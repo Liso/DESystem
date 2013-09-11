@@ -241,8 +241,11 @@ has already been pressed </li>
   <li>Car is at floor <b>f</b>, with all doors open.</li>
 </ul>
 <h3> Sequence Diagram: </h3>
-<p> <a href="proj2_scenario3.gif"><br>
+<p> <a href="proj2_scenario2b.gif"><br>
 </a> </p>
+<div align="center">
+<hr size="2" width="100%" align="center"> </div>
+<p> &nbsp; </p>
 <h2> <a name="usecase4" id="usecase4"></a>Use Case 4: Passenger Exits
 Elevator </h2>
 <h3> Scenario 4A: Passenger is in the elevator as it arrives at the
@@ -325,20 +328,18 @@ suffice.</p>
 </ul>
 <h3> Scenario: </h3>
 <ol start="1" type="1">
-  <li>The car approaches floor y. </li>
-  <li>AtFloor[<b>f</b>,<b>b</b>] at floor y appears TRUE. </li>
-  <li>The drive of the car stops. </li>
+  <li>Car approaches floor y. </li>
+  <li>Car stops at floor y. </li>
 </ol>
 <h3> Post-Conditions: </h3>
 <ul type="disc">
   <li>The car is at floor y. </li>
   <li>Door is closed. </li>
-  <li>The car position indicator appears y. </li>
-  <li>Car Lanterns are on indicating the dispatcher's t. </li>
+  <li>The car position indicator is set to y. </li>
 </ul>
 <h3> Sequence Diagram: </h3>
 <p> <a href="sd6a.png"><img src="sd6a.png" alt="1A" name="_x0000_i1027"
- style="border: 0px solid ; width: 602px; height: 237px;"></a> </p>
+ style="border: 0px solid ; "></a> </p>
 <div align="center">
 <hr size="2" width="100%" align="center"> </div>
 <p> &nbsp; </p>
@@ -360,17 +361,18 @@ hallway <b>b</b>. </li>
 </ul>
 <h3> Scenario: </h3>
 <ol start="1" type="1">
-  <li>Car Lantern which indicates the dispatcher's intended direction lights up. </li>
+  <li>CarLantern[<b>d</b>] lights up. </li>
   <li>Door[<b>b</b>,<b>r</b>] starts opening. </li>
+  <li>Door[<b>b</b>,<b>r</b>] completes opening. </li>
 </ol>
 <h3> Post-Conditions: </h3>
 <ul type="disc">
   <li>Door is open. </li>
-  <li>Elevator waits for passengers to enter. </li>
+  <li>CarLantern[<b>d</b>] is on. </li>
 </ul>
 <h3> Sequence Diagram: </h3>
 <p> <a href="sd7a.png"><img src="sd7a.png" alt="1A" name="_x0000_i1027"
- style="border: 0px solid ; width: 602px; height: 237px;"></a> </p>
+ style="border: 0px solid ;"></a> </p>
 <div align="center">
 <hr size="2" width="100%" align="center"> </div>
 <p> &nbsp; </p>
@@ -390,18 +392,22 @@ direction), with enabled pickup in hallway <b>b</b>. </li>
 </ul>
 <h3> Scenario: </h3>
 <ol start="1" type="1">
-  <li>Both car lanterns stay off. </li>
+  <li>Passenger arrives at a hallway [<b>f</b>,<b>b</b>] to use the
+elevator going in direction <b>d</b>. </li>
+  <li>Passenger presses the hall call button. </li>
+  <li>Dispatcher intends direction <b>d</b> and CarLantern[<b>d</b>] lights up</li>
   <li>Door[<b>b</b>,<b>r</b>] starts opening. </li>
+  <li>Door[<b>b</b>,<b>r</b>] completes opening. </li>
 </ol>
 <h3> Post-Conditions: </h3>
 <ul type="disc">
   <li>Door is open. </li>
-  <li>Both car lanterns are off. </li>
-  <li>Elevator waits for passengers to press car call. </li>
+  <li>Carlantern[<b>d</b>] is on. </li>
+  <li>Elevator waits for passengers to enter and press the car call. </li>
 </ul>
 <h3> Sequence Diagram: </h3>
 <p> <a href="sd7b.png"><img src="sd7b.png" alt="1A" name="_x0000_i1027"
- style="border: 0px solid ; width: 602px; height: 237px;"></a> </p>
+ style="border: 0px solid ;"></a> </p>
 <div align="center">
 <hr size="2" width="100%" align="center"> </div>
 <p> &nbsp; </p>
