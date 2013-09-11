@@ -149,7 +149,7 @@ but after doors are too fully closed for passenger to enter. </li>
 A Car Call </h2>
 <h3> <a name="scenario2a" id="scenario2a"></a>Scenario 2A: Passenger
 is in the car and elevator is not at the desired destination floor. </h3>
-<h3> Author name: Example Solutions </h3>
+<h3> Author name: Sally Stevenson</h3>
 <h3> Pre-Conditions: </h3>
 <ul type="disc">
   <li>Car is at floor <b>f</b>, with at least one Door[<b>b</b>,<b>r</b>]
@@ -162,7 +162,18 @@ b</b> might or might not be equal to <b>c</b>. </li>
   <li>Car call button for the desired destination is not lit. </li>
 </ul>
 <h3> Scenario: </h3>
+<ol start="1" type="1">
+  <li>Passenger pushes car call button for the desired destination [<b>g</b>,<b>c</b>].</li>
+  <li>CarLight[<b>f</b>,<b>b</b>] is lit.</li>
+  <li>Door[<b>b</b>,<b>r</b>] starts closing.</li>
+  <li>Door[<b>b</b>,<b>r</b>] completes closing.</li>
+</ol>
 <h3> Post-Conditions: </h3>
+<ul type="disc">
+  <li>Elevator is at floor <b>f</b>.</li>
+  <li>All doors are closed.</li>
+  <li>Car light for the desired destination is on.</li>
+</ul>
 <h3> Sequence Diagram: </h3>
 <p> <a href="proj2_scenario2a.gif"><br>
 </a> </p>
@@ -171,7 +182,7 @@ b</b> might or might not be equal to <b>c</b>. </li>
 <h3> <a name="scenario2b" id="scenario2b"></a>2B: Passenger is in the
 car and the elevator has arrived at the passenger's desired floor, but
 passenger has not yet exited the car as the doors begin to close. </h3>
-<h3> Author name: Example Solutions </h3>
+<h3> Author name: Sally Stevenson</h3>
 <h3> Pre-Conditions: </h3>
 <ul type="disc">
   <li>Passenger is in the car. </li>
@@ -180,7 +191,20 @@ has not yet exited the car. </li>
   <li>At least one door[<b>b</b>,<b>r</b>] is open. </li>
 </ul>
 <h3> Scenario: </h3>
+<ol start="1" type="1">
+  <li>Door[<b>b</b>,<b>r</b>] starts closing.</li>
+  <li>Passenger presses the car call button for the desired hallway [<b>f</b>,<b>b</b>].</li>
+  <li>CarLight[<b>f</b>,<b>b</b>] is lit.</li>
+  <li>Doors begin to reopen.</li>
+  <li>Doors finish opening.</li>
+  <li>CarLight[<b>f</b>,<b>b</b>] is unlit.</li>
+</ol>
 <h3> Post-Conditions: </h3>
+<ul type="disc">
+  <li>Car light is not lit.</li>
+  <li>All doors are open.</li>
+  <li>Passenger is in the car.</li>
+</ul>
 <h3> Sequence Diagram: </h3>
 <p> <a href="proj2_scenario2b.gif"><br>
 </a> </p>
@@ -191,7 +215,7 @@ has not yet exited the car. </li>
 Elevator </h2>
 <h3> Scenario 3A: Passenger is waiting at a hallway for the elevator
 and has already pressed the hall call button. </h3>
-<h3> Author name: Example Solutions </h3>
+<h3> Author name: Sally Stevenson</h3>
 <h3> Pre-Conditions: </h3>
 <ul type="disc">
   <li>Car is about to arrive at a hallway [<b>f</b>,<b>b</b>] at which
@@ -203,13 +227,22 @@ has already been pressed </li>
   <li>All doors are closed. </li>
 </ul>
 <h3> Scenario: </h3>
+<ol start="1" type="1">
+  <li>Car stops at floor <b>f</b>.</li>
+  <li>The hall call button for the passenger's desired direction is unlit.</li>
+  <li>Door[<b>b</b>,<b>r</b>] opens.</li>
+  <li>Door[<b>b</b>,<b>r</b>] finishes opening.</li>
+  <li>Passenger enters elevator.</li>
+  <li>Passenger finishes entering.</li>
+</ol>
 <h3> Post-Conditions: </h3>
+<ul type="disc">
+  <li>Passenger is in the car.</li>
+  <li>Car is at floor <b>f</b>, with all doors open.</li>
+</ul>
 <h3> Sequence Diagram: </h3>
 <p> <a href="proj2_scenario3.gif"><br>
 </a> </p>
-<div align="center">
-<hr size="2" width="100%" align="center"> </div>
-<p> &nbsp; </p>
 <h2> <a name="usecase4" id="usecase4"></a>Use Case 4: Passenger Exits
 Elevator </h2>
 <h3> Scenario 4A: Passenger is in the elevator as it arrives at the
