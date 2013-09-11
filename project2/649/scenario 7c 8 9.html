@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252"
+      http-equiv="Content-Type">
+    <title>scenario 7c 8 9</title>
+  </head>
+  <body>
+    <h3>Scenario 7C: Elevator doors close on a hallway. </h3>
+    <h3> Author name: Example Solutions </h3>
+    <h3> Pre-Conditions: </h3>
+    <ul type="disc">
+      <li>At least one Door[<b>b</b>,<b>r</b>] is open. </li>
+    </ul>
+    <h3> Scenario: </h3>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp; 1. Door[b,r] closes<br>
+    </p>
+    <h3> Post-Conditions: </h3>
+    <ul>
+      <li>All doors are closed<br>
+      </li>
+    </ul>
+    <h3> Sequence Diagram: </h3>
+    <img alt="" src="7c.png" height="302" width="607">
+    <h2><br>
+    </h2>
+    <h2>Use Case 8: Move Car to Next Floor </h2>
+    <h3> Scenario 8A: Elevator moves from {floor f, hallway b} to {floor
+      g, hallway c} in direction d. </h3>
+    <p> Note: You will want to create other scenarios that involve fast
+      speed for your elevator, but this is a starting point. </p>
+    <h3> Pre-Conditions: </h3>
+    <ul type="disc">
+      <li>Elevator is at floor <b>f</b>, with at least one Door[<b>b</b>,<b>r</b>]
+        open. </li>
+      <li>Drive is stopped. </li>
+    </ul>
+    <h3> Scenario: </h3>
+    <ol>
+      <li>Door[<b>b</b>,<b>r</b>] closes.</li>
+      <li>Car moves in direction <b>d</b> to floor <b>g</b>.</li>
+      <li>Car speeds up to fast speed.</li>
+      <li>Car arrives at commit point for floor <b>g</b>.</li>
+      <li>Car slows down.</li>
+      <li>Car arrives at floor <b>g</b>.</li>
+    </ol>
+    <h3> Post-Conditions: </h3>
+    <ul>
+      <li>Door[<b>b</b>,<b>r</b>] is closed.</li>
+      <li>Drive is stopped.</li>
+      <li>Car is at floor <b>g</b>.</li>
+    </ul>
+    <h3> Sequence Diagram: </h3>
+    <img alt="" src="sd8.png" height="537" width="1320">
+    <h2><br>
+    </h2>
+    <h2>Use Case 9: Cycle Doors </h2>
+    <h3> Scenario 9A: Elevator stops at hallway and doors open.
+      Dispatcher computes next desired floor just as doors open. Doors
+      close. </h3>
+    <p> Note: This dispatcher is really dumb and stops at every floor,
+      in order. It would be much better to stop only at floors with
+      people on them or that people want to go to. </p>
+    <h3> Pre-Conditions: </h3>
+    <ul type="disc">
+      <li>Car is stopped. </li>
+      <li>AtFloor[f,b] was last received as True. </li>
+      <li>All doors are closed. </li>
+    </ul>
+    <h3> Scenario: </h3>
+    &nbsp;&nbsp;&nbsp;&nbsp; 1. All doors open. <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; 2. Dispatcher sets next desired floor.<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; 3. All doors close.<br>
+    <h3> Post-Conditions: </h3>
+    <ul>
+      <li>All doors are closed.</li>
+      <li>AtFloor[f,b] was last received as True. </li>
+      <li>Drive is stop.<br>
+      </li>
+    </ul>
+    <h3> Sequence Diagram: </h3>
+    <img alt="" src="sd1c.png" height="356" width="764"><br>
+  </body>
+</html>
