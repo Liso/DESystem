@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;
+      charset=windows-1252">
+    <meta name="generator" content="HTML Tidy for Windows (vers 15
+      August 2007), see www.w3.org">
+    <link rel="Edit-Time-Data" href="proj2_scenarios_files/editdata.mso">
+    <title>18-649 Scenarios and Sequence Diagrams</title>
+  </head>
+  <body link="blue" vlink="blue">
+    <br>
+    <div class="Section1">
+      <h2> <a name="usecase4" id="usecase4"></a>Use Case 4: Passenger
+        Exits Elevator </h2>
+      <h3> Scenario 4A: Passenger is in the elevator as it arrives at
+        the passenger's desired hallway. </h3>
+      <h3> Author name: Sri Harsha Koppaka (skoppaka) </h3>
+      <h3> Pre-Conditions: </h3>
+      <ul type="disc">
+        <li>Passenger is inside the car, traveling to desired floor <b>f</b>
+          and hallway <b>b</b>. </li>
+        <li>Car is traveling in direction <b>d</b> </li>
+        <li>All doors are closed. </li>
+      </ul>
+      <h3> Scenario: </h3>
+      <ol>
+        <li>Car arrives at the passenger's desired hallway.</li>
+        <li>CarPositionIndicator displays the current floor of elevator.<br>
+        </li>
+        <li>DoorMotors[b,r] are commanded to open.</li>
+        <li>CarLight[f,b] for the passenger's hallway goes off.<br>
+        </li>
+        <li>Doors[b,r] are completely open.</li>
+        <li>Passenger exits the elevator.<br>
+        </li>
+      </ol>
+      <h3> Post-Conditions: </h3>
+      <ol>
+        <li>Elevator is at the passenger's floor.</li>
+        <li>CarLight for the passenger's floor goes off.</li>
+        <li>Doors[b,r] are open.<br>
+        </li>
+      </ol>
+      <h3> Sequence Diagram: </h3>
+      <img alt="4a" src="sd4a.png" height="338" width="1523">
+      <p><a href="proj2_scenario4.gif"> </a> </p>
+      <div align="center">
+        <hr size="2" width="1500"></div>
+      <h2> <a name="usecase5" id="usecase5"></a>Use Case 5: Passenger
+        Triggers Door Reversal </h2>
+      <h3> <a name="scenario5a" id="scenario5a"></a>Scenario 5A:
+        Passenger attempts to enter the car as the doors begin to close.
+      </h3>
+      <h3> Author name: Sri Harsha Koppaka (skoppaka) </h3>
+      <h3> Pre-Conditions: </h3>
+      <ul type="disc">
+        <li>Passenger is outside the car. </li>
+        <li>Car is stopped at passenger's floor <b>f</b> and hallway <b>b</b>.
+        </li>
+        <li>At least one door[<b>b</b>,<b>r</b>] is open. </li>
+      </ul>
+      <h3> Scenario: </h3>
+      <ol>
+        <li>Door[b,r] starts closing.</li>
+        <li>Passenger attempts to enter into the elevator triggering
+          DoorReversal[b,r].</li>
+        <li>DoorMotor[b,r] commanded to Stop and then Open.</li>
+        <li>Passenger gets into the car as the doors open again
+          completely.</li>
+      </ol>
+      <h3> Post-Conditions: </h3>
+      <ol>
+        <li>Passenger gets into the elevator.</li>
+        <li>Doors[b,r] are completely open.<br>
+        </li>
+      </ol>
+      <h3> Sequence Diagram: </h3>
+      <img alt="5a" src="sd5a.png" height="338" width="747"><br>
+      <br>
+      <p> </p>
+      <p><a
+href="file:///D:/Users/Sri%20Harsha.LT-430-WIN7/Desktop/proj2_scenario4.gif">
+        </a> </p>
+      <p><a href="proj2_scenario5a.gif"> </a> </p>
+      <div align="center">
+        <hr align="center" size="2" width="100%"> </div>
+      <h3> <a name="scenario5b" id="scenario5b"></a>Scenario 5B:
+        Passenger attempts to exit the car as the doors begin to close.
+      </h3>
+      <h3> Author name: Sri Harsha Koppaka (skoppaka) </h3>
+      <h3> Pre-Conditions: </h3>
+      <ul type="disc">
+        <li>Passenger is inside the car. </li>
+        <li>Car is stopped at passenger's floor <b>f</b> and hallway <b>b</b>.
+        </li>
+        <li>At least one door[<b>b</b>,<b>r</b>] is open. </li>
+      </ul>
+      <h3> Scenario: </h3>
+      <ol>
+        <li>Door[b,r] starts closing.</li>
+        <li>Passenger attempts to exit the elevator triggering
+          DoorReversal[b,r].</li>
+        <li>DoorMotor[b,r] commanded to Stop and then Open.</li>
+        <li>Passenger gets out of the car as the doors open again
+          completely.</li>
+      </ol>
+      <h3> Post-Conditions: </h3>
+      <ol>
+        <li>Passenger gets out of the elevator into the hallway.<br>
+        </li>
+        <li>Doors[b,r] are completely open.<br>
+        </li>
+      </ol>
+      <h3> Sequence Diagram: </h3>
+      <img alt="5b" src="sd5b.png" height="338" width="747"><br>
+      <br>
+      <div align="center">
+        <hr align="center" size="2" width="100%"> </div>
+    </div>
+  </body>
+</html>
