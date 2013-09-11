@@ -357,18 +357,14 @@ direction), with enabled pickup in hallway <b>b</b>. </li>
 </ul>
 <h3> Scenario: </h3>
 <ol start="1" type="1">
-  <li>Both car lanterns light up. </li>
+  <li>Both car lanterns stay off. </li>
   <li>Door[<b>b</b>,<b>r</b>] starts opening. </li>
 </ol>
 <h3> Post-Conditions: </h3>
 <ul type="disc">
   <li>Door is open. </li>
-  <li>Both car lanterns are on. </li>
-  <li>Elevator waits for passengers to enter. </li>
-</ul>
-<ul type="disc">
-  <li>Door is open. </li>
-  <li>Elevator waits for passengers to enter and exit. </li>
+  <li>Both car lanterns are off. </li>
+  <li>Elevator waits for passengers to press car call. </li>
 </ul>
 <h3> Sequence Diagram: </h3>
 <p> <a href="sd7b.png"><img src="sd7b.png" alt="1A" name="_x0000_i1027"
