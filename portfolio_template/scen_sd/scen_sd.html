@@ -25,6 +25,8 @@
 
 
 
+
+
         Sally Stevenson (ststeven)<br>
         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -272,7 +274,6 @@
           <img alt="3a" src="sd3a.png"></a> </p>
       <div align="center">
         <hr align="center" size="2" width="100%"> </div>
-      <br>
       <h2> <a name="usecase4" id="usecase4"></a>Use Case 4: Passenger
         Exits Elevator </h2>
       <h3> Scenario 4A: Passenger is in the elevator as it arrives at
@@ -293,9 +294,8 @@
         <li>DoorMotors[b,r] are commanded to open.</li>
         <li>CarLight[f,b] for the passenger's hallway goes off.<br>
         </li>
-        <li>Doors[b,r] are completely open.</li>
-        <li>Passenger exits the elevator.<br>
-        </li>
+        <li>Doors[b,r] finish opening.</li>
+        <li>Passenger exits the elevator.</li>
       </ol>
       <h3> Post-Conditions: </h3>
       <ol>
@@ -305,9 +305,11 @@
         </li>
       </ol>
       <h3> Sequence Diagram: </h3>
-      <p> <a href="sd4a.png"><img src="sd4a.png" alt="1A"
-            name="_x0000_i1027" style="border: 0px solid ; " border="0"
-            height="354" width="1812"></a> </p>
+      <p> <a
+          href="file:///D:/Users/Sri%20Harsha.LT-430-WIN7/Desktop/sd4a.png"><img
+src="file:///D:/Users/Sri%20Harsha.LT-430-WIN7/Desktop/sd4a.png"
+            alt="1A" name="_x0000_i1027" style="border: 0px solid ; "
+            border="0" height="354" width="1812"></a> </p>
       <div align="center">
         <hr align="center" size="2" width="100%"> </div>
       <h2> <a name="usecase5" id="usecase5"></a>Use Case 5: Passenger
@@ -328,9 +330,9 @@
         <li>Door[b,r] starts closing.</li>
         <li>Passenger attempts to enter into the elevator triggering
           DoorReversal[b,r].</li>
-        <li>DoorMotor[b,r] commanded to Stop and then Open.</li>
-        <li>Passenger gets into the car as the doors open again
-          completely.</li>
+        <li>DoorMotor[b,r] commanded to Open.</li>
+        <li>Doors Open completely.</li>
+        <li>Passenger gets into the car.</li>
       </ol>
       <h3> Post-Conditions: </h3>
       <ol>
@@ -339,7 +341,11 @@
         </li>
       </ol>
       <h3> Sequence Diagram: </h3>
-      <a href="sd5a.png"><img alt="5a" src="sd5a.png" ;="" border="0"></a><br>
+      <a
+        href="file:///D:/Users/Sri%20Harsha.LT-430-WIN7/Desktop/sd5a.png"><img
+          alt="5a"
+          src="file:///D:/Users/Sri%20Harsha.LT-430-WIN7/Desktop/sd5a.png"
+          ;="" border="0"></a><br>
       <br>
       <div align="center">
         <hr align="center" size="2" width="100%"> </div>
@@ -359,9 +365,9 @@
         <li>Door[b,r] starts closing.</li>
         <li>Passenger attempts to exit the elevator triggering
           DoorReversal[b,r].</li>
-        <li>DoorMotor[b,r] commanded to Stop and then Open.</li>
-        <li>Passenger gets out of the car as the doors open again
-          completely.</li>
+        <li>DoorMotor[b,r] commanded to Open.</li>
+        <li>Doors Open completely.</li>
+        <li>Passenger gets out of the car.</li>
       </ol>
       <h3> Post-Conditions: </h3>
       <ol>
@@ -371,7 +377,12 @@
         </li>
       </ol>
       <h3> Sequence Diagram: </h3>
-      <a href="sd5b.png"><img alt="5b" src="sd5b.png" ;="" border="0"></a>
+      <a
+        href="file:///D:/Users/Sri%20Harsha.LT-430-WIN7/Desktop/sd5b.png"><img
+          alt="5b"
+          src="file:///D:/Users/Sri%20Harsha.LT-430-WIN7/Desktop/sd5b.png"
+          ;="" border="0"></a><br>
+      <br>
       <div align="center">
         <hr align="center" size="2" width="100%"> </div>
       <h2> <a name="usecase6" id="usecase6"></a>Use Case 6: Determine
@@ -496,7 +507,7 @@
       </h2>
       <div align="center">
         <hr align="center" size="2" width="100%"> </div>
-      <h2>Use Case 8: Move Car to Next Floor </h2>
+      <h2><a name="usecase8"></a>Use Case 8: Move Car to Next Floor </h2>
       <h3> Scenario 8A: Elevator moves from {floor f, hallway b} to
         {floor g, hallway c} in direction d. </h3>
       <p> Note: You will want to create other scenarios that involve
@@ -530,7 +541,7 @@
       </h2>
       <div align="center">
         <hr align="center" size="2" width="100%"> </div>
-      <h2>Use Case 9: Cycle Doors </h2>
+      <h2><a name="usecase9"></a>Use Case 9: Cycle Doors </h2>
       <h3> Scenario 9A: Elevator stops at hallway and doors open.
         Dispatcher computes next desired floor just as doors open. Doors
         close. </h3>
