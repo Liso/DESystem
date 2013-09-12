@@ -1,6 +1,9 @@
-; 18649 <semester>
-; group #
-; student names and andrewID's
+; 18649 Fall 2013
+; group 16
+; Jiangtian Nie (jnie)
+; Sally Stevenson (ststeven)
+; Sri Harsha Koppaka (skoppaka)
+; Yue Chen (yuechen) 
 ; doorcontrol_test1.mf
 
 ;TODO  add test statements
