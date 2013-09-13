@@ -1098,7 +1098,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#1c. mAtFloor[f,b] = true#</dia:string>
+        <dia:string>#1b. mAtFloor[f,b] = true#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>
@@ -1128,7 +1128,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#1d. mAtFloor[f,b] = true#</dia:string>
+        <dia:string>#1b. mAtFloor[f,b] = true#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>

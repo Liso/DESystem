@@ -29,6 +29,8 @@
 
 
 
+
+
         Sally Stevenson (ststeven)<br>
         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -494,9 +496,9 @@
         </li>
       </ul>
       <h3> Sequence Diagram: </h3>
-      <img alt="" src="sd7c.png" height="302" width="542">
-      <h2><br>
-      </h2>
+      <a href="sd7c.png"><img alt="7c" src="sd7c.png" border="0"
+          height="237" width="402"></a><br>
+      <br>
       <div align="center">
         <hr align="center" size="2" width="100%"> </div>
       <h2><a name="usecase8"></a>Use Case 8: Move Car to Next Floor </h2>
@@ -514,7 +516,9 @@
       </ul>
       <h3> Scenario: </h3>
       <ol>
-        <li>Door[<b>b</b>,<b>r</b>] closes.</li>
+        <li>Door[<b>b,r</b>] commanded to close.</li>
+        <li>Door[<b>b,r</b>] finishes closing.<br>
+        </li>
         <li>Car moves in direction <b>d</b> to floor <b>g</b>.</li>
         <li>Car speeds up to fast speed.</li>
         <li>Car arrives at commit point for floor <b>g</b>.</li>
@@ -528,7 +532,8 @@
         <li>Car is at floor <b>g</b>.</li>
       </ul>
       <h3> Sequence Diagram: </h3>
-      <img alt="" src="sd8a.png" height="537" width="1320">
+      <a href="sd8a.png"><img alt="8a" src="sd8a.png" border="0"
+          height="477" width="1245"></a><br>
       <h2><br>
       </h2>
       <div align="center">
@@ -549,9 +554,14 @@
         <li>All doors are closed. </li>
       </ul>
       <h3> Scenario: </h3>
-      &nbsp;&nbsp;&nbsp;&nbsp; 1. All doors open. <br>
-      &nbsp;&nbsp;&nbsp;&nbsp; 2. Dispatcher sets next desired floor.<br>
-      &nbsp;&nbsp;&nbsp;&nbsp; 3. All doors close.<br>
+      <ol>
+        <li>Door[b,r] commanded to open.</li>
+        <li>Dispatcher sets next desired floor.</li>
+        <li>Door[b,r] finish opening.</li>
+        <li>Door[b,r] commanded to close.</li>
+        <li>Door[b,r] finish closing.<br>
+        </li>
+      </ol>
       <h3> Post-Conditions: </h3>
       <ul>
         <li>All doors are closed.</li>
@@ -560,7 +570,8 @@
         </li>
       </ul>
       <h3> Sequence Diagram: </h3>
-      <img alt="" src="sd9a.png" height="356" width="764"><br>
+      <a href="sd9a.png"><img alt="9a" src="sd9a.png" border="0"
+          height="311" width="786"></a><br>
       <h3> </h3>
     </div>
   </body>
