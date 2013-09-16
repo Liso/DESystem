@@ -1553,7 +1553,9 @@
       <li>All CarLights are off at initialization. </li>
     </ul>
     <h3> Assumptions: </h3>
-    None
+    <ul>
+      <li>CarButtonControl only commands CarLight[f, b] to turn off when mAtFloor[f, b] is True.</li>
+    </ul>
     <h3> Input Interface: </h3>
     <ul>
       <li>mAtFloor[f, b] </li>
@@ -1578,6 +1580,12 @@
     None
     <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
     <br>
+    9.1 &nbsp;&nbsp;&nbsp; If CarCall[f, b] is received as true, then<br>
+    &nbsp;&nbsp; 9.1.1&nbsp; mCarCall[f, b] shall be set to true.
+    &nbsp;&nbsp; 9.1.2&nbsp; CarLight[f, b] shall be set to On.
+    9.2 &nbsp;&nbsp;&nbsp; If CurrentFloor = mDesiredFloor and mDoorClosed[b, r] is received as false, then<br>
+    &nbsp;&nbsp; 9.1.1&nbsp; mCarCall[f, b] should be set to false.
+    &nbsp;&nbsp; 9.1.1&nbsp; CarLight[f, b] should be set to Off.
     <h2><a name="carpositioncontrol"></a> 10. CarPositionControl </h2>
     <h3> Replication: </h3>
     <ul>
