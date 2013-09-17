@@ -28,6 +28,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1287,15 +1288,16 @@
     drive shall not be commanded to {Slow, d} or {Fast, d}until the car
     is no longer overloaded.
     <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
-    6.6 &nbsp;&nbsp; If mEmergencyBrake is true then Drive shall be set
-    to (Stop,Stop). <br>
-    6.7 &nbsp;&nbsp; If CommitPoint[DesiredFloor] is reached then<br>
-    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp; Drive shall be set to (Stop,d). <br>
-    6.8 &nbsp;&nbsp; If all mLevel[d] is true then Drive shall be set to
-    (Stop,Stop). <br>
-    6.9 &nbsp;&nbsp; If any mLevel[d] is false then Drive shall be set
-    to (Level,d). <br>
+    6.6&nbsp;&nbsp;&nbsp; If mEmergencyBrake is true then Drive shall be
+    set to (Stop,Stop).<br>
+    6.7&nbsp;&nbsp;&nbsp; If mDoorClosed[b,r] is false then Drive shall
+    be set to (Stop,Stop).<br>
+    6.8&nbsp;&nbsp;&nbsp; If all mLevel[d] is true then Drive shall be
+    set to (Stop,Stop).<br>
+    6.9&nbsp;&nbsp;&nbsp; If any mLevel[d] is false then Drive shall be
+    set to (Level,d).<br>
+    6.10&nbsp; If mCarWeight&gt;= MaxCarCapacity then Drive shall be set
+    to (Stop,Stop).<br>
     <h2><a name="lanterncontrol"></a> 7. LanternControl[d] </h2>
     <h3> Replication: </h3>
     <ul>
