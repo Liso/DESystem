@@ -1456,13 +1456,21 @@
     None
     <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
     <br>
-    9.1 &nbsp;&nbsp;&nbsp; If CarCall[f, b] is received as true, then<br>
-    &nbsp;&nbsp; 9.1.1&nbsp; mCarCall[f, b] shall be set to true.
-    &nbsp;&nbsp; 9.1.2&nbsp; CarLight[f, b] shall be set to On. 9.2
-    &nbsp;&nbsp;&nbsp; If CurrentFloor = mDesiredFloor and
+    9.1 &nbsp;&nbsp;&nbsp; If CurrentFloor != f or mDoorClosed[b,r] is true and CarCall[f, b] is received as true, then<br>
+    &nbsp;&nbsp; 9.1.1&nbsp; mCarCall[f, b] shall be set to true.<br>
+    &nbsp;&nbsp; 9.1.2&nbsp; CarLight[f, b] should be set to On.<br> 
+    9.2 &nbsp;&nbsp;&nbsp; If CurrentFloor = f and CarCall[f,b] is false and
     mDoorClosed[b, r] is received as false, then<br>
-    &nbsp;&nbsp; 9.1.1&nbsp; mCarCall[f, b] should be set to false.
-    &nbsp;&nbsp; 9.1.1&nbsp; CarLight[f, b] should be set to Off.
+    &nbsp;&nbsp; 9.2.1&nbsp; mCarCall[f, b] shall be set to false.<br>
+    &nbsp;&nbsp; 9.2.2&nbsp; CarLight[f, b] should be set to Off.<br>
+    9.3 &nbsp;&nbsp;&nbsp; If CurrentFloor = f and mDoorClosed[b, r] is false
+    and CarCall[f,b] is received as false, then<br>
+    &nbsp;&nbsp; 9.3.1&nbsp; mCarCall[f, b] shall be set to false.<br>
+    &nbsp;&nbsp; 9.3.2&nbsp; CarLight[f, b] should be set to Off.<br>
+    9.4 &nbsp;&nbsp;&nbsp; If CurrentFloor = f and mDoorClosed[b, r] is false
+    and CarCall[f,b] is received as true, then<br>
+    &nbsp;&nbsp; 9.4.1&nbsp; mCarCall[f, b] shall be set to true.<br>
+    &nbsp;&nbsp; 9.4.2&nbsp; CarLight[f, b] should be set to On.<br>
     <h2><a name="carpositioncontrol"></a> 10. CarPositionControl </h2>
     <h3> Replication: </h3>
     <ul>
