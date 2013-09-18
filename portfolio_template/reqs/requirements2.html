@@ -30,6 +30,8 @@
 
 
 
+
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1296,20 +1298,16 @@
     6.8&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is true and d =
     mDesiredFloor.d is not equal to Stop, then Drive should be commanded
     to (Slow,d).<br>
-    6.8&nbsp;&nbsp;&nbsp; If mLevel[d] is received as true and
-    mAtFloor[f,b] is True then Drive shall be set to (Stop,Stop).<br>
-    6.9&nbsp;&nbsp;&nbsp; If any mLevel[d] is false and mAtFloor[f, b]
-    is True, then Drive shall be set to (Level,d).<br>
-    6.10&nbsp; If mCarWeight&gt;= MaxCarCapacity then Drive shall be set
+    6.9 &nbsp;&nbsp; If mLevel[d] is received as true and mAtFloor[f,b]
+    is True then Drive shall be set to (Stop,Stop).<br>
+    6.10 &nbsp;&nbsp; If any mLevel[d] is false and mAtFloor[f, b] is
+    True, then Drive shall be set to (Level,d).<br>
+    6.11&nbsp; If mCarWeight&gt;= MaxCarCapacity then Drive shall be set
     to (Stop,Stop).<br>
-    6.11&nbsp; If mHoistwayLimit[d] is received as true, then Drive
+    6.12&nbsp; If mHoistwayLimit[d] is received as true, then Drive
     shall be commanded to (Stop,Stop).<br>
-    6.12&nbsp; If mDoorMotor[b, r] is received as True, then Drive shall
+    6.13&nbsp; If mDoorMotor[b, r] is received as True, then Drive shall
     be commanded to (Stop,Stop).<br>
-    6.13&nbsp; If DriveSpeed = (Fast,d), then Drive shall not be
-    commanded to (Level,d).<br>
-    6.13&nbsp; If DriveSpeed = (Level,d), then Drive shall not be
-    commanded to (Fast,d).<br>
     6.14&nbsp; If DriveSpeed = (s, d) then Drive shall not be commanded
     to the opposite direction.<br>
     <br>
