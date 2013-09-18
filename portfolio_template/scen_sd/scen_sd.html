@@ -488,16 +488,18 @@
         <li>At least one Door[<b>b</b>,<b>r</b>] is open. </li>
       </ul>
       <h3> Scenario: </h3>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp; 1. Door[b,r] closes.<br>
-        &nbsp;&nbsp;&nbsp;&nbsp; 2. Doors complete closing. </p>
+      <ol start="1" type="1">
+          <li>Door[b,r] closes.</li>
+          <li>Doors complete closing.</li>
+          <li>CarLantern goes off.</li>
+      </ol>
       <h3> Post-Conditions: </h3>
       <ul>
-        <li>All doors are closed<br>
-        </li>
+        <li>All doors are closed</li>
+        <li>Both CarLantern[d] are off.</li>
       </ul>
       <h3> Sequence Diagram: </h3>
-      <a href="sd7c.png"><img alt="7c" src="sd7c.png" border="0"
-          height="237" width="402"></a><br>
+      <a href="sd7c.png"><img alt="7c" src="sd7c.png" border="0"></a><br>
       <br>
       <div align="center">
         <hr align="center" size="2" width="100%"> </div>
