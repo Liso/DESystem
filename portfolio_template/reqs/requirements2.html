@@ -35,6 +35,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1356,9 +1357,15 @@
     same time.
     <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
     7.2 &nbsp;&nbsp; If mDesiredFloor.d is not equal to Stop and any
+<<<<<<< HEAD
+    mAtFloor[f, b] is received as True and mDoorClosed[b, r] is False,
+    then CarLantern[d] should light up where d equals mDesiredFloor.d.<br>
+    7.3 &nbsp;&nbsp; If mDoorClosed[b, r] is True, then CarLantern[d]
+=======
     mAtFloor[f, b] is received as True and mDoorClosed[b, r] is False, then CarLantern[d] should light
     up where d equals mDesiredFloor.d.<br>
     7.3 &nbsp;&nbsp; If mDoorClosed[b, r] is received as True, then CarLantern[d]
+>>>>>>> 296b3d0ef307784cc3cdda5134b118162b9b2ea3
     should turn off. <br>
     <h2><a name="hallbuttoncontrol"></a> 8. HallButtonControl[f, b, d] </h2>
     <h3> Replication: </h3>
@@ -1409,18 +1416,18 @@
       and mDesiredFloor.d is not equal to Stop, then for <b>d</b> =
       mDesiredFloor.d <br>
       &nbsp;&nbsp;&nbsp; 8.2.1&nbsp;&nbsp;&nbsp; mHallCall[f, b, <b>d</b>]
-      should be set to False.<br>
+      shall be set to False.<br>
       &nbsp;&nbsp;&nbsp; 8.2.2 &nbsp;&nbsp; mHallLight[f, b, <b>d</b>]
-      should be set to False.<br>
+      shall be set to False.<br>
       &nbsp;&nbsp;&nbsp; 8.2.3 &nbsp;&nbsp; HallLight[f, b, <b>d</b>]
-      should be set to Off.<br>
+      shall be set to Off.<br>
       8.3 &nbsp;&nbsp; If mAtFloor[f, b] is true and mDesiredFloor.d =
       Stop and mDoorClosed =&nbsp; False, then<br>
       &nbsp;&nbsp;&nbsp; 8.3.1&nbsp;&nbsp;&nbsp; mHallCall[f, b, d]
-      should be set to False.<br>
-      &nbsp;&nbsp;&nbsp; 8.3.2 &nbsp;&nbsp; mHallLight[f, b, d] should
-      be set to False.<br>
-      &nbsp;&nbsp;&nbsp; 8.3.3 &nbsp;&nbsp; HallLight[f, b, d] should be
+      shall be set to False.<br>
+      &nbsp;&nbsp;&nbsp; 8.3.2 &nbsp;&nbsp; mHallLight[f, b, d] shall be
+      set to False.<br>
+      &nbsp;&nbsp;&nbsp; 8.3.3 &nbsp;&nbsp; HallLight[f, b, d] shall be
       set to Off.<br>
       <br>
     </p>
