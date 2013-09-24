@@ -1,3 +1,6 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
     <meta name="generator" content="HTML Tidy for Windows (vers 15
       August 2007), see www.w3.org">
     <meta http-equiv="Content-Type" content="text/html;
@@ -6,9 +9,6 @@
     <meta name="GENERATOR" content="Mozilla/4.77 [en] (Windows NT 5.0;
       U) [Netscape]">
     <title>18-649 Requirements II - Distributed Controller Requirements</title>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html>
-  <head>
     <meta name="generator" content="HTML Tidy for Windows (vers 15
       August 2007), see www.w3.org">
     <meta http-equiv="Content-Type" content="text/html;
@@ -26,6 +26,8 @@
     <hr style="width: 100%; height: 2px;"> 18649 Fall 2013<br>
     Group 16 - Jiangtian Nie (jnie) <br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
 
 
 
@@ -1365,109 +1367,108 @@
     same time.
     <h3> TIME-TRIGGERED BEHAVIORS: </h3>
     7.2 &nbsp;&nbsp; If mDesiredFloor.d is not equal to Stop and any
-    mAtFloor[f, b] is True and mDoorClosed[b, r] is False,
-    then CarLantern[d] should light up where d equals mDesiredFloor.d.<br>
-    7.3 &nbsp;&nbsp; If mDoorClosed[b, r] is True, then
-    CarLantern[d] should turn off. <br>
-<p class="MsoNormal" style=""> </p>
-<h3>Time-Triggered Statechart</h3>
-<p> <img alt="Testlight Statechart" src="sc7.png"><br
- clear="left">
-</p>
-<br style="font-weight: bold;">
-    <table style="text-align: left;" border="1"
- cellpadding="2" cellspacing="2">
-  <tbody>
-    <tr>
-      <td
- style="vertical-align: top; font-weight: bold; background-color: rgb(204, 204, 204);">Transition<br>
-      </td>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);"><span
- style="font-weight: bold;">Condition</span><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">T7.1<br>
-      </td>
-      <td style="vertical-align: top;">mDoorClosed[b, r] == true</td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">T7.2</td>
-      <td style="vertical-align: top;">mDesiredFloor.d != stop &amp;&amp; mAtFloor[f, b] == true &amp;&amp; mDoorClosed[b, r] == false</td>
-    </tr>
-
-  </tbody>
-</table>
-<br>
-<h3>Requirements-to-Statecharts Traceability</h3>
-<table style="text-align: left; width: 400px;" border="1"
- cellpadding="2" cellspacing="2">
-  <tbody>
-    <tr>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
-      </td>
-      <td colspan="2" rowspan="1"
- style="vertical-align: top; background-color: rgb(204, 204, 204);">Requirements<br>
-      </td>
-    </tr>
-    <tr>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">States<br>
-      </td>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">R7.2<br>
-      </td>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">R7.3<br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">S7.1 Lantern On<br>
-      </td>
-      <td style="vertical-align: top;">x<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">S7.2 Lantern Off</td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;">x<br>
-      </td>
-    </tr>
-    <tr>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">Transitions<br>
-      </td>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
-      </td>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">T7.1<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;">x<br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">T7.2<br>
-      </td>
-      <td style="vertical-align: top;">x<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<br>
+    mAtFloor[f, b] is True and mDoorClosed[b, r] is False, then
+    CarLantern[d] should light up where d equals mDesiredFloor.d.<br>
+    7.3 &nbsp;&nbsp; If mDoorClosed[b, r] is True, then CarLantern[d]
+    should turn off. <br>
+    <p class="MsoNormal" style=""> </p>
+    <h3>Time-Triggered Statechart</h3>
+    <p> <img alt="Testlight Statechart" src="sc7.png"><br clear="left">
+    </p>
+    <br style="font-weight: bold;">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top; font-weight: bold;
+            background-color: rgb(204, 204, 204);">Transition<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><span style="font-weight: bold;">Condition</span><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T7.1<br>
+          </td>
+          <td style="vertical-align: top;">mDoorClosed[b, r] == true</td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T7.2</td>
+          <td style="vertical-align: top;">mDesiredFloor.d != stop
+            &amp;&amp; mAtFloor[f, b] == true &amp;&amp; mDoorClosed[b,
+            r] == false</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <h3>Requirements-to-Statecharts Traceability</h3>
+    <table style="text-align: left; width: 400px;" border="1"
+      cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+          <td colspan="2" rowspan="1" style="vertical-align: top;
+            background-color: rgb(204, 204, 204);">Requirements<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">States<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">R7.2<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">R7.3<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">S7.1 Lantern On<br>
+          </td>
+          <td style="vertical-align: top;">x<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">S7.2 Lantern Off</td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">x<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">Transitions<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T7.1<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">x<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T7.2<br>
+          </td>
+          <td style="vertical-align: top;">x<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
     <h2><a name="hallbuttoncontrol"></a> 8. HallButtonControl[f, b, d] </h2>
     <h3> Replication: </h3>
     <ul>
@@ -1504,7 +1505,72 @@
         is invalid it has a mnemonic value of None. </li>
     </ul>
     <h3> CONSTRAINTS: </h3>
-    None
+    None<br>
+    <h3>TIME-TRIGGERED BEHAVIORS:</h3>
+    <p>8.1&nbsp;&nbsp;&nbsp; If HallCall[f,b,d] is True, then<br>
+      &nbsp;&nbsp;&nbsp; 8.1.1 &nbsp;&nbsp;&nbsp; mHallCall[f,b,d] shall
+      be set to True.<br>
+      &nbsp;&nbsp;&nbsp; 8.1.2&nbsp;&nbsp;&nbsp; HallLight[f,b,d] shall
+      be set to On.<br>
+      8.2 &nbsp;&nbsp; If mAtFloor[f,b] == True AND mDoorClosed[b,r] ==
+      False AND mDesiredFloor.f&nbsp; &gt; CurrentFloor, then<br>
+      &nbsp;&nbsp;&nbsp; 8.2.1&nbsp;&nbsp;&nbsp; mHallCall[f,b,Up] shall
+      be set to False.<br>
+      &nbsp;&nbsp;&nbsp; 8.2.2 &nbsp;&nbsp; HallLight[f,b,Up] shall be
+      set to False.<br>
+      8.3 &nbsp;&nbsp; If mAtFloor[f,b] == True AND mDoorClosed[b,r] ==
+      False AND mDesiredFloor.f &lt; CurrentFloor, then<br>
+      &nbsp;&nbsp;&nbsp; 8.3.1 &nbsp;&nbsp; mHallCall[f,b,Down] shall be
+      set to False.<br>
+      &nbsp;&nbsp;&nbsp; 8.3.2&nbsp;&nbsp;&nbsp; mHallLight[f,b,Down]
+      shall be set to False.<br>
+      8.4&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] shall be set to current
+      state of HallLight[f,b,d].<br>
+    </p>
+    <br style="font-weight: bold;">
+    <table style="text-align: left;" height="185" border="1"
+      cellpadding="2" cellspacing="2" width="526">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top; font-weight: bold;
+            background-color: rgb(204, 204, 204);">Transition<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);" bgcolor="#330033"><span style="font-weight:
+              bold;">Condition</span><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T.8.1<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T.8.2</td>
+          <td style="vertical-align: top;">Counter &lt;= 0 &amp;&amp;
+            mDoorClosed[front, left] == true</td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T.8.3</td>
+          <td style="vertical-align: top;">mDoorClosed[front, left] ==
+            false</td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T.8.4</td>
+          <td style="vertical-align: top;">mDoorClosed[front, left] ==
+            false</td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T.8.5</td>
+          <td style="vertical-align: top;">mDoorClosed[front, left] ==
+            true &amp;&amp; hallCall[f,b,d] == pressed</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><br>
+    </p>
+    <br>
     <h3> EVENT-TRIGGERED BEHAVIORS:</h3>
     <p>8.1 &nbsp;&nbsp; If HallCall[f, b, d] is received as True, then<br>
       &nbsp;&nbsp;&nbsp; 8.1.1&nbsp;&nbsp;&nbsp; mHallCall[f, b, d]
@@ -1634,76 +1700,71 @@
     CarPositionIndicator shall be commanded to display
     CurrentFloor.&nbsp;
     <p class="MsoNormal" style=""> </p>
-<h3>Time-Triggered Statechart</h3>
-<p> <img alt="Testlight Statechart" src="sc10.png"><br
- clear="left">
-</p>
-<br style="font-weight: bold;">
-    <table style="text-align: left;" border="1"
- cellpadding="2" cellspacing="2">
-  <tbody>
-    <tr>
-      <td
- style="vertical-align: top; font-weight: bold; background-color: rgb(204, 204, 204);">Transition<br>
-      </td>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);"><span
- style="font-weight: bold;">Condition</span><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">T10.2</td>
-      <td style="vertical-align: top;">mAtFloor[f, b] == true</td>
-    </tr>
-
-  </tbody>
-</table>
-
-<br>
-<h3>Requirements-to-Statecharts Traceability</h3>
-<table style="text-align: left; width: 400px;" border="1"
- cellpadding="2" cellspacing="2">
-  <tbody>
-    <tr>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
-      </td>
-      <td rowspan="1"
- style="vertical-align: top; background-color: rgb(204, 204, 204);">Requirements<br>
-      </td>
-    </tr>
-    <tr>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">States<br>
-      </td>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">R10.4<br>
-      </td>
-
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">S10.1 Display<br>
-      </td>
-      <td style="vertical-align: top;">x<br>
-      </td>
-    </tr>
-    <tr>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">Transitions<br>
-      </td>
-      <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">T10.1<br>
-      </td>
-      <td style="vertical-align: top;">x<br>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<br>
+    <h3>Time-Triggered Statechart</h3>
+    <p> <img alt="Testlight Statechart" src="sc10.png"><br clear="left">
+    </p>
+    <br style="font-weight: bold;">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top; font-weight: bold;
+            background-color: rgb(204, 204, 204);">Transition<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><span style="font-weight: bold;">Condition</span><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T10.2</td>
+          <td style="vertical-align: top;">mAtFloor[f, b] == true</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <h3>Requirements-to-Statecharts Traceability</h3>
+    <table style="text-align: left; width: 400px;" border="1"
+      cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+          <td rowspan="1" style="vertical-align: top; background-color:
+            rgb(204, 204, 204);">Requirements<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">States<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">R10.4<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">S10.1 Display<br>
+          </td>
+          <td style="vertical-align: top;">x<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">Transitions<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T10.1<br>
+          </td>
+          <td style="vertical-align: top;">x<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
     <h2><a name="dispatcher"></a> 11. Dispatcher </h2>
     <h3> Replication: </h3>
     <ul>
@@ -1763,7 +1824,7 @@
     to None .<br>
     11.8 &nbsp; If two mAtFloor[f, b] values are True with the same
     value f, then mDesiredFloor.b shall be set to Both.<br>
-    11.9 &nbsp;&nbsp; mDesiredDwell shall always be set to a constant appropriate value for 
-      door open dwell.
-      
-      </body></html>
+    11.9 &nbsp;&nbsp; mDesiredDwell shall always be set to a constant
+    appropriate value for door open dwell.
+  </body>
+</html>
