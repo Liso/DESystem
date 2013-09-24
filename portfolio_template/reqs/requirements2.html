@@ -1355,12 +1355,110 @@
     <h3> CONSTRAINTS: </h3>
     7.1&nbsp;&nbsp;&nbsp; Both CarLanterns[d] shall not be On at the
     same time.
-    <h3> EVENT-TRIGGERED BEHAVIORS: </h3>
+    <h3> TIME-TRIGGERED BEHAVIORS: </h3>
     7.2 &nbsp;&nbsp; If mDesiredFloor.d is not equal to Stop and any
-    mAtFloor[f, b] is received as True and mDoorClosed[b, r] is False,
+    mAtFloor[f, b] is True and mDoorClosed[b, r] is False,
     then CarLantern[d] should light up where d equals mDesiredFloor.d.<br>
-    7.3 &nbsp;&nbsp; If mDoorClosed[b, r] is received as True, then
+    7.3 &nbsp;&nbsp; If mDoorClosed[b, r] is True, then
     CarLantern[d] should turn off. <br>
+<p class="MsoNormal" style=""> </p>
+<h3>Time-Triggered Statechart</h3>
+<p> <img alt="Testlight Statechart" src="sc7.png"><br
+ clear="left">
+</p>
+<br style="font-weight: bold;">
+    <table style="text-align: left;" border="1"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-weight: bold; background-color: rgb(204, 204, 204);">Transition<br>
+      </td>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);"><span
+ style="font-weight: bold;">Condition</span><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">T7.1<br>
+      </td>
+      <td style="vertical-align: top;">mDoorClosed[b, r] == true</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">T7.2</td>
+      <td style="vertical-align: top;">mDesiredFloor.d != stop &amp;&amp; mAtFloor[f, b] == true &amp;&amp; mDoorClosed[b, r] == false</td>
+    </tr>
+
+  </tbody>
+</table><br>
+<h3>Requirements-to-Statecharts Traceability</h3>
+<table style="text-align: left; width: 400px;" border="1"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
+      </td>
+      <td colspan="2" rowspan="1"
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">Requirements<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">States<br>
+      </td>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">R7.2<br>
+      </td>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">R7.3<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">S7.1 Lantern On<br>
+      </td>
+      <td style="vertical-align: top;">x<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">S7.2 Lantern Off</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">x<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">Transitions<br>
+      </td>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
+      </td>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">T7.1<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">x<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">T7.2<br>
+      </td>
+      <td style="vertical-align: top;">x<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
     <h2><a name="hallbuttoncontrol"></a> 8. HallButtonControl[f, b, d] </h2>
     <h3> Replication: </h3>
     <ul>
@@ -1526,6 +1624,92 @@
     10.4 &nbsp;&nbsp;&nbsp; Whenever any mAtFloor[f, b] is True,
     CarPositionIndicator shall be commanded to display
     CurrentFloor.&nbsp;
+    <p class="MsoNormal" style=""> </p>
+<h3>Time-Triggered Statechart</h3>
+<p> <img alt="Testlight Statechart" src="sc10.png"><br
+ clear="left">
+</p>
+<br style="font-weight: bold;">
+    <table style="text-align: left;" border="1"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; font-weight: bold; background-color: rgb(204, 204, 204);">Transition<br>
+      </td>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);"><span
+ style="font-weight: bold;">Condition</span><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">T10.1<br>
+      </td>
+      <td style="vertical-align: top;">mAtFloor[f, b] != true</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">T10.2</td>
+      <td style="vertical-align: top;">mAtFloor[f, b] == true</td>
+    </tr>
+
+  </tbody>
+</table>
+<br>
+<h3>Requirements-to-Statecharts Traceability</h3>
+<table style="text-align: left; width: 400px;" border="1"
+ cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
+      </td>
+      <td rowspan="1"
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">Requirements<br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">States<br>
+      </td>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">R10.4<br>
+      </td>
+
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">S10.1 Display<br>
+      </td>
+      <td style="vertical-align: top;">x<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">S10.2 Idle</td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">Transitions<br>
+      </td>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">T10.1<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">T10.2<br>
+      </td>
+      <td style="vertical-align: top;">x<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
     <h2><a name="dispatcher"></a> 11. Dispatcher </h2>
     <h3> Replication: </h3>
     <ul>
