@@ -443,7 +443,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#7a. mDoorOpen[b,r]=True#</dia:string>
+        <dia:string>#7a. mDoorOpened[b,r]=True#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>
