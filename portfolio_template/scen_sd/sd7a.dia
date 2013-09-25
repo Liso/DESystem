@@ -906,11 +906,11 @@
         <dia:point val="-4,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-4.05,3.95;-3.95,23.05"/>
+        <dia:rectangle val="-4.05,3.95;-3.95,16.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="-4,4"/>
-        <dia:point val="-4,23"/>
+        <dia:point val="-4,16"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
