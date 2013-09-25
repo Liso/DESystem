@@ -49,6 +49,8 @@
 
 
 
+
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1331,7 +1333,7 @@
     <img alt="" src="drivecontrol_state_diagram.png" height="467"
       width="747"><br>
     <br>
-    <table border="1" cellpadding="2" cellspacing="2" height="424"
+    <table height="424" border="1" cellpadding="2" cellspacing="2"
       width="699">
       <tbody>
         <tr>
@@ -1592,6 +1594,7 @@
     </ul>
     <h3> CONSTRAINTS: </h3>
     None<br>
+    <br>
     <h3>TIME-TRIGGERED BEHAVIORS:</h3>
     <p>8.1&nbsp;&nbsp;&nbsp; If HallCall[f,b,d] is True, then<br>
       &nbsp;&nbsp;&nbsp; 8.1.1 &nbsp;&nbsp;&nbsp; mHallCall[f,b,d] shall
@@ -1599,23 +1602,21 @@
       &nbsp;&nbsp;&nbsp; 8.1.2&nbsp;&nbsp;&nbsp; HallLight[f,b,d] shall
       be set to On.<br>
       8.2 &nbsp;&nbsp; If mAtFloor[f,b] == True AND mDoorClosed[b,r] ==
-      False AND mDesiredFloor.f&nbsp; &gt; CurrentFloor, then<br>
-      &nbsp;&nbsp;&nbsp; 8.2.1&nbsp;&nbsp;&nbsp; mHallCall[f,b,Up] shall
+      False AND d = mDesiredFloor.d then<br>
+      &nbsp;&nbsp;&nbsp; 8.2.1&nbsp;&nbsp;&nbsp; mHallCall[f,b,d] shall
       be set to False.<br>
-      &nbsp;&nbsp;&nbsp; 8.2.2 &nbsp;&nbsp; HallLight[f,b,Up] shall be
+      &nbsp;&nbsp;&nbsp; 8.2.2 &nbsp;&nbsp; HallLight[f,b,d] shall be
       set to False.<br>
-      8.3 &nbsp;&nbsp; If mAtFloor[f,b] == True AND mDoorClosed[b,r] ==
-      False AND mDesiredFloor.f &lt; CurrentFloor, then<br>
-      &nbsp;&nbsp;&nbsp; 8.3.1 &nbsp;&nbsp; mHallCall[f,b,Down] shall be
-      set to False.<br>
-      &nbsp;&nbsp;&nbsp; 8.3.2&nbsp;&nbsp;&nbsp; mHallLight[f,b,Down]
-      shall be set to False.<br>
-      8.4&nbsp;&nbsp;&nbsp; mHallLight[f,b,d] shall be set to current
-      state of HallLight[f,b,d].<br>
+      8.3 &nbsp;&nbsp; mHallLight[f,b,d] shall be set to current state
+      of HallLight[f,b,d].<br>
     </p>
-    <br style="font-weight: bold;">
-    <table style="text-align: left;" border="1" cellpadding="2"
-      cellspacing="2" height="185" width="526">
+    &nbsp; <a href="statechart-HallButtonControl.png"><img
+        alt="statechart-HallButtonControl"
+        src="statechart-HallButtonControl.png" height="232" border="0"
+        width="438"></a><br>
+    <br>
+    <table style="text-align: left;" height="185" border="1"
+      cellpadding="2" cellspacing="2" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -1629,34 +1630,127 @@
         <tr>
           <td style="vertical-align: top;">T.8.1<br>
           </td>
-          <td style="vertical-align: top;"><br>
+          <td style="vertical-align: top;">HallCall[f,b,Up]=True<br>
           </td>
         </tr>
         <tr>
           <td style="vertical-align: top;">T.8.2</td>
-          <td style="vertical-align: top;">Counter &lt;= 0 &amp;&amp;
-            mDoorClosed[front, left] == true</td>
-        </tr>
-        <tr>
-          <td style="vertical-align: top;">T.8.3</td>
-          <td style="vertical-align: top;">mDoorClosed[front, left] ==
-            false</td>
-        </tr>
-        <tr>
-          <td style="vertical-align: top;">T.8.4</td>
-          <td style="vertical-align: top;">mDoorClosed[front, left] ==
-            false</td>
-        </tr>
-        <tr>
-          <td style="vertical-align: top;">T.8.5</td>
-          <td style="vertical-align: top;">mDoorClosed[front, left] ==
-            true &amp;&amp; hallCall[f,b,d] == pressed</td>
+          <td style="vertical-align: top;">mAtFloor==True AND
+            mDoorClosed==False AND&nbsp; d=mDesiredFloor.d<br>
+          </td>
         </tr>
       </tbody>
     </table>
-    <p><br>
-    </p>
     <br>
+    <table style="text-align: left; width: 400px;" border="1"
+      cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+          <td colspan="5" rowspan="1" style="vertical-align: top;
+            background-color: rgb(204, 204, 204);">Requirements<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">States<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">8.1.1<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">8.1.2<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">8.2.1<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">8.2.2<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">8.3<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">S8.1 OFF<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">S8.2 ON<br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);">Transitions<br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+          <td style="vertical-align: top; background-color: rgb(204,
+            204, 204);"><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T8.1<br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+        </tr>
+        <tr>
+          <td style="vertical-align: top;">T8.2<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+          <td style="vertical-align: top;">X<br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <h3> EVENT-TRIGGERED BEHAVIORS:</h3>
     <p>8.1 &nbsp;&nbsp; If HallCall[f, b, d] is received as True, then<br>
       &nbsp;&nbsp;&nbsp; 8.1.1&nbsp;&nbsp;&nbsp; mHallCall[f, b, d]
@@ -1918,7 +2012,7 @@
     <img alt="" src="dispatcher_state_diagram.png" height="466"
       width="1231"><br>
     <br>
-    <table border="1" cellpadding="2" cellspacing="2" height="396"
+    <table height="396" border="1" cellpadding="2" cellspacing="2"
       width="720">
       <tbody>
         <tr>
