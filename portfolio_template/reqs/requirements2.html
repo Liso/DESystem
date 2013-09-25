@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <meta name="generator" content="HTML Tidy for Windows (vers 15
@@ -26,6 +26,7 @@
     <hr style="width: 100%; height: 2px;"> 18649 Fall 2013<br>
     Group 16 - Jiangtian Nie (jnie) <br>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 
 
 
@@ -1327,6 +1328,91 @@
     6.13&nbsp; If DriveSpeed is received then mDriveSpeed shall be set
     to equal value.<br>
     <br>
+    <img alt="" src="drivecontrol_state_diagram.png" height="467"
+      width="747"><br>
+    <br>
+    <table border="1" cellpadding="2" cellspacing="2" height="424"
+      width="699">
+      <tbody>
+        <tr>
+          <td valign="top" width="25%">Transition #<br>
+          </td>
+          <td valign="top">Guard<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.1<br>
+          </td>
+          <td valign="top">mDoorClosed[b, r] is equal to true and d =
+            mDesiredFloor.d is equal to Up<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.2<br>
+          </td>
+          <td valign="top"> mLevel[d] is equal to true and mAtFloor[f,b]
+            is equal to True and mDesiredFloor.f is equal to f</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.3<br>
+          </td>
+          <td valign="top"> mLevel[d] is equal to true and mAtFloor[f,b]
+            is equal to True and mDesiredFloor.f is equal to f</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.4<br>
+          </td>
+          <td valign="top">mDoorClosed[b, r] is equal to true and d =
+            mDesiredFloor.d is equal to Down<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.5.*<br>
+          </td>
+          <td valign="top">mEmergencyBrake is equal to true </td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.6<br>
+          </td>
+          <td valign="top">any mLevel[d] is equal to false and
+            mAtFloor[f, b] is equal to True and mDesiredFloor.f&nbsp; is
+            equal to f</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.7<br>
+          </td>
+          <td valign="top">mLevel[d] is equal to true and mAtFloor[f,b]
+            is equal to True and mDesiredFloor.f is equal to f</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.8<br>
+          </td>
+          <td valign="top">any mLevel[d] is equal to false and
+            mAtFloor[f, b] is equal to True and mDesiredFloor.f&nbsp; is
+            equal to f</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.9<br>
+          </td>
+          <td valign="top">any mLevel[d] is equal to false and
+            mAtFloor[f, b] is equal to True and mDesiredFloor.f&nbsp; is
+            equal to f</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.10<br>
+          </td>
+          <td valign="top">mLevel[d] is equal to true and mAtFloor[f,b]
+            is equal to True and mDesiredFloor.f is equal to f</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.11<br>
+          </td>
+          <td valign="top">any mLevel[d] is equal to false and
+            mAtFloor[f, b] is equal to True and mDesiredFloor.f&nbsp; is
+            equal to f,</td>
+        </tr>
+      </tbody>
+    </table>
     <h2><a name="lanterncontrol"></a> 7. LanternControl[d] </h2>
     <h3> Replication: </h3>
     <ul>
@@ -1528,8 +1614,8 @@
       state of HallLight[f,b,d].<br>
     </p>
     <br style="font-weight: bold;">
-    <table style="text-align: left;" height="185" border="1"
-      cellpadding="2" cellspacing="2" width="526">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="185" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -1646,7 +1732,8 @@
     and any mDoorClosed[b, r] is false, then<br>
     &nbsp;&nbsp; 9.2.1&nbsp; mCarCall[f, b] shall be set to false.<br>
     &nbsp;&nbsp; 9.2.2&nbsp; CarLight[f, b] should be set to Off.<br>
-    9.3 &nbsp;&nbsp;&nbsp; mCarLight[f, b] shall be set to the current value of CarLight[f, b].
+    9.3 &nbsp;&nbsp;&nbsp; mCarLight[f, b] shall be set to the current
+    value of CarLight[f, b].
     <h2><a name="carpositioncontrol"></a> 10. CarPositionControl </h2>
     <h3> Replication: </h3>
     <ul>
@@ -1806,22 +1893,129 @@
     b, d) shall not be Down when f = 1.
     <h3> TIME-TRIGGERED BEHAVIORS: </h3>
     11.4&nbsp;&nbsp;&nbsp; mDesiredFloor.f shall always be set to
-    Target.<br>
-    11.5&nbsp;&nbsp;&nbsp; mDesiredFloor.d shall always be set to Stop.<br>
-    11.6&nbsp;&nbsp;&nbsp; Whenever any mDoorClosed [b, r] is False,
-    then<br>
-    &nbsp;&nbsp; 11.6.1&nbsp; Target shall be set equal to ((f mod
-    MaxFloors) + 1) <br>
-    &nbsp;&nbsp; 11.6.2 &nbsp; mDesiredFloor.b shall be set to b, where
-    f, b is whichever mAtFloor[f, b] is True<br>
-    11.7&nbsp; If all mAtFloor[f, b] are False AND any mDoorClosed [b,
+    TargetFloor.<br>
+    11.5&nbsp;&nbsp;&nbsp; mDesiredFloor.d shall always be set to
+    TargetDirection.<br>
+    11.6&nbsp;&nbsp;&nbsp; mDesiredFloor.b shall always be set to
+    TargetHall.<br>
+    11.7&nbsp;&nbsp;&nbsp; TargetHall should always bet set to Both.<br>
+    11.8&nbsp;&nbsp;&nbsp; If all mHallCall[f,b,d] are False and all
+    mCarCall[f,b] are False<br>
+    &nbsp;&nbsp; 11.8.1&nbsp; TargetFloor shall be set equal to
+    CurrentFloor<br>
+    &nbsp;&nbsp; 11.8.2&nbsp; TargetDirection shall be set equal to
+    STOP.<br>
+    11.9&nbsp; Dispatcher should set TargetFloor to the
+    NextServiceableFloor consistent with the direction of travel.<br>
+    11.10&nbsp; If all mAtFloor[f, b] are False AND any mDoorClosed [b,
     r] is False (which means doors are not closed between floors!); then<br>
-    &nbsp;&nbsp;&nbsp; 11.7.1&nbsp;&nbsp; Target shall be set to 1<br>
-    &nbsp;&nbsp;&nbsp; 11.7.2&nbsp;&nbsp; mDesiredFloor.b shall be set
-    to None .<br>
-    11.8 &nbsp; If two mAtFloor[f, b] values are True with the same
-    value f, then mDesiredFloor.b shall be set to Both.<br>
-    11.9 &nbsp;&nbsp; mDesiredDwell shall always be set to a constant
-    appropriate value for door open dwell.
+    &nbsp;&nbsp;&nbsp; 11.10.1&nbsp;&nbsp; TargetFloor shall be set to 1<br>
+    &nbsp;&nbsp;&nbsp; 11.10.2&nbsp;&nbsp; TargetHall shall be set to
+    NONE<br>
+    &nbsp;&nbsp;&nbsp; 11.10.3&nbsp;&nbsp; TargetDirection shall be set
+    to STOP<br>
+    <br>
+    <img alt="" src="dispatcher_state_diagram.png" height="466"
+      width="1231"><br>
+    <br>
+    <table border="1" cellpadding="2" cellspacing="2" height="396"
+      width="720">
+      <tbody>
+        <tr>
+          <td valign="top" width="25%">Trigger #</td>
+          <td valign="top">Trigger Conditions<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.1.*<br>
+          </td>
+          <td valign="top">Any mDoorClosed[b,r] is False and no
+            mAtFloor[f,b] is True.</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.2<br>
+          </td>
+          <td valign="top">Any mDoorClosed[b,r] is false</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.3<br>
+          </td>
+          <td valign="top">All mDoorClosed[b,r] are True AND all
+            mHallCall[CurrentFloor,b,UP] are False AND all
+            mCarCall[CurrentFloor,b] are False</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.4<br>
+          </td>
+          <td valign="top">CurrentFloor = NextServiceableFloor(UP) AND
+            (any mHallCall[CurrentFloor,b,UP] is True OR
+            FarthestFloor(Direction.UP) &gt; NextServiceableFloor(UP)) </td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.5<br>
+          </td>
+          <td valign="top">All mDoorClosed[b,r] are True AND
+            FloorCountdown = 0 AND NextServiceableFloor(UP) &gt;
+            CurrentFloor</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.6<br>
+          </td>
+          <td valign="top">CurrentFloor = NextServiceableFloor(DOWN) AND
+            any mHallCall[CurrentFloor,b,UP] is True AND
+            FarthestFloor(Direction.DOWN) == NextServiceableFloor(DOWN)</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.7<br>
+          </td>
+          <td valign="top">CurrentFloor = NextServiceableFloor(UP) AND
+            all mHallCall[CurrentFloor,b,UP] are False AND
+            FarthestFloor(Direction.UP) == NextServiceableFloor(UP)</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.8<br>
+          </td>
+          <td valign="top">All mDoorClosed[b,r] are True AND
+            FloorCountdown = 0 AND NextServiceableFloor(UP) =
+            CurrentFloor</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.9<br>
+          </td>
+          <td valign="top">All mDoorClosed[b,r] are True AND
+            FloorCountdown = 0 AND NextServiceableFloor(DOWN) =
+            CurrentFloor</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.10<br>
+          </td>
+          <td valign="top">All mDoorClosed[b,r] are True AND
+            FloorCountdown = 0 AND NextServiceableFloor(DOWN) &lt;
+            CurrentFloor</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.11<br>
+          </td>
+          <td valign="top">CurrentFloor = NextServiceableFloor(DOWN) AND
+            (any mHallCall[CurrentFloor,b,DOWN] is True OR
+            FarthestFloor(Direction.DOWN) &lt;
+            NextServiceableFloor(DOWN)) </td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.12<br>
+          </td>
+          <td valign="top">Any mDoorClosed[b,r] is false</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T11.13<br>
+          </td>
+          <td valign="top">All mDoorClosed[b,r] are True AND all
+            mHallCall[CurrentFloor,b,DOWN] are False AND all
+            mCarCall[CurrentFloor,b] are False</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <h3>Requirements-to-Statecharts Traceability</h3>
   </body>
 </html>
