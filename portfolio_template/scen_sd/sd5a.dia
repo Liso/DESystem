@@ -244,7 +244,7 @@
         <dia:color val="#0000ff"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#1a. DoorMotor[b,r]=Close#</dia:string>
+        <dia:string>#1a. DoorMotor[b,r]=Nudge#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>
@@ -644,7 +644,7 @@
         <dia:color val="#0000ff"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#3b. DoorMotor[b,r]=Open#</dia:string>
+        <dia:string>#3. DoorMotor[b,r]=Open#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>
