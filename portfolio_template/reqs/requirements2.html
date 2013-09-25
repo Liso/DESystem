@@ -52,6 +52,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1068,7 +1069,8 @@
     DoorMotor[b,r]<br>
     <p class="MsoNormal" style=""> </p>
     <h3>Time-Triggered Statechart</h3>
-    <p><a href="sc5.png"><img alt="DoorControl Statechart" src="sc5.png"></a><br clear="left">
+    <p><a href="sc5.png"><img alt="DoorControl Statechart" src="sc5.png"></a><br
+        clear="left">
     </p>
     <table style="text-align: left;" border="1" cellpadding="2"
       cellspacing="2" height="185" width="526">
@@ -1090,15 +1092,16 @@
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.2</td>
-          <td style="vertical-align: top;">CountDown <= 0 AND 
-            DoorReversal[b, r] = False AND mCarWeight(g) < MaxCarCapacity<br>
+          <td style="vertical-align: top;">CountDown &lt;= 0 AND
+            DoorReversal[b, r] = False AND mCarWeight(g) &lt;
+            MaxCarCapacity<br>
           </td>
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.3<br>
           </td>
-          <td style="vertical-align: top;">DoorReversal[b, r] = True OR 
-            mCarWeight(g) >= MaxCarCapacity<br>
+          <td style="vertical-align: top;">DoorReversal[b, r] = True OR
+            mCarWeight(g) &gt;= MaxCarCapacity<br>
           </td>
         </tr>
         <tr>
@@ -1111,8 +1114,8 @@
           <td style="vertical-align: top;">T5.5<br>
           </td>
           <td style="vertical-align: top;">Any mAtFloor[f, b] = True AND
-          f = mDesiredFloor.f AND mDriveSpeed = (0, d) OR (s, Stop), OR 
-          mCarWeight(g) >= maxCarCapacity<br>
+            f = mDesiredFloor.f AND mDriveSpeed = (0, d) OR (s, Stop),
+            OR mCarWeight(g) &gt;= maxCarCapacity<br>
           </td>
         </tr>
       </tbody>
@@ -1185,7 +1188,8 @@
           </td>
         </tr>
         <tr>
-          <td style="vertical-align: top;">S5.2 Command Door to Stop Opening<br>
+          <td style="vertical-align: top;">S5.2 Command Door to Stop
+            Opening<br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
@@ -1229,7 +1233,8 @@
           </td>
         </tr>
         <tr>
-          <td style="vertical-align: top;">S5.4 Command Door to Stop Closing<br>
+          <td style="vertical-align: top;">S5.4 Command Door to Stop
+            Closing<br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
@@ -1663,9 +1668,8 @@
     DriveControl State Chart:<br>
     <br>
     &nbsp;<br>
-    <img alt=""
-src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
-      height="483" width="748"><br>
+    <img alt="" src="drivecontrol_state_diagram.png" height="483"
+      width="748"><br>
     <br>
     <br>
     <table border="1" cellpadding="2" cellspacing="2" height="424"
@@ -1789,21 +1793,21 @@ src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
           </td>
         </tr>
         <tr>
-          <td style="vertical-align: top;">S6.1 LEVEL_UP<br>
+          <td style="vertical-align: top;">S6.1 STOP<br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;"><br>
+          <td style="vertical-align: top;">x<br>
           </td>
           <td valign="top" width="12%"><br>
           </td>
-          <td valign="top"><br>
+          <td valign="top">x<br>
           </td>
-          <td valign="top" width="12%">x<br>
+          <td valign="top" width="12%"><br>
           </td>
-          <td valign="top"><br>
+          <td valign="top">x<br>
           </td>
-          <td valign="top"><br>
+          <td valign="top">x<br>
           </td>
           <td valign="top">x<br>
           </td>
@@ -1849,7 +1853,12 @@ src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
           </td>
         </tr>
         <tr>
-          <td valign="top">S6.4 STOP<br>
+          <td valign="top">S6.4 LEVEL_UP </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
           </td>
           <td valign="top"><br>
           </td>
@@ -1857,13 +1866,7 @@ src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
           </td>
           <td valign="top"><br>
           </td>
-          <td valign="top">x<br>
-          </td>
           <td valign="top"><br>
-          </td>
-          <td valign="top">x<br>
-          </td>
-          <td valign="top">x<br>
           </td>
           <td valign="top">x<br>
           </td>
@@ -2569,7 +2572,8 @@ src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
     value of CarLight[f, b].<br>
     <p class="MsoNormal" style=""> </p>
     <h3>Time-Triggered Statechart</h3>
-    <p><a href="sc9.png"><img alt="CarButtonControl Statechart" src="sc9.png"></a><br clear="left">
+    <p><a href="sc9.png"><img alt="CarButtonControl Statechart"
+          src="sc9.png"></a><br clear="left">
     </p>
     <table style="text-align: left;" border="1" cellpadding="2"
       cellspacing="2" height="185" width="526">
@@ -2591,8 +2595,8 @@ src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
         </tr>
         <tr>
           <td style="vertical-align: top;">T9.2</td>
-          <td style="vertical-align: top;">mAtFloor[f, b] = True AND
-            any mDoorClosed[b, r] = False AND CarCall[f, b] = False<br>
+          <td style="vertical-align: top;">mAtFloor[f, b] = True AND any
+            mDoorClosed[b, r] = False AND CarCall[f, b] = False<br>
           </td>
         </tr>
       </tbody>
@@ -2823,7 +2827,9 @@ src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
       </tbody>
     </table>
     <br>
-    <h2><a name="dispatcher"></a> 11. Dispatcher </h2>
+    <h2><a name="dispatcher"></a> <br>
+    </h2>
+    <h2>11. Dispatcher </h2>
     <h3> Replication: </h3>
     <ul>
       <li>There is one Dispatcher in the system, corresponding with the
@@ -3019,15 +3025,14 @@ src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
           </td>
         </tr>
         <tr>
-          <td style="vertical-align: top;">S11.1 WAIT_UP<br>
-          </td>
+          <td style="vertical-align: top;">S11.1 DELAY_UP </td>
           <td style="vertical-align: top;">x<br>
           </td>
           <td style="vertical-align: top;">x<br>
           </td>
-          <td valign="top" width="10%">x<br>
+          <td valign="top" width="10%"><br>
           </td>
-          <td valign="top" width="10%">x<br>
+          <td valign="top" width="10%"><br>
           </td>
           <td valign="top" width="10%"><br>
           </td>
@@ -3099,15 +3104,15 @@ src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
           </td>
         </tr>
         <tr>
-          <td valign="top">S11.5 DELAY_UP<br>
+          <td valign="top">S11.5 WAIT_UP<br>
           </td>
           <td valign="top">x<br>
           </td>
           <td valign="top">x<br>
           </td>
-          <td valign="top" width="10%"><br>
+          <td valign="top" width="10%">x<br>
           </td>
-          <td valign="top" width="10%"><br>
+          <td valign="top" width="10%">x<br>
           </td>
           <td valign="top" width="10%"><br>
           </td>
@@ -3435,8 +3440,13 @@ src="file:///D:/DESystem/portfolio_template/reqs/drivecontrol_state_diagram.png"
           <td valign="top">x<br>
           </td>
           <td valign="top">x</td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
         </tr>
       </tbody>
     </table>
+    <br>
   </body>
 </html>
