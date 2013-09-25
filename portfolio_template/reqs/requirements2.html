@@ -54,6 +54,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1073,8 +1074,8 @@
     <p><a href="sc5.png"><img alt="DoorControl Statechart" src="sc5.png"></a><br
         clear="left">
     </p>
-    <table style="text-align: left;" height="185" border="1"
-      cellpadding="2" cellspacing="2" width="526">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="185" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -1650,7 +1651,7 @@
     6.7&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to false then
     Drive shall be set to (Stop,Stop).<br>
     6.8&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and d =
-    mDesiredFloor.d is not equal to Stop, then Drive should be commanded
+    mDesiredFloor.d is not equal to Stop, then Drive shall be commanded
     to (Slow,d).<br>
     6.9 &nbsp;&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is
     equal to True and mDesiredFloor.f is equal to f, then Drive shall be
@@ -1662,7 +1663,7 @@
     set to (Stop,Stop).<br>
     6.12&nbsp; If mHoistwayLimit[d]&nbsp; is equal to true, then Drive
     shall be commanded to (Stop,Stop).<br>
-    6.13&nbsp; mDriveSpeed shall always echo data recieved from
+    6.13&nbsp; mDriveSpeed shall always be set to current value of&nbsp;
     DriveSpeed.<br>
     <br>
     <h3>TIME-TRIGGERED STATE CHART: </h3>
@@ -1670,11 +1671,11 @@
     <br>
     &nbsp;<br>
     <a href="drivecontrol_state_diagram.png"><img alt=""
-        src="drivecontrol_state_diagram.png" height="483" border="0"
+        src="drivecontrol_state_diagram.png" border="0" height="483"
         width="748"></a><br>
     <br>
     <br>
-    <table height="424" border="1" cellpadding="2" cellspacing="2"
+    <table border="1" cellpadding="2" cellspacing="2" height="424"
       width="699">
       <tbody>
         <tr>
@@ -1760,8 +1761,8 @@
     <h2>&nbsp;<br>
     </h2>
     <h3>Requirements-to-Statecharts Traceability</h3>
-    <table style="text-align: left;" height="664" border="1"
-      cellpadding="2" cellspacing="2" width="688">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="664" width="688">
       <tbody>
         <tr>
           <td style="vertical-align: top; background-color: rgb(204,
@@ -2356,11 +2357,11 @@
     </p>
     &nbsp; <a href="statechart-HallButtonControl.png"><img
         alt="statechart-HallButtonControl"
-        src="statechart-HallButtonControl.png" height="232" border="0"
+        src="statechart-HallButtonControl.png" border="0" height="232"
         width="438"></a><br>
     <br>
-    <table style="text-align: left;" height="185" border="1"
-      cellpadding="2" cellspacing="2" width="526">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="185" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -2577,8 +2578,8 @@
     <p><a href="sc9.png"><img alt="CarButtonControl Statechart"
           src="sc9.png"></a><br clear="left">
     </p>
-    <table style="text-align: left;" height="185" border="1"
-      cellpadding="2" cellspacing="2" width="526">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="185" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -2897,10 +2898,10 @@
     Dispatcher State Chart:<br>
     <br>
     <a href="dispatcher_state_diagram.png"><img alt=""
-        src="dispatcher_state_diagram.png" height="483" border="0"
+        src="dispatcher_state_diagram.png" border="0" height="483"
         width="1065"></a><br>
     <br>
-    <table height="396" border="1" cellpadding="2" cellspacing="2"
+    <table border="1" cellpadding="2" cellspacing="2" height="396"
       width="720">
       <tbody>
         <tr>
@@ -2993,8 +2994,8 @@
     </table>
     <br>
     <h3>Requirements-to-Statecharts Traceability</h3>
-    <table style="text-align: left;" height="768" border="1"
-      cellpadding="2" cellspacing="2" width="719">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="768" width="719">
       <tbody>
         <tr>
           <td style="vertical-align: top; background-color: rgb(204,
