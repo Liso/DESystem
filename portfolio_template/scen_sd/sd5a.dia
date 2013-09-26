@@ -508,11 +508,11 @@
         <dia:point val="3,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,3.95;3.05,19.05"/>
+        <dia:rectangle val="2.95,3.95;3.05,18.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="3,4"/>
-        <dia:point val="3,19"/>
+        <dia:point val="3,18"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -526,11 +526,11 @@
         <dia:point val="33,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.95,3.95;33.05,19.05"/>
+        <dia:rectangle val="32.95,3.95;33.05,18.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="33,4"/>
-        <dia:point val="33,19"/>
+        <dia:point val="33,18"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -547,11 +547,11 @@
         <dia:point val="26,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.95,3.95;26.05,19.05"/>
+        <dia:rectangle val="25.95,3.95;26.05,18.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="26,4"/>
-        <dia:point val="26,19"/>
+        <dia:point val="26,18"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -565,11 +565,11 @@
         <dia:point val="19,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="18.95,3.95;19.05,19.05"/>
+        <dia:rectangle val="18.95,3.95;19.05,18.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="19,4"/>
-        <dia:point val="19,19"/>
+        <dia:point val="19,18"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -583,11 +583,11 @@
         <dia:point val="11,4.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.95,4;11.05,19.05"/>
+        <dia:rectangle val="10.95,4;11.05,18.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="11,4.05"/>
-        <dia:point val="11,19"/>
+        <dia:point val="11,18"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -658,12 +658,12 @@
         <dia:point val="4,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4,15.36;9.6325,16.9325"/>
+        <dia:rectangle val="4,15.3407;9.31681,16.9711"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#5a. Passengers gets
+            <dia:string>#5. Passengers gets
 into the Car.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

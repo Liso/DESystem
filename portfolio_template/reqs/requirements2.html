@@ -57,6 +57,9 @@
 
 
 
+
+
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1069,7 +1072,15 @@
     False, DoorMotor[b, r] shall be commanded to Open.<br>
     5.11 Dwell shall be set to an appropriate value based on
     mDesiredDwell[b].<br>
-    5.12 mDoorMotor[b,r] shall be set to the current value of
+    5.12 If any mAtFloor[f,b] is true and mDoorClosed[b,r] is false and
+    mHallCall[f,b,d] is true and d equals mDesiredFloor.d then
+    DoorMotor[b, r] shall be commanded to Open. <br>
+    5.13 If any mAtFloor[f,b] is true and mDoorClosed[b,r] is false and
+    mCarCall[f,b] is true then DoorMotor[b, r] shall be commanded to
+    Open. <br>
+    5.14 If any mDoorReversal[b,r] is true, DoorMotor[b,r] shall be
+    commanded to Open.<br>
+    5.15 mDoorMotor[b,r] shall be set to the current value of
     DoorMotor[b,r]<br>
     <p class="MsoNormal" style=""> </p>
     <h3>Time-Triggered Statechart</h3>
