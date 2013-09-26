@@ -413,7 +413,7 @@
         <dia:color val="#0000ff"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#2. HallLight[f,b,d]=On#</dia:string>
+        <dia:string>#2a. HallLight[f,b,d]=On#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>

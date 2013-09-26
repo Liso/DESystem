@@ -222,7 +222,7 @@
         <dia:point val="2,6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,4.95;8.05,6.4"/>
+        <dia:rectangle val="1.76254,4.95;8.23754,6.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -238,7 +238,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>##</dia:string>
+        <dia:string>#1a. mAtFloor[f,b]=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>

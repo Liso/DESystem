@@ -353,7 +353,7 @@
         <dia:color val="#0000ff"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#1a. DoorMotor[b,r]=Nudge#</dia:string>
+        <dia:string>#1. DoorMotor[b,r]=Nudge#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>
