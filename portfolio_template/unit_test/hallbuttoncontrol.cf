@@ -1,0 +1,7 @@
+;Configuration File - Unit Test for HallButtonControl
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sri Harsha Koppaka (skoppaka)
+
+HallButtonControl 4 FRONT UP true
