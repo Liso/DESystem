@@ -4,6 +4,6 @@
 ; Sally Stevenson (ststeven)
 ; Sri Harsha Koppaka (skoppaka)
 ; Yue Chen (yuechen) 
-; doorcontrol_test.cf
+; doorcontrol.cf
 
-DoorControl ;TODO complete this line
+DoorControl 4 FRONT LEFT true
