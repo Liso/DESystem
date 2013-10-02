@@ -1111,14 +1111,16 @@
           <td style="vertical-align: top;">T5.2</td>
           <td style="vertical-align: top;">CountDown &lt;= 0 AND
             DoorReversal[b, r] = False AND mCarWeight(g) &lt;
-            MaxCarCapacity<br>
+            MaxCarCapacity AND mCarCall[f, b] = False AND
+            mHallCall[f, b, d] = False, where d = mDesiredFloor.d<br>
           </td>
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.3<br>
           </td>
           <td style="vertical-align: top;">DoorReversal[b, r] = True OR
-            mCarWeight(g) &gt;= MaxCarCapacity<br>
+            mCarWeight(g) &gt;= MaxCarCapacity OR mCarCall[f, b] = True OR
+            mHallCall[f, b, d] = True, where d = mDesiredFloor.d<br>
           </td>
         </tr>
         <tr>
