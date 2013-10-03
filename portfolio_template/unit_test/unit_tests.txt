@@ -3,6 +3,6 @@
 ;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 DoorControl doorcontrol.cf doorcontrol_test1.mf
-DriveControl drivecontrol.cf drivecontrol.mf
+DriveControl drivecontrol.cf drivecontrol.mf drivecontrol2.mf 
 HallButtonControl hallbuttoncontrol.cf hallbuttoncontrol.mf
 CarButtonControl carbuttoncontrol.cf carbuttoncontrol.mf

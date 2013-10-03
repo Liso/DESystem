@@ -1,0 +1,68 @@
+;Message File - Unit Test for CarButtonControl
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Jiangtian Nie (jnie)
+
+#INCLUDE defines.mf
+
+;intialize
+0.04s  A S DriveControl : STATE == STATE_STOP
+0.04s  A F Drive : speed == STOP 
+0.04s  A F Drive : direction == STOP
+0.04s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP 
+0.04s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP 
+
+;set conditions for T6.9
+1s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
+1s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = false
+
+;T6.9
+2s  A S DriveControl : STATE == STATE_LEVEL_DOWN
+2s  A F Drive : speed == LEVEL
+2s  A F Drive : direction == DOWN
+2s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
+2s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
+
+;set conditions for T6.10
+3s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
+3s	I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
+
+;T6.10
+4s  A S DriveControl : STATE == STATE_STOP
+4s  A F Drive : speed == STOP
+4s  A F Drive : direction == STOP
+4s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+4s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
+
+;set conditions for T6.8
+5s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
+5s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = false
+
+;T6.8
+6s  A S DriveControl : STATE == STATE_LEVEL_UP
+6s  A F Drive : speed == LEVEL
+6s  A F Drive : direction == UP
+6s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
+6s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
+
+;set conditions for T6.7
+7s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
+7s	I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
+
+;T6.7
+8s  A S DriveControl : STATE == STATE_STOP
+8s  A F Drive : speed == STOP
+8s  A F Drive : direction == STOP
+8s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+8s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
+
+;set conditions for T6.5.*
+9s  I HOISTWAY_LIMIT_PERIOD N HOISTWAY_LIMIT_[UP]_CAN_ID HoistwayLimitSensor UP = true
+
+;T6.5.*
+10s  A S DriveControl : STATE == STATE_EMERGENCY
+10s  A F Drive : speed == STOP
+10s  A F Drive : direction == STOP
+10s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
+10s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP

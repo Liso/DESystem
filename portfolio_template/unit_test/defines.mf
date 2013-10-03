@@ -23,6 +23,7 @@
 #DEFINE DRIVE_PERIOD                                  10.0ms
 #DEFINE HOISTWAY_LIMIT_PERIOD                         200.0ms
 #DEFINE LEVEL_SENSOR_PERIOD                           10.0ms
+#DEFINE SAFETY_SENSOR_PERIOD						  10.0ms
 
 ;Controller CAN Ids
 ;NOTE:  These IDs assume you use the ReplicationComputer offsets and MessageDictionary base values
