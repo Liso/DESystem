@@ -1,9 +1,1 @@
-; 18649 Fall 2013
-; group 16
-; Jiangtian Nie (jnie)
-; Sally Stevenson (ststeven)
-; Sri Harsha Koppaka (skoppaka)
-; Yue Chen (yuechen) 
-; doorcontrol_test.cf
-
-DoorControl ;TODO complete this line
+DoorControl 4 FRONT LEFT true

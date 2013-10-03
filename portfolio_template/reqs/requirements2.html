@@ -1111,14 +1111,16 @@
           <td style="vertical-align: top;">T5.2</td>
           <td style="vertical-align: top;">CountDown &lt;= 0 AND
             DoorReversal[b, r] = False AND mCarWeight(g) &lt;
-            MaxCarCapacity<br>
+            MaxCarCapacity AND mCarCall[f, b] = False AND
+            mHallCall[f, b, d] = False, where d = mDesiredFloor.d<br>
           </td>
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.3<br>
           </td>
           <td style="vertical-align: top;">DoorReversal[b, r] = True OR
-            mCarWeight(g) &gt;= MaxCarCapacity<br>
+            mCarWeight(g) &gt;= MaxCarCapacity OR mCarCall[f, b] = True OR
+            mHallCall[f, b, d] = True, where d = mDesiredFloor.d and f = CurrentFloor<br>
           </td>
         </tr>
         <tr>
@@ -1663,22 +1665,20 @@
     <h3> TIME-TRIGGERED BEHAVIORS: </h3>
     6.6&nbsp;&nbsp;&nbsp; If mEmergencyBrake is equal to true then Drive
     shall be set to (Stop,Stop).<br>
-    6.7&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to false then
-    Drive shall be set to (Stop,Stop).<br>
-    6.8&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and d =
+    6.7&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and d =
     mDesiredFloor.d is not equal to Stop, then Drive shall be commanded
     to (Slow,d).<br>
-    6.9 &nbsp;&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is
+    6.8 &nbsp;&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is
     equal to True and mDesiredFloor.f is equal to f, then Drive shall be
     set to (Stop,Stop).<br>
-    6.10&nbsp; If any mLevel[d] is equal to false and mAtFloor[f, b] is
+    6.9&nbsp;&nbsp;&nbsp; If any mLevel[d] is equal to false and mAtFloor[f, b] is
     equal to True and mDesiredFloor.f&nbsp; is equal to f, then Drive
     shall be set to (Level,d).<br>
-    6.11&nbsp; If (mCarWeight&gt;= MaxCarCapacity) then Drive shall be
+    6.10&nbsp; If (mCarWeight&gt;= MaxCarCapacity) then Drive shall be
     set to (Stop,Stop).<br>
-    6.12&nbsp; If mHoistwayLimit[d]&nbsp; is equal to true, then Drive
+    6.11&nbsp; If mHoistwayLimit[d]&nbsp; is equal to true, then Drive
     shall be commanded to (Stop,Stop).<br>
-    6.13&nbsp; mDriveSpeed shall always be set to current value of&nbsp;
+    6.12&nbsp; mDriveSpeed shall always be set to current value of&nbsp;
     DriveSpeed.<br>
     <br>
     <h3>TIME-TRIGGERED STATE CHART: </h3>
@@ -1726,7 +1726,8 @@
         <tr>
           <td valign="top" width="25%">T6.5.*<br>
           </td>
-          <td valign="top">mEmergencyBrake is equal to true </td>
+          <td valign="top">mEmergencyBrake is equal to true or mHoistwayLimit[d]&nbsp; is equal to 
+              true</td>
         </tr>
         <tr>
           <td valign="top" width="25%">T6.6<br>
@@ -1764,10 +1765,12 @@
         <tr>
           <td valign="top" width="25%">T6.11<br>
           </td>
-          <td valign="top">any mLevel[d] is equal to false and
-            mAtFloor[f, b] is equal to True and mDesiredFloor.f&nbsp; is
-            equal to f,<br>
-          </td>
+          <td valign="top">any mLevel[d] is equal to false and mAtFloor[f, b] is equal to True 
+              and mDesiredFloor.f&nbsp; is equal to f</td>
+        </tr>
+        <tr>
+          <td valign="top" width="25%">T6.12</td>
+          <td valign="top">mCarWeight&gt;= MaxCarCapacity</td>
         </tr>
       </tbody>
     </table>
@@ -1781,7 +1784,7 @@
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);"><br>
           </td>
-          <td colspan="8" rowspan="1" style="vertical-align: top;
+          <td colspan="7" rowspan="1" style="vertical-align: top;
             background-color: rgb(204, 204, 204);">Requirements<br>
           </td>
         </tr>
@@ -1792,10 +1795,9 @@
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);">R6.6<br>
           </td>
-          <td style="vertical-align: top; background-color: rgb(204,
-            204, 204);">R6.7<br>
+          <td bgcolor="#cccccc" valign="top" width="8%">R6.7<br>
           </td>
-          <td bgcolor="#cccccc" valign="top" width="8%">R6.8<br>
+          <td bgcolor="#cccccc" valign="top" width="10%">R6.8<br>
           </td>
           <td bgcolor="#cccccc" valign="top" width="10%">R6.9<br>
           </td>
@@ -1805,15 +1807,11 @@
           </td>
           <td bgcolor="#cccccc" valign="top" width="10%">R6.12<br>
           </td>
-          <td bgcolor="#cccccc" valign="top" width="10%">R6.13<br>
-          </td>
         </tr>
         <tr>
           <td style="vertical-align: top;">S6.1 STOP<br>
           </td>
           <td style="vertical-align: top;"><br>
-          </td>
-          <td style="vertical-align: top;">x<br>
           </td>
           <td valign="top" width="12%"><br>
           </td>
@@ -1833,8 +1831,6 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;"><br>
-          </td>
           <td valign="top"><br>
           </td>
           <td valign="top"><br>
@@ -1850,8 +1846,6 @@
         </tr>
         <tr>
           <td valign="top">S6.3 DRIVE_UP<br>
-          </td>
-          <td valign="top"><br>
           </td>
           <td valign="top"><br>
           </td>
@@ -1876,8 +1870,6 @@
           </td>
           <td valign="top"><br>
           </td>
-          <td valign="top"><br>
-          </td>
           <td valign="top">x<br>
           </td>
           <td valign="top"><br>
@@ -1889,8 +1881,6 @@
         </tr>
         <tr>
           <td valign="top">S6.5 DRIVE_DOWN<br>
-          </td>
-          <td valign="top"><br>
           </td>
           <td valign="top"><br>
           </td>
@@ -1922,17 +1912,12 @@
           </td>
           <td valign="top"><br>
           </td>
-          <td valign="top"><br>
-          </td>
           <td valign="top">x<br>
           </td>
         </tr>
         <tr>
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);">Transitions<br>
-          </td>
-          <td style="vertical-align: top; background-color: rgb(204,
-            204, 204);"><br>
           </td>
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);"><br>
@@ -1955,8 +1940,6 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;"><br>
-          </td>
           <td valign="top">x<br>
           </td>
           <td valign="top"><br>
@@ -1972,8 +1955,6 @@
         </tr>
         <tr>
           <td style="vertical-align: top;">T6.2<br>
-          </td>
-          <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
@@ -1997,8 +1978,6 @@
           </td>
           <td valign="top"><br>
           </td>
-          <td valign="top"><br>
-          </td>
           <td valign="top">x<br>
           </td>
           <td valign="top"><br>
@@ -2012,8 +1991,6 @@
         </tr>
         <tr>
           <td valign="top">T6.4<br>
-          </td>
-          <td valign="top"><br>
           </td>
           <td valign="top"><br>
           </td>
@@ -2043,17 +2020,13 @@
           </td>
           <td valign="top"><br>
           </td>
-          <td valign="top"><br>
-          </td>
-          <td valign="top"><br>
+          <td valign="top">x<br>
           </td>
           <td valign="top"><br>
           </td>
         </tr>
         <tr>
           <td valign="top">T6.6<br>
-          </td>
-          <td valign="top"><br>
           </td>
           <td valign="top"><br>
           </td>
@@ -2072,8 +2045,6 @@
         </tr>
         <tr>
           <td valign="top">T6.7<br>
-          </td>
-          <td valign="top"><br>
           </td>
           <td valign="top"><br>
           </td>
@@ -2099,8 +2070,6 @@
           </td>
           <td valign="top"><br>
           </td>
-          <td valign="top"><br>
-          </td>
           <td valign="top">x<br>
           </td>
           <td valign="top"><br>
@@ -2119,8 +2088,6 @@
           </td>
           <td valign="top"><br>
           </td>
-          <td valign="top"><br>
-          </td>
           <td valign="top">x<br>
           </td>
           <td valign="top"><br>
@@ -2132,8 +2099,6 @@
         </tr>
         <tr>
           <td valign="top">T6.10<br>
-          </td>
-          <td valign="top"><br>
           </td>
           <td valign="top"><br>
           </td>
@@ -2159,8 +2124,6 @@
           </td>
           <td valign="top"><br>
           </td>
-          <td valign="top"><br>
-          </td>
           <td valign="top">x<br>
           </td>
           <td valign="top"><br>
@@ -2169,6 +2132,16 @@
           </td>
           <td valign="top"><br>
           </td>
+        </tr>
+        <tr>
+          <td valign="top">T6.12</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">x</td>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
         </tr>
       </tbody>
     </table>
@@ -2879,12 +2852,12 @@
     MaxFloors) + 1) <br>
     &nbsp;&nbsp; 11.6.2 &nbsp; mDesiredFloor.b shall be set to b, where
     f, b is whichever mAtFloor[f, b] is True<br>
-    11.7&nbsp; If all mAtFloor[f, b] are False AND any mDoorClosed [b,
+    11.7&nbsp;&nbsp;&nbsp; If all mAtFloor[f, b] are False AND any mDoorClosed [b,
     r] is False (which means doors are not closed between floors!); then<br>
     &nbsp;&nbsp;&nbsp; 11.7.1&nbsp;&nbsp; Target shall be set to 1<br>
     &nbsp;&nbsp;&nbsp; 11.7.2&nbsp;&nbsp; mDesiredFloor.b shall be set
     to None .<br>
-    11.8 &nbsp; If two mAtFloor[f, b] values are True with the same
+    11.8 &nbsp;&nbsp; If two mAtFloor[f, b] values are True with the same
     value f, then mDesiredFloor.b shall be set to Both.<br>
     11.9 &nbsp;&nbsp; mDesiredDwell shall always be set to a constant
     appropriate value for door open dwell. &nbsp;&nbsp; <br>

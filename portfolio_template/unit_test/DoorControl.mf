@@ -1,0 +1,65 @@
+; Unit test for DoorControl
+; Yue Chen
+
+;Note:  Assertions must be inserted more than two periods after a message or physical
+;value has been inserted to be sure that the change propagates through the system
+
+;this test file demonstrates network and framework message injections
+;and network, framework, and controller state assertions.
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+
+;check that the door is closing initially
+0.04s  A F DoorMotor FRONT LEFT : command == CLOSE
+0.04s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getDoorCommand == CLOSE
+
+;set conditions for T5.4
+0.08s  I  DOOR_CLOSED_SENSOR_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0.08s  I  DISPATCHER_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 DOWN FRONT
+
+;T5.4
+;check that the door is closed
+0.3s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSING
+0.3s  A F DoorMotor FRONT LEFT : command == STOP
+0.3s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getDoorCommand == STOP
+
+;set conditions for T5.5
+0.34s  I  DISPATCHER_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 DOWN FRONT
+0.34s  I  AT_FLOOR_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
+0.34s  I  DRIVE_CONTROL_PERIOD N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
+0.34s  I  DOOR_CLOSED_SENSOR_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;T5.5
+;check that the door is openning
+0.48s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+0.48s  A F DoorMotor FRONT LEFT : command == OPEN
+0.48s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getDoorCommand == OPEN
+
+;set conditions for T5.1
+0.50s  I  DOOR_OPENED_SENSOR_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+
+;T5.1
+;check that the door is open
+0.94s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENNING
+0.94s  A F DoorMotor FRONT LEFT : command == STOP
+0.94s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getDoorCommand == STOP
+
+;check that the door is closing 0.5s later
+1.46s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
+1.46s  A F DoorMotor FRONT LEFT : command == CLOSE
+1.46s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getDoorCommand == CLOSE
+
+;clear DoorOpened
+1.47s  I  DOOR_OPENED_SENSOR_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+
+;set conditions for T5.3
+2.41s  I  DOOR_REVERSAL_NETWORK_PERIOD N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
+
+;T5.3
+;check that door is openning
+2.61s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+2.61s  A F DoorMotor FRONT LEFT : command == OPEN
+2.61s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getDoorCommand == OPEN
+
