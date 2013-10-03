@@ -1,0 +1,27 @@
+; Message File Definitions - Unit Test for CarButtonControl
+; Course and Semester : 18649 Fall 2013
+; Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;            Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+
+
+;can ID's used:
+
+;mDesiredFloor
+#DEFINE DESIRED_FLOOR_CAN_ID 0x0f0cb600
+;mAtFloor 8 FRONT = 0x0C4C2800 + 7*2 + 0 = 0x0C4C280e
+#DEFINE AT_FLOOR_CAN_ID 0xc4c280e
+;mDoorClosed Front Left = 0x0D145000 + 0 + 0 = 0x0D145000
+#DEFINE DOOR_CLOSED_FL_CAN_ID 0x0D145000
+;mDoorClosed Front Right = 0x0D145000 + 0 + 1 = 0x0D145001
+#DEFINE DOOR_CLOSED_FR_CAN_ID 0x0D145001
+;mDoorClosed Back Left = 0x0D145000 + 1 + 0 = 0x0D145002
+#DEFINE DOOR_CLOSED_BL_CAN_ID 0x0D145002
+;mDoorClosed Back Right = 0x0D145000 + 1 + 1 = 0x0D145003
+#DEFINE DOOR_CLOSED_BR_CAN_ID 0x0D145003
+;mCarCall 8 FRONT = 0x0F11BA00 + 7*2 = 0xf11ba0e
+#DEFINE CAR_CALL_CAN_ID 0xf11ba0e
+;mCarLight 8 FRONT = 0x0F12BA00 + 7*2 = 0xf12ba0e
+#DEFINE CAR_LIGHT_CAN_ID 0xf12ba0e
+
+;message period
+#DEFINE MESSAGE_PERIOD 0.1s
