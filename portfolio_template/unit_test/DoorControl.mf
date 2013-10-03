@@ -1,11 +1,8 @@
-; Unit test for DoorControl
-; Yue Chen
-
-;Note:  Assertions must be inserted more than two periods after a message or physical
-;value has been inserted to be sure that the change propagates through the system
-
-;this test file demonstrates network and framework message injections
-;and network, framework, and controller state assertions.
+;Message File : Unit Test for DoorControl
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author   : Yue Chen(yuechen)
 
 #INCLUDE defines.mf ;include CAN id and period definitions
 

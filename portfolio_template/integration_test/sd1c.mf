@@ -1,35 +1,43 @@
+;Message File - Unit Test for SD1C
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sri Harsha Koppaka (skoppaka)
+
 #INCLUDE defines.mf ;include CAN id and period definitions
 
 ;intialize
 
 ;Injecting Initial conditions
 
-0s   I   MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
-+0s  I   MESSAGE_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-+0s  I MESSAGE_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 7 FRONT UP
-+0s  I F HallLight 4 FRONT DOWN : set == false 
-
-;Asserting Initial Conditions
-+0.5s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
-+0s    A N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-+0s    A N HALL_BUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 7 FRONT UP
-+0s    A F HallLight 4 FRONT DOWN : set == false 
++0s  I   AT_FLOOR_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0s  I DISPATCHER_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 7 FRONT UP
++0s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT DOWN = false
 
 ;#arc '1C/1a'
-+0.4s  A F DoorMotor FRONT LEFT : command == CLOSE
++0.2s  A F DoorMotor FRONT LEFT : command == CLOSE
+
+;Asserting Initial Conditions
++0.5s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == false
++0s    A N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT : getValue == true
++0s    A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
++0s    A F HallLight 4 FRONT DOWN : lighted == false 
+
 
 ;#arc '1C/2'
 ;#arc '1C/3a'
 ;#arc '1C/3b'
-+0.8s  I  MESSAGE_PERIOD F HallCall 4 FRONT DOWN = true
++0.8s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT DOWN = true
 
-+0.25s  I  MESSAGE_PERIOD F HallCall 4 FRONT DOWN = false
++0.3s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT DOWN = false
 
 ;#arc '1C/4'
-+0.25s  A F HallLight 4 FRONT UP : lighted == true
++0.5s  A F HallLight 4 FRONT DOWN : lighted == true
+
++0.5s  I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
 
 ;#arc '1C/5a'
-+2.5s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++2.5s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == true
 
 ;#arc '1C/5b'
 +0.5s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand : getDoorCommand == STOP

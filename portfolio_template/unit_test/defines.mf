@@ -1,5 +1,10 @@
 ;The following lines are automatically generated and designed to be compatible with the .mf #DEFINE directive.
 ;controller periods
+
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+
 #DEFINE HALL_BUTTON_CONTROL_PERIOD                    100.0ms
 #DEFINE CAR_BUTTON_CONTROL_PERIOD                     100.0ms
 #DEFINE LANTERN_CONTROL_PERIOD                        200.0ms

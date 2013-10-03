@@ -15,6 +15,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -32,11 +33,19 @@
       release.</span><br>
     <h2>Controller files</h2>
     <ul>
-      <li><a href="HallButtonControl.java">HallButtonControl.java</a>&nbsp;-
-        Controller that implements the behavior for the HallLights in
-        the elevator system.<br>
+      <li><a href="DoorControl.java">DoorControl.java</a> - Controller
+        that implements the behavior for the Doors Motors in the
+        elevator system.<br>
       </li>
-      <li>...</li>
+      <li><a href="HallButtonControl.java">HallButtonControl.java</a>&nbsp;-
+
+        Controller that implements the behavior for the HallLights and
+        HallCalls in the elevator system.<br>
+      </li>
+      <li><a href="CarButtonControl.java">CarButtonControl.java</a> -
+        Controller that implements the behavior for the CarLights and
+        CarCalls in the elevator system.<br>
+      </li>
     </ul>
     <h2>Translator files</h2>
     Links and descriptions to all message translators used by the
@@ -46,7 +55,10 @@
         - Translator for the mDesiredFloor[f,b,d] message. Packages the
         three fields into a bit level representation.<br>
       </li>
-      <li>...<br>
+      <li><a href="DoorMotorCommandCanPayloadTranslator.java">DoorMotorCommandCanPayloadTranslator.java</a>
+        - Translator for the DoorMotor Commands.</li>
+      <li><a href="DriveSpeedCanPayloadTranslator.java">DriveSpeedCanPayloadTranslator.java</a>
+        - Translator for the DriveSpeed message.<br>
       </li>
     </ul>
     <h2>Utility files</h2>

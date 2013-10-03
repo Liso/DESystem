@@ -1,0 +1,43 @@
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+
+Simulator Parameters:
+Command line = -cf hallbuttoncontrol.cf -mf hallbuttoncontrol_test.mf
+RandomSeed = 1380759395371
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = hallbuttoncontrol.mf
+Controller File = hallbuttoncontrol.cf
+
+Assertion Results:
+@0.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@376433e4 :: lighted ?== false PASSED
+@0.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@f7bd29 :: getValue ?== false PASSED
+@0.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3a7af3e0 :: getValue ?== false PASSED
+@1.2s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@4df194d9 :: lighted ?== true PASSED
+@1.2s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@23ccf0ad :: getValue ?== true PASSED
+@1.2s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@27c94e11 :: getValue ?== true PASSED
+@3.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@67a418a3 :: lighted ?== false PASSED
+@3.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@14f4189a :: getValue ?== false PASSED
+@3.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3adba1cc :: getValue ?== false PASSED
+@6.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@33b17f92 :: lighted ?== true PASSED
+@6.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2bd8e0f3 :: getValue ?== true PASSED
+@6.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2b0951aa :: getValue ?== true PASSED
+@9.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@a0b96a5 :: lighted ?== false PASSED
+@9.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@544a7629 :: getValue ?== false PASSED
+@9.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1a3ae8ac :: getValue ?== false PASSED
+@12.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@4d674592 :: lighted ?== true PASSED
+@12.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@16360771 :: getValue ?== true PASSED
+@12.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@71ee88dd :: getValue ?== true PASSED
+@15.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@144b6a6c :: lighted ?== false PASSED
+@15.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6a0f0c67 :: getValue ?== false PASSED
+@15.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1d076683 :: getValue ?== false PASSED
+
+
+******************Summary******************
+Passed:  21
+Failed:  0
+Total :  21
+

@@ -1,2 +1,6 @@
-;there is only one test in the sample file.  Your file shall contain all tests.
-SD1A.1 sd1a1.cf sd1a1.mf
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+
+SD1C sd1c.cf sd1c.mf
+SD5A sd5a.cf sd5a.mf
