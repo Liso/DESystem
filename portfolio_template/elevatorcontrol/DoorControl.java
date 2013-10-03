@@ -66,9 +66,9 @@ public class DoorControl extends Controller {
     private DesiredFloorCanPayloadTranslator mDesiredFloor;
     
     //received drive speed message
-    private ReadableCanMailbox networkDriveCommand;
+    private ReadableCanMailbox networkDriveSpeed;
     //translator for the DriveCommand message -- this translator is specific
-    private DriveCommandCanPayloadTranslator mDriveCommand;
+    private DriveSpeedCanPayloadTranslator mDriveSpeed;
    
     //these variables keep track of which instance this is.
     private final Hallway hallway;
@@ -145,13 +145,13 @@ public class DoorControl extends Controller {
         mDesiredFloor = new DesiredFloorCanPayloadTranslator(networkDesiredFloor);
         canInterface.registerTimeTriggered(networkDesiredFloor);
   
-        networkAtFloor = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(4, hallway));
-        mAtFloor = new AtFloorCanPayloadTranslator(networkAtFloor, 4, hallway);
+        networkAtFloor = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(floor, hallway));
+        mAtFloor = new AtFloorCanPayloadTranslator(networkAtFloor, floor, hallway);
         canInterface.registerTimeTriggered(networkAtFloor);
         
-        networkDriveCommand = CanMailbox.getReadableCanMailbox(MessageDictionary.DRIVE_COMMAND_CAN_ID);
-        mDriveCommand = new DriveCommandCanPayloadTranslator(networkDriveCommand);
-        canInterface.registerTimeTriggered(networkDriveCommand);
+        networkDriveSpeed = CanMailbox.getReadableCanMailbox(MessageDictionary.DRIVE_SPEED_CAN_ID);
+        mDriveSpeed = new DriveSpeedCanPayloadTranslator(networkDriveSpeed);
+        canInterface.registerTimeTriggered(networkDriveSpeed);
       
         timer.start(period);
     }
@@ -221,8 +221,8 @@ public class DoorControl extends Controller {
                 //#transition 'T5.5'
                if ((mAtFloor.getValue() == true && 
                     mDesiredFloor.getFloor() == floor && 
-                    mDriveCommand.getDirection() == Direction.STOP && 
-                    mDriveCommand.getSpeed() == Speed.STOP) || 
+                    mDriveSpeed.getDirection() == Direction.STOP && 
+                    mDriveSpeed.getSpeed() == Speed.STOP) || 
                    (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
                     newState = State.STATE_OPEN;
                 } else {

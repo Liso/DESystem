@@ -1,10 +1,5 @@
-; 18649 Fall 2013
-; group 16
-; Jiangtian Nie (jnie)
-; Sally Stevenson (ststeven)
-; Sri Harsha Koppaka (skoppaka)
-; Yue Chen (yuechen) 
-; doorcontrol.mf
+; Unit test for DoorControl
+; Yue Chen
 
 ;Note:  Assertions must be inserted more than two periods after a message or physical
 ;value has been inserted to be sure that the change propagates through the system
@@ -33,8 +28,8 @@
 ;set conditions for T5.5
 0.34s  I  DISPATCHER_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 DOWN FRONT
 0.34s  I  AT_FLOOR_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-0.34s  I  DRIVE_CONTROL_PERIOD N DRIVE_COMMAND_CAN_ID DriveCommand = STOP STOP
-0.08s  I  DOOR_CLOSED_SENSOR_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+0.34s  I  DRIVE_CONTROL_PERIOD N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
+0.34s  I  DOOR_CLOSED_SENSOR_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
 
 ;T5.5
 ;check that the door is openning
