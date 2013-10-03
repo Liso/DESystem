@@ -1,3 +1,13 @@
+/* 
+ * Course and Semester : 18-649 Fall 2013
+ * Group No: 16
+ * Group Members : Jiangtian Nie(jnie) , Yue Chen(yuechen),
+ *                 Sally Stevenson(ststeven) , Sri Harsha Koppaka(skoppaka)
+ * Author : Yue Chen
+ * AndrewID : yuechen
+ */
+
+
 package simulator.elevatorcontrol;
 
 import java.util.HashMap;
@@ -127,7 +137,7 @@ public class DoorControl extends Controller {
                 MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(hallway, side));
         mDoorMotor = new DoorMotorCommandCanPayloadTranslator(
-                networkDoorMotor);
+                networkDoorMotor, hallway, side);
         canInterface.sendTimeTriggered(networkDoorMotor, period);
 
         networkDoorOpened = CanMailbox.getReadableCanMailbox(
