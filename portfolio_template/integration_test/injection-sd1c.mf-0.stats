@@ -1,0 +1,27 @@
+
+Simulator Parameters:
+Command line = -cf sd1c.cf -mf sd1c.mf
+RandomSeed = 1380780359598
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd1c.mf
+Controller File = sd1c.cf
+
+Assertion Results:
+@0.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5cfc644a :: command ?== CLOSE PASSED
+@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3a6a5afc :: getValue ?== false PASSED
+@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6d13cf51 :: getValue ?== true PASSED
+@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@18ad8e84 :: getDirection ?== UP PASSED
+@0.7s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@7344119b :: lighted ?== false PASSED
+@2.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@65cd1dff :: lighted ?== true PASSED
+@5.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f73089d :: getValue ?== true PASSED
+@5.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7b0acf26 :: getDoorCommand ?== STOP PASSED
+
+
+******************Summary******************
+Passed:  8
+Failed:  0
+Total :  8
+
