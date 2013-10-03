@@ -1,19 +1,32 @@
+/* 
+ * Course and Semester : 18-649 Fall 2013
+ * Group No: 16
+ * Group Members : Jiangtian Nie(jnie) , Yue Chen(yuechen),
+ *                 Sally Stevenson(ststeven) , Sri Harsha Koppaka(skoppaka)
+ * Author : Yue Chen
+ * AndrewID : yuechen
+ */
+
+
 package simulator.elevatorcontrol;
 
 import java.util.BitSet;
 
 import simulator.framework.DoorCommand;
+import simulator.framework.Hallway;
+import simulator.framework.ReplicationComputer;
+import simulator.framework.Side;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.translators.CanPayloadTranslator;
 
 public class DoorMotorCommandCanPayloadTranslator extends CanPayloadTranslator {
-    public DoorMotorCommandCanPayloadTranslator(WriteableCanMailbox p) {
-        super(p, 4, MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID);
+    public DoorMotorCommandCanPayloadTranslator(WriteableCanMailbox p, Hallway hallway, Side side) {
+        super(p, 4, MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway, side));
     }
     
-    public DoorMotorCommandCanPayloadTranslator(ReadableCanMailbox p) {
-        super(p, 4, MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID);
+    public DoorMotorCommandCanPayloadTranslator(ReadableCanMailbox p, Hallway hallway, Side side) {
+        super(p, 4, MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway, side));
     }
 
     /**
