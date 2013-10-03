@@ -1,4 +1,4 @@
-;Message File - Unit Test for HallButtonControlH
+;Message File - Unit Test for HallButtonControl
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
@@ -8,65 +8,83 @@
 
 ;input initial value
 0s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = false
-0s  I  HALL_BUTTON_CONTROL_PERIOD N	AT_FLOOR_4F_CAN_ID AtFloor 2 FRONT = true
+
 
 ;#state 'S8.1 OFF'
-0.21s  A F HallLight 4 FRONT UP : lighted == false 
-0.21s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false
-0.21s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false
++0.3s  A F HallLight 4 FRONT UP : lighted == false 
++0s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false
++0s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false
+
++0.1s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = false
 
 ;#transition 'T8.1'
-1.0s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = true
++0.3s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = true
+
+
+;Setting Hall Call off
++0.25s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = false
 
 ;#state 'S8.2 ON'
-1.21s  A F HallLight 4 FRONT UP : lighted == true 
-1.21s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true
-1.21s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == true
++0.25s  A F HallLight 4 FRONT UP : lighted == true 
++0s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true
++0s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == true
 
 ;#transition 'T8.2'
-9s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = true
-9s  I  HALL_BUTTON_CONTROL_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = false
-9s  I  HALL_NUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor : setDirection = UP
++1.8s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = true
++0s  I  HALL_BUTTON_CONTROL_PERIOD N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = false
++0s  I  HALL_BUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 UP FRONT
 
 ;#state 'S8.1 OFF'
-9.5s  A F HallLight 4 FRONT UP : lighted == false 
-9.5s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false
-9.5s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false
++0.5s  A F HallLight 4 FRONT UP : lighted == false 
++0s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false
++0s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false
+
++0.1s I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = false
 
 ;transition 'T8.1'
-11s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 6 BACK UP = true
++2.4s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = true
+
+
+;Setting HallCall off
++0.25s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = false
 
 ;#state 'S8.2 ON'
-11.5s  A F HallLight 6 BACK UP : lighted == true 
-11.5s  A N HALL_LIGHT_6BU_CAN_ID Boolean : getValue == true
-11.5s  A N HALL_CALL_6BU_CAN_ID Boolean : getValue == true
++0.25s  A F HallLight 4 FRONT UP : lighted == true 
++0s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true
++0s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == true
 
 ;#transition 'T8.2'
-16s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_6B_CAN_ID AtFloor 6 BACK = true
-16s  I  HALL_BUTTON_CONTROL_PERIOD N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT = false
-16s  I  HALL_NUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor : setDirection = UP
++2.5s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = true
++0s  I  HALL_BUTTON_CONTROL_PERIOD N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT = false
++0s  I  HALL_BUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 7 FRONT UP
 
 ;#state 'S8.1 OFF'
-16.5s  A F HallLight 6 BACK UP : lighted == false 
-16.5s  A N HALL_LIGHT_6BU_CAN_ID Boolean : getValue == false
-16.5s  A N HALL_CALL_6BU_CAN_ID Boolean : getValue == false
++0.5s  A F HallLight 4 FRONT UP : lighted == false 
++0s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false
++0s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false
+
++0.1s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = false
 
 ;transition 'T8.1'
-18s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 7 BACK UP = true
++2.4s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = true
+
+
+;Setting HallCall off
++0.25s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = false
 
 ;#state 'S8.2 ON'
-18.21s  A F HallLight 7 BACK UP : lighted == true 
-18.21s  A N HALL_LIGHT_7BU_CAN_ID Boolean : getValue == true
-18.21s  A N HALL_CALL_7BU_CAN_ID Boolean : getValue == true
++0.25s  A F HallLight 4 FRONT UP : lighted == true 
++0s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == true
++0s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == true
 
 ;#transition 'T8.2'
-18.31s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_7B_CAN_ID AtFloor 7 BACK = true
-18.31s  I  HALL_BUTTON_CONTROL_PERIOD N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT = false
-18.31s  I  HALL_NUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor : setDirection = STOP
++2.5s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_4F_CAN_ID AtFloor 4 FRONT = true
++0s  I  HALL_BUTTON_CONTROL_PERIOD N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT = false
++0s  I  HALL_BUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
 
 ;#state 'S8.1 OFF'
-18.52s  A F HallLight 7 BACK UP : lighted == false 
-18.52s  A N HALL_LIGHT_7BU_CAN_ID Boolean : getValue == false
-18.52s  A N HALL_CALL_7BU_CAN_ID Boolean : getValue == false
++0.5s  A F HallLight 4 FRONT UP : lighted == false 
++0s  A N HALL_LIGHT_4FU_CAN_ID Boolean : getValue == false
++0s  A N HALL_CALL_4FU_CAN_ID Boolean : getValue == false
 
 

@@ -28,6 +28,7 @@ import simulator.payloads.HallLightPayload;
 import simulator.payloads.HallLightPayload.WriteableHallLightPayload;
 import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
+
 /*
 ** HallButton Control is used to take input Hall Calls from the passengers
 ** and set HallLight ON or OFF depending on the location and desired direction of elevator.
@@ -189,7 +190,7 @@ public class HallButtonControl extends Controller{
         canInterface.registerTimeTriggered(networkDoorClosedBackRight);
         
         //Starts Timer that schedules this code to expire after time interval has passed.
-        //It passed to timerExpired code after this.
+        //It passes control to timerExpired code after this.
         timer.start(period);
     }
     
@@ -202,29 +203,35 @@ public class HallButtonControl extends Controller{
     
     public void timerExpired(Object callbackData) {
     	State newState = state;
+
         switch (state) {
             case STATE_OFF:
                 // State actions for 'OFF'
-            	mHallCall.set(false);
                 localHallLight.set(false);
+            	mHallCall.set(false);
                 mHallLight.set(false);
-                
+
                 //#transition 'T8.1'
-                if(localHallCall.pressed() == true)
-                	newState = State.STATE_ON;
-               
+            	if(localHallCall.pressed() == true){
+            		newState = State.STATE_ON;
+            		break;
+            	}
+
                 break;
+                
             case STATE_ON:
             	// State actions for 'ON'
-            	mHallCall.set(true);
                 localHallLight.set(true);
+            	mHallCall.set(true);
                 mHallLight.set(true);
                 
                 //#transition 'T8.2'
-                if((mAtFloor.getValue() == true) && ((mDesiredFloor.getDirection() == direction) || mDesiredFloor.getDirection() == Direction.STOP))
-                	if((mDoorClosedFrontLeft.getValue() == false) || (mDoorClosedFrontRight.getValue() == false) || (mDoorClosedBackLeft.getValue() == false) || (mDoorClosedBackRight.getValue() == false))
+                if((localHallCall.pressed() == false) && (mAtFloor.getValue() == true) && ((mDesiredFloor.getDirection() == direction) || (mDesiredFloor.getDirection() == Direction.STOP))){
+                	if((mDoorClosedFrontLeft.getValue() == false) || (mDoorClosedFrontRight.getValue() == false) || (mDoorClosedBackLeft.getValue() == false) || (mDoorClosedBackRight.getValue() == false)){
                 		newState = State.STATE_OFF;
-              
+                		break;
+                	}
+                }
                 break;
            
             default:
