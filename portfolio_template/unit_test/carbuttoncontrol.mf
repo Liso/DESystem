@@ -4,121 +4,121 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Sally Stevenson
 
-#INCLUDE carbuttoncontrol_defines.mf
+#INCLUDE defines.mf
 
 ; Initial message values
 0s I 0s F CarCall 8 FRONT = false
-0s I 0s N AT_FLOOR_CAN_ID AtFloor 8 FRONT = true
+0s I 0s N AT_FLOOR_[8][FRONT]_CAN_ID AtFloor 8 FRONT = true
 0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 8 FRONT STOP
-0s I 0s N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
-0s I 0s N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = true
-0s I 0s N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT = true
-0s I 0s N DOOR_CLOSED_BR_CAN_ID DoorClosed BACK RIGHT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 
 ; #state 'S9.1 Light Off'
-0.25s A N CAR_CALL_CAN_ID Boolean : getValue == false
-0.25s A N CAR_LIGHT_CAN_ID Boolean : getValue == false
+0.25s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == false
+0.25s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == false
 0.25s A F CarLight 8 FRONT : lighted == false
 
 ; #transition 'T9.1'
 0.3s I 0s F CarCall 8 FRONT = true
 
 ; #state 'S9.2 Light On'
-0.65s A N CAR_CALL_CAN_ID Boolean : getValue == true
-0.65s A N CAR_LIGHT_CAN_ID Boolean : getValue == true
+0.65s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == true
+0.65s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == true
 0.65s A F CarLight 8 FRONT : lighted == true
 
 ; #transition 'T9.2'
-0.7s I 0s N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = false
+0.7s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
 0.7s I 0s F CarCall 8 FRONT = false
 
 ; #state 'S9.1 Light Off'
-1.05s A N CAR_CALL_CAN_ID Boolean : getValue == false
-1.05s A N CAR_LIGHT_CAN_ID Boolean : getValue == false
+1.05s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == false
+1.05s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == false
 1.05s A F CarLight 8 FRONT : lighted == false
 
 ; #transition 'T9.1'
-1.1s I 0s N DOOR_CLOSED_FL_CAN_ID DoorClosed FRONT LEFT = true
+1.1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
 1.1s I 0s F CarCall 8 FRONT = true
 
 ; #state 'S9.2 Light On'
-1.45s A N CAR_CALL_CAN_ID Boolean : getValue == true
-1.45s A N CAR_LIGHT_CAN_ID Boolean : getValue == true
+1.45s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == true
+1.45s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == true
 1.45s A F CarLight 8 FRONT : lighted == true
 
 ; #transition 'T9.2'
-1.5s I 0s N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = false
+1.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = false
 1.5s I 0s F CarCall 8 FRONT = false
 
 ; #state 'S9.1 Light Off'
-1.85s A N CAR_CALL_CAN_ID Boolean : getValue == false
-1.85s A N CAR_LIGHT_CAN_ID Boolean : getValue == false
+1.85s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == false
+1.85s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == false
 1.85s A F CarLight 8 FRONT : lighted == false
 
 ; #transition 'T9.1'
-1.9s I 0s N DOOR_CLOSED_FR_CAN_ID DoorClosed FRONT RIGHT = true
+1.9s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
 1.9s I 0s F CarCall 8 FRONT = true
 
 ; #state 'S9.2 Light On'
-2.25s A N CAR_CALL_CAN_ID Boolean : getValue == true
-2.25s A N CAR_LIGHT_CAN_ID Boolean : getValue == true
+2.25s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == true
+2.25s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == true
 2.25s A F CarLight 8 FRONT : lighted == true
 
 ; #transition 'T9.2'
-2.3s I 0s N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT = false
+2.3s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = false
 2.3s I 0s F CarCall 8 FRONT = false
 
 ; #state 'S9.1 Light Off'
-2.65s A N CAR_CALL_CAN_ID Boolean : getValue == false
-2.65s A N CAR_LIGHT_CAN_ID Boolean : getValue == false
+2.65s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == false
+2.65s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == false
 2.65s A F CarLight 8 FRONT : lighted == false
 
 ; #transition 'T9.1'
-2.7s I 0s N DOOR_CLOSED_BL_CAN_ID DoorClosed BACK LEFT = true
+2.7s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
 2.7s I 0s F CarCall 8 FRONT = true
 
 ; #state 'S9.2 Light On'
-3.05s A N CAR_CALL_CAN_ID Boolean : getValue == true
-3.05s A N CAR_LIGHT_CAN_ID Boolean : getValue == true
+3.05s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == true
+3.05s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == true
 3.05s A F CarLight 8 FRONT : lighted == true
 
 ; #transition 'T9.2'
-3.1s I 0s N DOOR_CLOSED_BR_CAN_ID DoorClosed BACK RIGHT = false
+3.1s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 3.1s I 0s F CarCall 8 FRONT = false
 
 ; #state 'S9.1 Light Off'
-3.45s A N CAR_CALL_CAN_ID Boolean : getValue == false
-3.45s A N CAR_LIGHT_CAN_ID Boolean : getValue == false
+3.45s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == false
+3.45s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == false
 3.45s A F CarLight 8 FRONT : lighted == false
 
 ; #transition 'T9.1'
 3.5s I 0s F CarCall 8 FRONT = true
 
 ; #state 'S9.2 Light On'
-3.85s A N CAR_CALL_CAN_ID Boolean : getValue == true
-3.85s A N CAR_LIGHT_CAN_ID Boolean : getValue == true
+3.85s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == true
+3.85s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == true
 3.85s A F CarLight 8 FRONT : lighted == true
 
 ; Now we need to make sure that we don't transition to state S9.2 unless ALL
 ; the conditions are met.
 
 ; #state 'S9.2 Light On'
-3.95s A N CAR_CALL_CAN_ID Boolean : getValue == true
-3.95s A N CAR_LIGHT_CAN_ID Boolean : getValue == true
+3.95s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == true
+3.95s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == true
 3.95s A F CarLight 8 FRONT : lighted == true
 
-4s I 0s N DOOR_CLOSED_BR_CAN_ID DoorClosed BACK RIGHT = true
+4s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 4s I 0s F CarCall 8 FRONT = false
 
 ; #state 'S9.2 Light On'
-4.35s A N CAR_CALL_CAN_ID Boolean : getValue == true
-4.35s A N CAR_LIGHT_CAN_ID Boolean : getValue == true
+4.35s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == true
+4.35s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == true
 4.35s A F CarLight 8 FRONT : lighted == true
 
-4.4s I 0s N AT_FLOOR_CAN_ID AtFloor 8 FRONT = false
-4.4s I 0s N DOOR_CLOSED_BR_CAN_ID DoorClosed BACK RIGHT = false
+4.4s I 0s N AT_FLOOR_[8][FRONT]_CAN_ID AtFloor 8 FRONT = false
+4.4s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ; #state 'S9.2 Light On'
-4.75s A N CAR_CALL_CAN_ID Boolean : getValue == true
-4.75s A N CAR_LIGHT_CAN_ID Boolean : getValue == true
+4.75s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == true
+4.75s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == true
 4.75s A F CarLight 8 FRONT : lighted == true
