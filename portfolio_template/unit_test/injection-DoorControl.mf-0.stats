@@ -1,0 +1,36 @@
+
+Simulator Parameters:
+Command line = -cf DoorControl.cf -mf DoorControl.mf
+RandomSeed = 1380764363109
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = DoorControl.mf
+Controller File = DoorControl.cf
+
+Assertion Results:
+@0.04s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4e1f52a :: command ?== CLOSE PASSED
+@0.04s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5c03bb34 :: getDoorCommand ?== CLOSE PASSED
+@0.3s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_CLOSING PASSED
+@0.3s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@18a37512 :: command ?== STOP PASSED
+@0.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3ab0f534 :: getDoorCommand ?== STOP PASSED
+@0.48s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_OPEN PASSED
+@0.48s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1943b93b :: command ?== OPEN PASSED
+@0.48s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2b5d7e8e :: getDoorCommand ?== OPEN PASSED
+@0.94s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_OPENING PASSED
+@0.94s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6b8e0782 :: command ?== STOP PASSED
+@0.94s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@633a494d :: getDoorCommand ?== STOP PASSED
+@1.46s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_CLOSE PASSED
+@1.46s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@56acf892 :: command ?== CLOSE PASSED
+@1.46s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3e99c59d :: getDoorCommand ?== CLOSE PASSED
+@2.61s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_OPEN PASSED
+@2.61s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@33a626ac :: command ?== OPEN PASSED
+@2.61s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5ec09652 :: getDoorCommand ?== OPEN PASSED
+
+
+******************Summary******************
+Passed:  17
+Failed:  0
+Total :  17
+

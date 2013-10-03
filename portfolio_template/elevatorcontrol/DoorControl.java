@@ -1,5 +1,7 @@
 package simulator.elevatorcontrol;
 
+import java.util.HashMap;
+
 import jSimPack.SimTime;
 import simulator.elevatormodules.*;
 import simulator.framework.Controller;
@@ -9,7 +11,6 @@ import simulator.framework.Elevator;
 import simulator.framework.Hallway;
 import simulator.framework.ReplicationComputer;
 import simulator.framework.Side;
-import simulator.framework.Speed;
 import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
@@ -56,9 +57,7 @@ public class DoorControl extends Controller {
     private DoorClosedCanPayloadTranslator mDoorClosed;
     
     //received at floor message
-    private ReadableCanMailbox networkAtFloor;
-    //translator for the AtFloor message -- this translator is specific
-    private AtFloorCanPayloadTranslator mAtFloor;
+    private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor = new HashMap<Integer, AtFloorCanPayloadTranslator>();
     
     //received desired floor message
     private ReadableCanMailbox networkDesiredFloor;
@@ -73,7 +72,6 @@ public class DoorControl extends Controller {
     //these variables keep track of which instance this is.
     private final Hallway hallway;
     private final Side side;
-    private final int floor;
     
     //store the period for the controller
     private final static SimTime period = 
@@ -102,15 +100,13 @@ public class DoorControl extends Controller {
      * For your elevator controllers, you should make sure that the constructor
      * matches the method signatures in ControllerBuilder.makeAll().
      */
-    public DoorControl(int floor, Hallway hallway, Side side,
-                       boolean verbose) {
+    public DoorControl(Hallway hallway, Side side, boolean verbose) {
         // call to the Controller superclass constructor is required
         super("DoorControl" +
               ReplicationComputer.makeReplicationString(hallway, side),
               verbose);
         
         // stored the constructor arguments in internal state
-        this.floor = floor;
         this.hallway = hallway;
         this.side = side;
         
@@ -165,13 +161,17 @@ public class DoorControl extends Controller {
         mDesiredFloor = new DesiredFloorCanPayloadTranslator(
                 networkDesiredFloor);
         canInterface.registerTimeTriggered(networkDesiredFloor);
-  
-        networkAtFloor = CanMailbox.getReadableCanMailbox(
-                MessageDictionary.AT_FLOOR_BASE_CAN_ID +
-                ReplicationComputer.computeReplicationId(floor, hallway));
-        mAtFloor = new AtFloorCanPayloadTranslator(networkAtFloor, floor,
-                                                   hallway);
-        canInterface.registerTimeTriggered(networkAtFloor);
+        
+        for (int i = 0; i < Elevator.numFloors; i++) {
+            int floor = i + 1;
+            for (Hallway h : Hallway.replicationValues) {
+                int index = ReplicationComputer.computeReplicationId(floor, h);
+                ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + index);
+                AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
+                canInterface.registerTimeTriggered(m);
+                mAtFloor.put(index, t);
+            }
+        }
         
         networkDriveSpeed = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DRIVE_SPEED_CAN_ID);
@@ -236,12 +236,18 @@ public class DoorControl extends Controller {
                 mDoorMotor.set(DoorCommand.STOP);
                 
                 //#transition 'T5.5'
-               if ((mAtFloor.getValue() && 
-                      (mDesiredFloor.getFloor() == floor) && 
-                      (mDriveSpeed.getDirection() == Direction.STOP) && 
-                      (mDriveSpeed.getSpeed() == Speed.STOP)) || 
-                      (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
-                    newState = State.STATE_OPEN;
+                for (int i = 0; i < Elevator.numFloors; i++) {
+                    int floor = i + 1;
+                    for (Hallway h : Hallway.replicationValues) {
+                        int index = ReplicationComputer.computeReplicationId(floor, h);
+                        if ((mAtFloor.get(index).getValue() &&
+                        	(mDesiredFloor.getFloor() == floor) &&
+                            (mDriveSpeed.getDirection() == Direction.STOP) && 
+                            (mDriveSpeed.getSpeed() < 10)) || 
+                            (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
+                          newState = State.STATE_OPEN;
+                         }
+                    }
                 }
                 break;
             default:

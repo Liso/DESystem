@@ -28,25 +28,20 @@ public class DriveSpeedCanPayloadTranslator extends CanPayloadTranslator {
      * @param speed
      * @param dir
      */
-    public void set(Speed speed, Direction dir) {
+    public void set(double speed, Direction dir) {
         setSpeed(speed);
         setDirection(dir);
     }
     
-    public void setSpeed(Speed speed) {
+    public void setSpeed(double speed) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, speed.ordinal(), 0, 32);
+        addIntToBitset(b, (int)speed, 0, 32);
         setMessagePayload(b, getByteSize());
     }
 
-    public Speed getSpeed() {
+    public double getSpeed() {
         int val = getIntFromBitset(getMessagePayload(), 0, 32);
-        for (Speed s : Speed.values()) {
-            if (s.ordinal() == val) {
-                return s;
-            }
-        }
-        throw new RuntimeException("Unrecognized Speed Value " + val);
+        return (double)val;
     }
 
     public void setDirection(Direction dir) {
