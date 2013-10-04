@@ -95,9 +95,9 @@ public class DriveControl extends Controller {
         Object hallways[] = Hallway.replicationValues;
         int hallwayCount = hallways.length;
         Object directions[] = Direction.replicationValues;
-        numDirections = directions.length;
+        int numDirections = directions.length;
         Side sides[] = Side.values();
-        int numSides = sideList.length;
+        int numSides = sides.length;
         
         // Setting up mailboxes so we can check the status of each of the doors
         for (int i = 0; i < hallwayCount; i++) {
@@ -111,7 +111,7 @@ public class DriveControl extends Controller {
                         CanMailbox.getReadableCanMailbox(
                             MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
                             doorId);
-                mDoorClosedArray.put(id, new DoorClosedCanPayloadTranslator(
+                mDoorClosedArray.put(doorId, new DoorClosedCanPayloadTranslator(
                         doorClosedMailbox, hallway, side));
                 canInterface.registerTimeTriggered(doorClosedMailbox);
                 simulator.payloads.CanMailbox.ReadableCanMailbox
@@ -141,7 +141,7 @@ public class DriveControl extends Controller {
             mHoistwayLimitArray.put(directionId,
                     new HoistwayLimitSensorCanPayloadTranslator(
                             hoistwayLimitMailbox, direction));
-            canInterface.registerTimeTriggered(readablecanmailbox2);
+            canInterface.registerTimeTriggered(hoistwayLimitMailbox);
         }
 
         // Setting up network messages for the level sensors
@@ -215,7 +215,7 @@ public class DriveControl extends Controller {
                 break;
             }
             //#transition 'T6.12'
-            if (isOverweight()) {
+            if (isOverweight) {
                 newstate=State.STATE_STOP;
                 break;
             }
