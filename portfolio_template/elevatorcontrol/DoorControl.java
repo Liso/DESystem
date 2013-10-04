@@ -235,7 +235,7 @@ public class DoorControl extends Controller {
                     (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
                     newState = State.STATE_OPEN;
                 }
-                //#transition 'T5.3'
+                //#transition 'T5.4'
                 else if (mDoorClosed.getValue()) {
                 	newState = State.STATE_STOP_CLOSING;
                 }
