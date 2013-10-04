@@ -7,60 +7,66 @@
 #INCLUDE defines.mf
 
 ;intialize
+;#state 'S6.1 STOP'
 0.04s  A S DriveControl : STATE == STATE_STOP
 0.04s  A F Drive : speed == STOP 
 0.04s  A F Drive : direction == STOP
 0.04s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP 
 0.04s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP 
 
-;set conditions for T6.9
+;#transition T6.9
 1s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
 1s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = false
 
 ;T6.9
+;#state 'S6.5 DRIVE_DOWN'
 2s  A S DriveControl : STATE == STATE_LEVEL_DOWN
 2s  A F Drive : speed == LEVEL
 2s  A F Drive : direction == DOWN
 2s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
 2s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
 
-;set conditions for T6.10
+;#transition T6.10
 3s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
 3s	I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
 
 ;T6.10
+;#state 'S6.1 STOP'
 4s  A S DriveControl : STATE == STATE_STOP
 4s  A F Drive : speed == STOP
 4s  A F Drive : direction == STOP
 4s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
 4s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
 
-;set conditions for T6.8
+;#transition T6.8
 5s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
 5s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = false
 
 ;T6.8
+;#state 'S6.4 LEVEL_UP'
 6s  A S DriveControl : STATE == STATE_LEVEL_UP
 6s  A F Drive : speed == LEVEL
 6s  A F Drive : direction == UP
 6s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
 6s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
 
-;set conditions for T6.7
+;#transition T6.7
 7s  I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
 7s	I LEVEL_SENSOR_PERIOD N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
 
 ;T6.7
+;#state 'S6.1 STOP'
 8s  A S DriveControl : STATE == STATE_STOP
 8s  A F Drive : speed == STOP
 8s  A F Drive : direction == STOP
 8s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
 8s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
 
-;set conditions for T6.5.*
+;#transition T6.5.*
 9s  I HOISTWAY_LIMIT_PERIOD N HOISTWAY_LIMIT_[UP]_CAN_ID HoistwayLimitSensor UP = true
 
 ;T6.5.*
+;#state 'S6.6 EMERGENCY'
 10s  A S DriveControl : STATE == STATE_EMERGENCY
 10s  A F Drive : speed == STOP
 10s  A F Drive : direction == STOP
