@@ -16,7 +16,6 @@ import java.util.HashMap;
 import simulator.elevatormodules.*;
 import simulator.framework.*;
 import simulator.payloads.*;
-import simulator.payloads.translators.IntegerCanPayloadTranslator;
 import simulator.payloads.DrivePayload.WriteableDrivePayload;
 import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
 
@@ -306,8 +305,27 @@ public class DriveControl extends Controller {
         default:
             throw new RuntimeException("State " + state + " was not recognized.");
         }
-
-        mDriveSpeed.set(localDriveSpeed.speed(),localDriveSpeed.direction());
+        
+        Speed targetSpeed;
+        
+        switch ((int)(localDriveSpeed.speed()*100)) {
+        case 0:
+            targetSpeed = Speed.STOP;
+            break;
+        case 5:
+            targetSpeed = Speed.LEVEL;
+            break;
+        case 25:
+            targetSpeed = Speed.SLOW;
+            break;
+        case 100:
+            targetSpeed = Speed.FAST;
+            break;
+        default:
+            throw new RuntimeException("Unknown speed");
+        }
+        
+        mDriveSpeed.set(targetSpeed,localDriveSpeed.direction());
         mDriveCommand.setSpeed(localDrive.speed());
         mDriveCommand.setDirection(localDrive.direction());
         

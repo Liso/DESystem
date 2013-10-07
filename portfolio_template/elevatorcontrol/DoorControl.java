@@ -21,6 +21,7 @@ import simulator.framework.Elevator;
 import simulator.framework.Hallway;
 import simulator.framework.ReplicationComputer;
 import simulator.framework.Side;
+import simulator.framework.Speed;
 import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
@@ -253,7 +254,7 @@ public class DoorControl extends Controller {
                         if ((mAtFloor.get(index).getValue() &&
                         	(mDesiredFloor.getFloor() == floor) &&
                             (mDriveSpeed.getDirection() == Direction.STOP) && 
-                            (mDriveSpeed.getSpeed() < 10)) || 
+                            (mDriveSpeed.getSpeed() == Speed.STOP)) || 
                             (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
                           newState = State.STATE_OPEN;
                          }

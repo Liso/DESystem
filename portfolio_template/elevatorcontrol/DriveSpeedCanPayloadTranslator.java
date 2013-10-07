@@ -37,22 +37,27 @@ public class DriveSpeedCanPayloadTranslator extends CanPayloadTranslator {
      * @param speed
      * @param dir
      */
-    public void set(double speed, Direction dir) {
+    public void set(Speed speed, Direction dir) {
         setSpeed(speed);
         setDirection(dir);
     }
     
-    public void setSpeed(double speed) {
+    public void setSpeed(Speed speed) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, (int)speed, 0, 32);
+        addIntToBitset(b, speed.ordinal(), 0, 32);
         setMessagePayload(b, getByteSize());
     }
 
-    public double getSpeed() {
+    public Speed getSpeed() {
         int val = getIntFromBitset(getMessagePayload(), 0, 32);
-        return (double)val;
+        for (Speed s : Speed.values()) {
+            if (s.ordinal() == val) {
+                return s;
+            }
+        }
+        throw new RuntimeException("Unrecognized Speed Value " + val);
     }
-
+    
     public void setDirection(Direction dir) {
         BitSet b = getMessagePayload();
         addIntToBitset(b, dir.ordinal(), 32, 32);
@@ -69,6 +74,19 @@ public class DriveSpeedCanPayloadTranslator extends CanPayloadTranslator {
         throw new RuntimeException("Unrecognized Direction Value " + val);
     }
 
+    public static void addDoubleToBitset(BitSet b, double value, int startLocation,
+            int bitSize) {
+    	int intValue = (int)(value * 100);
+        addIntToBitset(b, intValue, startLocation, bitSize);
+    }
+
+    public static double getDoubleFromBitset(BitSet b, int startLocation, int bitSize) {
+    	double value = getIntFromBitset(b, startLocation, bitSize) / 100;
+    	return value;
+    }
+
+
+    
     @Override
     public String payloadToString() {
         return "DriveCommand:  speed=" + getSpeed() + " direction=" + getDirection();
