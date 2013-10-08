@@ -95,7 +95,7 @@ public class Dispatcher extends Controller {
                 MessageDictionary.DESIRED_DWELL_BASE_CAN_ID + 
                 ReplicationComputer.computeReplicationId(Hallway.BACK));
         mDesiredDwellBack = new DesiredDwellCanPayloadTranslator(
-        		networkDesiredDwellFront, Hallway.BACK);
+        		networkDesiredDwellBack, Hallway.BACK);
         canInterface.sendTimeTriggered(networkDesiredDwellBack, period);
         
         for (int i = 0; i < Elevator.numFloors; i++) {
