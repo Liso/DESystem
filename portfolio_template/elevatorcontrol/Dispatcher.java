@@ -65,13 +65,12 @@ public class Dispatcher extends Controller {
 
     //enumerate states
     private enum State {
-        STATE_INIT,
         STATE_SET_TARGET,
         STATE_RESET,
     }
     
     //state variable initialized to the initial state FLASH_OFF
-    private State state = State.STATE_INIT;
+    private State state = State.STATE_SET_TARGET;
 
 	public Dispatcher(boolean verbose) {
 		super("Dispatcher", verbose);
