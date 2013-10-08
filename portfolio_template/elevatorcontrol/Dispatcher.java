@@ -189,7 +189,7 @@ public class Dispatcher extends Controller {
                     // make sure that the last is false as well
                     // #transition 'T11.1'
                     if (!isAtFloor)
-                    	state = State.STATE_RESET;
+                    	newState = State.STATE_RESET;
                 }
                 break;
             case STATE_RESET:
