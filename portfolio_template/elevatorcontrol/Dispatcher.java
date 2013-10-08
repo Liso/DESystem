@@ -133,6 +133,7 @@ public class Dispatcher extends Controller {
         canInterface.registerTimeTriggered(networkDoorClosedBackRight);
         
         mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
+        mDesiredDwellFront.setDwell(dwell);
         mDesiredDwellBack.setDwell(dwell);
         timer.start(period);
 	}
@@ -187,9 +188,8 @@ public class Dispatcher extends Controller {
                     
                     // make sure that the last is false as well
                     // #transition 'T11.1'
-                    if ((!isAtFloor) && (index == ReplicationComputer.computeReplicationId(Elevator.numFloors, Hallway.BACK)))
-                    	if (!mAtFloor.get(index).getValue())
-                    		state = State.STATE_RESET;
+                    if (!isAtFloor)
+                    	state = State.STATE_RESET;
                 }
                 break;
             case STATE_RESET:
