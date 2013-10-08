@@ -133,7 +133,8 @@ public class Dispatcher extends Controller {
         mDoorClosedBackRight = new DoorClosedCanPayloadTranslator(networkDoorClosedBackRight, Hallway.BACK, Side.RIGHT);
         canInterface.registerTimeTriggered(networkDoorClosedBackRight);
         
-        
+        mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
+        mDesiredDwellBack.setDwell(dwell);
         timer.start(period);
 	}
 	
@@ -147,39 +148,6 @@ public class Dispatcher extends Controller {
     public void timerExpired(Object callbackData) {
         State newState = state;
         switch (state) {
-            case STATE_INIT:
-                // state actions for 'Initialize'
-                mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
-                if (hallway == Hallway.FRONT)
-                	mDesiredDwellFront.setDwell(dwell);
-                
-                if (hallway == Hallway.BACK)
-                	mDesiredDwellBack.setDwell(dwell);
-                
-                // #transition 'T11.1'
-                if (!(mDoorClosedFrontLeft.getValue() && 
-                	mDoorClosedFrontRight.getValue() && 
-                	mDoorClosedBackLeft.getValue() && 
-                	mDoorClosedBackRight.getValue())) {
-                	newState = State.STATE_SET_TARGET;
-                	targetFloor++;
- 
-                	int nHallway = 0;
-                    for (int i = 0; i < Elevator.numFloors; i++) {
-                        int floor = i + 1;
-                        for (Hallway h : Hallway.replicationValues) {
-                            int index = ReplicationComputer.computeReplicationId(floor, h);
-                            if (mAtFloor.get(index).getValue()) {
-                            	nHallway++;
-                            	if (nHallway >= 2)
-                            		hallway = Hallway.BOTH;
-                            	else
-                            		hallway = h;
-                             }
-                        }
-                    }
-                }
-                break;
             case STATE_SET_TARGET:
                 // state actions for 'SET TARGET'
             	mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
@@ -194,10 +162,10 @@ public class Dispatcher extends Controller {
                 	mDoorClosedFrontRight.getValue() && 
                 	mDoorClosedBackLeft.getValue() && 
                 	mDoorClosedBackRight.getValue())) {
-                	targetFloor++;
  
                 	int nHallway = 0;
                 	int index = 0;
+                	int currentFloor = 0;
                 	boolean isAtFloor = false;
                     for (int i = 0; i < Elevator.numFloors; i++) {
                         int floor = i + 1;
@@ -205,6 +173,7 @@ public class Dispatcher extends Controller {
                             index = ReplicationComputer.computeReplicationId(floor, h);
                             if (mAtFloor.get(index).getValue()) {
                             	isAtFloor = true;
+                            	currentFloor = floor;
                             	nHallway++;
                             	if (nHallway >= 2)
                             		hallway = Hallway.BOTH;
@@ -213,6 +182,9 @@ public class Dispatcher extends Controller {
                              }
                         }
                     }
+                    
+
+                	targetFloor = currentFloor % Elevator.numFloors + 1;
                     
                     // make sure that the last is false as well
                     // #transition 'T11.1'
