@@ -27,6 +27,7 @@ import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.DoorMotorPayload;
 import simulator.payloads.DoorMotorPayload.WriteableDoorMotorPayload;
+import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
 /**
 * @author Yue Chen
@@ -79,10 +80,16 @@ public class DoorControl extends Controller {
     private ReadableCanMailbox networkDriveSpeed;
     //translator for the DriveCommand message -- this translator is specific
     private DriveSpeedCanPayloadTranslator mDriveSpeed;
+    
+    // Receive network message for HallCall
+    private ReadableCanMailbox networkHallCall;
+    // Translator for HallCall message -- Generic Translator
+    private BooleanCanPayloadTranslator mHallCall;
    
     //these variables keep track of which instance this is.
     private final Hallway hallway;
     private final Side side;
+    private final Direction direction;
     
     //store the period for the controller
     private final static SimTime period = 
@@ -147,7 +154,7 @@ public class DoorControl extends Controller {
         mDoorOpened = new DoorOpenedCanPayloadTranslator(networkDoorOpened,
                                                          hallway, side);
         canInterface.registerTimeTriggered(networkDoorOpened);
-
+        
         networkDoorReversal = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(hallway, side));
@@ -188,7 +195,8 @@ public class DoorControl extends Controller {
                 MessageDictionary.DRIVE_SPEED_CAN_ID);
         mDriveSpeed = new DriveSpeedCanPayloadTranslator(networkDriveSpeed);
         canInterface.registerTimeTriggered(networkDriveSpeed);
-      
+        
+        direction = mDesiredFloor.getDirection();
         timer.start(period);
     }
 
@@ -201,6 +209,20 @@ public class DoorControl extends Controller {
      */
     public void timerExpired(Object callbackData) {
         State newState = state;
+        for (int i = 0; i < Elevator.numFloors; i++) {
+            int floor = i + 1;
+            for (Hallway h : Hallway.replicationValues) {
+                int index = ReplicationComputer.computeReplicationId(floor, h);
+                if (mAtFloor.get(index).getValue()){
+                    networkHallCall = CanMailbox.getReadableCanMailbox(
+                    		MessageDictionary.HALL_CALL_BASE_CAN_ID + 
+                    		ReplicationComputer.computeReplicationId(floor, hallway, direction));
+                    mHallCall = new BooleanCanPayloadTranslator(networkHallCall);
+                    canInterface.registerTimeTriggered(networkHallCall);
+                }
+            }
+        }
+                
         switch (state) {
             case STATE_OPEN:
                 // state actions for 'DOOR OPEN'
@@ -233,7 +255,7 @@ public class DoorControl extends Controller {
                 
                 //#transition 'T5.3'
                 if (mDoorReversal.getValue() || 
-                    (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
+                    (mCarWeight.getValue() >= Elevator.MaxCarCapacity) || mHallCall.getValue()) {
                     newState = State.STATE_OPEN;
                 }
                 //#transition 'T5.4'
