@@ -60,7 +60,7 @@
 ;#transition 'T11.1'
 +0.05s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = true
 +0s I 0s N AT_FLOOR_[1][BACK]_CAN_ID AtFloor 1 BACK = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ;#state 'S11.1 SET_TARGET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
@@ -71,11 +71,11 @@
 
 ; Arriving at floor 2
 ;#transition 'T11.1'
-+0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.05s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 +0s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = false
 +0s I 0s N AT_FLOOR_[1][BACK]_CAN_ID AtFloor 1 BACK = false
 +0s I 0s N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ;#state 'S11.1 SET_TARGET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
@@ -86,10 +86,10 @@
 
 ;Arriving at floor 3
 ;#transition 'T11.1'
-+0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.05s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 +0s I 0s N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = false
 +0s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ;#state 'S11.1 SET_TARGET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
@@ -100,10 +100,10 @@
 
 ;Arriving at floor 4
 ;#transition 'T11.1'
-+0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.05s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 +0s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false
 +0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ;#state 'S11.1 SET_TARGET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
@@ -114,10 +114,10 @@
 
 ;Arriving at floor 5
 ;#transition 'T11.1'
-+0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.05s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 +0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
 +0s I 0s N AT_FLOOR_[5][FRONT]_CAN_ID AtFloor 5 FRONT = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ;#state 'S11.1 SET_TARGET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
@@ -128,10 +128,10 @@
 
 ;Arriving at floor 6
 ;#transition 'T11.1'
-+0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.05s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 +0s I 0s N AT_FLOOR_[5][FRONT]_CAN_ID AtFloor 5 FRONT = false
 +0s I 0s N AT_FLOOR_[6][FRONT]_CAN_ID AtFloor 6 FRONT = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ;#state 'S11.1 SET_TARGET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
@@ -142,11 +142,11 @@
 
 ;Arriving at floor 7
 ;#transition 'T11.1'
-+0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.05s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 +0.05s I 0s N AT_FLOOR_[6][FRONT]_CAN_ID AtFloor 6 FRONT = false
 +0s I 0s N AT_FLOOR_[7][FRONT]_CAN_ID AtFloor 7 FRONT = true
 +0s I 0s N AT_FLOOR_[7][BACK]_CAN_ID AtFloor 7 BACK = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ;#state 'S11.1 SET_TARGET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
@@ -157,11 +157,11 @@
 
 ;Arriving at floor 8
 ;#transition 'T11.1'
-+0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.05s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 +0s I 0s N AT_FLOOR_[7][FRONT]_CAN_ID AtFloor 7 FRONT = false
 +0s I 0s N AT_FLOOR_[7][BACK]_CAN_ID AtFloor 7 BACK = false
 +0s I 0s N AT_FLOOR_[8][FRONT]_CAN_ID AtFloor 8 FRONT = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ;#state 'S11.1 SET_TARGET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
@@ -170,7 +170,7 @@
 +0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
 +0s A N DESIRED_DWELL_[BACK]_CAN_ID DesiredDwell BACK : getDwell == 5s
 
-+0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.05s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 +0s I 0s N AT_FLOOR_[8][FRONT]_CAN_ID AtFloor 8 FRONT = false
 
 ;#state 'S11.1 SET_TARGET'
@@ -181,7 +181,7 @@
 +0s A N DESIRED_DWELL_[BACK]_CAN_ID DesiredDwell BACK : getDwell == 5s
 
 ;#transition 'T11.2'
-+0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0.05s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
 
 ;#state 'S11.2 RESET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
