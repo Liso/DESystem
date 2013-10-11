@@ -1,3 +1,12 @@
+/* 
+ * Course and Semester : 18-649 Fall 2013
+ * Group No: 16
+ * Group Members : Jiangtian Nie(jnie) , Yue Chen(yuechen),
+ *                 Sally Stevenson(ststeven) , Sri Harsha Koppaka(skoppaka)
+ * Author : Yue Chen
+ * AndrewID : yuechen
+ */
+
 package simulator.elevatorcontrol;
 
 import java.util.HashMap;
@@ -16,87 +25,90 @@ import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
 
 public class Dispatcher extends Controller {
-	
-    //network interface
+
+    // network interface
     // command door motor
     private WriteableCanMailbox networkDesiredFloor;
-    // translator for the door motor command message -- this is a generic translator
+    // translator for the door motor command message --
+    // this is a generic translator
     private DesiredFloorCanPayloadTranslator mDesiredFloor;
 
     private WriteableCanMailbox networkDesiredDwellFront;
-    // translator for the door motor command message -- this is a generic translator
+    // translator for the door motor command message --
+    // this is a generic translator
     private DesiredDwellCanPayloadTranslator mDesiredDwellFront;
 
     private WriteableCanMailbox networkDesiredDwellBack;
-    // translator for the door motor command message -- this is a generic translator
+    // translator for the door motor command message --
+    // this is a generic translator
     private DesiredDwellCanPayloadTranslator mDesiredDwellBack;
-    
+
     //received at floor message
-    private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor = new HashMap<Integer, AtFloorCanPayloadTranslator>();
-    
+    private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor =
+            new HashMap<Integer, AtFloorCanPayloadTranslator>();
+
     //received door closed message
     private ReadableCanMailbox networkDoorClosedFrontLeft;
     //translator for the doorClosed message -- this translator is specific
     private DoorClosedCanPayloadTranslator mDoorClosedFrontLeft;
-    
+
     //received door closed message
     private ReadableCanMailbox networkDoorClosedFrontRight;
     //translator for the doorClosed message -- this translator is specific
     private DoorClosedCanPayloadTranslator mDoorClosedFrontRight;
-    
+
     //received door closed message
     private ReadableCanMailbox networkDoorClosedBackLeft;
     //translator for the doorClosed message -- this translator is specific
     private DoorClosedCanPayloadTranslator mDoorClosedBackLeft;
-    
+
     //received door closed message
     private ReadableCanMailbox networkDoorClosedBackRight;
     //translator for the doorClosed message -- this translator is specific
     private DoorClosedCanPayloadTranslator mDoorClosedBackRight;
-    
+
     private static Hallway hallway = Hallway.NONE;
-	private static int targetFloor = 1;
+    private static int targetFloor = 1;
     private final static SimTime dwell = new SimTime(5,
             SimTime.SimTimeUnit.SECOND);
-    
+
     //store the period for the controller
-    private final static SimTime period = 
-    		MessageDictionary.DISPATCHER_PERIOD;
+    private final static SimTime period = MessageDictionary.DISPATCHER_PERIOD;
 
     //enumerate states
     private enum State {
         STATE_SET_TARGET,
         STATE_RESET,
     }
-    
+
     //state variable initialized to the initial state FLASH_OFF
     private State state = State.STATE_SET_TARGET;
 
-	public Dispatcher(boolean verbose) {
-		super("Dispatcher", verbose);
-	
+    public Dispatcher(boolean verbose) {
+        super("Dispatcher", verbose);
+
         log("Created Dispatcher with period = ", period);
-    
+
         networkDesiredFloor = CanMailbox.getWriteableCanMailbox(
                 MessageDictionary.DESIRED_FLOOR_CAN_ID);
         mDesiredFloor = new DesiredFloorCanPayloadTranslator(
-        		networkDesiredFloor);
+                networkDesiredFloor);
         canInterface.sendTimeTriggered(networkDesiredFloor, period);
-        
+
         networkDesiredDwellFront = CanMailbox.getWriteableCanMailbox(
                 MessageDictionary.DESIRED_DWELL_BASE_CAN_ID + 
                 ReplicationComputer.computeReplicationId(Hallway.FRONT));
         mDesiredDwellFront = new DesiredDwellCanPayloadTranslator(
-        		networkDesiredDwellFront, Hallway.FRONT);
+                networkDesiredDwellFront, Hallway.FRONT);
         canInterface.sendTimeTriggered(networkDesiredDwellFront, period);
 
         networkDesiredDwellBack = CanMailbox.getWriteableCanMailbox(
                 MessageDictionary.DESIRED_DWELL_BASE_CAN_ID + 
                 ReplicationComputer.computeReplicationId(Hallway.BACK));
         mDesiredDwellBack = new DesiredDwellCanPayloadTranslator(
-        		networkDesiredDwellBack, Hallway.BACK);
+                networkDesiredDwellBack, Hallway.BACK);
         canInterface.sendTimeTriggered(networkDesiredDwellBack, period);
-        
+
         for (int i = 0; i < Elevator.numFloors; i++) {
             int floor = i + 1;
             for (Hallway h : Hallway.replicationValues) {
@@ -107,37 +119,49 @@ public class Dispatcher extends Controller {
                 mAtFloor.put(index, t);
             }
         }
-        
+
         networkDoorClosedFrontLeft = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
-                ReplicationComputer.computeReplicationId(Hallway.FRONT, Side.LEFT));
-        mDoorClosedFrontLeft = new DoorClosedCanPayloadTranslator(networkDoorClosedFrontLeft, Hallway.FRONT, Side.LEFT);
+                ReplicationComputer.computeReplicationId(Hallway.FRONT,
+                                                         Side.LEFT));
+        mDoorClosedFrontLeft =
+                new DoorClosedCanPayloadTranslator(networkDoorClosedFrontLeft,
+                                                   Hallway.FRONT, Side.LEFT);
         canInterface.registerTimeTriggered(networkDoorClosedFrontLeft);
-        
+
         networkDoorClosedFrontRight = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
-                ReplicationComputer.computeReplicationId(Hallway.FRONT, Side.RIGHT));
-        mDoorClosedFrontRight = new DoorClosedCanPayloadTranslator(networkDoorClosedFrontRight, Hallway.FRONT, Side.RIGHT);
+                ReplicationComputer.computeReplicationId(Hallway.FRONT,
+                                                         Side.RIGHT));
+        mDoorClosedFrontRight =
+                new DoorClosedCanPayloadTranslator(networkDoorClosedFrontRight,
+                                                   Hallway.FRONT, Side.RIGHT);
         canInterface.registerTimeTriggered(networkDoorClosedFrontRight);
-        
+
         networkDoorClosedBackLeft = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
-                ReplicationComputer.computeReplicationId(Hallway.BACK, Side.LEFT));
-        mDoorClosedBackLeft = new DoorClosedCanPayloadTranslator(networkDoorClosedBackLeft, Hallway.BACK, Side.LEFT);
+                ReplicationComputer.computeReplicationId(Hallway.BACK,
+                                                         Side.LEFT));
+        mDoorClosedBackLeft =
+                new DoorClosedCanPayloadTranslator(networkDoorClosedBackLeft,
+                                                   Hallway.BACK, Side.LEFT);
         canInterface.registerTimeTriggered(networkDoorClosedBackLeft);
-        
+
         networkDoorClosedBackRight = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
-                ReplicationComputer.computeReplicationId(Hallway.BACK, Side.RIGHT));
-        mDoorClosedBackRight = new DoorClosedCanPayloadTranslator(networkDoorClosedBackRight, Hallway.BACK, Side.RIGHT);
+                ReplicationComputer.computeReplicationId(Hallway.BACK,
+                                                         Side.RIGHT));
+        mDoorClosedBackRight =
+                new DoorClosedCanPayloadTranslator(networkDoorClosedBackRight,
+                                                   Hallway.BACK, Side.RIGHT);
         canInterface.registerTimeTriggered(networkDoorClosedBackRight);
-        
+
         mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
         mDesiredDwellFront.setDwell(dwell);
         mDesiredDwellBack.setDwell(dwell);
         timer.start(period);
-	}
-	
+    }
+
     /*
      * The timer callback is where the main controller code is executed.  For
      * time triggered design, this consists mainly of a switch block with a
@@ -148,61 +172,63 @@ public class Dispatcher extends Controller {
     public void timerExpired(Object callbackData) {
         State newState = state;
         switch (state) {
-            case STATE_SET_TARGET:
-                // state actions for 'SET TARGET'
-            	mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
-            	if (hallway == Hallway.FRONT)
-                	mDesiredDwellFront.setDwell(dwell);
-                
-                if (hallway == Hallway.BACK)
-                	mDesiredDwellBack.setDwell(dwell);
-                
-                // #transition 'T11.1'
-                if (!(mDoorClosedFrontLeft.getValue() && 
-                	mDoorClosedFrontRight.getValue() && 
-                	mDoorClosedBackLeft.getValue() && 
-                	mDoorClosedBackRight.getValue())) {
- 
-                	int nHallway = 0;
-                	int index = 0;
-                	int currentFloor = 0;
-                	boolean isAtFloor = false;
-                    for (int i = 0; i < Elevator.numFloors; i++) {
-                        int floor = i + 1;
-                        for (Hallway h : Hallway.replicationValues) {
-                            index = ReplicationComputer.computeReplicationId(floor, h);
-                            if (mAtFloor.get(index).getValue()) {
-                            	isAtFloor = true;
-                            	currentFloor = floor;
-                            	nHallway++;
-                            	if (nHallway >= 2)
-                            		hallway = Hallway.BOTH;
-                            	else
-                            		hallway = h;
-                             }
+        case STATE_SET_TARGET:
+            // state actions for state S11.1 'SET TARGET'
+            mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
+            if (hallway == Hallway.FRONT)
+                mDesiredDwellFront.setDwell(dwell);
+            if (hallway == Hallway.BACK)
+                mDesiredDwellBack.setDwell(dwell);
+
+            // #transition 'T11.1'
+            if (!(mDoorClosedFrontLeft.getValue() && 
+                    mDoorClosedFrontRight.getValue() && 
+                    mDoorClosedBackLeft.getValue() && 
+                    mDoorClosedBackRight.getValue())) {
+
+                int nHallway = 0;
+                int index = 0;
+                int currentFloor = 0;
+                boolean isAtFloor = false;
+                for (int i = 0; i < Elevator.numFloors; i++) {
+                    int floor = i + 1;
+                    for (Hallway h : Hallway.replicationValues) {
+                        index = ReplicationComputer.computeReplicationId(floor,
+                                                                         h);
+                        if (mAtFloor.get(index).getValue()) {
+                            isAtFloor = true;
+                            currentFloor = floor;
+                            nHallway++;
+                            if (nHallway >= 2)
+                                hallway = Hallway.BOTH;
+                            else
+                                hallway = h;
                         }
                     }
-                    
-
-                	targetFloor = currentFloor % Elevator.numFloors + 1;
-                    
-                    // make sure that the last is false as well
-                    // #transition 'T11.1'
-                    if (!isAtFloor)
-                    	newState = State.STATE_RESET;
                 }
-                break;
-            case STATE_RESET:
-                // state actions for 'RESET'
-            	mDesiredFloor.set(1, Hallway.NONE, Direction.STOP);
-                break;
-            default:
-                throw new RuntimeException("State " + state + " was not recognized.");
+
+
+                targetFloor = currentFloor % Elevator.numFloors + 1;
+
+                // make sure that the last is false as well
+                // #transition 'T11.2'
+                if (!isAtFloor)
+                    newState = State.STATE_RESET;
+            }
+            break;
+        case STATE_RESET:
+            // state actions for state S11.2 'RESET'
+            mDesiredFloor.set(1, Hallway.NONE, Direction.STOP);
+            break;
+        default:
+            throw new RuntimeException("State " + state +
+                                       " was not recognized.");
         }
-        
+
         if (state == newState) {
             log("remains in state: ",state);
-        } else {
+        }
+        else {
             log("Transition:",state,"->",newState);
         }
 

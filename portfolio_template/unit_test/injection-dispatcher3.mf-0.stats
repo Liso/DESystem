@@ -1,7 +1,7 @@
 
 Simulator Parameters:
 Command line = -cf dispatcher.cf -mf dispatcher3.mf
-RandomSeed = 1381364178158
+RandomSeed = 1381451045686
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
