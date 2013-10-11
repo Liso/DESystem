@@ -1,3 +1,12 @@
+/* 
+ * Course and Semester : 18-649 Fall 2013
+ * Group No: 16
+ * Group Members : Jiangtian Nie(jnie) , Yue Chen(yuechen),
+ *                 Sally Stevenson(ststeven) , Sri Harsha Koppaka(skoppaka)
+ * Author : Jiangtian Nie
+ * AndrewID : jnie
+ */
+
 package simulator.elevatorcontrol;
 
 import java.util.LinkedHashMap;
