@@ -7,3 +7,4 @@ DriveControl drivecontrol.cf drivecontrol.mf drivecontrol2.mf
 HallButtonControl hallbuttoncontrol.cf hallbuttoncontrol.mf
 CarButtonControl carbuttoncontrol.cf carbuttoncontrol.mf
 LanternControl lanterncontrl.cf lanterncontrol.mf
+Dispatcher dispatcher.cf dispather.mf dispatcher2.mf dispatcher3.mf dispatcher4.mf
