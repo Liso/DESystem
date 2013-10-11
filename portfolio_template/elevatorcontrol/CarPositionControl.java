@@ -3,8 +3,8 @@
  * Group No: 16
  * Group Members : Jiangtian Nie(jnie) , Yue Chen(yuechen),
  *                 Sally Stevenson(ststeven) , Sri Harsha Koppaka(skoppaka)
- * Author : Yue Chen
- * AndrewID : yuechen
+ * Author : Jiangtian Nie
+ * AndrewID : jnie
  */
 
 package simulator.elevatorcontrol;
