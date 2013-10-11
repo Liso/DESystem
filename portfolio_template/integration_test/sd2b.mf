@@ -1,0 +1,37 @@
+;Message File - Unit Test for SD1C
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Yue Chen (yuechen)
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;#arc '2B/1'
+;check that the door is closing
+0.04s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
++0.0s  A F DoorMotor FRONT LEFT : command == CLOSE
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
+
+;#arc '2B/2b'
++0s I CAR_BUTTON_CONTROL_PERIOD F CAR_CALL_[4][FRONT]_CAN_ID CarCall 1 FRONT = true
+
+;#arc '2B/2c'
++0.0s  A N CAR_CALL_[4][FRONT]_CAN_ID Boolean : getValue == true
+
+;#arc '2B/4'
++0.2s  A F DoorMotor FRONT LEFT : command == OPEN
+
+;#arc '2B/5a'
++0.2s  A F CarLight 4 FRONT : isLight == false
+
+;#arc '2B/5b'
++0.2s  A N CAR_CALL_[4][FRONT]_CAN_ID Boolean : getValue == false
+
+;#arc '2B/6a'
++0.02s  I  DOOR_OPENED_SENSOR_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+
+;#arc '2B/6b'
+;check that the door is open
++0.5s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
++0.0s  A F DoorMotor FRONT LEFT : command == STOP
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
