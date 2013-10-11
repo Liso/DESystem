@@ -10,8 +10,7 @@
 
 ;#arc '2B/1'
 ;check that the door is closing
-+0.04s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
-+0.0s  A F DoorMotor FRONT LEFT : command == CLOSE
++0.04s  A F DoorMotor FRONT LEFT : command == CLOSE
 +0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ;#arc '2B/2b'
@@ -38,6 +37,5 @@
 
 ;#arc '2B/6b'
 ;check that the door is open
-+0.5s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
-+0.0s  A F DoorMotor FRONT LEFT : command == STOP
++0.5s  A F DoorMotor FRONT LEFT : command == STOP
 +0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
