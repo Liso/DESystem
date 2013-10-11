@@ -5,5 +5,5 @@
 ;Author : Yue Chen (yuechen)
 
 DoorControl FRONT LEFT true
-CarButtonControl 4 FRONT DOWN true
-Dispathcer true
+CarButtonControl 4 FRONT true
+Dispatcher true
