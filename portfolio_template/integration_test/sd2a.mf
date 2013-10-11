@@ -10,10 +10,10 @@
 
 ;#arc '2A/1b'
 ;Injecting Initial conditions
-+0s I CAR_BUTTON_CONTROL_PERIOD F CAR_CALL_[1][FRONT]_CAN_ID CarCall 1 FRONT = true
++0s I CAR_BUTTON_CONTROL_PERIOD F CarCall 1 FRONT = true
 
 ;#arc '2A/2'
-+0.2s  A F CarLight 1 FRONT : isLight == true
++0.3s  A F CarLight 1 FRONT : isLighted == true
 
 ;#arc '2A/3'
 ;check that the door is closing

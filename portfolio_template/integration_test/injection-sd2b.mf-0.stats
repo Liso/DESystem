@@ -1,0 +1,30 @@
+
+Simulator Parameters:
+Command line = -cf sd2b.cf -mf sd2b.mf
+RandomSeed = 1381460000515
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd2b.mf
+Controller File = sd2b.cf
+
+Assertion Results:
+@0.04s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_CLOSE PASSED
+@0.04s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@76745477 :: command ?== CLOSE PASSED
+@0.04s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79b5459e :: getDoorCommand ?== CLOSE PASSED
+@0.36s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4782b18d :: getValue ?== true PASSED
+@0.36s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@33891d5d :: isLighted ?== true PASSED
+@0.66s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@77411b30 :: command ?== OPEN PASSED
+@0.96s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@4e433359 :: isLighted ?== false PASSED
+@0.96s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6d96e397 :: getValue ?== false PASSED
+@1.48s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_OPENING PASSED
+@1.48s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@698fcb66 :: command ?== STOP PASSED
+@1.48s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@699a3d76 :: getDoorCommand ?== STOP PASSED
+
+
+******************Summary******************
+Passed:  11
+Failed:  0
+Total :  11
+
