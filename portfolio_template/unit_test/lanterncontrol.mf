@@ -9,27 +9,27 @@
 ;initialize
 
 ;Check that Lantern is OFF Initially
-;# state 'S7.1 OFF'
+;# state 'S7.2 OFF'
 0.1s  A F CarLantern UP : lighted == false
 +0s   A N CAR_LANTERN_[UP]_CAN_ID Boolean : getValue == false
 +0s   A N CAR_LANTERN_[DOWN]_CAN_ID Boolean : getValue == false
 
-;#transition 'T7.2'
+;#transition 'T7.1'
 +1.5s  I  LANTERN_CONTROL_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
 +0s  I  DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
 +0s  I  DISPATCHER_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
 
-;# state 'S7.2 ON'
+;# state 'S7.1 ON'
 +0.5s  A F CarLantern UP : lighted == true
 +0s   A N CAR_LANTERN_[UP]_CAN_ID Boolean : getValue == true
 
-;#transition 'T7.1'
+;#transition 'T7.2'
 +2s I DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
 +0s I DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
 +0s I DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
 +0s I DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
 
-;# state 'S7.1 OFF'
+;# state 'S7.2 OFF'
 0.1s  A F CarLantern UP : lighted == false
 +0s   A N CAR_LANTERN_[UP]_CAN_ID Boolean : getValue == false
 +0s   A N CAR_LANTERN_[DOWN]_CAN_ID Boolean : getValue == false

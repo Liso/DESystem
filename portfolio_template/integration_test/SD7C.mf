@@ -1,0 +1,35 @@
+;Message File - Integration Test for SD7C
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Jiangtian Nie (jnie)
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+0.50s  I  DOOR_OPENED_SENSOR_PERIOD N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+
+;# arc '1a'
++1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
++0s  A F DoorMotor FRONT LEFT : command == CLOSE
++0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
+
++1s  I  DOOR_CLOSED_SENSOR_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0s I DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
++0s I DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
++0s I DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+
+;# arc '2a'
++1s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == true
+
+;# arc '2b'
++0s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSING
++0s  A F DoorMotor FRONT LEFT : command == STOP
++0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
+
+
+
+;# arc '3'
++0.1s  A F CarLantern UP : lighted == false
++0s   A N CAR_LANTERN_[UP]_CAN_ID Boolean : getValue == false
++0s   A N CAR_LANTERN_[DOWN]_CAN_ID Boolean : getValue == false
