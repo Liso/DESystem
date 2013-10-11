@@ -71,6 +71,10 @@ public class DoorControl extends Controller {
     //received at floor message
     private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor = new HashMap<Integer, AtFloorCanPayloadTranslator>();
     
+    private HashMap<Integer, BooleanCanPayloadTranslator> mCarCall = new HashMap<Integer, BooleanCanPayloadTranslator>();
+    
+    private HashMap<Integer, BooleanCanPayloadTranslator> mHallCall = new HashMap<Integer, BooleanCanPayloadTranslator>();
+    
     //received desired floor message
     private ReadableCanMailbox networkDesiredFloor;
     //translator for the DesiredFloor message -- this translator is specific
@@ -80,16 +84,12 @@ public class DoorControl extends Controller {
     private ReadableCanMailbox networkDriveSpeed;
     //translator for the DriveCommand message -- this translator is specific
     private DriveSpeedCanPayloadTranslator mDriveSpeed;
-    
-    // Receive network message for HallCall
-    private ReadableCanMailbox networkHallCall;
-    // Translator for HallCall message -- Generic Translator
-    private BooleanCanPayloadTranslator mHallCall;
    
     //these variables keep track of which instance this is.
     private final Hallway hallway;
     private final Side side;
     private final Direction direction;
+    private int currentFloor;
     
     //store the period for the controller
     private final static SimTime period = 
@@ -188,6 +188,24 @@ public class DoorControl extends Controller {
                 AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
                 canInterface.registerTimeTriggered(m);
                 mAtFloor.put(index, t);
+                
+
+                ReadableCanMailbox networkCarCall = CanMailbox.getReadableCanMailbox(
+                		MessageDictionary.CAR_CALL_BASE_CAN_ID + 
+                		ReplicationComputer.computeReplicationId(floor, hallway));
+                BooleanCanPayloadTranslator nCarCall = new BooleanCanPayloadTranslator(networkCarCall);
+                canInterface.registerTimeTriggered(networkCarCall);
+                mCarCall.put(floor, nCarCall);
+                
+                for (Direction d : Direction.replicationValues) {
+	                ReadableCanMailbox networkHallCall = CanMailbox.getReadableCanMailbox(
+	                		MessageDictionary.HALL_CALL_BASE_CAN_ID + 
+	                		ReplicationComputer.computeReplicationId(floor, hallway, d));
+	                BooleanCanPayloadTranslator nHallCall = new BooleanCanPayloadTranslator(networkHallCall);
+	                canInterface.registerTimeTriggered(networkHallCall);
+	                mHallCall.put(floor, nHallCall);
+                }
+
             }
         }
         
@@ -214,11 +232,8 @@ public class DoorControl extends Controller {
             for (Hallway h : Hallway.replicationValues) {
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 if (mAtFloor.get(index).getValue()){
-                    networkHallCall = CanMailbox.getReadableCanMailbox(
-                    		MessageDictionary.HALL_CALL_BASE_CAN_ID + 
-                    		ReplicationComputer.computeReplicationId(floor, hallway, direction));
-                    mHallCall = new BooleanCanPayloadTranslator(networkHallCall);
-                    canInterface.registerTimeTriggered(networkHallCall);
+                	currentFloor = floor;
+
                 }
             }
         }
@@ -255,7 +270,8 @@ public class DoorControl extends Controller {
                 
                 //#transition 'T5.3'
                 if (mDoorReversal.getValue() || 
-                    (mCarWeight.getValue() >= Elevator.MaxCarCapacity) || mHallCall.getValue()) {
+                    (mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
+                    mHallCall.get(currentFloor).getValue() || mCarCall.get(currentFloor).getValue()) {
                     newState = State.STATE_OPEN;
                 }
                 //#transition 'T5.4'
@@ -269,18 +285,12 @@ public class DoorControl extends Controller {
                 mDoorMotor.set(DoorCommand.STOP);
                 
                 //#transition 'T5.5'
-                for (int i = 0; i < Elevator.numFloors; i++) {
-                    int floor = i + 1;
-                    for (Hallway h : Hallway.replicationValues) {
-                        int index = ReplicationComputer.computeReplicationId(floor, h);
-                        if ((mAtFloor.get(index).getValue() &&
-                        	(mDesiredFloor.getFloor() == floor) &&
-                            (mDriveSpeed.getDirection() == Direction.STOP) && 
-                            (mDriveSpeed.getSpeed() == Speed.STOP)) || 
-                            (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
-                          newState = State.STATE_OPEN;
-                         }
-                    }
+
+                if (((mDesiredFloor.getFloor() == currentFloor) &&
+                    (mDriveSpeed.getDirection() == Direction.STOP) && 
+                    (mDriveSpeed.getSpeed() == Speed.STOP)) || 
+                    (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
+                    	newState = State.STATE_OPEN;
                 }
                 break;
             default:

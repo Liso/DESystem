@@ -1,0 +1,9 @@
+;Configuration File - Unit Test for SD1C
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Yue Chen (yuechen)
+
+DoorControl FRONT LEFT true
+CarButtonControl 4 FRONT DOWN true
+Dispathcer true

@@ -1,0 +1,31 @@
+;Message File - Unit Test for SD1C
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Yue Chen (yuechen)
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+
+;#arc '2A/1b'
+;Injecting Initial conditions
++0s I CAR_BUTTON_CONTROL_PERIOD F CAR_CALL_[1][FRONT]_CAN_ID CarCall 1 FRONT = true
+
+;#arc '2A/2'
++0.2s  A F CarLight 1 FRONT : isLight == true
+
+;#arc '2A/3'
+;check that the door is closing
++0.4s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
++0.0s  A F DoorMotor FRONT LEFT : command == CLOSE
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
+
+;#arc '2A/4a'
++0.08s  I  DOOR_CLOSED_SENSOR_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+
+;#arc '2A/4b'
+;check that the door is closed
++0.4s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSING
++0.0s  A F DoorMotor FRONT LEFT : command == STOP
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
