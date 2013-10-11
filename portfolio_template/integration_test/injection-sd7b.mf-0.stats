@@ -1,7 +1,7 @@
 
 Simulator Parameters:
 Command line = -cf sd7b.cf -mf sd7b.mf
-RandomSeed = 1381447445396
+RandomSeed = 1381457455322
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -10,10 +10,10 @@ Message File = sd7b.mf
 Controller File = sd7b.cf
 
 Assertion Results:
-@0.85s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@4574aee5 :: lighted ?== true PASSED
-@0.85s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5f095c81 :: command ?== OPEN PASSED
-@1.25s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@71b8a6b :: lighted ?== false PASSED
-@1.35s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@54aae359 :: command ?== STOP PASSED
+@0.85s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@5f9849e5 :: lighted ?== true PASSED
+@0.85s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@211c7a72 :: command ?== OPEN PASSED
+@1.25s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@1f34137c :: lighted ?== false PASSED
+@1.35s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@3a332b9a :: command ?== STOP PASSED
 
 
 ******************Summary******************
