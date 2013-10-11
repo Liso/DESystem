@@ -1,0 +1,50 @@
+;Message File - Integration Test for SD6C
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Jiangtian Nie (jnie)
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+;Injecting Initial conditions
+0.0s  I  DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0.0s  I  DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+0.0s  I  DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0.0s  I  DOOR_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+0.0s  I  DISPATCHER_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 5 FRONT UP
+0.0s  I  AT_FLOOR_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
+0.0s  I  WEIGHT_PERIOD N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = false
+0.0s  I  WEIGHT_PERIOD N CAR_WEIGHT_CAN_ID CarWeight = 1000
+0.0s  I  DOOR_CONTROL_PERIOD N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT = STOP
+0.0s  I  DOOR_CONTROL_PERIOD N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT = STOP
+0.0s  I  DOOR_CONTROL_PERIOD N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT = STOP
+0.0s  I  DOOR_CONTROL_PERIOD N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotorCommand BACK RIGHT = STOP 
+
+
+;# arc '1a/1b'
+;+1s A S CarPositionControl : STATE == STATE_DISPLAY
+;+0s A N CAR_POSITION_CAN_ID Integer : getValue == 4
+;+0s A F CarPositionIndicator : floor == 4 
+;+0s  A S DriveControl : STATE == STATE_SLOW_UP
+;+0s  A F Drive : speed == SLOW 
+;+0s  A F Drive : direction == UP
+;+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
+;+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
+
++1s  I  AT_FLOOR_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
+
+;# arc '1a'
++1s  I  AT_FLOOR_PERIOD N AT_FLOOR_[5][FRONT]_CAN_ID AtFloor 5 FRONT = true
+
+;# arc '1b'
++1s A S CarPositionControl : STATE == STATE_DISPLAY
++0s A N CAR_POSITION_CAN_ID Integer : getValue == 4
++0s A F CarPositionIndicator : floor == 5 
+
+;# arc '2'
++0s  A S DriveControl : STATE == STATE_STOP
++0s  A F Drive : speed == STOP
++0s  A F Drive : direction == STOP
++0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
++0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
