@@ -90,11 +90,12 @@ public class CarPositionControl extends Controller {
 		case STATE_DISPLAY:
 			for (int i = 1; i < 9; i++) {
 				for (int j = 1; j < 3; j++) {
-					
+					//# transition 'T10.1'
 					if ((new AtFloorCanPayloadTranslator(networkAtFloor[i-1][j-1], i,
 							hallway.get(j))).getValue()) {
 						mAtFloor=new AtFloorCanPayloadTranslator(networkAtFloor[i-1][j-1],
 								i, hallway.get(j));
+						// State Actions
 						localCPI.set(i);
 						mCPI.set(i);
 						break;
