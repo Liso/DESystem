@@ -1,0 +1,26 @@
+
+Simulator Parameters:
+Command line = -cf sd9a.cf -mf sd9a.mf
+RandomSeed = 1381457304674
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd9a.mf
+Controller File = sd9a.cf
+
+Assertion Results:
+@0.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2433cf0f :: command ?== OPEN PASSED
+@0.4s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5cfc644a :: getFloor ?== 2 PASSED
+@0.4s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3a6a5afc :: getDwell ?== 5.0s PASSED
+@0.4s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6d13cf51 :: getDwell ?== 5.0s PASSED
+@0.6s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@18ad8e84 :: command ?== STOP PASSED
+@6.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7344119b :: command ?== CLOSE PASSED
+@6.3s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@65cd1dff :: command ?== STOP PASSED
+
+
+******************Summary******************
+Passed:  7
+Failed:  0
+Total :  7
+

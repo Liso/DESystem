@@ -90,6 +90,8 @@ public class DoorControl extends Controller {
     private final Side side;
     private final Direction direction;
     private int currentFloor;
+    private int indexHallCall;
+    private int indexCarCall;
     
     //store the period for the controller
     private final static SimTime period = 
@@ -195,15 +197,16 @@ public class DoorControl extends Controller {
                 		ReplicationComputer.computeReplicationId(floor, hallway));
                 BooleanCanPayloadTranslator nCarCall = new BooleanCanPayloadTranslator(networkCarCall);
                 canInterface.registerTimeTriggered(networkCarCall);
-                mCarCall.put(floor, nCarCall);
+                mCarCall.put(index, nCarCall);
                 
                 for (Direction d : Direction.replicationValues) {
+                	int indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
 	                ReadableCanMailbox networkHallCall = CanMailbox.getReadableCanMailbox(
 	                		MessageDictionary.HALL_CALL_BASE_CAN_ID + 
 	                		ReplicationComputer.computeReplicationId(floor, hallway, d));
 	                BooleanCanPayloadTranslator nHallCall = new BooleanCanPayloadTranslator(networkHallCall);
 	                canInterface.registerTimeTriggered(networkHallCall);
-	                mHallCall.put(floor, nHallCall);
+	                mHallCall.put(indexHallCall, nHallCall);
                 }
 
             }
@@ -232,6 +235,8 @@ public class DoorControl extends Controller {
             for (Hallway h : Hallway.replicationValues) {
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 if (mAtFloor.get(index).getValue()){
+                	indexHallCall = ReplicationComputer.computeReplicationId(floor, hallway, direction);
+                	indexCarCall = ReplicationComputer.computeReplicationId(floor, hallway);
                 	currentFloor = floor;
                         break;
 
@@ -268,13 +273,14 @@ public class DoorControl extends Controller {
                 // state actions for 'DOOR NOT CLOSED'
             	localDoorMotor.set(DoorCommand.CLOSE);
                 mDoorMotor.set(DoorCommand.CLOSE);
-               System.out.println((currentFloor)); 
+
+               
                 //#transition 'T5.3'
                 if (currentFloor != 0) {
                     if (mDoorReversal.getValue() || 
                        (mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
-                        mHallCall.get(currentFloor).getValue() ||
-                        mCarCall.get(currentFloor).getValue())
+                        mHallCall.get(indexHallCall).getValue() ||
+                        mCarCall.get(indexCarCall).getValue())
                     {
                         newState = State.STATE_OPEN;
                     }

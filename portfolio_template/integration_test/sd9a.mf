@@ -1,0 +1,46 @@
+;Message File - Integration Test for SD9A
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sally Stevenson (ststeven)
+
+;include CAN id and period definitions
+#INCLUDE defines.mf
+
+; Pre-conditions
+0s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
+0s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = true
+0s I 0s N AT_FLOOR_[1][BACK]_CAN_ID AtFloor 1 BACK = true
+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
+0s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+
+;#arc '9A/1'
++0.1s A F DoorMotor FRONT LEFT : command == OPEN
+
++0.1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;#arc '9A/2a'
++0.2s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 2
+
+;#arc '9A/2b'
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
++0s A N DESIRED_DWELL_[BACK]_CAN_ID DesiredDwell BACK : getDwell == 5s
+
+;#arc '9A/3a'
++0.1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+
+;#arc '9A/3b'
++0.1s A F DoorMotor FRONT LEFT : command == STOP
+
+;#arc '9A/4'
++5.5s A F DoorMotor FRONT LEFT : command == CLOSE
+
+;#arc '9A/5a'
++0.1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+
+;#arc '9A/5b'
++0.1s A F DoorMotor FRONT LEFT : command == STOP
