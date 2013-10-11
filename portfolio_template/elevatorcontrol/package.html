@@ -16,6 +16,8 @@
 
 
 
+
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -39,12 +41,26 @@
       </li>
       <li><a href="HallButtonControl.java">HallButtonControl.java</a>&nbsp;-
 
+
+
         Controller that implements the behavior for the HallLights and
         HallCalls in the elevator system.<br>
       </li>
       <li><a href="CarButtonControl.java">CarButtonControl.java</a> -
         Controller that implements the behavior for the CarLights and
-        CarCalls in the elevator system.<br>
+        CarCalls in the elevator system.</li>
+      <li><a href="DriveControl.java">DriveControl.java</a> - Controller
+        that implements the behavior for the Drive in the elevator
+        system.</li>
+      <li><a href="Dispatcher.java">Dispatcher.java</a> - Controller
+        that implements the behavior of the dispatcher that sets the
+        target of the elevator in the elevator system.</li>
+      <li><a href="CarPositionControl.java">CarPositionControl.java</a>
+        - Controller that is used to display the current position of the
+        elevator in terms of floors.</li>
+      <li><a href="LanternControl.java">LanternControl.java</a> -
+        Controller that is used to light up the car lanterns in the
+        elevator to display the next direction of the elevator system.<br>
       </li>
     </ul>
     <h2>Translator files</h2>
@@ -58,18 +74,13 @@
       <li><a href="DoorMotorCommandCanPayloadTranslator.java">DoorMotorCommandCanPayloadTranslator.java</a>
         - Translator for the DoorMotor Commands.</li>
       <li><a href="DriveSpeedCanPayloadTranslator.java">DriveSpeedCanPayloadTranslator.java</a>
-        - Translator for the DriveSpeed message.<br>
+        - Translator for the DriveSpeed message.</li>
+      <li><a href="DesiredDwellCanPayloadTranslator.java">DesiredDwellCanPayloadTranslator.java</a>
+        - Translator for the DesiredDwell message.<br>
       </li>
     </ul>
     <h2>Utility files</h2>
     <ul>
-      <li><a href="Utility.java">Utility.java</a> - Contains some
-        example classes that are useful in replicated situations.<br>
-      </li>
-      <li><a href="MessageDictionary.java">MessageDictionary.java</a> -
-        Contains constant definitions for CAN IDs and CAN Base IDs(for
-        replicated cases).<br>
-      </li>
     </ul>
     <br>
   </body>

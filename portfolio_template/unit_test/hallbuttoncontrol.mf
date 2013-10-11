@@ -7,7 +7,7 @@
 #INCLUDE defines.mf
 
 ;input initial value
-0s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = false
+0s  I  0s F HallCall 4 FRONT UP = false
 
 
 ;#state 'S8.1 OFF'
@@ -15,14 +15,14 @@
 +0s  A N HALL_LIGHT_[4][FRONT][UP]_CAN_ID Boolean : getValue == false
 +0s  A N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean : getValue == false
 
-+0.1s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
++0.1s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
 
 ;#transition 'T8.1'
-+0.3s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = true
++0.3s  I  0s F HallCall 4 FRONT UP = true
 
 
 ;Setting Hall Call off
-+0.25s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = false
++0.25s  I  0s F HallCall 4 FRONT UP = false
 
 ;#state 'S8.2 ON'
 +0.25s  A F HallLight 4 FRONT UP : lighted == true 
@@ -30,23 +30,23 @@
 +0s  A N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean : getValue == true
 
 ;#transition 'T8.2'
-+1.8s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-+0s  I  HALL_BUTTON_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
-+0s  I  HALL_BUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
++1.8s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
 
 ;#state 'S8.1 OFF'
 +0.5s  A F HallLight 4 FRONT UP : lighted == false 
 +0s  A N HALL_LIGHT_[4][FRONT][UP]_CAN_ID Boolean : getValue == false
 +0s  A N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean : getValue == false
 
-+0.1s I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
++0.1s I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
 
 ;transition 'T8.1'
-+2.4s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = true
++2.4s  I  0s F HallCall 4 FRONT UP = true
 
 
 ;Setting HallCall off
-+0.25s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = false
++0.25s  I  0s F HallCall 4 FRONT UP = false
 
 ;#state 'S8.2 ON'
 +0.25s  A F HallLight 4 FRONT UP : lighted == true 
@@ -54,23 +54,23 @@
 +0s  A N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean : getValue == true
 
 ;#transition 'T8.2'
-+2.5s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-+0s  I  HALL_BUTTON_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = false
-+0s  I  HALL_BUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 7 FRONT UP
++2.5s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0s  I  0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = false
++0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 7 FRONT UP
 
 ;#state 'S8.1 OFF'
 +0.5s  A F HallLight 4 FRONT UP : lighted == false 
 +0s  A N HALL_LIGHT_[4][FRONT][UP]_CAN_ID Boolean : getValue == false
 +0s  A N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean : getValue == false
 
-+0.1s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
++0.1s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
 
 ;transition 'T8.1'
-+2.4s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = true
++2.4s  I  0s F HallCall 4 FRONT UP = true
 
 
 ;Setting HallCall off
-+0.25s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT UP = false
++0.25s  I  0s F HallCall 4 FRONT UP = false
 
 ;#state 'S8.2 ON'
 +0.25s  A F HallLight 4 FRONT UP : lighted == true 
@@ -78,9 +78,9 @@
 +0s  A N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean : getValue == true
 
 ;#transition 'T8.2'
-+2.5s  I  HALL_BUTTON_CONTROL_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-+0s  I  HALL_BUTTON_CONTROL_PERIOD N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = false
-+0s  I  HALL_BUTTON_CONTROL_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
++2.5s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0s  I  0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = false
++0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
 
 ;#state 'S8.1 OFF'
 +0.5s  A F HallLight 4 FRONT UP : lighted == false 

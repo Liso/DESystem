@@ -10,7 +10,7 @@
 0.5s A S CarPositionControl : STATE == STATE_DISPLAY
 
 ;set conditions for T10.1
-1s I AT_FLOOR_PERIOD N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = true
+1s I 0s N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = true
 
 ;T10.1
 +2s A S CarPositionControl : STATE == STATE_DISPLAY
