@@ -1,0 +1,32 @@
+;Message File - Integration Test for SD8C
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sally Stevenson (ststeven)
+
+;include CAN id and period definitions
+#INCLUDE defines.mf
+
+; Pre-conditions
+0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
+0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed  FRONT LEFT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed  FRONT RIGHT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed  BACK LEFT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed  BACK RIGHT = true
+0s I 0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = false
+0s I 0s N CAR_WEIGHT_CAN_ID CarWeight = 1000
+0s I 0s N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT = STOP
+0s I 0s N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT = STOP
+0s I 0s N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT = STOP
+0s I 0s N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotorCommand BACK RIGHT = STOP
+
+;#arc '8C/1a'
++0.1s I 0s N HOISTWAY_LIMIT_[UP]_CAN_ID HoistwayLimitSensor UP = true
+
+;#arc '8C/1b'
++0s I 0s N EMERGENCY_BRAKE_CAN_ID SafetySensor = true
+
+;#arc '8C/2'
++0.1s A F Drive : speed == STOP 
++0s A F Drive : direction == STOP

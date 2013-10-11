@@ -1,0 +1,8 @@
+;Configuration File - Integration Test for SD7B
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sally Stevenson (ststeven)
+
+DoorControl FRONT LEFT true
+HallButtonControl 4 FRONT DOWN true
