@@ -127,7 +127,7 @@ public class DoorControl extends Controller {
         // stored the constructor arguments in internal state
         this.hallway = hallway;
         this.side = side;
-        
+        currentFloor = 0; 
 
         log("Created DoorControl with period = ", period);
     
@@ -233,6 +233,7 @@ public class DoorControl extends Controller {
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 if (mAtFloor.get(index).getValue()){
                 	currentFloor = floor;
+                        break;
 
                 }
             }
@@ -267,11 +268,14 @@ public class DoorControl extends Controller {
                 // state actions for 'DOOR NOT CLOSED'
             	localDoorMotor.set(DoorCommand.CLOSE);
                 mDoorMotor.set(DoorCommand.CLOSE);
-                
+               System.out.println((currentFloor)); 
                 //#transition 'T5.3'
-                if (mDoorReversal.getValue() || 
+                if (currentFloor != 0)
+                    if (mDoorReversal.getValue() || 
                     (mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
-                    mHallCall.get(currentFloor).getValue() || mCarCall.get(currentFloor).getValue()) {
+                    mHallCall.get(currentFloor).getValue() ||
+                    mCarCall.get(currentFloor).getValue())
+                   {
                     newState = State.STATE_OPEN;
                 }
                 //#transition 'T5.4'
