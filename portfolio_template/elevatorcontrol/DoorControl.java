@@ -270,16 +270,17 @@ public class DoorControl extends Controller {
                 mDoorMotor.set(DoorCommand.CLOSE);
                System.out.println((currentFloor)); 
                 //#transition 'T5.3'
-                if (currentFloor != 0)
+                if (currentFloor != 0) {
                     if (mDoorReversal.getValue() || 
-                    (mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
-                    mHallCall.get(currentFloor).getValue() ||
-                    mCarCall.get(currentFloor).getValue())
-                   {
-                    newState = State.STATE_OPEN;
+                       (mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
+                        mHallCall.get(currentFloor).getValue() ||
+                        mCarCall.get(currentFloor).getValue())
+                    {
+                        newState = State.STATE_OPEN;
+                    }
                 }
                 //#transition 'T5.4'
-                else if (mDoorClosed.getValue()) {
+                if (mDoorClosed.getValue()) {
                 	newState = State.STATE_STOP_CLOSING;
                 }
                 break;
