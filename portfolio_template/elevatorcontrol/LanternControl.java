@@ -88,17 +88,20 @@ public class LanternControl extends Controller{
         // Add creation of Controller to Log.
         log("Created LanternControl with period = ", period);
         
-        
+        //Create a payload object for the Lantern
 		localCarLantern = CarLanternPayload.getWriteablePayload(direction);
+		//Register payload to be sent periodically
 		physicalInterface.sendTimeTriggered(localCarLantern, period);
 		
+		//Create a canMailbox for networkCarLantern
 		networkCarLantern = CanMailbox.getWriteableCanMailbox(
 				MessageDictionary.CAR_LANTERN_BASE_CAN_ID +
 				ReplicationComputer.computeReplicationId(direction));
 		mCarLantern = new BooleanCanPayloadTranslator(networkCarLantern);
+		//Register the network Message periodically
 		canInterface.sendTimeTriggered(networkCarLantern, period);
         
-		
+		//Register for AtFloor messages
 		for (int i = 0; i < Elevator.numFloors; i++) {
             int floor = i + 1;
             for (Hallway h : Hallway.replicationValues) {
@@ -110,6 +113,7 @@ public class LanternControl extends Controller{
             }
         }
         
+		//Register for DoorClosed Messages
 		for(Hallway h : Hallway.replicationValues){
 			for(Side s : replicationValues){
 				int index = ReplicationComputer.computeReplicationId(h, s);
@@ -120,6 +124,7 @@ public class LanternControl extends Controller{
 			}
 		}
 		
+		//Start the periodic timer.
 		timer.start(period);
 		
 	}
