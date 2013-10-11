@@ -1,0 +1,18 @@
+;Message File - Unit Test for CarButtonControl
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Jiangtian Nie (jnie)
+
+#INCLUDE defines.mf
+
+;intialize
+0.5s A S CarPositionControl : STATE == STATE_DISPLAY
+
+;set conditions for T10.1
+1s I AT_FLOOR_PERIOD N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = true
+
+;T10.1
++2s A S CarPositionControl : STATE == STATE_DISPLAY
++2s A N CAR_POSITION_CAN_ID Integer : getValue == 2
++2s A F CarPositionIndicator : floor == 2 
