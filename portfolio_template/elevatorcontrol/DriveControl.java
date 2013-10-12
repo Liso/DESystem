@@ -47,7 +47,7 @@ public class DriveControl extends Controller {
 
     private State state = State.STATE_STOP;
 
-    public DriveControl(boolean flag) {
+    public DriveControl(SimTime newperiod, boolean flag) {
         super("DriveControl", flag);
         
         // Initializing physical interface
@@ -307,6 +307,20 @@ public class DriveControl extends Controller {
         }
         
         Speed targetSpeed;
+	int newlocalDriveSpeed = (int)(localDriveSpeed.speed()*100);
+
+	if(newlocalDriveSpeed == 0)
+		targetSpeed = Speed.STOP;
+	else if(newlocalDriveSpeed <=5)
+		targetSpeed = Speed.LEVEL;
+	else if(newlocalDriveSpeed <=25)
+		targetSpeed = Speed.SLOW;
+	else if(newlocalDriveSpeed <=100)
+		targetSpeed = Speed.FAST;
+	else
+		throw new RuntimeException("Unknown Speed");
+
+/*
         
         switch ((int)(localDriveSpeed.speed()*100)) {
         case 0:
@@ -324,7 +338,7 @@ public class DriveControl extends Controller {
         default:
             throw new RuntimeException("Unknown speed");
         }
-        
+        */
         mDriveSpeed.set(targetSpeed,localDriveSpeed.direction());
         mDriveCommand.setSpeed(localDrive.speed());
         mDriveCommand.setDirection(localDrive.direction());
