@@ -63,13 +63,8 @@ public class LanternControl extends Controller{
     private final Direction direction;
     
  // Store period for the controller from the Message Dictionary.
-    private SimTime period = MessageDictionary.LANTERN_CONTROL_PERIOD;
+    private SimTime period;
     
-    public final static Side[] replicationValues = {
-        Side.LEFT,
-        Side.RIGHT
-    };
-
     // Enumerate States
     private enum State {
         STATE_OFF,
@@ -80,8 +75,9 @@ public class LanternControl extends Controller{
     private State state = State.STATE_OFF;
 	
 
-	public LanternControl(boolean verbose) {
-		super("LanternControl",verbose);
+	public LanternControl(Direction direction, SimTime period, boolean verbose) {
+		super("LanternControl" +
+					ReplicationComputer.makeReplicationString(direction),verbose);
 		
 			
 		 // Create a can mailbox for DesiredFloor.
@@ -92,8 +88,8 @@ public class LanternControl extends Controller{
         // Register for Updates
         canInterface.registerTimeTriggered(networkDesiredFloor);
         
-        direction = mDesiredFloor.getDirection();
-        
+        this.direction =  direction;   
+	 this.period = period;
         // Add creation of Controller to Log.
         log("Created LanternControl with period = ", period);
         
@@ -124,7 +120,7 @@ public class LanternControl extends Controller{
         
 		//Register for DoorClosed Messages
 		for(Hallway h : Hallway.replicationValues){
-			for(Side s : replicationValues){
+			for(Side s : Side.values()){
 				int index = ReplicationComputer.computeReplicationId(h, s);
 				ReadableCanMailbox networkDoorClosed = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + index);
 				DoorClosedCanPayloadTranslator d = new DoorClosedCanPayloadTranslator(networkDoorClosed, h, s);
@@ -151,7 +147,7 @@ public class LanternControl extends Controller{
 				
 				boolean aDoorIsOpen = false;
 				for(Hallway h : Hallway.replicationValues){
-					for(Side s : replicationValues){
+					for(Side s : Side.values()){
 						int index = ReplicationComputer.computeReplicationId(h, s);
 						aDoorIsOpen = aDoorIsOpen || !mDoorClosed.get(index).getValue();
 					}
@@ -164,7 +160,8 @@ public class LanternControl extends Controller{
                     int floor = i + 1;
                     for (Hallway h : Hallway.replicationValues) {
                         int index = ReplicationComputer.computeReplicationId(floor, h);
-                        if (mAtFloor.get(index).getValue() && aDoorIsOpen && (direction != Direction.STOP)){
+                        if (mAtFloor.get(index).getValue() && aDoorIsOpen && (mDesiredFloor.getDirection() != Direction.STOP) 
+				&& (direction == mDesiredFloor.getDirection())){
             							newState = State.STATE_ON;
                         }
                     }
@@ -181,7 +178,7 @@ public class LanternControl extends Controller{
 				boolean allDoorsClosed = true;
 				// #transition 'T7.1'
 				for(Hallway h : Hallway.replicationValues){
-					for(Side s : replicationValues){
+					for(Side s : Side.values()){
 						int index = ReplicationComputer.computeReplicationId(h, s);
 						allDoorsClosed = allDoorsClosed && mDoorClosed.get(index).getValue();
 					}
