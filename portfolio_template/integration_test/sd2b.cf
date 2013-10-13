@@ -4,6 +4,6 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Yue Chen (yuechen)
 
-DoorControl FRONT LEFT 0.01strue
+DoorControl FRONT LEFT 0.01s true
 CarButtonControl 4 FRONT  0.01s true
 Dispatcher 8 0.05s true

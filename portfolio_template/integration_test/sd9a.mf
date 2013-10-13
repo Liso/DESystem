@@ -36,7 +36,7 @@
 +0.1s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '9A/4'
-+5.5s A F DoorMotor FRONT LEFT : command == CLOSE
++5.5s A F DoorMotor FRONT LEFT : command == NUDGE
 
 ;#arc '9A/5a'
 +0.1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false

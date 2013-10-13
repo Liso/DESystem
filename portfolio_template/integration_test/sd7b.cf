@@ -4,5 +4,5 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Sally Stevenson (ststeven)
 
-DoorControl FRONT LEFT true
+DoorControl FRONT LEFT 0.01s true
 HallButtonControl 4 FRONT DOWN 0.1s true
