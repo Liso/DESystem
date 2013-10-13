@@ -199,6 +199,7 @@ public class Dispatcher extends Controller {
                                                                          h);
                         if (mAtFloor.get(index).getValue()) {
                             isAtFloor = true;
+                            mDesiredFloor.setDirection(Direction.UP);
                             currentFloor = floor;
                             nHallway++;
                             if (nHallway >= 2)
@@ -209,8 +210,11 @@ public class Dispatcher extends Controller {
                     }
                 }
 
-
-                targetFloor = currentFloor % Elevator.numFloors + 1;
+                targetFloor = currentFloor + 1;
+                if (targetFloor > 8) {
+                    mDesiredFloor.setDirection(Direction.DOWN);
+                    targetFloor = 1;
+                }
 
                 // make sure that the last is false as well
                 // #transition 'T11.2'
