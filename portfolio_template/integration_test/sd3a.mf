@@ -1,4 +1,4 @@
-;Message File - Integration Test for SD4A
+;Message File - Integration Test for SD3A
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
@@ -85,7 +85,7 @@
 +0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed  FRONT RIGHT = false
 
 ;# 'SD3A/3a'
-+0.5s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 6 FRONT UP
++0.5s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 6
 +0s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
 +0s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
 

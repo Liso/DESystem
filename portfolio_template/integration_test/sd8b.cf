@@ -5,8 +5,5 @@
 ;Author : Sri Harsha Koppaka (skoppaka)
 
 DriveControl 0.01s true
-HallButtonControl 4 FRONT UP 0.1s true
 DoorControl FRONT LEFT 0.01s true
-DoorControl FRONT RIGHT 0.01s true
-DoorControl BACK LEFT 0.01s true
-DoorControl BACK RIGHT 0.01s true
+Dispatcher 8 0.05s true
