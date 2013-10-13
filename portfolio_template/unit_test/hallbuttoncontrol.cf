@@ -4,4 +4,4 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Sri Harsha Koppaka (skoppaka)
 
-HallButtonControl 4 FRONT UP true
+HallButtonControl 4 FRONT UP 0.1s true

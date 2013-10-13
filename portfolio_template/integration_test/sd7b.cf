@@ -5,4 +5,4 @@
 ;Author : Sally Stevenson (ststeven)
 
 DoorControl FRONT LEFT true
-HallButtonControl 4 FRONT DOWN true
+HallButtonControl 4 FRONT DOWN 0.1s true

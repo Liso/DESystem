@@ -4,4 +4,4 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author   : Sri Harsha Koppaka (skoppaka)
 
-LanternControl true
+LanternControl UP 0.2s true

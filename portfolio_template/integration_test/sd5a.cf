@@ -4,4 +4,4 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Yue Chen(yuechen)
 
-DoorControl FRONT LEFT true
+DoorControl FRONT LEFT 0.01s true
