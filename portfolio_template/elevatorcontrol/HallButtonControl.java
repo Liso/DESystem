@@ -95,7 +95,7 @@ public class HallButtonControl extends Controller {
     private final Direction direction;
 
     // Store period for the controller from the Message Dictionary.
-    private SimTime period = MessageDictionary.HALL_BUTTON_CONTROL_PERIOD;
+    private SimTime period;
 
     // Enumerate States
     private enum State {
@@ -109,7 +109,7 @@ public class HallButtonControl extends Controller {
     // Constructor for the HallButtonControl Class. Arguments in .cf file
     // should match order and type given here.
     public HallButtonControl(int floor, Hallway hallway, Direction direction,
-                             boolean verbose) {
+                             SimTime period, boolean verbose) {
         // Call to the Controller superclass.
         super("HallButtonControl" +
               ReplicationComputer.makeReplicationString(floor, hallway,
@@ -117,6 +117,7 @@ public class HallButtonControl extends Controller {
 
         // Constructor arguments stored in local variable.
         this.direction = direction;
+        this.period = period;
 
         // Add creation of Controller to Log.
         log("Created HallButtonControl with period = ", period);

@@ -76,8 +76,7 @@ public class LanternControl extends Controller{
 	
 
 	public LanternControl(Direction direction, SimTime period, boolean verbose) {
-		super("LanternControl" +
-					ReplicationComputer.makeReplicationString(direction),verbose);
+		super("LanternControl" + ReplicationComputer.makeReplicationString(direction),verbose);
 		
 			
 		 // Create a can mailbox for DesiredFloor.
@@ -89,7 +88,7 @@ public class LanternControl extends Controller{
         canInterface.registerTimeTriggered(networkDesiredFloor);
         
         this.direction =  direction;   
-	 this.period = period;
+        this.period = period;
         // Add creation of Controller to Log.
         log("Created LanternControl with period = ", period);
         

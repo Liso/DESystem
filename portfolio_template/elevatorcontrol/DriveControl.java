@@ -21,7 +21,7 @@ import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
 
 public class DriveControl extends Controller {
 
-    SimTime simtime = MessageDictionary.DRIVE_CONTROL_PERIOD;
+    SimTime period;
     WriteableDrivePayload localDrive;
     ReadableDriveSpeedPayload localDriveSpeed;
     DriveCommandCanPayloadTranslator mDriveCommand;
@@ -47,12 +47,14 @@ public class DriveControl extends Controller {
 
     private State state = State.STATE_STOP;
 
-    public DriveControl(SimTime newperiod, boolean flag) {
+    public DriveControl(SimTime period, boolean flag) {
         super("DriveControl", flag);
+        
+        this.period = period;
         
         // Initializing physical interface
         localDrive = DrivePayload.getWriteablePayload();
-        physicalInterface.sendTimeTriggered(localDrive, simtime);
+        physicalInterface.sendTimeTriggered(localDrive, period);
         localDriveSpeed = DriveSpeedPayload.getReadablePayload();
         physicalInterface.registerTimeTriggered(localDriveSpeed);
         
@@ -62,11 +64,11 @@ public class DriveControl extends Controller {
                         MessageDictionary.DRIVE_COMMAND_CAN_ID);
         mDriveCommand = new DriveCommandCanPayloadTranslator(
                 writeablecanmailbox);
-        canInterface.sendTimeTriggered(writeablecanmailbox, simtime);
+        canInterface.sendTimeTriggered(writeablecanmailbox, period);
         writeablecanmailbox = CanMailbox.getWriteableCanMailbox(
                 MessageDictionary.DRIVE_SPEED_CAN_ID);
         mDriveSpeed = new DriveSpeedCanPayloadTranslator(writeablecanmailbox);
-        canInterface.sendTimeTriggered(writeablecanmailbox, simtime);
+        canInterface.sendTimeTriggered(writeablecanmailbox, period);
         simulator.payloads.CanMailbox.ReadableCanMailbox readablecanmailbox =
                 CanMailbox.getReadableCanMailbox(
                         MessageDictionary.DESIRED_FLOOR_CAN_ID);
@@ -158,7 +160,7 @@ public class DriveControl extends Controller {
         }
 
         mAtFloorArray = new Utility.AtFloorArray(canInterface);
-        timer.start(simtime);
+        timer.start(period);
     }
 
     private boolean isAnyDoorOpen() {
@@ -206,6 +208,7 @@ public class DriveControl extends Controller {
         
         switch (state) {
         case STATE_STOP:
+        	//State Actions
             localDrive.set(Speed.STOP, Direction.STOP);
             
             //#transition 'T6.5.1'
@@ -242,7 +245,9 @@ public class DriveControl extends Controller {
             }
             break;
         case STATE_LEVEL_UP:
+        	//State Actions
             localDrive.set(Speed.LEVEL, Direction.UP);
+            
             if (isSafetyViolation()) {
                 //#transition 'T6.5.*'
                 newstate = State.STATE_EMERGENCY;
@@ -253,7 +258,9 @@ public class DriveControl extends Controller {
             }
             break;
         case STATE_LEVEL_DOWN:
+        	//State Actions
             localDrive.set(Speed.LEVEL, Direction.DOWN);
+            
             if (isSafetyViolation()) {
                 //#transition 'T6.5.*'
                 newstate = State.STATE_EMERGENCY;
@@ -264,7 +271,9 @@ public class DriveControl extends Controller {
             }
             break;
         case STATE_SLOW_UP:
+        	//State Actions
             localDrive.set(Speed.SLOW, Direction.UP);
+            
             if (isSafetyViolation()) {
                 //#transition 'T6.5.2'
                 newstate = State.STATE_EMERGENCY;
@@ -281,7 +290,9 @@ public class DriveControl extends Controller {
             }
             break;
         case STATE_SLOW_DOWN:
+        	//State Actions
             localDrive.set(Speed.SLOW, Direction.DOWN);
+            
             if (isSafetyViolation()) {
                 //#transition 'T6.5.3'
                 newstate = State.STATE_EMERGENCY;
@@ -300,54 +311,44 @@ public class DriveControl extends Controller {
             }
             break;
         case STATE_EMERGENCY:
+        	//State Actions
             localDrive.set(Speed.STOP, Direction.STOP);
+            
             break;
         default:
             throw new RuntimeException("State " + state + " was not recognized.");
         }
         
+        //To Convert Speed from double values to enumerated values 
         Speed targetSpeed;
-	int newlocalDriveSpeed = (int)(localDriveSpeed.speed()*100);
+        int newlocalDriveSpeed = (int)(localDriveSpeed.speed()*100);
 
-	if(newlocalDriveSpeed == 0)
-		targetSpeed = Speed.STOP;
-	else if(newlocalDriveSpeed <=5)
-		targetSpeed = Speed.LEVEL;
-	else if(newlocalDriveSpeed <=25)
-		targetSpeed = Speed.SLOW;
-	else if(newlocalDriveSpeed <=100)
-		targetSpeed = Speed.FAST;
-	else
-		throw new RuntimeException("Unknown Speed");
-
-/*
+        if(newlocalDriveSpeed == 0)
+        	targetSpeed = Speed.STOP;
+        else if(newlocalDriveSpeed <=5)
+        	targetSpeed = Speed.LEVEL;
+        else if(newlocalDriveSpeed <=25)
+        	targetSpeed = Speed.SLOW;
+        else if(newlocalDriveSpeed <=100)
+        	targetSpeed = Speed.FAST;
+        else
+        	throw new RuntimeException("Unknown Speed");
         
-        switch ((int)(localDriveSpeed.speed()*100)) {
-        case 0:
-            targetSpeed = Speed.STOP;
-            break;
-        case 5:
-            targetSpeed = Speed.LEVEL;
-            break;
-        case 25:
-            targetSpeed = Speed.SLOW;
-            break;
-        case 100:
-            targetSpeed = Speed.FAST;
-            break;
-        default:
-            throw new RuntimeException("Unknown speed");
-        }
-        */
+        //Set the network Messages
         mDriveSpeed.set(targetSpeed,localDriveSpeed.direction());
         mDriveCommand.setSpeed(localDrive.speed());
         mDriveCommand.setDirection(localDrive.direction());
         
         if (state != newstate)
             log(new Object[] { "Transition from ", state, " to ", newstate });
+        
         setState("STATE", state.toString());
         state = newstate;
-        timer.start(simtime);
+        
+        // Schedule the next iteration of the controller
+        // You must do this at the end of the timer callback in order to
+        // restart the timer
+        timer.start(period);
     }
 }
 

@@ -1,5 +1,5 @@
 /* 
-** Course and Semester : 18-649 Fall 2013
+ ** Course and Semester : 18-649 Fall 2013
 ** Group No: 16
 ** Group Members : Jiangtian Nie(jnie) , Yue Chen(yuechen),
 **                 Sally Stevenson(ststeven) , Sri Harsha Koppaka(skoppaka)
@@ -62,11 +62,6 @@ public class CarButtonControl extends Controller{
     private ReadableCanMailbox networkAtFloor;
     // Translator for AtFloor message -- Specific to Message
     private AtFloorCanPayloadTranslator mAtFloor;
-
-    // Receive DesiredFloor Message
-    private ReadableCanMailbox networkDesiredFloor;
-    // Translator for DesiredFloor message -- Specific to Message
-    private DesiredFloorCanPayloadTranslator mDesiredFloor;
     
     // Receive DoorClosedFrontLeft
     private ReadableCanMailbox networkDoorClosedFrontLeft;
@@ -91,7 +86,7 @@ public class CarButtonControl extends Controller{
     // These variables keep track of current instance
     
     // Store period for the controller from the Message Dictionary.
-    private SimTime period = MessageDictionary.CAR_BUTTON_CONTROL_PERIOD;
+    private SimTime period;
     
     // Enumerate States
     private enum State {
@@ -104,11 +99,13 @@ public class CarButtonControl extends Controller{
     
     // Constructor for the CarButtonControl Class. Arguments in .cf file should
     // match order and type given here.
-    public CarButtonControl(int floor, Hallway hallway, boolean verbose){
+    public CarButtonControl(int floor, Hallway hallway, SimTime period, boolean verbose){
         // Call to the Controller superclass.
         super("CarButtonControl" +
               ReplicationComputer.makeReplicationString(floor, hallway),
               verbose);
+        
+        this.period = period;
         
         log("Created CarButtonControl with period = ", period);
         
@@ -167,13 +164,6 @@ public class CarButtonControl extends Controller{
         // the message.
         canInterface.registerTimeTriggered(networkAtFloor);
         
-        // Create a can mailbox for DesiredFloor.
-        networkDesiredFloor = CanMailbox.getReadableCanMailbox(
-                MessageDictionary.DESIRED_FLOOR_CAN_ID);
-        mDesiredFloor = new DesiredFloorCanPayloadTranslator(
-                networkDesiredFloor);
-        //Register for Updates
-        canInterface.registerTimeTriggered(networkDesiredFloor);
         
         //Create a can mailbox for DoorClosedFront Left
         networkDoorClosedFrontLeft = CanMailbox.getReadableCanMailbox(

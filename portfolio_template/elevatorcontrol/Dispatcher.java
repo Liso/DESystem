@@ -73,7 +73,7 @@ public class Dispatcher extends Controller {
             SimTime.SimTimeUnit.SECOND);
 
     //store the period for the controller
-    private final static SimTime period = MessageDictionary.DISPATCHER_PERIOD;
+    private SimTime period;
 
     //enumerate states
     private enum State {
@@ -84,8 +84,10 @@ public class Dispatcher extends Controller {
     //state variable initialized to the initial state FLASH_OFF
     private State state = State.STATE_SET_TARGET;
 
-    public Dispatcher(boolean verbose) {
+    public Dispatcher(int MaxFloor, SimTime period, boolean verbose) {
         super("Dispatcher", verbose);
+        
+        this.period = period;
 
         log("Created Dispatcher with period = ", period);
 
@@ -165,7 +167,7 @@ public class Dispatcher extends Controller {
     /*
      * The timer callback is where the main controller code is executed.  For
      * time triggered design, this consists mainly of a switch block with a
-     * case blcok for each state.  Each case block executes actions for that
+     * case block for each state.  Each case block executes actions for that
      * state, then executes a transition to the next state if the transition
      * conditions are met.
      */
