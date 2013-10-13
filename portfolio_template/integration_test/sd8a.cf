@@ -5,4 +5,7 @@
 ;Author : Yue Chen (yuechen)
 
 DoorControl FRONT LEFT 0.01s true
+DoorControl FRONT RIGHT 0.01s true
+DoorControl BACK LEFT 0.01s true
+DoorControl BACK RIGHT 0.01s true
 DriveControl 10ms true
