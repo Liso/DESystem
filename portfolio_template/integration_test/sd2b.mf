@@ -10,8 +10,8 @@
 
 ;#arc '2B/1'
 ;check that the door is closing
-+0.04s  A F DoorMotor FRONT LEFT : command == CLOSE
-+0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
++0.04s  A F DoorMotor FRONT LEFT : command == NUDGE
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ;#arc '2B/2b'
 +0.5s I 0s F CarCall 4 FRONT = true

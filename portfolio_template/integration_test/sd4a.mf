@@ -77,10 +77,6 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 +0s  A F DoorMotor FRONT RIGHT : command == OPEN
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT : getDoorCommand == OPEN
-+0s  A F DoorMotor BACK LEFT : command == OPEN
-+0s  A N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT : getDoorCommand == OPEN
-+0s  A F DoorMotor BACK RIGHT : command == OPEN
-+0s  A N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotorCommand BACK RIGHT : getDoorCommand == OPEN
 
 ;Preconditions
 +0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false

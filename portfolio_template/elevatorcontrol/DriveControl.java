@@ -21,19 +21,20 @@ import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
 
 public class DriveControl extends Controller {
 
-    SimTime period;
-    WriteableDrivePayload localDrive;
-    ReadableDriveSpeedPayload localDriveSpeed;
-    DriveCommandCanPayloadTranslator mDriveCommand;
-    DriveSpeedCanPayloadTranslator mDriveSpeed;
-    DesiredFloorCanPayloadTranslator mDesiredFloor;
-    CarLevelPositionCanPayloadTranslator mCarLevelPosition;
-    HashMap<Integer, DoorClosedCanPayloadTranslator> mDoorClosedArray;
-    HashMap<Integer, DoorMotorCommandCanPayloadTranslator> mDoorMotorArray;
-    SafetySensorCanPayloadTranslator mSafety;
-    HashMap<Integer, HoistwayLimitSensorCanPayloadTranslator> mHoistwayLimitArray;
-    LevelingCanPayloadTranslator mLevelSensorArray[];
-    CarWeightCanPayloadTranslator mCarWeight;
+    private SimTime period;
+    private WriteableDrivePayload localDrive;
+    private ReadableDriveSpeedPayload localDriveSpeed;
+    private DriveCommandCanPayloadTranslator mDriveCommand;
+    private DriveSpeedCanPayloadTranslator mDriveSpeed;
+    private DesiredFloorCanPayloadTranslator mDesiredFloor;
+    private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
+    private HashMap<Integer, DoorClosedCanPayloadTranslator> mDoorClosedArray;
+    private HashMap<Integer, DoorMotorCommandCanPayloadTranslator> mDoorMotorArray;
+    private SafetySensorCanPayloadTranslator mSafety;
+    private HashMap<Integer, HoistwayLimitSensorCanPayloadTranslator> mHoistwayLimitArray;
+    private LevelingCanPayloadTranslator mLevelSensorArray[];
+    private CarWeightCanPayloadTranslator mCarWeight;
+    
     Utility.AtFloorArray mAtFloorArray;
 
     private enum State {
@@ -219,6 +220,8 @@ public class DriveControl extends Controller {
             //#transition 'T6.12'
             if (isOverweight) {
                 newstate=State.STATE_STOP;
+                
+                
                 break;
             }
             if ((desiredFloor != currentFloor) && !isAnyDoorOpen() && !isOverweight) {
