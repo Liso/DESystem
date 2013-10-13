@@ -15,8 +15,8 @@
 ;intialize
 
 ;check that the door is closing initially
-0.04s  A F DoorMotor FRONT LEFT : command == CLOSE
-0.04s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
+0.04s  A F DoorMotor FRONT LEFT : command == NUDGE
+0.04s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ;set conditions for T5.4
 0.08s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
@@ -51,8 +51,8 @@
 
 ;check that the door is closing 0.5s later
 1.46s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
-1.46s  A F DoorMotor FRONT LEFT : command == CLOSE
-1.46s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
+1.46s  A F DoorMotor FRONT LEFT : command == NUDGE
+1.46s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ;clear DoorOpened
 1.47s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false

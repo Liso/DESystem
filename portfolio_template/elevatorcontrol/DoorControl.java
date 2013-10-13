@@ -129,7 +129,7 @@ public class DoorControl extends Controller {
         this.period = period;
         this.hallway = hallway;
         this.side = side;
-        currentFloor = 0; 
+        currentFloor = 1; 
 
         log("Created DoorControl with period = ", period);
     
@@ -185,6 +185,7 @@ public class DoorControl extends Controller {
         for (int i = 0; i < Elevator.numFloors; i++) {
             int floor = i + 1;
             for (Hallway h : Hallway.replicationValues) {
+            	
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + index);
                 AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
@@ -274,6 +275,7 @@ public class DoorControl extends Controller {
             	localDoorMotor.set(DoorCommand.NUDGE);
                 mDoorMotor.set(DoorCommand.NUDGE);
             
+
                 //Index for getting current AtFloor
                 int index = ReplicationComputer.computeReplicationId(currentFloor, hallway);
                 
@@ -301,18 +303,18 @@ public class DoorControl extends Controller {
             	localDoorMotor.set(DoorCommand.STOP);
                 mDoorMotor.set(DoorCommand.STOP);
 
-                //Index for getting current AtFloo
-                int index1 = ReplicationComputer.computeReplicationId(currentFloor, hallway);
-                
+                //Index for getting current AtFloor
+                int index1 = ReplicationComputer.computeReplicationId(currentFloor, hallway);             
+
                 //#transition 'T5.5'
                 if(mAtFloor.get(index1).getValue()){
-                	if (((mDesiredFloor.getFloor() == currentFloor) &&
-                		 (mDriveSpeed.getDirection() == Direction.STOP) && 
-                		 (mDriveSpeed.getSpeed() == Speed.STOP)) || 
-                		 (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
-                		
-                    			newState = State.STATE_OPEN;
-                	}
+                		if (((mDesiredFloor.getFloor() == currentFloor) &&
+                			 (mDriveSpeed.getDirection() == Direction.STOP) && 
+                			 (mDriveSpeed.getSpeed() == Speed.STOP)) || 
+                			 (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {                		
+                				newState = State.STATE_OPEN;
+                		}
+                	
                 }
          
                 break;
