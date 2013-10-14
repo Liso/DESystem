@@ -58,6 +58,10 @@ public class DoorControl extends Controller {
     //translator for the doorReversal message -- this translator is specific
     private DoorReversalCanPayloadTranslator mDoorReversal;
     
+    //received door reversal message for Opp Side
+    private ReadableCanMailbox networkDoorReversalOpp;
+    //translator for the doorReversal message -- this translator is specific
+    private DoorReversalCanPayloadTranslator mDoorReversalOpp;
     //received car weight message
     private ReadableCanMailbox networkCarWeight;
     //translator for the CarWeight message -- this translator is specific
@@ -88,6 +92,7 @@ public class DoorControl extends Controller {
     //these variables keep track of which instance this is.
     private final Hallway hallway;
     private final Side side;
+    private final Side Oppside;
     private final Direction direction;
     private int currentFloor;
     private int indexHallCall;
@@ -98,8 +103,8 @@ public class DoorControl extends Controller {
     
     //additional internal state variables
     private SimTime countDown = SimTime.ZERO;
-    private final static SimTime dwell = new SimTime(500,
-            SimTime.SimTimeUnit.MILLISECOND);
+    private final static SimTime dwell = new SimTime(3,
+            SimTime.SimTimeUnit.SECOND);
 
     //enumerate states
     private enum State {
@@ -129,6 +134,11 @@ public class DoorControl extends Controller {
         this.period = period;
         this.hallway = hallway;
         this.side = side;
+	 if(side == Side.LEFT){
+		Oppside = Side.RIGHT;
+	 }
+	 else
+		Oppside = Side.LEFT;
         currentFloor = 1; 
 
         log("Created DoorControl with period = ", period);
@@ -163,6 +173,12 @@ public class DoorControl extends Controller {
                 networkDoorReversal, hallway, side);
         canInterface.registerTimeTriggered(networkDoorReversal);
 
+	 networkDoorReversalOpp = CanMailbox.getReadableCanMailbox(
+                MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID +
+                ReplicationComputer.computeReplicationId(hallway, Oppside));
+        mDoorReversalOpp = new DoorReversalCanPayloadTranslator(
+                networkDoorReversalOpp, hallway, Oppside);
+        canInterface.registerTimeTriggered(networkDoorReversalOpp);
 
         networkCarWeight = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.CAR_WEIGHT_CAN_ID);
@@ -272,8 +288,8 @@ public class DoorControl extends Controller {
                 break;
             case STATE_CLOSE:
                 // state actions for 'DOOR NOT CLOSED'
-            	localDoorMotor.set(DoorCommand.NUDGE);
-                mDoorMotor.set(DoorCommand.NUDGE);
+            	localDoorMotor.set(DoorCommand.CLOSE);
+                mDoorMotor.set(DoorCommand.CLOSE);
             
 
                 //Index for getting current AtFloor
@@ -281,8 +297,7 @@ public class DoorControl extends Controller {
                 
                 //#transition 'T5.3'
                 if(mAtFloor.get(index).getValue()){
-                	if (currentFloor != 0) {
-                		if ((mDoorReversal.getValue() || 
+                		if ((mDoorReversal.getValue() || mDoorReversalOpp.getValue() ||
                 			(mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
                 			 mHallCall.get(indexHallCall).getValue() ||
                 			 mCarCall.get(indexCarCall).getValue()) &&  
@@ -290,7 +305,6 @@ public class DoorControl extends Controller {
                 		
                 				newState = State.STATE_OPEN;
                 		}
-                	}
                 }
                 
                 //#transition 'T5.4'
