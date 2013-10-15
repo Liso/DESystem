@@ -1,8 +1,8 @@
-;Message File - Integration Test for SD1C
+;Message File - Integration Test for SD1B
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
-;Author : Sri Harsha Koppaka (skoppaka)
+;Author : Sally Stevenson (ststeven)
 
 #INCLUDE defines.mf ;include CAN id and period definitions
 
