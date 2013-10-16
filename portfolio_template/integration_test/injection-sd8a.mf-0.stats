@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd8a.cf -mf sd8a.mf
-RandomSeed = 1381702357514
+RandomSeed = 1381961365352
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,8 +13,8 @@ Message File = sd8a.mf
 Controller File = sd8a.cf
 
 Assertion Results:
-@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5f72cbae :: command ?== NUDGE PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@d394424 :: getDoorCommand ?== NUDGE PASSED
+@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5f72cbae :: command ?== CLOSE PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@d394424 :: getDoorCommand ?== CLOSE PASSED
 @0.9s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@242e983d :: command ?== STOP PASSED
 @0.9s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@361b8504 :: getDoorCommand ?== STOP PASSED
 @1.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@24812051 :: speed ?== SLOW PASSED

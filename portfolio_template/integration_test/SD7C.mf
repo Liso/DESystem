@@ -11,8 +11,8 @@
 
 ;# arc '1a'
 +1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
-+0s  A F DoorMotor FRONT LEFT : command == NUDGE
-+0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
++0s  A F DoorMotor FRONT LEFT : command == CLOSE
++0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 +1s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
 +0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true

@@ -15,7 +15,7 @@
 +0s  I  0s F HallCall 4 FRONT DOWN = false
 
 ;#arc '1C/1a'
-+0.2s  A F DoorMotor FRONT LEFT : command == NUDGE
++0.2s  A F DoorMotor FRONT LEFT : command == CLOSE
 
 ;Asserting Initial Conditions
 +0.5s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == false

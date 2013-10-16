@@ -13,8 +13,8 @@
 +0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP 
 
 ;#arc 8A/1'
-+0.5s  A F DoorMotor FRONT LEFT : command == NUDGE
-+0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
++0.5s  A F DoorMotor FRONT LEFT : command == CLOSE
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ;#arc 8A/2a'
 +0.1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true

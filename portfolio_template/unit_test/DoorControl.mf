@@ -49,20 +49,20 @@
 0.94s  A F DoorMotor FRONT LEFT : command == STOP
 0.94s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
 
-;check that the door is closing 0.5s later
-1.46s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
-1.46s  A F DoorMotor FRONT LEFT : command == CLOSE
-1.46s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
+;check that the door is closing 3.5s later
+4.46s  A S DoorControl[FRONT][LEFT] : STATE == STATE_CLOSE
+4.46s  A F DoorMotor FRONT LEFT : command == CLOSE
+4.46s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ;clear DoorOpened
-1.47s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+4.47s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
 
 ;set conditions for T5.3
-2.41s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
+5.41s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
 
 ;T5.3
 ;check that door is opening
-2.61s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
-2.61s  A F DoorMotor FRONT LEFT : command == OPEN
-2.61s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
+5.61s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
+5.61s  A F DoorMotor FRONT LEFT : command == OPEN
+5.61s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
