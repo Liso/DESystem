@@ -1,0 +1,38 @@
+;Message File - Integration Test for SD1B
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sally Stevenson (ststeven)
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+; Pre-conditions
+0s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = true
+0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
+0s I 0s F HallCall 1 FRONT UP = false
+
+;#arc '1B/1'
++0.1s A F DoorMotor FRONT LEFT : command == CLOSE
+
+;#arc '1B/3b'
++0.05s I 0s F HallCall 1 FRONT UP = true
+
+;#arc '1B/4'
++1s A F HallLight 1 FRONT UP : lighted == true
+
+;#arc '1B/5a;
++0s A N HALL_CALL_[1][FRONT][UP]_CAN_ID Boolean : getValue == true
+
+;#arc '1B/5b'
++0.1s A F DoorMotor FRONT LEFT : command == OPEN
+
++0.05s I 0s F HallCall 1 FRONT UP = false
+
+;#arc '1B/6'
++1s A F HallLight 1 FRONT UP : lighted == false
+
+;#arc '1B/7a'
++0.05s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+
+;#arc '1B/7b'
++0.1s A F DoorMotor FRONT LEFT : command == STOP

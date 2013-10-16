@@ -1,4 +1,4 @@
-;Message File - Integration Test for SD4A
+;Message File - Integration Test for SD3A
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
@@ -10,8 +10,8 @@
 
 ;Injecting Initial conditions
 
-+0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
-+0s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0s  I  0s F HallCall 4 FRONT UP = true
++0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
 +0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed  FRONT LEFT = true
 +0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed  FRONT RIGHT = true
 +0s  I  0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed  BACK LEFT = true
@@ -22,31 +22,17 @@
 +0s  I  0s N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT = STOP
 +0s  I  0s N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT = STOP
 +0s  I  0s N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotorCommand BACK RIGHT = STOP
-+0s  I  0s F CarCall 6 FRONT = true
-
-+0.4s I 0s F CarCall 6 FRONT = false
-
-
-+1s  A N CAR_POSITION_CAN_ID Integer : getValue == 4
-+0s  A F CarPositionIndicator : floor == 4 
-+0s  A F Drive : speed == SLOW 
-+0s  A F Drive : direction == UP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
-+0s  A N CAR_CALL_[6][FRONT]_CAN_ID Boolean : getValue == true
-+0s  A N CAR_LIGHT_[6][FRONT]_CAN_ID Boolean : getValue == true
-+0s  A F CarLight 6 FRONT : lighted == true
-
-+1s  I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
-
++0s  I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
 ;Preconditions
-;# 'SD4A/1a'
-+2s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
-+0s	 I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = false
-+0s  I 0s N AT_FLOOR_[6][FRONT]_CAN_ID AtFloor 6 FRONT = true
+;# 'SD3A/1a'
++0.5s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = false
++0s	 I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
 
++0.0s I  0s F HallCall 4 FRONT UP = false
 
-;# 'SD4A/1b'
++0.5s  A F HallLight 4 FRONT UP : lighted == true
+
+;# 'SD3A/1b'
 +2s  A F Drive : speed == LEVEL
 +0s  A F Drive : direction == UP
 +0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
@@ -55,7 +41,7 @@
 ;Preconditions
 +1s  I 0s F DriveSpeed = UP 0.02
 
-;# 'SD4A/1c'
+;# 'SD3A/1c'
 +0.5s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == LEVEL
 +0s A N DRIVE_SPEED_CAN_ID DriveSpeed : getDirection == UP
 
@@ -64,63 +50,55 @@
 +1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
 +0s  I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
 
-;# 'SD4A/1d'
+;# 'SD3A/1d'
 +1s A N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP : getValue == true
 +0s A N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN : getValue == true
 
-;# 'SD4A/1e'
+;# 'SD3A/1e'
 +1s  A F Drive : speed == STOP
 +0s  A F Drive : direction == STOP
 +0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
 +0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
 
+
 ;Preconditions
+;# 'SD3A/1f'
 +1s  I 0s F DriveSpeed = STOP 0.00
 
-;# 'SD4A/1f'
+;# 'SD3A/2a'
 +1s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == STOP
 +0s A N DRIVE_SPEED_CAN_ID DriveSpeed : getDirection == STOP
 
-;# 'SD4A/4a'
-;# 'SD4A/4b'
+;# 'SD3A/2b'
+;# 'SD3A/2c'
 +0.5s  A F DoorMotor FRONT LEFT : command == OPEN
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 +0s  A F DoorMotor FRONT RIGHT : command == OPEN
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT : getDoorCommand == OPEN
 
 ;Preconditions
-+0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = false
-+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = false
-+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = false
++0.5s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
 
-;# 'SD4A/2'
-+0s  A N CAR_POSITION_CAN_ID Integer : getValue == 6
-+0s  A F CarPositionIndicator : floor == 6 
+;Preconditions
+;# 'SD3A/2d'
++1s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed  FRONT LEFT = false
++0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed  FRONT RIGHT = false
 
-;# 'SD4A/3'
-+2s A N CAR_CALL_[8][FRONT]_CAN_ID Boolean : getValue == false
-+0s A N CAR_LIGHT_[8][FRONT]_CAN_ID Boolean : getValue == false
-+0s A F CarLight 8 FRONT : lighted == false
+;# 'SD3A/3a'
++0.5s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 6
++0s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
++0s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
 
+;# 'SD3A/3b'
++0s  A  F HallLight 4 FRONT UP : lighted == false
 
-
-;# 'SD4A/5a'
+;# 'SD3A/4a'
 +1s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened  FRONT LEFT = true
 +0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened  FRONT RIGHT = true
 
-
-;# 'SD4A/5b'
+;# 'SD3A/4b'
+;# 'SD3A/5'
 +0.5s  A F DoorMotor FRONT LEFT : command == STOP
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
 +0s  A F DoorMotor FRONT RIGHT : command == STOP
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT : getDoorCommand == STOP
-
-
-
-
-
-
-
-
-

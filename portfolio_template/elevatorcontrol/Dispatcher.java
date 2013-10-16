@@ -86,8 +86,8 @@ public class Dispatcher extends Controller {
 
     public Dispatcher(int MaxFloor, SimTime period, boolean verbose) {
         super("Dispatcher", verbose);
-        
-        this.period = period;
+
+	 this.period = period;
 
         log("Created Dispatcher with period = ", period);
 
@@ -167,7 +167,7 @@ public class Dispatcher extends Controller {
     /*
      * The timer callback is where the main controller code is executed.  For
      * time triggered design, this consists mainly of a switch block with a
-     * case block for each state.  Each case block executes actions for that
+     * case blcok for each state.  Each case block executes actions for that
      * state, then executes a transition to the next state if the transition
      * conditions are met.
      */
@@ -199,7 +199,6 @@ public class Dispatcher extends Controller {
                                                                          h);
                         if (mAtFloor.get(index).getValue()) {
                             isAtFloor = true;
-                            mDesiredFloor.setDirection(Direction.UP);
                             currentFloor = floor;
                             nHallway++;
                             if (nHallway >= 2)
@@ -210,11 +209,8 @@ public class Dispatcher extends Controller {
                     }
                 }
 
-                targetFloor = currentFloor + 1;
-                if (targetFloor > 8) {
-                    mDesiredFloor.setDirection(Direction.DOWN);
-                    targetFloor = 1;
-                }
+
+                targetFloor = currentFloor % Elevator.numFloors + 1;
 
                 // make sure that the last is false as well
                 // #transition 'T11.2'

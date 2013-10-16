@@ -219,6 +219,12 @@ public class DriveControl extends Controller {
             }
             //#transition 'T6.12'
             if (isOverweight) {
+		if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
+			!mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
+                //#transition 'T6.8'
+                newstate = State.STATE_LEVEL_UP;
+			break;
+		}
                 newstate=State.STATE_STOP;
                 
                 
@@ -238,11 +244,13 @@ public class DriveControl extends Controller {
             if (isLevel || !isAnyDoorOpen()) {
                 break;
             }
-            if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue()) {
+            if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
+			!mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
                 //#transition 'T6.8'
                 newstate = State.STATE_LEVEL_UP;
             }
-            else if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
+            else if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()&&
+			!mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue()) {
                 //#transition 'T6.9'
                 newstate = State.STATE_LEVEL_DOWN;
             }

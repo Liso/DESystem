@@ -1,0 +1,36 @@
+;Message File - Integration Test for SD3B
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sally Stevenson (ststeven)
+
+;include CAN id and period definitions
+#INCLUDE defines.mf
+
+; Pre-conditions
+0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
+0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
+
+;#arc '3B/1'
++0.5s A F DoorMotor FRONT LEFT : command == OPEN
+
+;#arc '3B/2a'
++0.1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;#arc '3B/2b'
++0.05s A F DoorMotor FRONT LEFT : command == STOP
+
+;#arc '3B/4a'
++0.05s I 0s N CAR_WEIGHT_CAN_ID CarWeight = 15000
+
+;#arc '3B/5'
++0.1s  A F Drive : speed == STOP
++0s  A F Drive : direction == STOP
++0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
++0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
+
+;#arc '3B/6'
++0.5s A F DoorMotor FRONT LEFT : command == STOP

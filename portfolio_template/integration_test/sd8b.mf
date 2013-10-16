@@ -1,0 +1,44 @@
+;Message File - Integration Test for SD8B
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sri Harsha Koppaka (skoppaka)
+
+
+#INCLUDE defines.mf ;include CAN id and period definitions
+
+;intialize
+
+;Injecting Initial conditions
+;# 'SD8B/1a'
++0s  I  0s N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = false
++0s  I  0s N AT_FLOOR_[1][BACK]_CAN_ID AtFloor 1 BACK = false
++0s  I  0s N AT_FLOOR_[2][BACK]_CAN_ID AtFloor 2 BACK = false
++0s  I  0s N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false
++0s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
++0s  I  0s N AT_FLOOR_[5][FRONT]_CAN_ID AtFloor 5 FRONT = false
++0s  I  0s N AT_FLOOR_[6][FRONT]_CAN_ID AtFloor 6 FRONT = false
++0s  I  0s N AT_FLOOR_[7][FRONT]_CAN_ID AtFloor 7 FRONT = false
++0s  I  0s N AT_FLOOR_[7][BACK]_CAN_ID AtFloor 7 BACK = false
++0s  I  0s N AT_FLOOR_[8][FRONT]_CAN_ID AtFloor 8 FRONT = false
+
+;Preconditions
+;# 'SD8B/1b'
++0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed  FRONT LEFT = false
+
+;# 'SD8B/2'
++0s  I 0s N EMERGENCY_BRAKE_CAN_ID SafetySensor = true
+
+;# 'SD8B/3a'
++0.5s  A F Drive : speed == STOP
++0s  A F Drive : direction == STOP
++0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
++0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
+
+;# 'SD8B/3b'
++0.5s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
++0s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s  A  N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
+
+
+
