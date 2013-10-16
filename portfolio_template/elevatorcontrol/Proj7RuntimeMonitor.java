@@ -1,6 +1,7 @@
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
+import simulator.framework.Direction;
 import simulator.framework.DoorCommand;
 import simulator.framework.Elevator;
 import simulator.framework.Hallway;
@@ -24,6 +25,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     WeightStateMachine weightState = new WeightStateMachine();
     boolean hasMoved = false;
     boolean wasOverweight = false;
+    boolean wasCarCall[][] = new boolean[Elevator.numFloors][2];
+    boolean wasHallCall[][][] = new boolean[Elevator.numFloors][2][2];
     boolean wasCall = false;
     int wastedOpeningCount = 0;
     int overWeightCount = 0;
@@ -33,7 +36,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
     protected String[] summarize() {
-        String[] arr = new String[2];
+        String[] arr = new String[3];
         arr[0] = "Overweight Count = " + overWeightCount;
         arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
         arr[2] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
@@ -55,6 +58,12 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
      * @param hallway which door the event pertains to
      */
     private void doorOpening(Hallway hallway) {
+    	CheckHallorCarCall(hallway);
+        if (!wasCall) {
+        	message("Wasted Opening");
+        	wastedOpeningCount++;
+        }
+        wasCall = false;
     }
 
     /**
@@ -71,6 +80,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
      * @param hallway which door the event pertains to
      */
     private void doorReopening(Hallway hallway) {
+    	message("Logging wasted time for reversal");
+    	watch.start();
         //System.out.println(hallway.toString() + " Door Reopening");
     }
 
@@ -82,6 +93,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         //System.out.println(hallway.toString() + " Door Closed");
         //once all doors are closed, check to see if the car was overweight
         if (!doorState.anyDoorOpen()) {
+        	watch.stop();
             if (wasOverweight) {
                 message("Overweight");
                 overWeightCount++;
@@ -142,17 +154,19 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
     public void receive(ReadableAtFloorPayload msg) {
-        updateCurrentFloor(msg);
+    	updateCurrentFloor(msg);
     }
     
     @Override
     public void receive(ReadableHallCallPayload msg) {
-    	checkHallCall(msg);
+    	if(msg.pressed())
+    	wasHallCall[msg.getFloor()-1][msg.getHallway().ordinal()][msg.getDirection().ordinal()] = true;	
     }
     
     @Override
     public void receive(ReadableCarCallPayload msg) {
-    	checkCarCall(msg);
+    	if(msg.pressed())
+    	wasCarCall[msg.getFloor()-1][msg.getHallway().ordinal()] = true;
     }
 
     private static enum DoorState {
@@ -161,18 +175,6 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         OPENING,
         OPEN,
         CLOSING
-    }
-    
-    private void checkHallCall(ReadableHallCallPayload msg) {
-    	if (msg.getFloor() == currentFloor) {
-    		wasCall = true;
-    	}
-    }
-
-    private void checkCarCall(ReadableCarCallPayload msg) {
-    	if (msg.getFloor() == currentFloor) {
-    		wasCall = true;
-    	}
     }
     
     private void updateCurrentFloor(ReadableAtFloorPayload lastAtFloor) {
@@ -204,7 +206,17 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             oldWeight = msg.weight();
         }
     }
+    
 
+    public void CheckHallorCarCall(Hallway h){
+    	for(Direction d : Direction.replicationValues){
+    		if(wasCarCall[currentFloor-1][h.ordinal()] || 
+    			wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()]){
+    			wasCall = true;
+    		}
+    	}	
+    }
+    
     /**
      * Utility class for keeping track of the door state.
      * 
@@ -247,12 +259,11 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             } else if (anyDoorMotorOpening(h)) {
                 newState = DoorState.OPENING;
             }
-
+            
             if (newState != previousState) {
                 switch (newState) {
                     case CLOSED:
                         doorClosed(h);
-                        watch.stop();
                         break;
                     case OPEN:
                         doorOpened(h);
@@ -260,13 +271,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
                     case OPENING:
                         if (previousState == DoorState.CLOSING) {
                             doorReopening(h);
-                            if (wasCall) {
-                            	wastedOpeningCount++;
-                            	watch.start();
-                            	wasCall = false;
-                            }
                         } else {
-                            doorOpening(h);
+                            doorOpening(h);         
                         }
                         break;
                     case CLOSING:
