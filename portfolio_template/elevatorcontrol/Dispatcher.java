@@ -73,7 +73,7 @@ public class Dispatcher extends Controller {
             SimTime.SimTimeUnit.SECOND);
 
     //store the period for the controller
-    private final static SimTime period = MessageDictionary.DISPATCHER_PERIOD;
+    private SimTime period;
 
     //enumerate states
     private enum State {
@@ -84,8 +84,10 @@ public class Dispatcher extends Controller {
     //state variable initialized to the initial state FLASH_OFF
     private State state = State.STATE_SET_TARGET;
 
-    public Dispatcher(boolean verbose) {
+    public Dispatcher(int MaxFloor, SimTime period, boolean verbose) {
         super("Dispatcher", verbose);
+
+	 this.period = period;
 
         log("Created Dispatcher with period = ", period);
 

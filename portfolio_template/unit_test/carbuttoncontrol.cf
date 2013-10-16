@@ -4,6 +4,6 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Sally Stevenson (ststeven)
 
-CarButtonControl 8 FRONT true
+CarButtonControl 8 FRONT 0.1s true
 
 

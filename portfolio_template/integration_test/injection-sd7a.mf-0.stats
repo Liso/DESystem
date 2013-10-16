@@ -1,0 +1,30 @@
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+
+Simulator Parameters:
+Command line = -cf sd7a.cf -mf sd7a.mf
+RandomSeed = 1381695453874
+CanNetworkBitTime = 0 ns
+Effective Can Bitrate = Infinity
+Run Time = null
+Real time rate = null
+Message File = sd7a.mf
+Controller File = sd7a.cf
+
+Assertion Results:
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@46cfd5ee :: getSpeed ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7e64cfe0 :: getDirection ?== STOP PASSED
+@1.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@57bfaf97 :: command ?== OPEN PASSED
+@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4d0155fb :: getDoorCommand ?== OPEN PASSED
+@1.7s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@65afdbbb :: lighted ?== true PASSED
+@1.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7e086558 :: getValue ?== true PASSED
+@2.4s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@55015495 :: command ?== STOP PASSED
+@2.4s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6326d235 :: getDoorCommand ?== STOP PASSED
+
+
+******************Summary******************
+Passed:  8
+Failed:  0
+Total :  8
+

@@ -1,3 +1,10 @@
+/* 
+ * Course and Semester : 18-649 Fall 2013
+ * Group No: 16
+ * Group Members : Jiangtian Nie(jnie) , Yue Chen(yuechen),
+ *                 Sally Stevenson(ststeven) , Sri Harsha Koppaka(skoppaka)
+*/
+
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;

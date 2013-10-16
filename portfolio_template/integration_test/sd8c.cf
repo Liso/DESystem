@@ -4,4 +4,4 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Sally Stevenson (ststeven)
 
-DriveControl true
+DriveControl 0.01s true

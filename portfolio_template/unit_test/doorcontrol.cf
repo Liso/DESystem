@@ -3,4 +3,4 @@
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : YueChen (yuechen)
-DoorControl FRONT LEFT true
+DoorControl FRONT LEFT 0.01s true

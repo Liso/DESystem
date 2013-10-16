@@ -58,6 +58,10 @@ public class DoorControl extends Controller {
     //translator for the doorReversal message -- this translator is specific
     private DoorReversalCanPayloadTranslator mDoorReversal;
     
+    //received door reversal message for Opp Side
+    private ReadableCanMailbox networkDoorReversalOpp;
+    //translator for the doorReversal message -- this translator is specific
+    private DoorReversalCanPayloadTranslator mDoorReversalOpp;
     //received car weight message
     private ReadableCanMailbox networkCarWeight;
     //translator for the CarWeight message -- this translator is specific
@@ -88,19 +92,19 @@ public class DoorControl extends Controller {
     //these variables keep track of which instance this is.
     private final Hallway hallway;
     private final Side side;
+    private final Side Oppside;
     private final Direction direction;
     private int currentFloor;
     private int indexHallCall;
     private int indexCarCall;
     
     //store the period for the controller
-    private final static SimTime period = 
-            MessageDictionary.DOOR_CONTROL_PERIOD;
+    private SimTime period;
     
     //additional internal state variables
     private SimTime countDown = SimTime.ZERO;
-    private final static SimTime dwell = new SimTime(500,
-            SimTime.SimTimeUnit.MILLISECOND);
+    private final static SimTime dwell = new SimTime(3,
+            SimTime.SimTimeUnit.SECOND);
 
     //enumerate states
     private enum State {
@@ -120,16 +124,22 @@ public class DoorControl extends Controller {
      * For your elevator controllers, you should make sure that the constructor
      * matches the method signatures in ControllerBuilder.makeAll().
      */
-    public DoorControl(Hallway hallway, Side side, boolean verbose) {
+    public DoorControl(Hallway hallway, Side side, SimTime period, boolean verbose) {
         // call to the Controller superclass constructor is required
         super("DoorControl" +
               ReplicationComputer.makeReplicationString(hallway, side),
               verbose);
         
         // stored the constructor arguments in internal state
+        this.period = period;
         this.hallway = hallway;
         this.side = side;
-        currentFloor = 0; 
+	 if(side == Side.LEFT){
+		Oppside = Side.RIGHT;
+	 }
+	 else
+		Oppside = Side.LEFT;
+        currentFloor = 1; 
 
         log("Created DoorControl with period = ", period);
     
@@ -149,7 +159,6 @@ public class DoorControl extends Controller {
         mDoorMotor = new DoorMotorCommandCanPayloadTranslator(
                 networkDoorMotor, hallway, side);
         canInterface.sendTimeTriggered(networkDoorMotor, period);
-
         networkDoorOpened = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_OPEN_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(hallway, side));
@@ -163,6 +172,13 @@ public class DoorControl extends Controller {
         mDoorReversal = new DoorReversalCanPayloadTranslator(
                 networkDoorReversal, hallway, side);
         canInterface.registerTimeTriggered(networkDoorReversal);
+
+	 networkDoorReversalOpp = CanMailbox.getReadableCanMailbox(
+                MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID +
+                ReplicationComputer.computeReplicationId(hallway, Oppside));
+        mDoorReversalOpp = new DoorReversalCanPayloadTranslator(
+                networkDoorReversalOpp, hallway, Oppside);
+        canInterface.registerTimeTriggered(networkDoorReversalOpp);
 
         networkCarWeight = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.CAR_WEIGHT_CAN_ID);
@@ -185,6 +201,7 @@ public class DoorControl extends Controller {
         for (int i = 0; i < Elevator.numFloors; i++) {
             int floor = i + 1;
             for (Hallway h : Hallway.replicationValues) {
+            	
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + index);
                 AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
@@ -224,7 +241,7 @@ public class DoorControl extends Controller {
     /*
      * The timer callback is where the main controller code is executed.  For
      * time triggered design, this consists mainly of a switch block with a
-     * case blcok for each state.  Each case block executes actions for that
+     * case block for each state.  Each case block executes actions for that
      * state, then executes a transition to the next state if the transition
      * conditions are met.
      */
@@ -273,18 +290,23 @@ public class DoorControl extends Controller {
                 // state actions for 'DOOR NOT CLOSED'
             	localDoorMotor.set(DoorCommand.CLOSE);
                 mDoorMotor.set(DoorCommand.CLOSE);
+            
 
-               
+                //Index for getting current AtFloor
+                int index = ReplicationComputer.computeReplicationId(currentFloor, hallway);
+                
                 //#transition 'T5.3'
-                if (currentFloor != 0) {
-                    if (mDoorReversal.getValue() || 
-                       (mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
-                        mHallCall.get(indexHallCall).getValue() ||
-                        mCarCall.get(indexCarCall).getValue())
-                    {
-                        newState = State.STATE_OPEN;
-                    }
+                if(mAtFloor.get(index).getValue()){
+                		if ((mDoorReversal.getValue() || mDoorReversalOpp.getValue() ||
+                			(mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
+                			 mHallCall.get(indexHallCall).getValue() ||
+                			 mCarCall.get(indexCarCall).getValue()) &&  
+                			(mDriveSpeed.getSpeed() == Speed.STOP)){
+                		
+                				newState = State.STATE_OPEN;
+                		}
                 }
+                
                 //#transition 'T5.4'
                 if (mDoorClosed.getValue()) {
                 	newState = State.STATE_STOP_CLOSING;
@@ -294,15 +316,21 @@ public class DoorControl extends Controller {
             	//state actions for 'DOOR STOP CLOSING'
             	localDoorMotor.set(DoorCommand.STOP);
                 mDoorMotor.set(DoorCommand.STOP);
-                
-                //#transition 'T5.5'
 
-                if (((mDesiredFloor.getFloor() == currentFloor) &&
-                    (mDriveSpeed.getDirection() == Direction.STOP) && 
-                    (mDriveSpeed.getSpeed() == Speed.STOP)) || 
-                    (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
-                    	newState = State.STATE_OPEN;
+                //Index for getting current AtFloor
+                int index1 = ReplicationComputer.computeReplicationId(currentFloor, hallway);             
+
+                //#transition 'T5.5'
+                if(mAtFloor.get(index1).getValue()){
+                		if (((mDesiredFloor.getFloor() == currentFloor) &&
+                			 (mDriveSpeed.getDirection() == Direction.STOP) && 
+                			 (mDriveSpeed.getSpeed() == Speed.STOP)) || 
+                			 (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {                		
+                				newState = State.STATE_OPEN;
+                		}
+                	
                 }
+         
                 break;
             default:
                 throw new RuntimeException("State " + state + " was not recognized.");

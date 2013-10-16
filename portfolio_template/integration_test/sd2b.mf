@@ -1,4 +1,4 @@
-;Message File - Unit Test for SD1C
+;Message File - Unit Test for SD2B
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
@@ -10,21 +10,23 @@
 
 ;#arc '2B/1'
 ;check that the door is closing
-+0.04s  A F DoorMotor FRONT LEFT : command == CLOSE
-+0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
++0.04s  A F DoorMotor FRONT LEFT : command == NUDGE
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ;#arc '2B/2b'
-+0.02s I 0s F CarCall 4 FRONT = true
++0.5s I 0s F CarCall 4 FRONT = true
+
 
 ;#arc '2B/2c'
-+0.30s  A N CAR_CALL_[4][FRONT]_CAN_ID Boolean : getValue == true
++0.50s  A N CAR_CALL_[4][FRONT]_CAN_ID Boolean : getValue == true
+
++0.1s I 0s F CarCall 4 FRONT = false
 
 ;#arc '2B/3'
-+0.0s  A F CarLight 4 FRONT : isLighted == true 
++0.03s  A F CarLight 4 FRONT : isLighted == true 
 
 ;#arc '2B/4'
 +0.30s  A F DoorMotor FRONT LEFT : command == OPEN
-+0.0s I 0s F CarCall 4 FRONT = false 
 
 ;#arc '2B/5a'
 +0.30s  A F CarLight 4 FRONT : isLighted == false

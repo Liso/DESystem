@@ -10,12 +10,12 @@
 
 ;Injecting Initial conditions
 
-+0s  I  AT_FLOOR_PERIOD N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-+0s  I  DISPATCHER_PERIOD N DESIRED_FLOOR_CAN_ID DesiredFloor = 7 FRONT UP
-+0s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT DOWN = false
++0s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 7 FRONT UP
++0s  I  0s F HallCall 4 FRONT DOWN = false
 
 ;#arc '1C/1a'
-+0.2s  A F DoorMotor FRONT LEFT : command == CLOSE
++0.2s  A F DoorMotor FRONT LEFT : command == NUDGE
 
 ;Asserting Initial Conditions
 +0.5s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == false
@@ -27,14 +27,14 @@
 ;#arc '1C/2'
 ;#arc '1C/3a'
 ;#arc '1C/3b'
-+0.8s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT DOWN = true
++0.8s  I  0s F HallCall 4 FRONT DOWN = true
 
-+0.3s  I  HALL_BUTTON_CONTROL_PERIOD F HallCall 4 FRONT DOWN = false
++0.3s  I  0s F HallCall 4 FRONT DOWN = false
 
 ;#arc '1C/4'
 +0.5s  A F HallLight 4 FRONT DOWN : lighted == true
 
-+0.5s  I MESSAGE_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.5s  I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
 
 ;#arc '1C/5a'
 +2.5s  A N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT : getValue == true

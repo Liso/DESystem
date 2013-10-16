@@ -4,5 +4,5 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Sri Harsha Koppaka (skoppaka)
 
-DoorControl FRONT LEFT true
-HallButtonControl 4 FRONT DOWN true
+DoorControl FRONT LEFT 0.01s true
+HallButtonControl 4 FRONT DOWN 0.1s true

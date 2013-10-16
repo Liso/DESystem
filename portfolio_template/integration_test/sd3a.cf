@@ -1,0 +1,12 @@
+;Configuration File - Integration Test for SD3A
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sri Harsha Koppaka (skoppaka)
+
+DriveControl 0.01s true
+HallButtonControl 4 FRONT UP 0.1s true
+DoorControl FRONT LEFT 0.01s true
+DoorControl FRONT RIGHT 0.01s true
+DoorControl BACK LEFT 0.01s true
+DoorControl BACK RIGHT 0.01s true

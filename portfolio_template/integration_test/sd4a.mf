@@ -47,17 +47,27 @@
 
 
 ;# 'SD4A/1b'
-;# 'SD4A/1c'
 +2s  A F Drive : speed == LEVEL
 +0s  A F Drive : direction == UP
 +0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
 +0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
 
+;Preconditions
++1s  I 0s F DriveSpeed = UP 0.02
+
+;# 'SD4A/1c'
++0.5s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == LEVEL
++0s A N DRIVE_SPEED_CAN_ID DriveSpeed : getDirection == UP
+
+
 ; Preconditions
 +1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
-+0s	 I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
++0s  I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
 
 ;# 'SD4A/1d'
++1s A N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP : getValue == true
++0s A N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN : getValue == true
+
 ;# 'SD4A/1e'
 +1s  A F Drive : speed == STOP
 +0s  A F Drive : direction == STOP
@@ -65,7 +75,7 @@
 +0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
 
 ;Preconditions
-+0.5s  I  0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
++1s  I 0s F DriveSpeed = STOP 0.00
 
 ;# 'SD4A/1f'
 +1s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == STOP
@@ -77,10 +87,6 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 +0s  A F DoorMotor FRONT RIGHT : command == OPEN
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT : getDoorCommand == OPEN
-+0s  A F DoorMotor BACK LEFT : command == OPEN
-+0s  A N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT : getDoorCommand == OPEN
-+0s  A F DoorMotor BACK RIGHT : command == OPEN
-+0s  A N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotorCommand BACK RIGHT : getDoorCommand == OPEN
 
 ;Preconditions
 +0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
@@ -102,18 +108,13 @@
 ;# 'SD4A/5a'
 +1s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened  FRONT LEFT = true
 +0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened  FRONT RIGHT = true
-+0s  I  0s N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened  BACK LEFT = true
-+0s  I  0s N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened  BACK RIGHT = true
+
 
 ;# 'SD4A/5b'
 +0.5s  A F DoorMotor FRONT LEFT : command == STOP
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
 +0s  A F DoorMotor FRONT RIGHT : command == STOP
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT : getDoorCommand == STOP
-+0s  A F DoorMotor BACK LEFT : command == STOP
-+0s  A N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT : getDoorCommand == STOP
-+0s  A F DoorMotor BACK RIGHT : command == STOP
-+0s  A N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotorCommand BACK RIGHT : getDoorCommand == STOP
 
 
 

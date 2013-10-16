@@ -4,10 +4,10 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Sri Harsha Koppaka (skoppaka)
 
-DriveControl true
-CarPositionControl true
-CarButtonControl 6 FRONT true
-DoorControl FRONT LEFT true
-DoorControl FRONT RIGHT true
-DoorControl BACK LEFT true
-DoorControl BACK RIGHT true
+DriveControl 0.01s true
+CarPositionControl 0.1s true
+CarButtonControl 6 FRONT 0.1s true
+DoorControl FRONT LEFT 0.01s true
+DoorControl FRONT RIGHT 0.01s true
+DoorControl BACK LEFT 0.01s true
+DoorControl BACK RIGHT 0.01s true

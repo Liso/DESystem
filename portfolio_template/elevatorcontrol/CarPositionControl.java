@@ -21,35 +21,37 @@ import simulator.payloads.CarPositionIndicatorPayload.*;
 
 public class CarPositionControl extends Controller {
 
-	private SimTime period = MessageDictionary.CAR_POSITION_CONTROL_PERIOD;
+	private SimTime period ;
 	// Translator for AtFloor message -- Specific to Message
 
 	private enum State {
 		STATE_DISPLAY;
 	}
 	
-	//current state
-	State currentState = State.STATE_DISPLAY;
+	//physical CarPosition indicator;
+	private WriteableCarPositionIndicatorPayload localCPI;
+	//network CarPosition indicator
+	private IntegerCanPayloadTranslator mCPI;
 	
-	//physical carposition indicator;
-	WriteableCarPositionIndicatorPayload localCPI;
-	//network carposition indicator
-	IntegerCanPayloadTranslator mCPI;
-	CarLevelPositionCanPayloadTranslator networkCarLevelPosTranslator;
-	//network message for futrue extention
-	IntegerCanPayloadTranslator networkDriveSpeedTranslator;
-	IntegerCanPayloadTranslator networkDesiredFloorTranslator;
-	WriteableCanMailbox networkCPI;
-	ReadableCanMailbox atfloor;
+	private CarLevelPositionCanPayloadTranslator networkCarLevelPosTranslator;
+	//network message for future extension
+	private WriteableCanMailbox networkCPI;
+
 	//define all mAtFloor in an array;
 	private ReadableCanMailbox[][] networkAtFloor=new ReadableCanMailbox[8][2];
-	//define a hashmap to represent 4 status of hallway. 
+	//define a HashMap to represent 4 status of hallway. 
 	LinkedHashMap<Integer, Hallway> hallway=new LinkedHashMap<Integer, Hallway>();
 	AtFloorCanPayloadTranslator mAtFloor;
+	
+	//current state
+	State state = State.STATE_DISPLAY;
 
-	public CarPositionControl(boolean verbose) {
-		// TODO Auto-generated constructor stub
+	public CarPositionControl(SimTime period, boolean verbose) {
 		super("CarPositionControl", verbose);
+		
+		this.period = period;
+		
+		//Initializing the Hallway values
 		hallway.put(1, Hallway.FRONT);
 		hallway.put(2, Hallway.BACK);
 		hallway.put(3, Hallway.BOTH);
@@ -57,14 +59,15 @@ public class CarPositionControl extends Controller {
 		
 		//Send Physical message to CarPositionIndicator
 		localCPI = CarPositionIndicatorPayload.getWriteablePayload();
-		networkCPI = CanMailbox
-				.getWriteableCanMailbox(MessageDictionary.CAR_POSITION_CAN_ID);
-		atfloor = CanMailbox
-				.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID);
+		//Register PayLoad to be sent periodically
 		physicalInterface.sendTimeTriggered(localCPI, period);
 		
-		//Send network Message mCarPositionIndicator
+		
+		networkCPI = CanMailbox
+				.getWriteableCanMailbox(MessageDictionary.CAR_POSITION_CAN_ID);
+		//Network Message for CarPositionIndicator
 		mCPI = new IntegerCanPayloadTranslator(networkCPI);
+		//Register mailbox to be sent onto network periodically
 		canInterface.sendTimeTriggered(networkCPI, period);
 		
 		
@@ -75,7 +78,8 @@ public class CarPositionControl extends Controller {
 				networkCarLevelPosIndicator);
 		canInterface.registerTimeTriggered(networkCarLevelPosIndicator);
 		
-		currentState = State.STATE_DISPLAY;
+		//Set Current State to Display
+		state = State.STATE_DISPLAY;
 		
 		//register all mAtFloor
 		for (int i = 1; i < 9; i++) {
@@ -87,49 +91,52 @@ public class CarPositionControl extends Controller {
 			}
 		}
 		
-		
+		//Start timer
 		timer.start(period);
 
 	}
 
 	@Override
 	public void timerExpired(Object callbackData) {
-		// TODO Auto-generated method stub
-
-		State newState = currentState;
+		State newState = state;
 		
-		switch (currentState) {
-		
-		case STATE_DISPLAY:
-			//look up the current floor.
-			for (int i = 1; i < 9; i++) {
-				for (int j = 1; j < 3; j++) {
-					//# transition 'T10.1'
-					if ((new AtFloorCanPayloadTranslator(networkAtFloor[i-1][j-1], i,
-							hallway.get(j))).getValue()) {
-						mAtFloor=new AtFloorCanPayloadTranslator(networkAtFloor[i-1][j-1],
+		switch (state) {		
+			case STATE_DISPLAY:
+				//look up the current floor.
+				for (int i = 1; i < 9; i++) {
+					for (int j = 1; j < 3; j++) {
+						//# transition 'T10.1'
+						if ((new AtFloorCanPayloadTranslator(networkAtFloor[i-1][j-1], i,
+								hallway.get(j))).getValue()) {
+							mAtFloor=new AtFloorCanPayloadTranslator(networkAtFloor[i-1][j-1],
 								i, hallway.get(j));
-						// State Actions
-						localCPI.set(i);
-						mCPI.set(i);
-						break;
+							// State Actions to Display Current Floor
+							localCPI.set(i);
+							mCPI.set(i);
+							break;
+						}
 					}
 				}
-			}
 			
-
-			newState = State.STATE_DISPLAY;
+				//Sets State to iterate Continuously 
+				newState = State.STATE_DISPLAY;
 			
-			
-			break;
-
-		default:
-			throw new RuntimeException("State" + currentState
+				break;
+			default:
+				throw new RuntimeException("State" + state
 					+ "was not recognized");
-
 		}
-		currentState = newState;
-		setState(STATE_KEY, currentState.toString());
+		
+		if (state == newState) {
+            log("Remaining in state: ",state);
+        }
+		
+		state = newState;
+		setState(STATE_KEY, state.toString());
+		
+        // Schedule the next iteration of the controller
+        // You must do this at the end of the timer callback in order to
+        // restart the timer
 		timer.start(period);
 	}
 

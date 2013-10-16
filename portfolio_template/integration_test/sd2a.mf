@@ -1,4 +1,4 @@
-;Message File - Unit Test for SD1C
+;Message File - Unit Test for SD2A
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
@@ -10,20 +10,22 @@
 
 ;#arc '2A/1b'
 ;Injecting Initial conditions
-+0s I CAR_BUTTON_CONTROL_PERIOD F CarCall 1 FRONT = true
++0s I 0s F CarCall 1 FRONT = true
+
++0.3s I 0s F CarCall 1 FRONT = false
 
 ;#arc '2A/2'
-+0.3s  A F CarLight 1 FRONT : isLighted == true
++0.7s  A F CarLight 1 FRONT : isLighted == true
 
 ;#arc '2A/3'
 ;check that the door is closing
-+0.4s  A F DoorMotor FRONT LEFT : command == CLOSE
-+0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
++0.5s  A F DoorMotor FRONT LEFT : command == NUDGE
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ;#arc '2A/4a'
-+0.08s  I  DOOR_CLOSED_SENSOR_PERIOD N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.2s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
 
 ;#arc '2A/4b'
 ;check that the door is closed
-+0.4s  A F DoorMotor FRONT LEFT : command == STOP
++0.6s  A F DoorMotor FRONT LEFT : command == STOP
 +0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP

@@ -1,0 +1,71 @@
+;Message File - Integration Test for SD7A
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Yue Chen (yuechen)
+
+;include CAN id and period definitions
+#INCLUDE defines.mf
+
+; Pre-conditions
++0.0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0.0s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
++0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP 
+
+;#arc 8A/1'
++0.5s  A F DoorMotor FRONT LEFT : command == NUDGE
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
+
+;#arc 8A/2a'
++0.1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
++0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
++0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
++0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT DOWN
+
+;#arc 8A/2b'
+;check that the door is closed
++0.3s  A F DoorMotor FRONT LEFT : command == STOP
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
+
+;#arc 8A/3a'
++0.1s A F Drive : speed == SLOW 
++0.0s A F Drive : direction == UP
+
++0.1s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = SLOW UP
++0.0s I 0s F DriveSpeed = UP 0.2
++0.0s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false 
+
+;#arc 8A/3b'
++1.0s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == SLOW
++0.0s A N DRIVE_SPEED_CAN_ID DriveSpeed : getDirection == UP
+
+;#arc 8A/4a'
++0.1s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
+
+;#arc 8A/4b'
++0.5s A F Drive : speed == LEVEL
++0.0s A F Drive : direction == UP
+
++0.1s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = LEVEL UP
++0.0s I 0s F DriveSpeed = UP 0.02
+
+;#arc 8A/4c'
++0.5s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == LEVEL
++0.0s A N DRIVE_SPEED_CAN_ID DriveSpeed : getDirection == UP
+
+;#arc 8A/4d'
++0.1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
++0s I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
+
+;#arc 8A/4e'
++0.5s A F Drive : speed == STOP
++0.0s A F Drive : direction == STOP
+
++0.1s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
++0.0s I 0s F DriveSpeed = STOP 0.0
+
+;#arc 8A/4f'
++0.5s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == STOP
++0.0s A N DRIVE_SPEED_CAN_ID DriveSpeed : getDirection == STOP
+
