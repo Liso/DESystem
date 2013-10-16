@@ -10,8 +10,8 @@
 
 ;#arc '2B/1'
 ;check that the door is closing
-+0.04s  A F DoorMotor FRONT LEFT : command == NUDGE
-+0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
++0.04s  A F DoorMotor FRONT LEFT : command == CLOSE
++0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ;#arc '2B/2b'
 +0.5s I 0s F CarCall 4 FRONT = true
@@ -20,10 +20,12 @@
 ;#arc '2B/2c'
 +0.50s  A N CAR_CALL_[4][FRONT]_CAN_ID Boolean : getValue == true
 
-+0.1s I 0s F CarCall 4 FRONT = false
+
 
 ;#arc '2B/3'
 +0.03s  A F CarLight 4 FRONT : isLighted == true 
+
++0.1s I 0s F CarCall 4 FRONT = false
 
 ;#arc '2B/4'
 +0.30s  A F DoorMotor FRONT LEFT : command == OPEN

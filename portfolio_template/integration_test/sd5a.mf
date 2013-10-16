@@ -11,8 +11,8 @@
 0.0s I 0.0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true 
 
 ;check that the door is closing initially
-0.2s  A F DoorMotor FRONT LEFT : command == NUDGE
-0.2s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
+0.2s  A F DoorMotor FRONT LEFT : command == CLOSE
+0.2s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ;set conditions for T5.4
 0.4s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true

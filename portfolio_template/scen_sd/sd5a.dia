@@ -244,7 +244,7 @@
         <dia:color val="#0000ff"/>
       </dia:attribute>
       <dia:attribute name="text">
-        <dia:string>#1. DoorMotor[b,r]=Nudge#</dia:string>
+        <dia:string>#1. DoorMotor[b,r]=Close#</dia:string>
       </dia:attribute>
       <dia:attribute name="type">
         <dia:enum val="0"/>
@@ -658,7 +658,7 @@
         <dia:point val="4,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4,15.3407;9.31681,16.9711"/>
+        <dia:rectangle val="4,15.36;9.2975,16.9325"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
