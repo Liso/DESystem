@@ -1,10 +1,7 @@
-;Course and Semester : 18649 Fall 2013
-;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
-;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
 Command line = -cf sd1a.cf -mf sd1a.mf
-RandomSeed = 1381437227793
+RandomSeed = 1381980600131
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -14,23 +11,23 @@ Controller File = sd1a.cf
 
 Assertion Results:
 @0.5s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_CLOSING PASSED
-@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@3bdd6a67 :: command ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6f866002 :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f9849e5 :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@211c7a72 :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1f34137c :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3a332b9a :: getValue ?== false PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7c70bdc6 :: getDirection ?== UP PASSED
-@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@4503e0e9 :: lighted ?== false PASSED
-@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@757583b9 :: lighted ?== false PASSED
-@1.85s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6f92322e :: getValue ?== true PASSED
-@2.1s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@920ab60 :: lighted ?== true PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4208719e :: getValue ?== true PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@76745477 :: getValue ?== false PASSED
+@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7bc8b313 :: command ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@72ad25d0 :: getDoorCommand ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5a874bd3 :: getDoorCommand ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7ed69cff :: getDoorCommand ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4574aee5 :: getDoorCommand ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f095c81 :: getValue ?== false PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@71b8a6b :: getDirection ?== UP PASSED
+@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@54aae359 :: lighted ?== false PASSED
+@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@13eb41e5 :: lighted ?== false PASSED
+@1.85s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7c70bdc6 :: getValue ?== true PASSED
+@2.1s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@4503e0e9 :: lighted ?== true PASSED
+@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@757583b9 :: getValue ?== true PASSED
+@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6f92322e :: getValue ?== false PASSED
+@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@920ab60 :: getDoorCommand ?== STOP PASSED
+@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4208719e :: getDoorCommand ?== STOP PASSED
+@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@76745477 :: getDoorCommand ?== STOP PASSED
 @2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79b5459e :: getDoorCommand ?== STOP PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4782b18d :: getDoorCommand ?== STOP PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@33891d5d :: getDoorCommand ?== STOP PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@77411b30 :: getDoorCommand ?== STOP PASSED
 
 
 ******************Summary******************
