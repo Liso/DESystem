@@ -4,3 +4,6 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Jiangtian Nie (jnie)
 DoorControl FRONT LEFT 10.0ms true
+DoorControl FRONT RIGHT 10.0ms true
+DoorControl BACK LEFT 10.0ms true
+DoorControl BACK RIGHT 10.0ms true
