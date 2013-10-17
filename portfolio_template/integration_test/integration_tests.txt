@@ -7,12 +7,19 @@ SD1B sd1b.cf sc1b.mf
 SD1C sd1c.cf sd1c.mf
 SD2A sd2a.cf sd2a.mf
 SD2B sd2b.cf sd2b.mf
+SD3A sd3a.cf sd3a.mf
 SD3B sd3b.cf sd3b.mf
 SD4A sd4a.cf sd4a.mf
+SD4B sd4a.cf sd4b.mf
 SD5A sd5a.cf sd5a.mf
 SD5B sd5b.cf sd5b.mf
 SD6A sd6a.cf sd6a.mf
+SD7A sd7a.cf sd7a.mf
 SD7B sd7b.cf sd7b.mf
 SD7C sd7c.cf sd7c.mf
+SD8A sd8a.cf sd8a.mf
+SD8B sd8b.cf sd8b.mf
 SD8C sd8c.cf sd8c.mf
 SD9A sd9a.cf sd9a.mf
+
+
