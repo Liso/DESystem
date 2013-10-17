@@ -8,12 +8,14 @@
 
 ;intialize
 +0s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-+0s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = false
-+0s  I  0s N CAR_WEIGHT_CAN_ID CarWeight = 1000
++0s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = true
++0s  I  0s N CAR_WEIGHT_CAN_ID CarWeight = 14001
 +0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
 +0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = true
 +0s  I  0s N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = true
 +0s  I  0s N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = true
++1s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = false
++0s  I  0s N CAR_WEIGHT_CAN_ID CarWeight = 1000
 
 ;# arc '1c'
 +1s  A N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT : getValue == true
@@ -23,14 +25,13 @@
 
 ;# arc '1d'
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
-+0s  A N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT : getDoorCommand == STOP
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT : getDoorCommand == STOP
-+0s  A N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotorCommand BACK RIGHT : getDoorCommand == STOP
+
 
 ;# arc '2'
 +0s  A N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm : getValue == false
 
-+1s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
++3s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 +0s  A N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT : getDoorCommand == CLOSE
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT : getDoorCommand == CLOSE
 +0s  A N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotorCommand BACK RIGHT : getDoorCommand == CLOSE
