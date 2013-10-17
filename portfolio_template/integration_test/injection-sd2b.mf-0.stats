@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd2b.cf -mf sd2b.mf -head header.txt
-RandomSeed = 1381980321229
+RandomSeed = 1381981746717
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,15 +13,15 @@ Message File = sd2b.mf
 Controller File = sd2b.cf
 
 Assertion Results:
-@0.04s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@54aae359 :: command ?== CLOSE PASSED
-@0.04s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@13eb41e5 :: getDoorCommand ?== CLOSE PASSED
-@1.04s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@671ca33b :: getValue ?== true PASSED
-@1.07s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@3fd3304e :: isLighted ?== true PASSED
-@1.47s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@385b5df0 :: command ?== OPEN PASSED
-@1.77s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@4f558d62 :: isLighted ?== false PASSED
-@1.77s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6bedc67e :: getValue ?== false PASSED
-@2.29s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5556c4a8 :: command ?== STOP PASSED
-@2.29s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6ee6df19 :: getDoorCommand ?== STOP PASSED
+@0.04s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@211c7a72 :: command ?== CLOSE PASSED
+@0.04s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1f34137c :: getDoorCommand ?== CLOSE PASSED
+@1.04s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6f92322e :: getValue ?== true PASSED
+@1.07s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@920ab60 :: isLighted ?== true PASSED
+@1.47s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4208719e :: command ?== OPEN PASSED
+@1.77s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@76745477 :: isLighted ?== false PASSED
+@1.77s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79b5459e :: getValue ?== false PASSED
+@2.29s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4782b18d :: command ?== STOP PASSED
+@2.29s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@33891d5d :: getDoorCommand ?== STOP PASSED
 
 
 ******************Summary******************

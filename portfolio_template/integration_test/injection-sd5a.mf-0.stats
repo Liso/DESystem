@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd5a.cf -mf sd5a.mf -head header.txt
-RandomSeed = 1381980327368
+RandomSeed = 1381981752852
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,14 +13,14 @@ Message File = sd5a.mf
 Controller File = sd5a.cf
 
 Assertion Results:
-@0.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@a0b96a5 :: command ?== CLOSE PASSED
-@0.2s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@544a7629 :: getDoorCommand ?== CLOSE PASSED
+@0.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@70d085f8 :: command ?== CLOSE PASSED
+@0.2s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7ecf2fc9 :: getDoorCommand ?== CLOSE PASSED
 @0.8s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_OPEN PASSED
-@0.8s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6337e2dc :: command ?== OPEN PASSED
-@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1f77497 :: getDoorCommand ?== OPEN PASSED
+@0.8s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@144b6a6c :: command ?== OPEN PASSED
+@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6a0f0c67 :: getDoorCommand ?== OPEN PASSED
 @1.7s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_OPENING PASSED
-@1.7s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@11ba1db5 :: command ?== STOP PASSED
-@1.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@293e86f :: getDoorCommand ?== STOP PASSED
+@1.7s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6684b1e0 :: command ?== STOP PASSED
+@1.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@51f45f2a :: getDoorCommand ?== STOP PASSED
 
 
 ******************Summary******************
