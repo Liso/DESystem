@@ -4,7 +4,6 @@
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 ;Author : Yue Chen (yuechen)
 
-Dispatcher 8 0.05s true
 LanternControl UP 200ms true
 DoorControl FRONT LEFT 0.01s true
 DriveControl 10ms true

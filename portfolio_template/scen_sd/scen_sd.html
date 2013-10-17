@@ -326,7 +326,7 @@
         <li>Passenger enters elevator.</li>
         <li>Car weight alarm rings.</li>
         <li>Drive is commanded to Stop.</li>
-        <li>DoorMotor[<b>b</b>,<b>r</b>] is commanded to Open.</li>
+        <li>DoorMotor[<b>b</b>,<b>r</b>] is commanded to stay open.</li>
       </ol>
       <h3> Post-Conditions: </h3>
       <ul type="disc">
@@ -517,13 +517,11 @@
       <h3> Scenario: </h3>
       <ol start="1" type="1">
         <li>Door[<b>b</b>,<b>r</b>] starts opening. </li>
-        <li>CarLantern[<b>d</b>] lights up. </li>
         <li>Door[<b>b</b>,<b>r</b>] completes opening. </li>
       </ol>
       <h3> Post-Conditions: </h3>
       <ul type="disc">
         <li>Door is open. </li>
-        <li>CarLantern[<b>d</b>] is on. </li>
       </ul>
       <h3> Sequence Diagram: </h3>
       <p> <a href="sd7a.png"><img src="sd7a.png" alt="1A"
