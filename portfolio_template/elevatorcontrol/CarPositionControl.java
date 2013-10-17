@@ -33,6 +33,7 @@ public class CarPositionControl extends Controller {
 	//network CarPosition indicator
 	private IntegerCanPayloadTranslator mCPI;
 	
+	private CarLevelPositionCanPayloadTranslator networkCarLevelPosTranslator;
 	//network message for future extension
 	private WriteableCanMailbox networkCPI;
 
@@ -73,7 +74,7 @@ public class CarPositionControl extends Controller {
 		//Message for CarLevel Position Indicator - Future Expansion
 		ReadableCanMailbox networkCarLevelPosIndicator = CanMailbox
 				.getReadableCanMailbox(MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
-		new CarLevelPositionCanPayloadTranslator(
+		networkCarLevelPosTranslator = new CarLevelPositionCanPayloadTranslator(
 				networkCarLevelPosIndicator);
 		canInterface.registerTimeTriggered(networkCarLevelPosIndicator);
 		

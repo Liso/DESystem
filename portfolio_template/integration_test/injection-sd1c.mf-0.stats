@@ -1,10 +1,10 @@
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
-;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd1c.cf -mf sd1c.mf
-RandomSeed = 1381959454733
+Command line = -cf sd1c.cf -mf sd1c.mf -head header.txt
+RandomSeed = 1381980319845
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,12 +13,12 @@ Message File = sd1c.mf
 Controller File = sd1c.cf
 
 Assertion Results:
-@0.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1c7b745a :: command ?== CLOSE PASSED
-@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2f9006c9 :: getValue ?== false PASSED
-@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2a6788c4 :: getValue ?== true PASSED
-@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79e0123b :: getDirection ?== UP PASSED
-@0.7s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@7d6c848f :: lighted ?== false PASSED
-@2.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@793aac5f :: lighted ?== true PASSED
+@0.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6d13cf51 :: command ?== CLOSE PASSED
+@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@18ad8e84 :: getValue ?== false PASSED
+@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7344119b :: getValue ?== true PASSED
+@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@65cd1dff :: getDirection ?== UP PASSED
+@0.7s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@5f73089d :: lighted ?== false PASSED
+@2.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@7b0acf26 :: lighted ?== true PASSED
 @5.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@620ee765 :: getValue ?== true PASSED
 @5.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7bc8b313 :: getDoorCommand ?== STOP PASSED
 

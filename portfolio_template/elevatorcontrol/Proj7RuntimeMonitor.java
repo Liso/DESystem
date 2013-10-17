@@ -213,6 +213,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     		if(wasCarCall[currentFloor-1][h.ordinal()] || 
     			wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()]){
     			wasCall = true;
+    			wasCarCall[currentFloor-1][h.ordinal()] = false;
+    			wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()] = false;
     		}
     	}	
     }

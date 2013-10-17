@@ -291,6 +291,7 @@ public class DoorControl extends Controller {
             	localDoorMotor.set(DoorCommand.CLOSE);
                 mDoorMotor.set(DoorCommand.CLOSE);
             
+
                 //Index for getting current AtFloor
                 int index = ReplicationComputer.computeReplicationId(currentFloor, hallway);
                 

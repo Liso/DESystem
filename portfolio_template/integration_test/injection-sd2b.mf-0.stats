@@ -1,10 +1,10 @@
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
-;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd2b.cf -mf sd2b.mf
-RandomSeed = 1381960119774
+Command line = -cf sd2b.cf -mf sd2b.mf -head header.txt
+RandomSeed = 1381980321229
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
