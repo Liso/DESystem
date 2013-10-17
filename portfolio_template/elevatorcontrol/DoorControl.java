@@ -288,10 +288,9 @@ public class DoorControl extends Controller {
                 break;
             case STATE_CLOSE:
                 // state actions for 'DOOR NOT CLOSED'
-            	localDoorMotor.set(DoorCommand.CLOSE);
-                mDoorMotor.set(DoorCommand.CLOSE);
+            	localDoorMotor.set(DoorCommand.NUDGE);
+                mDoorMotor.set(DoorCommand.NUDGE);
             
-
                 //Index for getting current AtFloor
                 int index = ReplicationComputer.computeReplicationId(currentFloor, hallway);
                 

@@ -1,4 +1,4 @@
-;Message File - Integration Test for SD7A
+;Message File - Integration Test for SD8A
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
@@ -21,7 +21,6 @@
 +0.0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
 +0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
 +0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
-+0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT DOWN
 
 ;#arc 8A/2b'
 ;check that the door is closed
