@@ -63,6 +63,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1041,7 +1042,10 @@
         during current cycle. </li>
       <li>CountDown: a count-down timer for Door Dwell[b] (implemented
         in simulation by scheduling a future task execution at time of
-        expiration) </li>
+        expiration)</li>
+      <li>ReversalCount: a counter to record how many times reversal has
+        been trigger when car stops at some floor.<br>
+      </li>
     </ul>
     <h3> CONSTRAINTS: </h3>
     5.1&nbsp;&nbsp;&nbsp; DoorClosed[b, *] shall be True when there is
@@ -1063,27 +1067,31 @@
     &nbsp;&nbsp;&nbsp; 5.6.1&nbsp; DoorMotor[b, r] shall be commanded to
     Open; <br>
     &nbsp;&nbsp;&nbsp; 5.6.2&nbsp; CountDown shall be set to Dwell.<br>
+    &nbsp;&nbsp;&nbsp; 5.6.3&nbsp; ReversalCount shall be set to 0.<br>
     5.7 &nbsp;&nbsp; If mDoorOpened[b, r] is True, then<br>
     &nbsp;&nbsp;&nbsp; 5.7.1&nbsp; DoorMotor[b,r] shall be commanded to
     Stop.<br>
     &nbsp;&nbsp;&nbsp; 5.7.2&nbsp; CountDown shall be decremented.<br>
     5.8&nbsp; If mDoorClosed[b, r] is True, then DoorMotor[b,r] should
     be commanded to Stop.<br>
-    5.9&nbsp; When CountDown &lt;= 0, DoorMotor[b,r] should be commanded
-    to Close.<br>
-    5.10 If mCarWeight(g) &gt;= MaxCarCapacity, and mDoorOpened[b, r] is
+    5.9&nbsp; When CountDown &lt;= 0 and ReversalCount is not greater
+    than three, DoorMotor[b,r] should be commanded to Close.<br>
+    5.10 When CountDown &lt;= 0 and ReversalCount is greater than three,
+    DoorMotor[b,r] should be commanded to Nudge.<br>
+    5.11 If mCarWeight(g) &gt;= MaxCarCapacity, and mDoorOpened[b, r] is
     False, DoorMotor[b, r] shall be commanded to Open.<br>
-    5.11 Dwell shall be set to an appropriate value based on
+    5.12 Dwell shall be set to an appropriate value based on
     mDesiredDwell[b].<br>
-    5.12 If any mAtFloor[f,b] is true and mDoorClosed[b,r] is false and
+    5.13 If any mAtFloor[f,b] is true and mDoorClosed[b,r] is false and
     mHallCall[f,b,d] is true and d equals mDesiredFloor.d then
     DoorMotor[b, r] shall be commanded to Open. <br>
-    5.13 If any mAtFloor[f,b] is true and mDoorClosed[b,r] is false and
+    5.14 If any mAtFloor[f,b] is true and mDoorClosed[b,r] is false and
     mCarCall[f,b] is true then DoorMotor[b, r] shall be commanded to
     Open. <br>
-    5.14 If any mDoorReversal[b,r] is true, DoorMotor[b,r] shall be
-    commanded to Open.<br>
-    5.15 mDoorMotor[b,r] shall be set to the current value of
+    5.15 If any mDoorReversal[b,r] is true, <br>
+    &nbsp;&nbsp;&nbsp; 5.15.1 DoorMotor[b,r] shall be commanded to Open.<br>
+    &nbsp;&nbsp;&nbsp; 5.15.2 ReversalCount shall increment.<br>
+    5.16 mDoorMotor[b,r] shall be set to the current value of
     DoorMotor[b,r]<br>
     <p class="MsoNormal" style=""> </p>
     <h3>Time-Triggered Statechart</h3>
@@ -1672,6 +1680,12 @@
     6.7&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and d =
     mDesiredFloor.d is not equal to Stop, then Drive shall be commanded
     to (Slow,d).<br>
+    6.8&nbsp;&nbsp;&nbsp; If DriveSpeed is equal to Slow and Commit
+    point for mDesiredFloor.f has not been reached, then Drive shall be
+    commanded to (Fast,d) where d = mDesiredFloor.d.<br>
+    6.9&nbsp;&nbsp;&nbsp; If DriveSpeed is equal to Fast and Commit
+    point for mDesiredFloor.f has been reached, then Drive shall be
+    commanded to (Slow,d) where d = mDesiredFloor.d.<br>
     6.8 &nbsp;&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is
     equal to True and mDesiredFloor.f is equal to f, then Drive shall be
     set to (Stop,Stop).<br>
@@ -2839,6 +2853,11 @@
     <ul>
       <li>Target: an integer Floor number for desired Floor, initialized
         to Lobby = 1. </li>
+      <li>CurrentDirection: Indicates the current traveling direction of
+        the Elevator, initialized to Stop.</li>
+      <li>CurrentFloor: A shorthand notation for the value f of
+        whichever mAtFloor[f, b] is True, if any.&nbsp; If CurrentFloor
+        is invalid it has a mnemonic value of None.</li>
     </ul>
     <h3> CONSTRAINTS: </h3>
     11.1&nbsp;&nbsp;&nbsp; Target shall be a valid Floor number from 1
@@ -2848,24 +2867,49 @@
     11.3&nbsp;&nbsp;&nbsp; The desired direction d of mDesiredFloor(f,
     b, d) shall not be Down when f = 1.
     <h3> TIME-TRIGGERED BEHAVIORS: </h3>
-    11.4&nbsp;&nbsp;&nbsp; mDesiredFloor.f shall always be set to
-    Target.<br>
-    11.5&nbsp;&nbsp;&nbsp; mDesiredFloor.d shall always be set to Stop.<br>
-    11.6&nbsp;&nbsp;&nbsp; Whenever any mDoorClosed [b, r] is False,
-    then<br>
-    &nbsp;&nbsp; 11.6.1&nbsp; Target shall be set equal to ((f mod
-    MaxFloors) + 1) <br>
-    &nbsp;&nbsp; 11.6.2 &nbsp; mDesiredFloor.b shall be set to b, where
-    f, b is whichever mAtFloor[f, b] is True<br>
-    11.7&nbsp;&nbsp;&nbsp; If all mAtFloor[f, b] are False AND any
-    mDoorClosed [b, r] is False (which means doors are not closed
-    between floors!); then<br>
-    &nbsp;&nbsp;&nbsp; 11.7.1&nbsp;&nbsp; Target shall be set to 1<br>
-    &nbsp;&nbsp;&nbsp; 11.7.2&nbsp;&nbsp; mDesiredFloor.b shall be set
+    11.4&nbsp;&nbsp;&nbsp; CurrentDirection shall always be set to
+    mDesiredFloor.d.<br>
+    11.5&nbsp;&nbsp;&nbsp; If CurrentDirection is Stop and any mHallCall
+    OR mCarCall above CurrentFloor are True, then mDesiredFloor.d shall
+    be set to Up.<br>
+    11.6 &nbsp;&nbsp; If CurrentDirection is Stop and any mHallCall OR
+    mCarCall below CurrentFloor are True, then mDesiredFloor.d shall be
+    set to Down.<br>
+    11.7 &nbsp;&nbsp; If CurrentDirection is Up and all mDoorClosed[b,
+    r] are True and any mHallCall OR mCarCall above CurrentFloor are
+    True, then mDesiredFloor.d shall be set to Up.<br>
+    11.8 &nbsp;&nbsp; If CurrentDirection is Down and all mDoorClosed[b,
+    r] are True and any mHallCall OR mCarCall below CurrentFloor are
+    True, then mDesiredFloor.d shall be set to Down.<br>
+    11.9 &nbsp;&nbsp; If CurrentDirection is Up and all mDoorClosed[b,
+    r] are True and any mHallCall OR mCarCall above CurrentFloor are
+    False, then mDesiredFloor.d shall be set to Stop.<br>
+    11.10&nbsp; If CurrentDirection is Down and all mDoorClosed[b, r]
+    are True and any mHallCall OR mCarCall below CurrentFloor are False,
+    then mDesiredFloor.d shall be set to Stop.<br>
+    11.11&nbsp; mDesiredFloor.f shall always be set to Target.<br>
+    11.12&nbsp; If CurrentDirection is Up and Commit point for Floors
+    (fa...fn) above CurrentFloor has not been reached where any
+    mHallCall OR mCarCall are true, <br>
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; then Target shall
+    be set equal to MIN(fa...fn).<br>
+    11.13&nbsp; If CurrentDirection is Down and Commit point for Floors
+    (fa...fn) below CurrentFloor has not been reached where any
+    mHallCall OR mCarCall are true, <br>
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; then Target shall
+    be set equal to MAX(fa...fn).<br>
+    11.14&nbsp; If all mAtFloor[f, b] are False AND any mDoorClosed [b,
+    r] is False (which means doors are not closed between floors!); then<br>
+    &nbsp;&nbsp;&nbsp; 11.14.1&nbsp;&nbsp; Target shall be set to 1<br>
+    &nbsp;&nbsp;&nbsp; 11.14.2&nbsp;&nbsp; mDesiredFloor.b shall be set
     to None .<br>
-    11.8 &nbsp;&nbsp; If two mAtFloor[f, b] values are True with the
-    same value f, then mDesiredFloor.b shall be set to Both.<br>
-    11.9 &nbsp;&nbsp; mDesiredDwell shall always be set to a constant
+    11.15&nbsp; mDesiredFloor.b shall be set to b, where f, b is
+    whichever mHallCall[f, b, d] or mCarCall[f,b] is True where f =
+    Target.<br>
+    11.16&nbsp; Whenever any two mHallCall[f, b, d] or two mCarCall[f,
+    b] values are True for the same f where f = Target, then
+    mDesiredFloor.b shall be set to Both.<br>
+    11.17&nbsp; mDesiredDwell shall always be set to a constant
     appropriate value for door open dwell. &nbsp;&nbsp; <br>
     <br>
     <h3>TIME-TRIGGERED STATE CHART: </h3>

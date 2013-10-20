@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd7a.cf -mf sd7a.mf -head header.txt
-RandomSeed = 1381980329241
+RandomSeed = 1381981754753
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,8 +13,8 @@ Message File = sd7a.mf
 Controller File = sd7a.cf
 
 Assertion Results:
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@52977e69 :: getSpeed ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@59e4f5f5 :: getDirection ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@57ec49db :: getSpeed ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@46cfd5ee :: getDirection ?== STOP PASSED
 @1.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7e64cfe0 :: command ?== OPEN PASSED
 @1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@29e0969b :: getDoorCommand ?== OPEN PASSED
 @1.9s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@69a10f82 :: command ?== STOP PASSED

@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd3b.cf -mf sd3b.mf -head header.txt
-RandomSeed = 1381980323595
+RandomSeed = 1381981749115
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
