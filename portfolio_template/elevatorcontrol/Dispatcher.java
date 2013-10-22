@@ -23,6 +23,7 @@ import simulator.framework.Side;
 import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
+import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
 public class Dispatcher extends Controller {
 
@@ -46,6 +47,12 @@ public class Dispatcher extends Controller {
     //received at floor message
     private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor =
             new HashMap<Integer, AtFloorCanPayloadTranslator>();
+    
+    private HashMap<Integer, BooleanCanPayloadTranslator> mCarCall = 
+    		new HashMap<Integer, BooleanCanPayloadTranslator>();
+    
+    private HashMap<Integer, BooleanCanPayloadTranslator> mHallCall = 
+    		new HashMap<Integer, BooleanCanPayloadTranslator>();
 
     //received door closed message
     private ReadableCanMailbox networkDoorClosedFrontLeft;
@@ -71,18 +78,22 @@ public class Dispatcher extends Controller {
     private static int targetFloor = 1;
     private final static SimTime dwell = new SimTime(5,
             SimTime.SimTimeUnit.SECOND);
+    private int currentFloor = 0;
+    private Direction currentDirection = Direction.STOP;
 
     //store the period for the controller
     private SimTime period;
 
     //enumerate states
     private enum State {
-        STATE_SET_TARGET,
+        STATE_UP,
+        STATE_DOWN,
+        STATE_STOP,
         STATE_RESET,
     }
 
     //state variable initialized to the initial state FLASH_OFF
-    private State state = State.STATE_SET_TARGET;
+    private State state = State.STATE_STOP;
 
     public Dispatcher(int MaxFloor, SimTime period, boolean verbose) {
         super("Dispatcher", verbose);
@@ -119,8 +130,26 @@ public class Dispatcher extends Controller {
                 AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
                 canInterface.registerTimeTriggered(m);
                 mAtFloor.put(index, t);
+                
+                ReadableCanMailbox networkCarCall = CanMailbox.getReadableCanMailbox(
+                		MessageDictionary.CAR_CALL_BASE_CAN_ID + 
+                		ReplicationComputer.computeReplicationId(floor, h));
+                BooleanCanPayloadTranslator nCarCall = new BooleanCanPayloadTranslator(networkCarCall);
+                canInterface.registerTimeTriggered(networkCarCall);
+                mCarCall.put(index, nCarCall);
+                
+                for (Direction d : Direction.replicationValues) {
+                	int indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+	                ReadableCanMailbox networkHallCall = CanMailbox.getReadableCanMailbox(
+	                		MessageDictionary.HALL_CALL_BASE_CAN_ID + 
+	                		ReplicationComputer.computeReplicationId(floor, h, d));
+	                BooleanCanPayloadTranslator nHallCall = new BooleanCanPayloadTranslator(networkHallCall);
+	                canInterface.registerTimeTriggered(networkHallCall);
+	                mHallCall.put(indexHallCall, nHallCall);
+                }
             }
         }
+        
 
         networkDoorClosedFrontLeft = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
@@ -173,51 +202,220 @@ public class Dispatcher extends Controller {
      */
     public void timerExpired(Object callbackData) {
         State newState = state;
+
+        boolean isAtFloor = false;
+        int nHallway = 0;
+        int index = 0;
+        for (int i = 0; i < Elevator.numFloors; i++) {
+            int floor = i + 1;
+            for (Hallway h : Hallway.replicationValues) {
+            	
+                index = ReplicationComputer.computeReplicationId(floor, h);
+                if (mAtFloor.get(index).getValue()) {
+                    isAtFloor = true;
+                    currentFloor = floor;
+                }
+            }
+        }
+        
+
+        for (Hallway h : Hallway.replicationValues) {
+        	int indexCarCall = ReplicationComputer.computeReplicationId(targetFloor, h);
+        	if (mCarCall.get(indexCarCall).getValue()) {
+                nHallway++;
+                if (nHallway >= 2)
+                    hallway = Hallway.BOTH;
+                else
+                    hallway = h;
+    		}
+        	
+    		int indexHallCall = ReplicationComputer.computeReplicationId(targetFloor, h, currentDirection);
+    		if (mHallCall.get(indexHallCall).getValue()) {
+                nHallway++;
+                if (nHallway >= 2)
+                    hallway = Hallway.BOTH;
+                else
+                    hallway = h;
+    		}
+        }
+        
         switch (state) {
-        case STATE_SET_TARGET:
+        case STATE_STOP:
             // state actions for state S11.1 'SET TARGET'
-            mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
-            if (hallway == Hallway.FRONT)
-                mDesiredDwellFront.setDwell(dwell);
-            if (hallway == Hallway.BACK)
-                mDesiredDwellBack.setDwell(dwell);
+            mDesiredFloor.set(targetFloor, Hallway.NONE, Direction.STOP);
 
             // #transition 'T11.1'
+            // all doors are closed
             if (!(mDoorClosedFrontLeft.getValue() && 
                     mDoorClosedFrontRight.getValue() && 
                     mDoorClosedBackLeft.getValue() && 
                     mDoorClosedBackRight.getValue())) {
 
-                int nHallway = 0;
-                int index = 0;
-                int currentFloor = 0;
-                boolean isAtFloor = false;
+                int indexHallCall;
+                int indexCarCall;
+                int nearestFloor = 100;
                 for (int i = 0; i < Elevator.numFloors; i++) {
                     int floor = i + 1;
-                    for (Hallway h : Hallway.replicationValues) {
-                        index = ReplicationComputer.computeReplicationId(floor,
-                                                                         h);
-                        if (mAtFloor.get(index).getValue()) {
-                            isAtFloor = true;
-                            currentFloor = floor;
-                            nHallway++;
-                            if (nHallway >= 2)
-                                hallway = Hallway.BOTH;
-                            else
-                                hallway = h;
-                        }
+                    if (Math.abs(floor - currentFloor) < Math.abs(nearestFloor - currentFloor)) {
+	                    for (Hallway h : Hallway.replicationValues) {
+                    	
+	                    	for (Direction d : Direction.replicationValues) {
+	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+	                    		if (mHallCall.get(indexHallCall).getValue()) {
+	                    			if (floor > currentFloor) {
+                    					nearestFloor = floor;
+                    					currentDirection = Direction.UP;
+                    					newState = State.STATE_UP;
+                    					
+	                    			}
+	                    			else if (floor < currentFloor) {
+	                    					nearestFloor = floor;
+	                    					currentDirection = Direction.DOWN;
+	                    					newState = State.STATE_DOWN;
+	                    			}
+	                    		}
+	                    	}
+                   
+	                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+	                    	if (mCarCall.get(indexCarCall).getValue()) {
+	                			if (floor > currentFloor) {
+                					nearestFloor = floor;
+                					currentDirection = Direction.UP;
+                					newState = State.STATE_UP;
+	                			}
+	                			else if (floor < currentFloor) {
+	                					nearestFloor = floor;
+                    					currentDirection = Direction.DOWN;
+	                					newState = State.STATE_DOWN;
+	                			}
+	                		}
+	
+	                    }
                     }
+                    
                 }
 
-
-                targetFloor = currentFloor % Elevator.numFloors + 1;
+                if (nearestFloor != 100)
+                	targetFloor = nearestFloor;
 
                 // make sure that the last is false as well
-                // #transition 'T11.2'
+                // #transition 'T11.9'
                 if (!isAtFloor)
                     newState = State.STATE_RESET;
             }
             break;
+        case STATE_UP:
+            // state actions for state S11.1 'SET TARGET'
+            mDesiredFloor.set(targetFloor, hallway, Direction.UP);
+            if (hallway == Hallway.FRONT)
+                mDesiredDwellFront.setDwell(dwell);
+            else if (hallway == Hallway.BACK)
+                mDesiredDwellBack.setDwell(dwell);
+            else if (hallway == Hallway.BOTH) {
+                mDesiredDwellFront.setDwell(dwell);
+                mDesiredDwellBack.setDwell(dwell);
+            }
+
+            // #transition 'T11.1'
+            // all doors are closed
+            if (!(mDoorClosedFrontLeft.getValue() && 
+                    mDoorClosedFrontRight.getValue() && 
+                    mDoorClosedBackLeft.getValue() && 
+                    mDoorClosedBackRight.getValue())) {
+
+                int indexHallCall;
+                int indexCarCall;
+                int nearestFloor = 100;
+                for (int i = currentFloor; i < Elevator.numFloors; i++) {
+                    int floor = i + 1;
+                    if (Math.abs(floor - currentFloor) < Math.abs(nearestFloor - currentFloor)) {
+	                    for (Hallway h : Hallway.replicationValues) {
+                    	
+	                    	for (Direction d : Direction.replicationValues) {
+	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+	                    		if (mHallCall.get(indexHallCall).getValue()) {
+	                    			nearestFloor = floor;
+	                    		}
+	                    	}
+                   
+	                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+	                    	if (mCarCall.get(indexCarCall).getValue()) {
+	                    		nearestFloor = floor;
+	                		}
+	
+	                    }
+                    }
+                    
+                }
+
+
+                if (nearestFloor != 100)
+                	targetFloor = nearestFloor;
+                else
+                	newState = State.STATE_STOP;
+
+                // make sure that the last is false as well
+                // #transition 'T11.9'
+                if (!isAtFloor)
+                    newState = State.STATE_RESET;
+            }
+            break;      
+        case STATE_DOWN:
+            // state actions for state S11.1 'SET TARGET'
+            mDesiredFloor.set(targetFloor, hallway, Direction.DOWN);
+            if (hallway == Hallway.FRONT)
+                mDesiredDwellFront.setDwell(dwell);
+            else if (hallway == Hallway.BACK)
+                mDesiredDwellBack.setDwell(dwell);
+            else if (hallway == Hallway.BOTH) {
+                mDesiredDwellFront.setDwell(dwell);
+                mDesiredDwellBack.setDwell(dwell);
+            }
+
+            // #transition 'T11.1'
+            // all doors are closed
+            if (!(mDoorClosedFrontLeft.getValue() && 
+                    mDoorClosedFrontRight.getValue() && 
+                    mDoorClosedBackLeft.getValue() && 
+                    mDoorClosedBackRight.getValue())) {
+
+                int indexHallCall;
+                int indexCarCall;
+                int nearestFloor = 100;
+                for (int i = 0; i < currentFloor - 1; i++) {
+                    int floor = i + 1;
+                    if (Math.abs(floor - currentFloor) < Math.abs(nearestFloor - currentFloor)) {
+	                    for (Hallway h : Hallway.replicationValues) {
+                    	
+	                    	for (Direction d : Direction.replicationValues) {
+	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+	                    		if (mHallCall.get(indexHallCall).getValue()) {
+	                    			nearestFloor = floor;
+	                    		}
+	                    	}
+                   
+	                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+	                    	if (mCarCall.get(indexCarCall).getValue()) {
+	                    		nearestFloor = floor;
+	                		}
+	
+	                    }
+                    }
+                    
+                }
+
+
+                if (nearestFloor != 100)
+                	targetFloor = nearestFloor;
+                else
+                	newState = State.STATE_STOP;
+
+                // make sure that the last is false as well
+                // #transition 'T11.9'
+                if (!isAtFloor)
+                    newState = State.STATE_RESET;
+            }
+            break;               
         case STATE_RESET:
             // state actions for state S11.2 'RESET'
             mDesiredFloor.set(1, Hallway.NONE, Direction.STOP);

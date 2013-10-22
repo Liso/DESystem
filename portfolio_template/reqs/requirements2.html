@@ -2952,11 +2952,11 @@
           </td>
         </tr>
         <tr>
-          <td valign="top" width="25%">T11.1<br>
+        <td valign="top" width="25%">T11.1<br>
           </td>
-          <td valign="top">Any mDoorClosed[b,r] is false
+          <td valign="top">Any mDoorClosed[b,r] is true
               <br />
-              AND CurrentDirection is UP
+              AND CurrentDirection is UP           
               <br />
               AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is true, where f &gt; 
               CurrentFloor</td>
@@ -2967,58 +2967,56 @@
           <td valign="top">all mAtFloor[f, b] are False AND any mDoorClosed [b, r] is False </td>
         </tr>
         <tr>
-          <td valign="top" width="25%">T11.3</td>
-          <td valign="top">Any mDoorClosed[b,r] is false
+          <td valign="top" width="25%">T11.3<br>
+          </td>
+          <td valign="top">Any mDoorClosed[b,r] is true
               <br />
-              AND CurrentDirection is UP
+              AND CurrentDirection is UP           
               <br />
               AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is false, where f &gt; 
               CurrentFloor</td>
         </tr>
         <tr>
-          <td valign="top" width="25%">T11.5</td>
-          <td valign="top">Any mDoorClosed[b,r] is false
-              <br />
-              AND CurrentDirection is DOWN
+        <td valign="top" width="25%">T11.4</td>
+        </td>
+          <td valign="top">Any mDoorClosed[b,r] is true               <br />
+              AND CurrentDirection is DOWN         
               <br />
               AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is true, where f &lt; 
               CurrentFloor</td>
         </tr>
         <tr>
-          <td valign="top" width="25%">T11.6</td>
+          <td valign="top" width="25%">T11.5</td>
           <td valign="top">all mAtFloor[f, b] are False AND any mDoorClosed [b, r] is False </td>
         </tr>
         <tr>
-          <td valign="top" width="25%">T11.7</td>
-          <td valign="top">Any mDoorClosed[b,r] is false
-              <br />
-              AND CurrentDirection is DOWN
+        <td valign="top" width="25%">T11.6</td>
+          <td valign="top">Any mDoorClosed[b,r] is true               <br />
+              AND CurrentDirection is DOWN         
               <br />
               AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is false, where f &lt; 
               CurrentFloor</td>
         </tr>
         <tr>
-          <td valign="top" width="25%">T11.9</td>
-          <td valign="top">Any mDoorClosed[b,r] is false
-              <br />
-              AND CurrentDirection is STOP
+        <td valign="top" width="25%">T11.7</td>
+          <td valign="top">CurrentDirection is STOP
               <br />
               AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is true, where f &gt; 
+              CurrentFloorll[f, b] is true, where f &gt; 
               CurrentFloor</td>
         </tr>
         <tr>
-          <td valign="top" width="25%">T11.10</td>
-          <td valign="top">Any mDoorClosed[b,r] is false
-              <br />
-              AND CurrentDirection is STOP
+        <td valign="top" width="25%">T11.8</td>
+          <td valign="top">CurrentDirection is STOP
               <br />
               AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is false, where f &gt; 
+              CurrentFloorl[f, b] is false, where f &gt; 
               CurrentFloor<br />
               AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is true, where f &lt; 
               CurrentFloor</td>
         </tr>
         <tr>
-          <td valign="top" width="25%">T11.11</td>
+          <td valign="top" width="25%">T11.9</td>
           <td valign="top">all mAtFloor[f, b] are False AND any mDoorClosed [b, r] is False </td>
         </tr>
       </tbody>
