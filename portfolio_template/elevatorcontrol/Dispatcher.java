@@ -202,6 +202,10 @@ public class Dispatcher extends Controller {
      */
     public void timerExpired(Object callbackData) {
         State newState = state;
+        
+
+        int commitPointUp;
+        int commitPointDown;
 
         boolean isAtFloor = false;
         int nHallway = 0;
@@ -328,19 +332,24 @@ public class Dispatcher extends Controller {
                 int nearestFloor = 100;
                 for (int i = currentFloor; i < Elevator.numFloors; i++) {
                     int floor = i + 1;
+                    commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 200;
                     if (Math.abs(floor - currentFloor) < Math.abs(nearestFloor - currentFloor)) {
 	                    for (Hallway h : Hallway.replicationValues) {
                     	
 	                    	for (Direction d : Direction.replicationValues) {
 	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
-	                    		if (mHallCall.get(indexHallCall).getValue()) {
-	                    			nearestFloor = floor;
+	                    		if (mHallCall.get(indexHallCall).getValue()) {        			
+	                    			if(position < commitPointUp){
+	                    				nearestFloor = floor;
+	                    			}
 	                    		}
 	                    	}
                    
 	                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
-	                    	if (mCarCall.get(indexCarCall).getValue()) {
-	                    		nearestFloor = floor;
+	                    	if (mCarCall.get(indexCarCall).getValue()) {        			
+                    			if(position < commitPointUp){
+                    				nearestFloor = floor;
+                    			}
 	                		}
 	
 	                    }
@@ -384,19 +393,24 @@ public class Dispatcher extends Controller {
                 int nearestFloor = 100;
                 for (int i = 0; i < currentFloor - 1; i++) {
                     int floor = i + 1;
+                    commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 200;
                     if (Math.abs(floor - currentFloor) < Math.abs(nearestFloor - currentFloor)) {
 	                    for (Hallway h : Hallway.replicationValues) {
                     	
 	                    	for (Direction d : Direction.replicationValues) {
 	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
 	                    		if (mHallCall.get(indexHallCall).getValue()) {
-	                    			nearestFloor = floor;
+	                    			if(position > commitPointDown){
+	                    				nearestFloor = floor;
+	                    			}
 	                    		}
 	                    	}
                    
 	                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
 	                    	if (mCarCall.get(indexCarCall).getValue()) {
-	                    		nearestFloor = floor;
+                    			if(position > commitPointDown){
+                    				nearestFloor = floor;
+                    			}
 	                		}
 	
 	                    }
