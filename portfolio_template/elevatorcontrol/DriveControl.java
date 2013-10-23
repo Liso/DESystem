@@ -43,7 +43,9 @@ public class DriveControl extends Controller {
         STATE_LEVEL_DOWN,
         STATE_SLOW_UP,
         STATE_SLOW_DOWN,
-        STATE_EMERGENCY;	
+        STATE_FAST_UP,
+        STATE_FAST_DOWN,
+        STATE_EMERGENCY,	
     }
 
     private State state = State.STATE_STOP;
@@ -199,6 +201,8 @@ public class DriveControl extends Controller {
 
     public void timerExpired(Object callbackData) {
         State newstate = state;
+        double currentSpeed = localDriveSpeed.speed();
+        int acc = 1;
         int desiredFloor = mDesiredFloor.getFloor();
         int currentFloor = mAtFloorArray.getCurrentFloor();
         boolean isOverweight = mCarWeight.getWeight() >= Elevator.MaxCarCapacity;
@@ -206,6 +210,9 @@ public class DriveControl extends Controller {
                 mLevelSensorArray[ReplicationComputer.computeReplicationId(
                         Direction.DOWN)].getValue() &&
                         mLevelSensorArray[ReplicationComputer .computeReplicationId(Direction.UP)].getValue();
+        int position = mCarLevelPosition.getValue();
+        int commitPointUp = (int)(((5*(desiredFloor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 200;
+        int commitPointDown = (int)(((5*(desiredFloor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 200;
         
         switch (state) {
         case STATE_STOP:
@@ -217,38 +224,41 @@ public class DriveControl extends Controller {
                 newstate = State.STATE_EMERGENCY;
                 break;
             }
+            
             //#transition 'T6.12'
             if (isOverweight) {
-		if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
-			!mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
-                //#transition 'T6.8'
-                newstate = State.STATE_LEVEL_UP;
-			break;
-		}
-                newstate=State.STATE_STOP;
-                
-                
+            	if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
+			       !mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
+            		//#transition 'T6.8'
+            		newstate = State.STATE_LEVEL_UP;
+            		break;
+            	}
+                newstate=State.STATE_STOP;                               
                 break;
             }
+            
             if ((desiredFloor != currentFloor) && !isAnyDoorOpen() && !isOverweight) {
-                if (desiredFloor - currentFloor > 0) {
+                if ((desiredFloor - currentFloor > 0) && (localDriveSpeed.speed() == 0)) {
                     //#transition 'T6.1'
                     newstate = State.STATE_SLOW_UP;
                 }
-                else {
+                else if ((desiredFloor - currentFloor < 0) && (localDriveSpeed.speed() == 0)){
                     //#transition 'T6.4'
                     newstate = State.STATE_SLOW_DOWN;
                 }
                 break;
             }
+            
             if (isLevel || !isAnyDoorOpen()) {
                 break;
             }
+            
             if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
 			!mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
                 //#transition 'T6.8'
                 newstate = State.STATE_LEVEL_UP;
             }
+            
             else if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()&&
 			!mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue()) {
                 //#transition 'T6.9'
@@ -285,6 +295,9 @@ public class DriveControl extends Controller {
         	//State Actions
             localDrive.set(Speed.SLOW, Direction.UP);
             
+            if((localDriveSpeed.speed() == 0.25) && (position < commitPointUp)){
+            	newstate = State.STATE_FAST_UP;
+            }
             if (isSafetyViolation()) {
                 //#transition 'T6.5.2'
                 newstate = State.STATE_EMERGENCY;
@@ -304,6 +317,10 @@ public class DriveControl extends Controller {
         	//State Actions
             localDrive.set(Speed.SLOW, Direction.DOWN);
             
+            if((localDriveSpeed.speed() == 0.25) && (position > commitPointDown)){
+            	newstate = State.STATE_FAST_DOWN;
+            }
+            
             if (isSafetyViolation()) {
                 //#transition 'T6.5.3'
                 newstate = State.STATE_EMERGENCY;
@@ -319,6 +336,23 @@ public class DriveControl extends Controller {
                     newstate = State.STATE_LEVEL_DOWN;
                 }
                 break;
+            }
+            break;
+            
+        case STATE_FAST_UP:
+        	
+        	localDrive.set(Speed.FAST, Direction.UP);
+        	
+            if(position > commitPointUp){
+            	newstate = State.STATE_SLOW_UP;
+            }
+            break;
+        case STATE_FAST_DOWN:
+        	
+        	localDrive.set(Speed.FAST, Direction.DOWN);
+        	
+            if(position < commitPointDown){
+            	newstate = State.STATE_SLOW_DOWN;
             }
             break;
         case STATE_EMERGENCY:
