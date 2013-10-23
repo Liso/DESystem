@@ -410,6 +410,7 @@
         <li>Car is stopped at passenger's floor <b>f</b> and hallway <b>b</b>.
         </li>
         <li>At least one door[<b>b</b>,<b>r</b>] is open. </li>
+        <li>A door reversal has already been triggered at least twice while the car was at this floor.</li>
       </ul>
       <h3> Scenario: </h3>
       <ol>
@@ -419,11 +420,12 @@
         <li>DoorMotor[b,r] commanded to Open.</li>
         <li>Doors finish Opening.</li>
         <li>Passenger gets into the car.</li>
+        <li>Door[b,r] starts to nudge.</li>
       </ol>
       <h3> Post-Conditions: </h3>
       <ol>
         <li>Passenger is in the elevator.</li>
-        <li>Doors[b,r] are completely open.<br>
+        <li>At least one door[<b>b</b>,<b>r</b>] is open.<br>
         </li>
       </ol>
       <h3> Sequence Diagram: </h3>
@@ -675,14 +677,16 @@
       <h3>Author name: Jiangtian Nie </h3>
       <h3> Pre-Conditions: </h3>
       <ul type="disc">
-        <li>Car is stopped. </li>
+        <li>Car is stopped at floor f. </li>
         <li>AtFloor[f,b] was last received as True. </li>
         <li>All doors are closed. </li>
+        <li>There is an outstanding hall call for floor g, hallway b, where g > f.</li>
       </ul>
       <h3> Scenario: </h3>
       <ol>
         <li>Door[b,r] commanded to open.</li>
         <li>Dispatcher sets next desired floor.</li>
+        <li>CarLantern[UP] lights up to reflect the new desired direction</li>
         <li>Door[b,r] finish opening.</li>
         <li>Door[b,r] commanded to close.</li>
         <li>Door[b,r] finish closing.<br>
