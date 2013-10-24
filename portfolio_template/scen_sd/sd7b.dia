@@ -778,11 +778,11 @@
         <dia:point val="3,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,3.95;3.05,20.05"/>
+        <dia:rectangle val="2.95,3.95;3.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="3,4"/>
-        <dia:point val="3,20"/>
+        <dia:point val="3,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -799,11 +799,11 @@
         <dia:point val="39,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.95,3.95;39.05,20.05"/>
+        <dia:rectangle val="38.95,3.95;39.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="39,4"/>
-        <dia:point val="39,20"/>
+        <dia:point val="39,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -820,11 +820,11 @@
         <dia:point val="47,4.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,4;47.05,20.05"/>
+        <dia:rectangle val="46.95,4;47.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="47,4.05"/>
-        <dia:point val="47,20"/>
+        <dia:point val="47,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -838,11 +838,11 @@
         <dia:point val="55,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.95,3.95;55.05,20.05"/>
+        <dia:rectangle val="54.95,3.95;55.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="55,4"/>
-        <dia:point val="55,20"/>
+        <dia:point val="55,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -859,11 +859,11 @@
         <dia:point val="25,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.95,3.95;25.05,20.05"/>
+        <dia:rectangle val="24.95,3.95;25.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="25,4"/>
-        <dia:point val="25,20"/>
+        <dia:point val="25,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -880,11 +880,11 @@
         <dia:point val="18,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,3.95;18.05,20.05"/>
+        <dia:rectangle val="17.95,3.95;18.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="18,4"/>
-        <dia:point val="18,20"/>
+        <dia:point val="18,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -901,11 +901,11 @@
         <dia:point val="10,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,3.95;10.05,20.05"/>
+        <dia:rectangle val="9.95,3.95;10.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="10,4"/>
-        <dia:point val="10,20"/>
+        <dia:point val="10,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -981,11 +981,11 @@
         <dia:point val="32,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,3.95;32.05,20.05"/>
+        <dia:rectangle val="31.95,3.95;32.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="32,4"/>
-        <dia:point val="32,20"/>
+        <dia:point val="32,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -1124,11 +1124,11 @@
         <dia:point val="69,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.95,3.95;69.05,20.05"/>
+        <dia:rectangle val="68.95,3.95;69.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="69,4"/>
-        <dia:point val="69,20"/>
+        <dia:point val="69,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -1204,11 +1204,11 @@
         <dia:point val="62,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.95,3.95;62.05,20.05"/>
+        <dia:rectangle val="61.95,3.95;62.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="62,4"/>
-        <dia:point val="62,20"/>
+        <dia:point val="62,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -1281,11 +1281,11 @@
         <dia:point val="76,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.95,3.95;76.05,20.05"/>
+        <dia:rectangle val="75.95,3.95;76.05,27.05"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="76,4"/>
-        <dia:point val="76,20"/>
+        <dia:point val="76,27"/>
       </dia:attribute>
       <dia:attribute name="numcp">
         <dia:int val="1"/>
@@ -1412,6 +1412,189 @@
       </dia:attribute>
       <dia:attribute name="text_pos">
         <dia:point val="46.55,12.75"/>
+      </dia:attribute>
+    </dia:object>
+    <dia:object type="Standard - Text" version="1" id="O48">
+      <dia:attribute name="obj_pos">
+        <dia:point val="3.85,19.85"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="3.85,19.21;9.805,19.9825"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#7.  Passenger Arrives#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="sans" style="0" name="Helvetica"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="3.85,19.85"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#0000ff"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="valign">
+        <dia:enum val="3"/>
+      </dia:attribute>
+    </dia:object>
+    <dia:object type="UML - Message" version="0" id="O49">
+      <dia:attribute name="obj_pos">
+        <dia:point val="18,21"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="9.95,20;18.05,21.4"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="conn_endpoints">
+        <dia:point val="18,21"/>
+        <dia:point val="10,21"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#0000ff"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#0000ff"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:string>#8. DoorMotor[b,r]=Close#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="text_pos">
+        <dia:point val="14.25,20.65"/>
+      </dia:attribute>
+    </dia:object>
+    <dia:object type="UML - Message" version="0" id="O50">
+      <dia:attribute name="obj_pos">
+        <dia:point val="32,22"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="9.95,21;32.05,22.4"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="conn_endpoints">
+        <dia:point val="32,22"/>
+        <dia:point val="10,22"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:string>#9a. mDoorClosed[b,r]=True#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="text_pos">
+        <dia:point val="21,21.65"/>
+      </dia:attribute>
+    </dia:object>
+    <dia:object type="UML - Message" version="0" id="O51">
+      <dia:attribute name="obj_pos">
+        <dia:point val="10,24"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="9.95,22.95;18.05,24.4"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="conn_endpoints">
+        <dia:point val="10,24"/>
+        <dia:point val="18,24"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#0000ff"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#0000ff"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:string>#9b. DoorMotor[b,r]=Stop#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="text_pos">
+        <dia:point val="14,23.6"/>
+      </dia:attribute>
+    </dia:object>
+    <dia:object type="UML - Message" version="0" id="O52">
+      <dia:attribute name="obj_pos">
+        <dia:point val="32,25"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="31.95,24.1;62.05,25.4"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="conn_endpoints">
+        <dia:point val="32,25"/>
+        <dia:point val="62,25"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:string>#10a. mDoorClosed[b,r]=True#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="text_pos">
+        <dia:point val="46.55,24.75"/>
+      </dia:attribute>
+    </dia:object>
+    <dia:object type="UML - Message" version="0" id="O53">
+      <dia:attribute name="obj_pos">
+        <dia:point val="62,26"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="61.65,24.95;69.35,26.4"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="conn_endpoints">
+        <dia:point val="62,26"/>
+        <dia:point val="69,26"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#0000ff"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#0000ff"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:string>#10b. CarLantern[d] = False#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="text_pos">
+        <dia:point val="65.5,25.6"/>
       </dia:attribute>
     </dia:object>
   </dia:layer>

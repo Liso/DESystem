@@ -64,6 +64,8 @@
 
 
 
+
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1096,8 +1098,7 @@
     <p class="MsoNormal" style=""> </p>
     <h3>Time-Triggered Statechart</h3>
     <p><a href="doorcontrol_state_diagram.png"><img alt="DoorControl
-          Statechart" src="doorcontrol_state_diagram.png"
-          border="0"></a><br>
+          Statechart" src="doorcontrol_state_diagram.png" border="0"></a><br>
       <br clear="left">
     </p>
     <table style="text-align: left;" height="185" border="1"
@@ -1129,9 +1130,9 @@
         <tr>
           <td style="vertical-align: top;">T5.3<br>
           </td>
-          <td style="vertical-align: top;">&nbsp;mCarWeight(g) &gt;= MaxCarCapacity OR mCarCall[f, b] = True
-            OR mHallCall[f, b, d] = True, where d = mDesiredFloor.d and
-            f = CurrentFloor<br>
+          <td style="vertical-align: top;">&nbsp;mCarWeight(g) &gt;=
+            MaxCarCapacity OR mCarCall[f, b] = True OR mHallCall[f, b,
+            d] = True, where d = mDesiredFloor.d and f = CurrentFloor<br>
           </td>
         </tr>
         <tr>
@@ -1151,8 +1152,8 @@
         <tr>
           <td style="vertical-align: top;">T5.7<br>
           </td>
-          <td style="vertical-align: top;">Any mAtFloor[f, b] = True AND f = mDesiredFloor.f 
-              AND mDriveSpeed = (0, d) OR (s, Stop)<br>
+          <td style="vertical-align: top;">Any mAtFloor[f, b] = True AND
+            f = mDesiredFloor.f AND mDriveSpeed = (0, d) OR (s, Stop)<br>
           </td>
         </tr>
         <tr>
@@ -1161,10 +1162,10 @@
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.9</td>
-          <td style="vertical-align: top;">ReversalCount &gt; 3 AND CountDown &lt;= 0 AND
-            DoorReversal[b, r] = False AND mCarWeight(g) &lt;
-            MaxCarCapacity AND mCarCall[f, b] = False AND mHallCall[f,
-            b, d] = False, where d = mDesiredFloor.d</td>
+          <td style="vertical-align: top;">ReversalCount &gt; 3 AND
+            CountDown &lt;= 0 AND DoorReversal[b, r] = False AND
+            mCarWeight(g) &lt; MaxCarCapacity AND mCarCall[f, b] = False
+            AND mHallCall[f, b, d] = False, where d = mDesiredFloor.d</td>
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.10</td>
@@ -1172,10 +1173,10 @@
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.11</td>
-          <td style="vertical-align: top;">
-              DoorReversal[b, r] = True OR mCarWeight(g) &gt;= MaxCarCapacity OR mCarCall[f, b] = 
-              True OR mHallCall[f, b, d] = True, where d = mDesiredFloor.d and f = 
-              CurrentFloor</td>
+          <td style="vertical-align: top;"> DoorReversal[b, r] = True OR
+            mCarWeight(g) &gt;= MaxCarCapacity OR mCarCall[f, b] = True
+            OR mHallCall[f, b, d] = True, where d = mDesiredFloor.d and
+            f = CurrentFloor</td>
         </tr>
       </tbody>
     </table>
@@ -2871,6 +2872,9 @@
       <li>mHallCall[f, b, d]&nbsp;&nbsp; </li>
       <li>mCarCall[f, b]&nbsp;&nbsp;&nbsp; </li>
       <li>mCarWeight </li>
+      <li>mDriveSpeed</li>
+      <li>mCarLevelPosition<br>
+      </li>
     </ul>
     <h3> Output Interface: </h3>
     <ul>
@@ -2938,7 +2942,8 @@
     b] values are True for the same f where f = Target, then
     mDesiredFloor.b shall be set to Both.<br>
     11.17&nbsp; mDesiredDwell shall always be set to a constant
-    appropriate valueTIME-TRIGGERED STATE CHART: </h3>
+    appropriate value<br>
+    <br>
     <a href="dispatcher_state_diagram.png"><img alt="disp"
         src="dispatcher_state_diagram.png"></a><br>
     <br>
@@ -2952,78 +2957,72 @@
           </td>
         </tr>
         <tr>
-        <td valign="top" width="25%">T11.1<br>
+          <td valign="top" width="25%">T11.1<br>
           </td>
-          <td valign="top">Any mDoorClosed[b,r] is true
-              <br />
-              AND CurrentDirection is UP           
-              <br />
-              AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is true, where f &gt; 
-              CurrentFloor</td>
+          <td valign="top">Any mDoorClosed[b,r] is true <br>
+            AND CurrentDirection is UP <br>
+            AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is
+            true, where f &gt; CurrentFloor</td>
         </tr>
         <tr>
           <td valign="top" width="25%">T11.2<br>
           </td>
-          <td valign="top">all mAtFloor[f, b] are False AND any mDoorClosed [b, r] is False </td>
+          <td valign="top">all mAtFloor[f, b] are False AND any
+            mDoorClosed [b, r] is False </td>
         </tr>
         <tr>
           <td valign="top" width="25%">T11.3<br>
           </td>
-          <td valign="top">Any mDoorClosed[b,r] is true
-              <br />
-              AND CurrentDirection is UP           
-              <br />
-              AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is false, where f &gt; 
-              CurrentFloor</td>
+          <td valign="top">Any mDoorClosed[b,r] is true <br>
+            AND CurrentDirection is UP <br>
+            AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is
+            false, where f &gt; CurrentFloor</td>
         </tr>
         <tr>
-        <td valign="top" width="25%">T11.4</td>
-        </td>
-          <td valign="top">Any mDoorClosed[b,r] is true               <br />
-              AND CurrentDirection is DOWN         
-              <br />
-              AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is true, where f &lt; 
-              CurrentFloor</td>
+          <td valign="top" width="25%">T11.4</td>
+          <td valign="top">Any mDoorClosed[b,r] is true <br>
+            AND CurrentDirection is DOWN <br>
+            AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is
+            true, where f &lt; CurrentFloor</td>
         </tr>
         <tr>
           <td valign="top" width="25%">T11.5</td>
-          <td valign="top">all mAtFloor[f, b] are False AND any mDoorClosed [b, r] is False </td>
+          <td valign="top">all mAtFloor[f, b] are False AND any
+            mDoorClosed [b, r] is False </td>
         </tr>
         <tr>
-        <td valign="top" width="25%">T11.6</td>
-          <td valign="top">Any mDoorClosed[b,r] is true               <br />
-              AND CurrentDirection is DOWN         
-              <br />
-              AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is false, where f &lt; 
-              CurrentFloor</td>
+          <td valign="top" width="25%">T11.6</td>
+          <td valign="top">Any mDoorClosed[b,r] is true <br>
+            AND CurrentDirection is DOWN <br>
+            AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is
+            false, where f &lt; CurrentFloor</td>
         </tr>
         <tr>
-        <td valign="top" width="25%">T11.7</td>
-          <td valign="top">CurrentDirection is STOP
-              <br />
-              AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is true, where f &gt; 
-              CurrentFloorll[f, b] is true, where f &gt; 
-              CurrentFloor</td>
+          <td valign="top" width="25%">T11.7</td>
+          <td valign="top">CurrentDirection is STOP <br>
+            AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is
+            true, where f &gt; CurrentFloorll[f, b] is true, where f
+            &gt; CurrentFloor</td>
         </tr>
         <tr>
-        <td valign="top" width="25%">T11.8</td>
-          <td valign="top">CurrentDirection is STOP
-              <br />
-              AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is false, where f &gt; 
-              CurrentFloorl[f, b] is false, where f &gt; 
-              CurrentFloor<br />
-              AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is true, where f &lt; 
-              CurrentFloor</td>
+          <td valign="top" width="25%">T11.8</td>
+          <td valign="top">CurrentDirection is STOP <br>
+            AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is
+            false, where f &gt; CurrentFloorl[f, b] is false, where f
+            &gt; CurrentFloor<br>
+            AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is
+            true, where f &lt; CurrentFloor</td>
         </tr>
         <tr>
           <td valign="top" width="25%">T11.9</td>
-          <td valign="top">all mAtFloor[f, b] are False AND any mDoorClosed [b, r] is False </td>
+          <td valign="top">all mAtFloor[f, b] are False AND any
+            mDoorClosed [b, r] is False </td>
         </tr>
       </tbody>
     </table>
     <br>
-    <h3>Requirements-to-Statecharts Traceability    </table>
-    <br>
+    <h3>Requirements-to-Statecharts Traceability <br>
+    </h3>
     <h3>Requirements-to-Statecharts Traceability</h3>
     <table style="text-align: left;" height="326" border="1"
       cellpadding="2" cellspacing="2" width="719">

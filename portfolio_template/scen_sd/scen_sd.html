@@ -28,6 +28,7 @@
 
 
 
+
         Sally Stevenson (ststeven)<br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -42,8 +43,10 @@
 
 
 
+
         Sri Harsha Koppaka (skoppaka)<br>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 
 
 
@@ -73,8 +76,9 @@
         </ul>
         <li><a href="#usecase3">3. Passenger Enters Car</a> </li>
         <ul>
-          <li><a href="#scenario3a">Scenario 3A</a> </li>
-          <li><a href="#scenario3b">Scenario 3B</a></li>
+          <li><a href="#scenario3a">Scenario 3A - R-T6</a> </li>
+          <li><a href="#scenario3b">Scenario 3B - R-T7<br>
+            </a></li>
         </ul>
         <li><a href="#usecase4">4. Passenger Exits Car</a> </li>
         <ul>
@@ -90,8 +94,9 @@
         <li><a href="#usecase6">6. Determine Car Position</a> </li>
         <li><a href="#usecase7">7. Determine Car Direction</a> </li>
         <ul>
-          <li><a href="#scenario7a">Scenario 7A</a> </li>
-          <li><a href="#scenario7b">Scenario 7B</a></li>
+          <li><a href="#scenario7a">Scenario 7A - R-T8.1</a> </li>
+          <li><a href="#scenario7b">Scenario 7B - R-T8.2<br>
+            </a></li>
           <li><a href="#scenario7c">Scenario 7C</a> </li>
         </ul>
         <li><a href="#usecase8">8. Move Car to Next Floor</a></li>
@@ -151,8 +156,8 @@
         <li>Door[<b>b</b>,<b>r</b>] starts closing. </li>
         <li>Passenger arrives at a hallway [<b>f</b>, <b>b</b>] to use
           the elevator, with intent to travel in direction <b>d</b>. </li>
-        <li>Passenger presses hall call button before doors are too fully
-          closed for passenger to enter. </li>
+        <li>Passenger presses hall call button before doors are too
+          fully closed for passenger to enter. </li>
         <li>Hall button lights up. </li>
         <li>Doors start reopening.</li>
         <li>Hall button is unlit.</li>
@@ -373,8 +378,8 @@
       </p>
       <div align="center">
         <hr align="center" size="2" width="100%"> </div>
-      <h3> <a name="scenario4b" id="A2"></a>Scenario 4B: Car is overweight and passenger 
-          exits the car. </h3>
+      <h3> <a name="scenario4b" id="A2"></a>Scenario 4B: Car is
+        overweight and passenger exits the car. </h3>
       <h3> Author name: Yue Chen (yuechen) </h3>
       <h3> Pre-Conditions: </h3>
       <ul type="disc">
@@ -410,7 +415,8 @@
         <li>Car is stopped at passenger's floor <b>f</b> and hallway <b>b</b>.
         </li>
         <li>At least one door[<b>b</b>,<b>r</b>] is open. </li>
-        <li>A door reversal has already been triggered at least twice while the car was at this floor.</li>
+        <li>A door reversal has already been triggered at least twice
+          while the car was at this floor.</li>
       </ul>
       <h3> Scenario: </h3>
       <ol>
@@ -479,7 +485,7 @@
       <h3> Scenario: </h3>
       <ol start="1" type="1">
         <li>Commit point for floor y has been reached</li>
-          <li>Car approaches floor y. </li>
+        <li>Car approaches floor y. </li>
         <li>Car stops at floor y. </li>
       </ol>
       <h3> Post-Conditions: </h3>
@@ -546,11 +552,16 @@
         <li>HallLight[<b>f</b>,<b>b</b>,<b>d</b>] goes off.</li>
         <li>Car Lantern for direction <b>b</b> lights up. </li>
         <li>Door[<b>b</b>,<b>r</b>] completes opening. </li>
+        <li>Passenger enters elevator.</li>
+        <li>Door[b,r] starts closing.</li>
+        <li>Door[b,r] completes closing.</li>
+        <li>CarLanern[d] goes Off.<br>
+        </li>
       </ol>
       <h3> Post-Conditions: </h3>
       <ul type="disc">
-        <li>Door is open. </li>
-        <li>CarLantern[<b>d</b>] is lit. </li>
+        <li>Door is closes. </li>
+        <li>CarLantern[<b>d</b>] is Off. </li>
         <li>Elevator waits for passengers to enter or press the car
           call. </li>
       </ul>
@@ -676,13 +687,15 @@
         <li>Car is stopped at floor f. </li>
         <li>AtFloor[f,b] was last received as True. </li>
         <li>All doors are closed. </li>
-        <li>There is an outstanding hall call for floor g, hallway b, where g > f.</li>
+        <li>There is an outstanding hall call for floor g, hallway b,
+          where g &gt; f.</li>
       </ul>
       <h3> Scenario: </h3>
       <ol>
         <li>Door[b,r] commanded to open.</li>
         <li>Dispatcher sets next desired floor.</li>
-        <li>CarLantern[UP] lights up to reflect the new desired direction</li>
+        <li>CarLantern[UP] lights up to reflect the new desired
+          direction</li>
         <li>Door[b,r] finish opening.</li>
         <li>Door[b,r] commanded to close.</li>
         <li>Door[b,r] finish closing.<br>
