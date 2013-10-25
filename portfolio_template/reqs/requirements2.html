@@ -66,6 +66,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1715,17 +1716,17 @@
     6.9&nbsp;&nbsp;&nbsp; If DriveSpeed is equal to Fast and Commit
     point for mDesiredFloor.f has been reached, then Drive shall be
     commanded to (Slow,d) where d = mDesiredFloor.d.<br>
-    6.8 &nbsp;&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is
-    equal to True and mDesiredFloor.f is equal to f, then Drive shall be
+    6.10&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is equal
+    to True and mDesiredFloor.f is equal to f, then Drive shall be set
+    to (Stop,Stop).<br>
+    6.11&nbsp; If any mLevel[d] is equal to false and mAtFloor[f, b] is
+    equal to True and mDesiredFloor.f&nbsp; is equal to f, then Drive
+    shall be set to (Level,d).<br>
+    6.12&nbsp; If (mCarWeight&gt;= MaxCarCapacity) then Drive shall be
     set to (Stop,Stop).<br>
-    6.9&nbsp;&nbsp;&nbsp; If any mLevel[d] is equal to false and
-    mAtFloor[f, b] is equal to True and mDesiredFloor.f&nbsp; is equal
-    to f, then Drive shall be set to (Level,d).<br>
-    6.10&nbsp; If (mCarWeight&gt;= MaxCarCapacity) then Drive shall be
-    set to (Stop,Stop).<br>
-    6.11&nbsp; If mHoistwayLimit[d]&nbsp; is equal to true, then Drive
+    6.13&nbsp; If mHoistwayLimit[d]&nbsp; is equal to true, then Drive
     shall be commanded to (Stop,Stop).<br>
-    6.12&nbsp; mDriveSpeed shall always be set to current value of&nbsp;
+    6.14&nbsp; mDriveSpeed shall always be set to current value of&nbsp;
     DriveSpeed.<br>
     <br>
     <h3>TIME-TRIGGERED STATE CHART: </h3>
