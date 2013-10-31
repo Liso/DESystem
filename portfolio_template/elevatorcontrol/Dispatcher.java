@@ -395,7 +395,7 @@ public class Dispatcher extends Controller {
         		  if(Calls == false){
         	   for(int i = targetFloor; i < Elevator.numFloors; i++){
         		   int floor = i;
-        		   if(currentSpeed < 0.05){
+        		   if(currentSpeed == 0){
                    	commitPointUp = (5000*(floor -1)) + 100;
                    }
                    else
@@ -425,7 +425,7 @@ public class Dispatcher extends Controller {
            }
                 for (int i = 0; i < Elevator.numFloors; i++) {
                     int floor = i + 1;
-                    if(currentSpeed < 0.05){
+                    if(currentSpeed == 0.0){
                     	commitPointUp = (5000*(floor -1)) + 100;
                     }
                     else
@@ -603,7 +603,7 @@ public class Dispatcher extends Controller {
         		   if(Calls == false){
         	   for(int i = targetFloor; i > 0; i--){
         		   int floor = i;
-        		   if(currentSpeed < 0.05){
+        		   if(currentSpeed == 0){
                    	commitPointDown = (5000*(floor -1)) - 100;
                    }
                    else
@@ -634,7 +634,7 @@ public class Dispatcher extends Controller {
            }
                 for (int i = 0; i < currentFloor ; i++) {
                     int floor = i + 1;
-                    if(currentSpeed < 0.05){
+                    if(currentSpeed == 0){
                        	commitPointDown = (5000*(floor -1)) - 100;
                        }
                        else
