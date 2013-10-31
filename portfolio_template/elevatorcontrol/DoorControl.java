@@ -97,13 +97,14 @@ public class DoorControl extends Controller {
     private int currentFloor;
     private int indexHallCall;
     private int indexCarCall;
+    private int reversalCount = 0;
     
     //store the period for the controller
     private SimTime period;
     
     //additional internal state variables
     private SimTime countDown = SimTime.ZERO;
-    private final static SimTime dwell = new SimTime(3,
+    private final static SimTime dwell = new SimTime(5,
             SimTime.SimTimeUnit.SECOND);
 
     //enumerate states
@@ -112,6 +113,8 @@ public class DoorControl extends Controller {
         STATE_STOP_OPENING,
         STATE_CLOSE,
         STATE_STOP_CLOSING,
+        STATE_REVERSING,
+        STATE_NUDGE,
     }
     
     //state variable initialized to the initial state FLASH_OFF
@@ -261,6 +264,7 @@ public class DoorControl extends Controller {
             }
         }
                 
+        
         switch (state) {
             case STATE_OPEN:
                 // state actions for 'DOOR OPEN'
@@ -273,6 +277,40 @@ public class DoorControl extends Controller {
                     newState = State.STATE_STOP_OPENING;
                 }
                 break;
+            case STATE_REVERSING:
+                // state actions for 'DOOR OPEN'
+                reversalCount++;
+                newState = State.STATE_OPEN;
+                // #transition 'T5.1'                
+                if(reversalCount > 3){
+                	newState = State.STATE_NUDGE;
+                }
+                break;
+            case STATE_NUDGE:
+                // state actions for 'DOOR NOT CLOSED'
+            	localDoorMotor.set(DoorCommand.NUDGE);
+                mDoorMotor.set(DoorCommand.NUDGE);
+                
+                //Index for getting current AtFloor
+                int index2 = ReplicationComputer.computeReplicationId(currentFloor, hallway);
+                
+                //#transition 'T5.3'
+                if(mAtFloor.get(index2).getValue()){
+                		if (((mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
+                			 mHallCall.get(indexHallCall).getValue() ||
+                			 mCarCall.get(indexCarCall).getValue()) &&  
+                			(mDriveSpeed.getSpeed() == Speed.STOP)){
+                		
+                				newState = State.STATE_OPEN;
+                		}
+                }
+                
+                //#transition 'T5.4'
+                if (mDoorClosed.getValue()) {
+                	newState = State.STATE_STOP_CLOSING;
+                }
+                break;
+                
             case STATE_STOP_OPENING:
                 // state actions for 'DOOR STOP OPENING'
             	localDoorMotor.set(DoorCommand.STOP);
@@ -297,14 +335,14 @@ public class DoorControl extends Controller {
                 
                 //#transition 'T5.3'
                 if(mAtFloor.get(index).getValue()){
-                		if ((mDoorReversal.getValue() || mDoorReversalOpp.getValue() ||
-                			(mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
-                			 mHallCall.get(indexHallCall).getValue() ||
-                			 mCarCall.get(indexCarCall).getValue()) &&  
-                			(mDriveSpeed.getSpeed() == Speed.STOP)){
-                		
-                				newState = State.STATE_OPEN;
-                		}
+                	if ((mDoorReversal.getValue() || mDoorReversalOpp.getValue() ||
+                		(mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
+                		 mHallCall.get(indexHallCall).getValue() ||
+                		 mCarCall.get(indexCarCall).getValue()) &&  
+                		(mDriveSpeed.getSpeed() == Speed.STOP)){
+                	
+                			newState = State.STATE_OPEN;
+                	}
                 }
                 
                 //#transition 'T5.4'
@@ -320,14 +358,18 @@ public class DoorControl extends Controller {
                 //Index for getting current AtFloor
                 int index1 = ReplicationComputer.computeReplicationId(currentFloor, hallway);             
 
+//                System.out.println("doorcontrol[" + hallway + "]: " + mDesiredFloor.getHallway());
                 //#transition 'T5.5'
                 if(mAtFloor.get(index1).getValue()){
-                		if (((mDesiredFloor.getFloor() == currentFloor) &&
-                			 (mDriveSpeed.getDirection() == Direction.STOP) && 
-                			 (mDriveSpeed.getSpeed() == Speed.STOP)) || 
-                			 (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {                		
-                				newState = State.STATE_OPEN;
-                		}
+                	if (((mDesiredFloor.getFloor() == currentFloor) &&
+                            ((mDesiredFloor.getHallway() == hallway) || 
+                            (mDesiredFloor.getHallway() == Hallway.BOTH)) &&
+                	    (mDriveSpeed.getDirection() == Direction.STOP) && 
+                	    (mDriveSpeed.getSpeed() == Speed.STOP)) || 
+                	    (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
+                			newState = State.STATE_OPEN;
+                			reversalCount = 0;
+                	}
                 	
                 }
          

@@ -10,6 +10,7 @@ import simulator.framework.RuntimeMonitor;
 import simulator.framework.Side;
 import simulator.payloads.AtFloorPayload.ReadableAtFloorPayload;
 import simulator.payloads.CarCallPayload.ReadableCarCallPayload;
+import simulator.payloads.CarLanternPayload.ReadableCarLanternPayload;
 import simulator.payloads.CarWeightPayload.ReadableCarWeightPayload;
 import simulator.payloads.DoorClosedPayload.ReadableDoorClosedPayload;
 import simulator.payloads.DoorMotorPayload.ReadableDoorMotorPayload;
@@ -27,7 +28,9 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     boolean wasOverweight = false;
     boolean wasCarCall[][] = new boolean[Elevator.numFloors][2];
     boolean wasHallCall[][][] = new boolean[Elevator.numFloors][2][2];
+    boolean litLantern[] = new boolean[2];
     boolean wasCall = false;
+    boolean bothLit = false;
     int wastedOpeningCount = 0;
     int overWeightCount = 0;
 
@@ -36,10 +39,11 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
     protected String[] summarize() {
-        String[] arr = new String[3];
+        String[] arr = new String[4];
         arr[0] = "Overweight Count = " + overWeightCount;
         arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
         arr[2] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
+        arr[3] = "Both lanterns lit up? " + bothLit;
         return arr;
     }
 
@@ -168,6 +172,14 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     	if(msg.pressed())
     	wasCarCall[msg.getFloor()-1][msg.getHallway().ordinal()] = true;
     }
+    
+    @Override
+    public void receive(ReadableCarLanternPayload msg) {
+    	if(msg.lighted())
+    		litLantern[msg.getDirection().ordinal()] = true;
+    	else
+    		litLantern[msg.getDirection().ordinal()] = false;
+    }
 
     private static enum DoorState {
 
@@ -177,6 +189,10 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         CLOSING
     }
     
+    private void checkLantern() {
+    	if (litLantern[0] && litLantern[1])
+    		bothLit = true;
+    }
     private void updateCurrentFloor(ReadableAtFloorPayload lastAtFloor) {
         if (lastAtFloor.getFloor() == currentFloor) {
             //the atFloor message is for the currentfloor, so check both sides to see if they are both false
