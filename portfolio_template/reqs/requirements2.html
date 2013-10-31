@@ -1070,13 +1070,14 @@
     &nbsp;&nbsp;&nbsp; 5.6.1&nbsp; DoorMotor[b, r] shall be commanded to
     Open; <br>
     &nbsp;&nbsp;&nbsp; 5.6.2&nbsp; CountDown shall be set to Dwell.<br>
-    &nbsp;&nbsp;&nbsp; 5.6.3&nbsp; ReversalCount shall be set to 0.<br>
     5.7 &nbsp;&nbsp; If mDoorOpened[b, r] is True, then<br>
     &nbsp;&nbsp;&nbsp; 5.7.1&nbsp; DoorMotor[b,r] shall be commanded to
     Stop.<br>
     &nbsp;&nbsp;&nbsp; 5.7.2&nbsp; CountDown shall be decremented.<br>
-    5.8&nbsp; If mDoorClosed[b, r] is True, then DoorMotor[b,r] should
-    be commanded to Stop.<br>
+    5.8&nbsp; If mDoorClosed[b, r] is True, then<br>
+    &nbsp;&nbsp;&nbsp; 5.8.1&nbsp; DoorMotor[b,r] should be commanded to
+    Stop.<br>
+    &nbsp;&nbsp;&nbsp; 5.8.2&nbsp; ReversalCount shall be set to 0.<br>
     5.9&nbsp; When CountDown &lt;= 0 and ReversalCount is not greater
     than three, DoorMotor[b,r] should be commanded to Close.<br>
     5.10 When CountDown &lt;= 0 and ReversalCount is greater than three,
@@ -1102,8 +1103,8 @@
           Statechart" src="doorcontrol_state_diagram.png" border="0"></a><br>
       <br clear="left">
     </p>
-    <table style="text-align: left;" height="185" border="1"
-      cellpadding="2" cellspacing="2" width="526">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="185" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -1159,21 +1160,17 @@
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.8</td>
-          <td style="vertical-align: top;">State = Init Reversal</td>
-        </tr>
-        <tr>
-          <td style="vertical-align: top;">T5.9</td>
           <td style="vertical-align: top;">ReversalCount &gt; 3 AND
             CountDown &lt;= 0 AND DoorReversal[b, r] = False AND
             mCarWeight(g) &lt; MaxCarCapacity AND mCarCall[f, b] = False
             AND mHallCall[f, b, d] = False, where d = mDesiredFloor.d</td>
         </tr>
         <tr>
-          <td style="vertical-align: top;">T5.10</td>
+          <td style="vertical-align: top;">T5.9</td>
           <td style="vertical-align: top;">mDoorClosed[b, r] = True</td>
         </tr>
         <tr>
-          <td style="vertical-align: top;">T5.11</td>
+          <td style="vertical-align: top;">T5.10</td>
           <td style="vertical-align: top;"> DoorReversal[b, r] = True OR
             mCarWeight(g) &gt;= MaxCarCapacity OR mCarCall[f, b] = True
             OR mHallCall[f, b, d] = True, where d = mDesiredFloor.d and
@@ -1190,7 +1187,7 @@
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);"><br>
           </td>
-          <td colspan="9" rowspan="1" style="vertical-align: top;
+          <td colspan="15" rowspan="1" style="vertical-align: top;
             background-color: rgb(204, 204, 204);">Requirements<br>
           </td>
         </tr>
@@ -1211,7 +1208,9 @@
             204, 204);">R5.7.2<br>
           </td>
           <td style="vertical-align: top; background-color: rgb(204,
-            204, 204);">R5.8<br>
+            204, 204);">R5.8.1<br>
+          </td>
+          <td bgcolor="#cccccc" valign="top">R5.8.1<br>
           </td>
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);">R5.9<br>
@@ -1224,6 +1223,16 @@
           </td>
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);">R5.12<br>
+          </td>
+          <td bgcolor="#cccccc" valign="top">R5.13<br>
+          </td>
+          <td bgcolor="#cccccc" valign="top">R5.14<br>
+          </td>
+          <td bgcolor="#cccccc" valign="top">R5.15.1<br>
+          </td>
+          <td bgcolor="#cccccc" valign="top">R5.15.2<br>
+          </td>
+          <td bgcolor="#cccccc" valign="top">R5.16<br>
           </td>
         </tr>
         <tr>
@@ -1239,6 +1248,8 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
+          <td valign="top"><br>
+          </td>
           <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;">X<br>
@@ -1246,6 +1257,16 @@
           <td style="vertical-align: top;">X<br>
           </td>
           <td style="vertical-align: top;">X<br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
           </td>
         </tr>
         <tr>
@@ -1262,13 +1283,25 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;"><br>
+          <td valign="top"><br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;">X<br>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
           </td>
         </tr>
         <tr>
@@ -1284,13 +1317,25 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
+          <td valign="top"><br>
+          </td>
           <td style="vertical-align: top;">X<br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;">X<br>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
           </td>
         </tr>
         <tr>
@@ -1307,13 +1352,93 @@
           </td>
           <td style="vertical-align: top;">X<br>
           </td>
-          <td style="vertical-align: top;"><br>
+          <td valign="top">X<br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;">X<br>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">S5.5 Reversing<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">S6.6 Command Door to Nudge<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
           </td>
         </tr>
         <tr>
@@ -1332,8 +1457,10 @@
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);"><br>
           </td>
-          <td style="vertical-align: top; background-color: rgb(204,
-            204, 204);"><br>
+          <td colspan="1" rowspan="1" style="vertical-align: top;
+            background-color: rgb(204, 204, 204);" bgcolor="#c0c0c0"><br>
+          </td>
+          <td bgcolor="#cccccc" valign="top"><br>
           </td>
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);"><br>
@@ -1346,6 +1473,16 @@
           </td>
           <td style="vertical-align: top; background-color: rgb(204,
             204, 204);"><br>
+          </td>
+          <td bgcolor="#cccccc" valign="top"><br>
+          </td>
+          <td bgcolor="#cccccc" valign="top"><br>
+          </td>
+          <td bgcolor="#cccccc" valign="top"><br>
+          </td>
+          <td bgcolor="#cccccc" valign="top"><br>
+          </td>
+          <td bgcolor="#cccccc" valign="top"><br>
           </td>
         </tr>
         <tr>
@@ -1361,13 +1498,25 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;"><br>
+          <td valign="top"><br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
           </td>
         </tr>
         <tr>
@@ -1383,6 +1532,8 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
+          <td valign="top"><br>
+          </td>
           <td style="vertical-align: top;">X<br>
           </td>
           <td style="vertical-align: top;"><br>
@@ -1390,6 +1541,16 @@
           <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
           </td>
         </tr>
         <tr>
@@ -1405,13 +1566,25 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
+          <td valign="top"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
           <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;">X<br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;"><br>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
           </td>
         </tr>
         <tr>
@@ -1425,7 +1598,9 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;">X<br>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td valign="top"><br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
@@ -1434,14 +1609,32 @@
           <td style="vertical-align: top;"><br>
           </td>
           <td style="vertical-align: top;"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
           </td>
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.5<br>
           </td>
-          <td style="vertical-align: top;">X<br>
+          <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;">X<br>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td style="vertical-align: top;"><br>
+          </td>
+          <td valign="top"><br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
@@ -1451,11 +1644,185 @@
           </td>
           <td style="vertical-align: top;"><br>
           </td>
-          <td style="vertical-align: top;">X<br>
+          <td valign="top"><br>
           </td>
-          <td style="vertical-align: top;"><br>
+          <td valign="top"><br>
           </td>
-          <td style="vertical-align: top;"><br>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">T5.6<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">T5.7<br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">T5.8<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">T5.9<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">T5.10<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top">X<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
           </td>
         </tr>
       </tbody>
