@@ -183,7 +183,7 @@ public class LanternControl extends Controller{
 					}
 				}
 				
-				if(allDoorsClosed){
+				if(allDoorsClosed || mDesiredFloor.getDirection() != direction){
 					newState = State.STATE_OFF;
 				}
 				

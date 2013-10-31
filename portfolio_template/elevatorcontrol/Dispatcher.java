@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import jSimPack.SimTime;
 import simulator.elevatormodules.AtFloorCanPayloadTranslator;
+import simulator.elevatormodules.CarLevelPositionCanPayloadTranslator;
 import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
 import simulator.framework.Controller;
 import simulator.framework.Direction;
@@ -21,8 +22,10 @@ import simulator.framework.Hallway;
 import simulator.framework.ReplicationComputer;
 import simulator.framework.Side;
 import simulator.payloads.CanMailbox;
+import simulator.payloads.DriveSpeedPayload;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
+import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
 import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
 public class Dispatcher extends Controller {
@@ -33,6 +36,11 @@ public class Dispatcher extends Controller {
     // translator for the door motor command message --
     // this is a generic translator
     private DesiredFloorCanPayloadTranslator mDesiredFloor;
+    
+    private ReadableDriveSpeedPayload localDriveSpeed;
+    
+    private ReadableCanMailbox networkCarLevelPosition;
+    private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
 
     private WriteableCanMailbox networkDesiredDwellFront;
     // translator for the door motor command message --
@@ -78,7 +86,9 @@ public class Dispatcher extends Controller {
     private static int targetFloor = 1;
     private final static SimTime dwell = new SimTime(5,
             SimTime.SimTimeUnit.SECOND);
+    private int currentAtFloor = 0;
     private int currentFloor = 0;
+    private Direction desiredDirection = Direction.STOP;
     private Direction currentDirection = Direction.STOP;
 
     //store the period for the controller
@@ -89,6 +99,9 @@ public class Dispatcher extends Controller {
         STATE_UP,
         STATE_DOWN,
         STATE_STOP,
+        STATE_REACHED_FLOOR_UP,
+        STATE_REACHED_FLOOR_DOWN,
+        STATE_REACHED_FLOOR,
         STATE_RESET,
     }
 
@@ -107,7 +120,16 @@ public class Dispatcher extends Controller {
         mDesiredFloor = new DesiredFloorCanPayloadTranslator(
                 networkDesiredFloor);
         canInterface.sendTimeTriggered(networkDesiredFloor, period);
+        
+        localDriveSpeed = DriveSpeedPayload.getReadablePayload();
+        physicalInterface.registerTimeTriggered(localDriveSpeed);
 
+        networkCarLevelPosition = CanMailbox.getReadableCanMailbox(
+                MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
+        mCarLevelPosition = new CarLevelPositionCanPayloadTranslator(
+                networkCarLevelPosition);
+        canInterface.registerTimeTriggered(networkCarLevelPosition);
+        
         networkDesiredDwellFront = CanMailbox.getWriteableCanMailbox(
                 MessageDictionary.DESIRED_DWELL_BASE_CAN_ID + 
                 ReplicationComputer.computeReplicationId(Hallway.FRONT));
@@ -202,14 +224,18 @@ public class Dispatcher extends Controller {
      */
     public void timerExpired(Object callbackData) {
         State newState = state;
-        
-
-        int commitPointUp;
-        int commitPointDown;
 
         boolean isAtFloor = false;
         int nHallway = 0;
         int index = 0;
+        int indexHallCall;
+        int indexCarCall;
+        int commitPointUp;
+        int commitPointDown;
+        boolean desiredHallwayOpen = false;
+        int acc = 1;
+        int position = mCarLevelPosition.getValue();
+        double currentSpeed = localDriveSpeed.speed();
         for (int i = 0; i < Elevator.numFloors; i++) {
             int floor = i + 1;
             for (Hallway h : Hallway.replicationValues) {
@@ -217,32 +243,24 @@ public class Dispatcher extends Controller {
                 index = ReplicationComputer.computeReplicationId(floor, h);
                 if (mAtFloor.get(index).getValue()) {
                     isAtFloor = true;
-                    currentFloor = floor;
+                    currentAtFloor = floor;
                 }
             }
         }
-        
-
-        for (Hallway h : Hallway.replicationValues) {
-        	int indexCarCall = ReplicationComputer.computeReplicationId(targetFloor, h);
-        	if (mCarCall.get(indexCarCall).getValue()) {
-                nHallway++;
-                if (nHallway >= 2)
-                    hallway = Hallway.BOTH;
-                else
-                    hallway = h;
-    		}
-        	
-    		int indexHallCall = ReplicationComputer.computeReplicationId(targetFloor, h, currentDirection);
-    		if (mHallCall.get(indexHallCall).getValue()) {
-                nHallway++;
-                if (nHallway >= 2)
-                    hallway = Hallway.BOTH;
-                else
-                    hallway = h;
-    		}
+        if(isAtFloor == true){
+        	currentFloor  =currentAtFloor;
         }
-        
+        else{
+        	for(int i = 0; i < Elevator.numFloors; i++){
+        		int floor = i + 1;
+        		if((position >= ((5000*(floor - 1)) - 50)) && (position < ((5000*floor) -50))){
+        			currentFloor = floor;
+        		}
+        	}
+        }
+        System.out.println("CurrentFloor is " + currentFloor);
+
+        System.out.println(state);
         switch (state) {
         case STATE_STOP:
             // state actions for state S11.1 'SET TARGET'
@@ -254,63 +272,96 @@ public class Dispatcher extends Controller {
                     mDoorClosedFrontRight.getValue() && 
                     mDoorClosedBackLeft.getValue() && 
                     mDoorClosedBackRight.getValue())) {
-
-                int indexHallCall;
-                int indexCarCall;
-                int nearestFloor = 100;
-                for (int i = 0; i < Elevator.numFloors; i++) {
-                    int floor = i + 1;
-                    if (Math.abs(floor - currentFloor) < Math.abs(nearestFloor - currentFloor)) {
-	                    for (Hallway h : Hallway.replicationValues) {
-                    	
-	                    	for (Direction d : Direction.replicationValues) {
-	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
-	                    		if (mHallCall.get(indexHallCall).getValue()) {
-	                    			if (floor > currentFloor) {
-                    					nearestFloor = floor;
-                    					currentDirection = Direction.UP;
-                    					newState = State.STATE_UP;
-                    					
-	                    			}
-	                    			else if (floor < currentFloor) {
-	                    					nearestFloor = floor;
-	                    					currentDirection = Direction.DOWN;
-	                    					newState = State.STATE_DOWN;
-	                    			}
-	                    		}
-	                    	}
-                   
-	                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
-	                    	if (mCarCall.get(indexCarCall).getValue()) {
-	                			if (floor > currentFloor) {
-                					nearestFloor = floor;
-                					currentDirection = Direction.UP;
-                					newState = State.STATE_UP;
-	                			}
-	                			else if (floor < currentFloor) {
-	                					nearestFloor = floor;
-                    					currentDirection = Direction.DOWN;
-	                					newState = State.STATE_DOWN;
-	                			}
-	                		}
-	
-	                    }
-                    }
-                    
-                }
-
-                if (nearestFloor != 100)
-                	targetFloor = nearestFloor;
-
-                // make sure that the last is false as well
-                // #transition 'T11.9'
-                if (!isAtFloor)
+                if (!isAtFloor){
                     newState = State.STATE_RESET;
+                    break;
+                }
             }
+            int flag = 0;
+            for(int i = 0; i < Elevator.numFloors; i++){
+            	int floor = i + 1;
+            	
+            	for(Hallway h : Hallway.replicationValues){
+            		for(Direction d : Direction.replicationValues){
+            			indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+            			indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+            				
+            			if(flag == 0){
+            				if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+            			
+            					flag = 1;
+            					targetFloor = floor;
+            					System.out.println("TargetFloor is " + targetFloor);
+            					System.out.println("CurrentFloor is " + currentFloor);
+            					if(mHallCall.get(indexHallCall).getValue()){
+            						if(targetFloor > currentAtFloor){
+            							newState = State.STATE_UP;
+            							currentDirection = d;
+            							desiredDirection = Direction.UP;
+            						}
+            						else if(targetFloor < currentAtFloor) {
+            							newState = State.STATE_DOWN;
+            							currentDirection = d;
+            							desiredDirection = Direction.DOWN;
+            						}    
+            					
+            						else if(targetFloor == currentAtFloor){
+            							newState = State.STATE_REACHED_FLOOR;
+            							currentDirection = d;
+            							desiredDirection = d;
+            						}
+            					}
+            					
+            					else{
+            						if(targetFloor > currentAtFloor){
+            							newState = State.STATE_UP;
+            							currentDirection = Direction.UP;
+            							desiredDirection = Direction.STOP;
+            						}
+            						else if(targetFloor < currentAtFloor) {
+            							newState = State.STATE_DOWN;
+            							currentDirection = Direction.DOWN;
+            							desiredDirection = Direction.STOP;
+            						}    
+            					
+            						else if(targetFloor == currentAtFloor){
+            							newState = State.STATE_REACHED_FLOOR;
+            							desiredDirection = Direction.STOP;
+            						}	
+            					}
+            						
+            				}       				
+            			}
+            		}
+           		}
+           	}
+            
+            nHallway = 0;
+            for (Hallway h : Hallway.replicationValues) {
+            	indexCarCall = ReplicationComputer.computeReplicationId(targetFloor, h);
+            	if (mCarCall.get(indexCarCall).getValue()) {
+                    nHallway++;
+                    if (nHallway >= 2)
+                        hallway = Hallway.BOTH;
+                    else
+                        hallway = h;
+        		}
+            	
+        		indexHallCall = ReplicationComputer.computeReplicationId(targetFloor, h, currentDirection);
+        		if (mHallCall.get(indexHallCall).getValue() && !mCarCall.get(indexCarCall).getValue()) {
+                    nHallway++;
+                    if (nHallway >= 2)
+                        hallway = Hallway.BOTH;
+                    else
+                        hallway = h;
+        		}
+            }
+            
             break;
         case STATE_UP:
             // state actions for state S11.1 'SET TARGET'
-            mDesiredFloor.set(targetFloor, hallway, Direction.UP);
+        	
+            mDesiredFloor.set(targetFloor, hallway, desiredDirection);
             if (hallway == Hallway.FRONT)
                 mDesiredDwellFront.setDwell(dwell);
             else if (hallway == Hallway.BACK)
@@ -326,52 +377,198 @@ public class Dispatcher extends Controller {
                     mDoorClosedFrontRight.getValue() && 
                     mDoorClosedBackLeft.getValue() && 
                     mDoorClosedBackRight.getValue())) {
+                if (!isAtFloor)
+                    newState = State.STATE_RESET;
+            }
+            boolean Calls = false;
+            for(Hallway h : Hallway.replicationValues){
+            	int indextargetHallCall = ReplicationComputer.computeReplicationId(targetFloor,h,Direction.UP);
+                int indextargetCarCall = ReplicationComputer.computeReplicationId(targetFloor,h);
+                
+                if(mHallCall.get(indextargetHallCall).getValue() || mCarCall.get(indextargetCarCall).getValue()){
+                	Calls = true;
+                }
+            }
+            
+            int targetFlag = 0;
 
-                int indexHallCall;
-                int indexCarCall;
-                int nearestFloor = 100;
-                for (int i = currentFloor; i < Elevator.numFloors; i++) {
+        		  if(Calls == false){
+        	   for(int i = targetFloor; i < Elevator.numFloors; i++){
+        		   int floor = i;
+        		   if(currentSpeed < 0.05){
+                   	commitPointUp = (5000*(floor -1)) + 100;
+                   }
+                   else
+        		   commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 200;
+        		   for(Hallway hall : Hallway.replicationValues){
+        			   for(Direction d : Direction.replicationValues){
+        			   indexHallCall = ReplicationComputer.computeReplicationId(floor, hall, d);
+        			   		if(mHallCall.get(indexHallCall).getValue()){
+        			   			if((targetFlag == 0) && (position < commitPointUp)){
+        			   				System.out.println("Inside this function");
+        			   				targetFloor = floor;
+        			   				currentDirection = d;
+        			   				targetFlag = 1;
+        			   			}
+        			   		}
+        			   		indexCarCall = ReplicationComputer.computeReplicationId(floor, hall);
+        			   		if(mCarCall.get(indexCarCall).getValue()){
+        			   			if((targetFlag == 0) && (position < commitPointUp)){
+        			   				targetFloor = floor;
+        			   				currentDirection = Direction.UP;
+        			   				targetFlag = 1;
+        			   			}
+        			   		}
+        			   }
+        		   }
+        	   }
+           }
+                for (int i = 0; i < Elevator.numFloors; i++) {
                     int floor = i + 1;
-                    commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 200;
-                    if (Math.abs(floor - currentFloor) < Math.abs(nearestFloor - currentFloor)) {
-	                    for (Hallway h : Hallway.replicationValues) {
-                    	
-	                    	for (Direction d : Direction.replicationValues) {
-	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
-	                    		if (mHallCall.get(indexHallCall).getValue()) {        			
-	                    			if(position < commitPointUp){
-	                    				nearestFloor = floor;
+                    if(currentSpeed < 0.05){
+                    	commitPointUp = (5000*(floor -1)) + 100;
+                    }
+                    else
+                    	commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 200;
+                    if (Math.abs(floor - currentFloor) <= Math.abs(targetFloor - currentFloor)) {
+	                    for (Hallway h : Hallway.replicationValues) {                    	
+	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.UP);
+		                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+		                    	
+	                    		if (mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()) { 
+	                    			System.out.println("got a Car call for hallway" + hallway + "floor" + floor);
+	                    			System.out.println(position);
+	                    			System.out.println(commitPointUp);
+	                    			if(position <= commitPointUp){
+	                    				System.out.println("TargetFloor not changed");
+	                    				currentDirection = Direction.UP;
+	                    				targetFloor = floor;
 	                    			}
 	                    		}
-	                    	}
-                   
-	                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
-	                    	if (mCarCall.get(indexCarCall).getValue()) {        			
-                    			if(position < commitPointUp){
-                    				nearestFloor = floor;
-                    			}
-	                		}
-	
 	                    }
                     }
                     
                 }
+                if (!(mDoorClosedFrontLeft.getValue() && 
+                        mDoorClosedFrontRight.getValue() && 
+                        mDoorClosedBackLeft.getValue() && 
+                        mDoorClosedBackRight.getValue())) {
+                	desiredDirection = Direction.UP;
+                }
+                else{
+                int dirflag = 0;
+                for(int i = targetFloor ; i < Elevator.numFloors; i++){
+            		int floor = i +1 ;
+                    for (Hallway h : Hallway.replicationValues) {
+                    	for (Direction d : Direction.replicationValues) {
+                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+                    		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+                    		
+                    		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                    			desiredDirection = Direction.UP;
+                    			dirflag = 1;
+                    		}
+                    	}
+                    }
+                }
+                int dirflag1 = 0;
+                if(dirflag == 0){
+                	  for(int i = targetFloor-1 ; i >0; i--){
+                  		int floor = i ;
+                          for (Hallway h : Hallway.replicationValues) {
+                          	for (Direction d : Direction.replicationValues) {
+                          		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+                          		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+                          		
+                          		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                          			desiredDirection = Direction.DOWN;
+                          			dirflag1 = 1;
+                          		}
+                          	}
+                          }
+                      }
+                }
+                if(dirflag ==0 && dirflag1 == 0){
+                	desiredDirection = Direction.STOP;
+                }
+                }
 
 
-                if (nearestFloor != 100)
-                	targetFloor = nearestFloor;
-                else
-                	newState = State.STATE_STOP;
+            int flag2 = 0;
+            if(targetFloor == currentAtFloor){
+            	flag2 =2;
+            	System.out.println("Reached target floor in state up");
+            	for(int i = currentAtFloor ; i < Elevator.numFloors; i++){
+            		int floor = i +1 ;
+                    for (Hallway h : Hallway.replicationValues) {
+                    	for (Direction d : Direction.replicationValues) {
+                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+                    		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+                    		
+                    		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                    			flag2 =1;
+                    			newState = State.STATE_REACHED_FLOOR_UP;
+                    			desiredDirection = Direction.UP;
+                    		}
+                    	}
+                    	
+                    }
+            		
+            	}
+            }
+        	if(flag2 == 2){
+            for(Hallway h : Hallway.replicationValues){
+            	int indexCurrentCall = ReplicationComputer.computeReplicationId(currentAtFloor, h, Direction.DOWN);
+            
+            		if(mHallCall.get(indexCurrentCall).getValue()){
+            			System.out.println("Going to state down from state up");
+            			targetFloor = currentAtFloor;
+                		currentDirection = Direction.DOWN;
+                		desiredDirection = Direction.DOWN;
+                		newState = State.STATE_DOWN;
+            		}
+            		else{
+            			
+            			System.out.println("Going to state reached floor from state up");
+            			newState = State.STATE_REACHED_FLOOR;
+            		}
+            	}
+            }
+            
+
+            nHallway = 0;
+            for (Hallway h : Hallway.replicationValues) {
+            	indexCarCall = ReplicationComputer.computeReplicationId(targetFloor, h);
+            	if (mCarCall.get(indexCarCall).getValue()) {
+                    nHallway++;
+                    if (nHallway >= 2)
+                        hallway = Hallway.BOTH;
+                    else
+                        hallway = h;
+        		}
+            	if(targetFloor == 8){
+            		currentDirection = Direction.DOWN;
+            	}
+        		indexHallCall = ReplicationComputer.computeReplicationId(targetFloor, h, currentDirection);
+        		if (mHallCall.get(indexHallCall).getValue() && !mCarCall.get(indexCarCall).getValue()) {
+                    nHallway++;
+                    if (nHallway >= 2)
+                        hallway = Hallway.BOTH;
+                    else
+                        hallway = h;
+        		}
+            }
+            
+            
+                	
 
                 // make sure that the last is false as well
                 // #transition 'T11.9'
-                if (!isAtFloor)
-                    newState = State.STATE_RESET;
-            }
+
             break;      
         case STATE_DOWN:
             // state actions for state S11.1 'SET TARGET'
-            mDesiredFloor.set(targetFloor, hallway, Direction.DOWN);
+            mDesiredFloor.set(targetFloor, hallway, desiredDirection);
             if (hallway == Hallway.FRONT)
                 mDesiredDwellFront.setDwell(dwell);
             else if (hallway == Hallway.BACK)
@@ -386,50 +583,399 @@ public class Dispatcher extends Controller {
             if (!(mDoorClosedFrontLeft.getValue() && 
                     mDoorClosedFrontRight.getValue() && 
                     mDoorClosedBackLeft.getValue() && 
-                    mDoorClosedBackRight.getValue())) {
+                    mDoorClosedBackRight.getValue())) {            	
+                if (!isAtFloor)
+                    newState = State.STATE_RESET;
+            }
 
-                int indexHallCall;
-                int indexCarCall;
-                int nearestFloor = 100;
-                for (int i = 0; i < currentFloor - 1; i++) {
+            Calls = false;
+            for(Hallway h : Hallway.replicationValues){
+            	int indextargetHallCall = ReplicationComputer.computeReplicationId(targetFloor,h,Direction.DOWN);
+                int indextargetCarCall = ReplicationComputer.computeReplicationId(targetFloor,h);
+                
+                if(mHallCall.get(indextargetHallCall).getValue() || mCarCall.get(indextargetCarCall).getValue()){
+                	Calls = true;
+                }
+            }
+
+            int targetflag1 = 0;
+          
+        		   if(Calls == false){
+        	   for(int i = targetFloor; i > 0; i--){
+        		   int floor = i;
+        		   if(currentSpeed < 0.05){
+                   	commitPointDown = (5000*(floor -1)) - 100;
+                   }
+                   else
+                	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 200;
+        		   for(Hallway hall : Hallway.replicationValues){
+        			   for(Direction d : Direction.replicationValues){
+        			   indexHallCall = ReplicationComputer.computeReplicationId(floor, hall, d);
+        			   		if(mHallCall.get(indexHallCall).getValue()){
+        			   			if((targetflag1 == 0) && (position > commitPointDown)){
+        			   				targetFloor = floor;
+        			   				currentDirection = d;
+        			   				targetflag1 = 1;
+        			   			}
+        			   		}
+        			   		
+        			   		indexCarCall = ReplicationComputer.computeReplicationId(floor, hall);
+        			   		if(mCarCall.get(indexCarCall).getValue()){
+        			   			if((targetflag1 == 0) && (position > commitPointDown)){
+        			   				targetFloor = floor;
+        			   				currentDirection = Direction.DOWN;
+        			   				targetFlag = 1;
+        			   			}
+        			   		}
+        			   }
+        			   
+        		   }
+        	   }
+           }
+                for (int i = 0; i < currentFloor ; i++) {
                     int floor = i + 1;
-                    commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 200;
-                    if (Math.abs(floor - currentFloor) < Math.abs(nearestFloor - currentFloor)) {
+                    if(currentSpeed < 0.05){
+                       	commitPointDown = (5000*(floor -1)) - 100;
+                       }
+                       else
+                    	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 200;
+                    if (Math.abs(floor - currentFloor) <= Math.abs(targetFloor - currentFloor)) {
 	                    for (Hallway h : Hallway.replicationValues) {
                     	
-	                    	for (Direction d : Direction.replicationValues) {
-	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
-	                    		if (mHallCall.get(indexHallCall).getValue()) {
-	                    			if(position > commitPointDown){
-	                    				nearestFloor = floor;
+
+	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.DOWN);
+	                    		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+	                    		if (mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()) {
+	                    			if(position >= commitPointDown){
+	                    				targetFloor = floor;
+	                    				currentDirection = Direction.DOWN;
 	                    			}
-	                    		}
-	                    	}
-                   
-	                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
-	                    	if (mCarCall.get(indexCarCall).getValue()) {
-                    			if(position > commitPointDown){
-                    				nearestFloor = floor;
-                    			}
-	                		}
-	
+	                    		}	                    	             	
 	                    }
                     }
                     
                 }
-
-
-                if (nearestFloor != 100)
-                	targetFloor = nearestFloor;
-                else
-                	newState = State.STATE_STOP;
-
+            
+                if (!(mDoorClosedFrontLeft.getValue() && 
+                        mDoorClosedFrontRight.getValue() && 
+                        mDoorClosedBackLeft.getValue() && 
+                        mDoorClosedBackRight.getValue())) {
+                	desiredDirection = Direction.DOWN;
+                }
+                else{
+                int dirflag2 = 0;
+                for(int i = targetFloor -1 ; i >0; i--){
+            		int floor = i  ;
+                    for (Hallway h : Hallway.replicationValues) {
+                    	for (Direction d : Direction.replicationValues) {
+                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+                    		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+                    		
+                    		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                    			desiredDirection = Direction.DOWN;
+                    			dirflag2 = 1;
+                    		}
+                    	}
+                    }
+                }
+                int dirflag3 = 0;
+                if(dirflag2 == 0){
+                	  for(int i = targetFloor ; i < Elevator.numFloors; i++){
+                  		int floor = i+1 ;
+                          for (Hallway h : Hallway.replicationValues) {
+                          	for (Direction d : Direction.replicationValues) {
+                          		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+                          		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+                          		
+                          		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                          			desiredDirection = Direction.UP;
+                          			dirflag3 = 1;
+                          		}
+                          	}
+                          }
+                      }
+                }
+                if(dirflag2 ==0 && dirflag3 == 0){
+                	desiredDirection = Direction.STOP;
+                }
+                }
+                int flag3 = 0;
+                if(targetFloor == currentAtFloor){
+                	flag3 = 2;
+                	for(int i = currentAtFloor -1 ; i > 0; i--){
+                		int floor = i ;
+                        for (Hallway h : Hallway.replicationValues) {
+                        	for (Direction d : Direction.replicationValues) {
+                        		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+                        		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+                        		
+                        		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                        			flag3 =1;
+                        			newState = State.STATE_REACHED_FLOOR_DOWN;
+                        			desiredDirection = Direction.DOWN;
+                        		}
+                        	}
+                        	
+                        }
+                		
+                	}
+                }
+                
+                for(Hallway h : Hallway.replicationValues){
+                	int indexCurrentCall = ReplicationComputer.computeReplicationId(currentAtFloor, h, Direction.UP);
+                	if(flag3 == 2){
+                		if(mHallCall.get(indexCurrentCall).getValue()){
+                			targetFloor = currentAtFloor;
+                			currentDirection = Direction.UP;
+                			desiredDirection = Direction.UP;
+                			newState = State.STATE_UP;
+                		}
+                		else{
+                			newState = State.STATE_REACHED_FLOOR;
+                		}
+                	}	
+                }
+             
+                
+                nHallway = 0;
+                for (Hallway h : Hallway.replicationValues) {
+                	indexCarCall = ReplicationComputer.computeReplicationId(targetFloor, h);
+                	if (mCarCall.get(indexCarCall).getValue()) {
+                        nHallway++;
+                        if (nHallway >= 2)
+                            hallway = Hallway.BOTH;
+                        else
+                            hallway = h;
+            		}
+                	if(targetFloor == 1){
+                		currentDirection = Direction.UP;
+                	}
+            		indexHallCall = ReplicationComputer.computeReplicationId(targetFloor, h, currentDirection);
+            		if (mHallCall.get(indexHallCall).getValue() && !mCarCall.get(indexCarCall).getValue()) {
+                        nHallway++;
+                        if (nHallway >= 2)
+                            hallway = Hallway.BOTH;
+                        else
+                            hallway = h;
+            		}
+                }
                 // make sure that the last is false as well
                 // #transition 'T11.9'
-                if (!isAtFloor)
-                    newState = State.STATE_RESET;
+
+            break;       
+            
+        case STATE_REACHED_FLOOR_UP:
+        	
+            mDesiredFloor.set(targetFloor, hallway, Direction.UP);
+            desiredHallwayOpen = false;
+        	if(hallway == Hallway.BOTH){
+        		if(!mDoorClosedFrontLeft.getValue() && 
+                        !mDoorClosedFrontRight.getValue() && 
+                        !mDoorClosedBackLeft.getValue() && 
+                        !mDoorClosedBackRight.getValue()){
+        			desiredHallwayOpen = true;     			
+        		}
+        	}
+        		
+        	else if(hallway == Hallway.FRONT){
+        		if(!mDoorClosedFrontLeft.getValue() && 
+                        !mDoorClosedFrontRight.getValue()){
+        			desiredHallwayOpen = true;    
+        		}
+        	}
+
+        	else if(hallway == Hallway.BACK){
+        		if(!mDoorClosedBackLeft.getValue() && 
+                    !mDoorClosedBackRight.getValue()){
+        			desiredHallwayOpen = true;     			
+        		}
+        	}
+            if (desiredHallwayOpen){
+                int flag1 = 0;
+                for(int i = currentAtFloor; i < Elevator.numFloors; i++){
+                	int floor = i + 1;
+                	
+                	for(Hallway h : Hallway.replicationValues){
+                		for(Direction d : Direction.replicationValues){
+                			indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.UP);
+                			indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+                				
+                			if(flag1 == 0){
+                				if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                			
+                					flag1 = 1;
+                					targetFloor = floor;
+                					currentDirection = Direction.UP;
+                					desiredDirection = Direction.UP;
+                					newState = State.STATE_UP;
+                				}       				
+                			}
+                		}
+               		}
+               	}
+                if(flag1 == 0){
+                	for(int i = currentAtFloor; i < Elevator.numFloors; i++){
+                    	int floor = i + 1;
+                    	
+                    	for(Hallway h : Hallway.replicationValues){
+                    		
+                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.DOWN);
+                    		
+                    		if(mHallCall.get(indexHallCall).getValue()){
+                    			targetFloor = floor;
+                    			currentDirection = Direction.DOWN;
+                    			desiredDirection = Direction.UP;
+                    			newState = State.STATE_UP;
+                  //  			flag7 = 1;
+                    		}
+                    	}
+                	}
+                }                 
             }
-            break;               
+
+            nHallway = 0;
+            for (Hallway h : Hallway.replicationValues) {
+            	indexCarCall = ReplicationComputer.computeReplicationId(targetFloor, h);
+            	if (mCarCall.get(indexCarCall).getValue()) {
+                    nHallway++;
+                    if (nHallway >= 2)
+                        hallway = Hallway.BOTH;
+                    else
+                        hallway = h;
+        		}
+            	
+        		indexHallCall = ReplicationComputer.computeReplicationId(targetFloor, h, currentDirection);
+        		if (mHallCall.get(indexHallCall).getValue() && !mCarCall.get(indexCarCall).getValue()) {
+                    nHallway++;
+                    if (nHallway >= 2)
+                        hallway = Hallway.BOTH;
+                    else
+                        hallway = h;
+        		}
+            }
+            break;
+            
+        case STATE_REACHED_FLOOR_DOWN:
+        	
+            mDesiredFloor.set(targetFloor, hallway, Direction.DOWN);
+            desiredHallwayOpen = false;
+        	if(hallway == Hallway.BOTH){
+        		if(!mDoorClosedFrontLeft.getValue() && 
+                        !mDoorClosedFrontRight.getValue() && 
+                        !mDoorClosedBackLeft.getValue() && 
+                        !mDoorClosedBackRight.getValue()){
+        			desiredHallwayOpen = true;     			
+        		}
+        	}
+        		
+        	else if(hallway == Hallway.FRONT){
+        		if(!mDoorClosedFrontLeft.getValue() && 
+                        !mDoorClosedFrontRight.getValue()){
+        			desiredHallwayOpen = true;    
+        		}
+        	}
+
+        	else if(hallway == Hallway.BACK){
+        		if(!mDoorClosedBackLeft.getValue() && 
+                    !mDoorClosedBackRight.getValue()){
+        			desiredHallwayOpen = true;     			
+        		}
+        	}
+            if (desiredHallwayOpen){
+            	 int flag1 = 0;
+                 for(int i = currentFloor -1; i > 0; i--){
+                 	int floor = i ;
+                 	
+                 	for(Hallway h : Hallway.replicationValues){
+                 		for(Direction d : Direction.replicationValues){
+                 			indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.DOWN);
+                 			indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
+                 				
+                 			if(flag1 != 1){
+                 				if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                 			
+                 					flag1 = 1;
+                 					targetFloor = floor;
+                 					currentDirection = Direction.DOWN;
+                 					newState = State.STATE_DOWN;
+                 				}       				
+                 			}
+                 		}
+                	}
+                }
+                 if(flag1 == 0){
+                 	for(int i = currentFloor; i > 1; i--){
+                     	int floor = i - 1;
+                     	
+                     	for(Hallway h : Hallway.replicationValues){
+                     		
+                     		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.UP);
+                     		
+                     		if(mHallCall.get(indexHallCall).getValue()){
+                     			targetFloor = floor;
+                     			currentDirection = Direction.UP;
+                     			desiredDirection = Direction.DOWN;
+                     			newState = State.STATE_DOWN;
+                     		}
+                     	}
+                 	}
+                 }
+            }   		
+    		
+            nHallway = 0;
+            for (Hallway h : Hallway.replicationValues) {
+            	indexCarCall = ReplicationComputer.computeReplicationId(targetFloor, h);
+            	if (mCarCall.get(indexCarCall).getValue()) {
+                    nHallway++;
+                    if (nHallway >= 2)
+                        hallway = Hallway.BOTH;
+                    else
+                        hallway = h;
+        		}
+            	
+        		indexHallCall = ReplicationComputer.computeReplicationId(targetFloor, h, currentDirection);
+        		if (mHallCall.get(indexHallCall).getValue() && !mCarCall.get(indexCarCall).getValue()) {
+                    nHallway++;
+                    if (nHallway >= 2)
+                        hallway = Hallway.BOTH;
+                    else
+                        hallway = h;
+        		}
+            }
+            break;
+            
+        case STATE_REACHED_FLOOR:
+        	
+            mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
+            desiredHallwayOpen = false;
+        	if(hallway == Hallway.BOTH){
+        		if(!mDoorClosedFrontLeft.getValue() && 
+                        !mDoorClosedFrontRight.getValue() && 
+                        !mDoorClosedBackLeft.getValue() && 
+                        !mDoorClosedBackRight.getValue()){
+        			desiredHallwayOpen = true;     			
+        		}
+        	}
+        		
+        	else if(hallway == Hallway.FRONT){
+        		if(!mDoorClosedFrontLeft.getValue() && 
+                        !mDoorClosedFrontRight.getValue()){
+        			desiredHallwayOpen = true;    
+        		}
+        	}
+
+        	else if(hallway == Hallway.BACK){
+        		if(!mDoorClosedBackLeft.getValue() && 
+                    !mDoorClosedBackRight.getValue()){
+        			desiredHallwayOpen = true;     			
+        		}
+        	}
+        	
+            if (desiredHallwayOpen){
+            	newState = State.STATE_STOP;
+            }
+        	
+        	break;
         case STATE_RESET:
             // state actions for state S11.2 'RESET'
             mDesiredFloor.set(1, Hallway.NONE, Direction.STOP);
