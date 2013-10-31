@@ -137,11 +137,11 @@ public class DoorControl extends Controller {
         this.period = period;
         this.hallway = hallway;
         this.side = side;
-	 if(side == Side.LEFT){
-		Oppside = Side.RIGHT;
-	 }
-	 else
-		Oppside = Side.LEFT;
+     if(side == Side.LEFT){
+        Oppside = Side.RIGHT;
+     }
+     else
+        Oppside = Side.LEFT;
         currentFloor = 1; 
 
         log("Created DoorControl with period = ", period);
@@ -176,7 +176,7 @@ public class DoorControl extends Controller {
                 networkDoorReversal, hallway, side);
         canInterface.registerTimeTriggered(networkDoorReversal);
 
-	 networkDoorReversalOpp = CanMailbox.getReadableCanMailbox(
+     networkDoorReversalOpp = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(hallway, Oppside));
         mDoorReversalOpp = new DoorReversalCanPayloadTranslator(
@@ -204,7 +204,7 @@ public class DoorControl extends Controller {
         for (int i = 0; i < Elevator.numFloors; i++) {
             int floor = i + 1;
             for (Hallway h : Hallway.replicationValues) {
-            	
+                
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + index);
                 AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
@@ -213,20 +213,20 @@ public class DoorControl extends Controller {
                 
 
                 ReadableCanMailbox networkCarCall = CanMailbox.getReadableCanMailbox(
-                		MessageDictionary.CAR_CALL_BASE_CAN_ID + 
-                		ReplicationComputer.computeReplicationId(floor, hallway));
+                        MessageDictionary.CAR_CALL_BASE_CAN_ID + 
+                        ReplicationComputer.computeReplicationId(floor, hallway));
                 BooleanCanPayloadTranslator nCarCall = new BooleanCanPayloadTranslator(networkCarCall);
                 canInterface.registerTimeTriggered(networkCarCall);
                 mCarCall.put(index, nCarCall);
                 
                 for (Direction d : Direction.replicationValues) {
-                	int indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
-	                ReadableCanMailbox networkHallCall = CanMailbox.getReadableCanMailbox(
-	                		MessageDictionary.HALL_CALL_BASE_CAN_ID + 
-	                		ReplicationComputer.computeReplicationId(floor, hallway, d));
-	                BooleanCanPayloadTranslator nHallCall = new BooleanCanPayloadTranslator(networkHallCall);
-	                canInterface.registerTimeTriggered(networkHallCall);
-	                mHallCall.put(indexHallCall, nHallCall);
+                    int indexHallCall = ReplicationComputer.computeReplicationId(floor, h, d);
+                    ReadableCanMailbox networkHallCall = CanMailbox.getReadableCanMailbox(
+                            MessageDictionary.HALL_CALL_BASE_CAN_ID + 
+                            ReplicationComputer.computeReplicationId(floor, hallway, d));
+                    BooleanCanPayloadTranslator nHallCall = new BooleanCanPayloadTranslator(networkHallCall);
+                    canInterface.registerTimeTriggered(networkHallCall);
+                    mHallCall.put(indexHallCall, nHallCall);
                 }
 
             }
@@ -255,9 +255,9 @@ public class DoorControl extends Controller {
             for (Hallway h : Hallway.replicationValues) {
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 if (mAtFloor.get(index).getValue()){
-                	indexHallCall = ReplicationComputer.computeReplicationId(floor, hallway, direction);
-                	indexCarCall = ReplicationComputer.computeReplicationId(floor, hallway);
-                	currentFloor = floor;
+                    indexHallCall = ReplicationComputer.computeReplicationId(floor, hallway, direction);
+                    indexCarCall = ReplicationComputer.computeReplicationId(floor, hallway);
+                    currentFloor = floor;
                         break;
 
                 }
@@ -268,7 +268,7 @@ public class DoorControl extends Controller {
         switch (state) {
             case STATE_OPEN:
                 // state actions for 'DOOR OPEN'
-            	localDoorMotor.set(DoorCommand.OPEN);
+                localDoorMotor.set(DoorCommand.OPEN);
                 mDoorMotor.set(DoorCommand.OPEN);
                 countDown = SimTime.add(SimTime.ZERO, dwell);
                 
@@ -277,100 +277,98 @@ public class DoorControl extends Controller {
                     newState = State.STATE_STOP_OPENING;
                 }
                 break;
-            case STATE_REVERSING:
-                // state actions for 'DOOR OPEN'
-                reversalCount++;
-                newState = State.STATE_OPEN;
-                // #transition 'T5.1'                
-                if(reversalCount > 3){
-                	newState = State.STATE_NUDGE;
-                }
-                break;
             case STATE_NUDGE:
-                // state actions for 'DOOR NOT CLOSED'
-            	localDoorMotor.set(DoorCommand.NUDGE);
+                // state actions for 'DOOR NUDGE'
+                localDoorMotor.set(DoorCommand.NUDGE);
                 mDoorMotor.set(DoorCommand.NUDGE);
                 
                 //Index for getting current AtFloor
                 int index2 = ReplicationComputer.computeReplicationId(currentFloor, hallway);
                 
-                //#transition 'T5.3'
-                if(mAtFloor.get(index2).getValue()){
-                		if (((mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
-                			 mHallCall.get(indexHallCall).getValue() ||
-                			 mCarCall.get(indexCarCall).getValue()) &&  
-                			(mDriveSpeed.getSpeed() == Speed.STOP)){
-                		
-                				newState = State.STATE_OPEN;
-                		}
+                //#transition 'T5.9'
+                if (mAtFloor.get(index2).getValue()) {
+                    if ((mDriveSpeed.getSpeed() == Speed.STOP) &&
+                            ((mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
+                             mHallCall.get(indexHallCall).getValue() ||
+                             mCarCall.get(indexCarCall).getValue())) {
+                        newState = State.STATE_OPEN;
+                    }
                 }
                 
-                //#transition 'T5.4'
+                //#transition 'T5.10'
                 if (mDoorClosed.getValue()) {
-                	newState = State.STATE_STOP_CLOSING;
+                    newState = State.STATE_STOP_CLOSING;
                 }
                 break;
-                
             case STATE_STOP_OPENING:
                 // state actions for 'DOOR STOP OPENING'
-            	localDoorMotor.set(DoorCommand.STOP);
+                localDoorMotor.set(DoorCommand.STOP);
                 mDoorMotor.set(DoorCommand.STOP);
                 countDown = SimTime.subtract(countDown, period);
                 
-                // #transition 'T5.2'
                 if (countDown.isLessThanOrEqual(SimTime.ZERO) && 
                     !mDoorReversal.getValue() && 
                     (mCarWeight.getValue() < Elevator.MaxCarCapacity)) {
-                    newState = State.STATE_CLOSE;
+                    if (reversalCount >= 3) {
+                        // #transition 'T5.8'
+                        newState = State.STATE_NUDGE;
+                    }
+                    else {
+                        // #transition '5.3'
+                        newState = State.STATE_CLOSE;
+                    }
                 }
                 break;
             case STATE_CLOSE:
                 // state actions for 'DOOR NOT CLOSED'
-            	localDoorMotor.set(DoorCommand.CLOSE);
+                localDoorMotor.set(DoorCommand.CLOSE);
                 mDoorMotor.set(DoorCommand.CLOSE);
-            
-
+                
                 //Index for getting current AtFloor
                 int index = ReplicationComputer.computeReplicationId(currentFloor, hallway);
                 
-                //#transition 'T5.3'
-                if(mAtFloor.get(index).getValue()){
-                	if ((mDoorReversal.getValue() || mDoorReversalOpp.getValue() ||
-                		(mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
-                		 mHallCall.get(indexHallCall).getValue() ||
-                		 mCarCall.get(indexCarCall).getValue()) &&  
-                		(mDriveSpeed.getSpeed() == Speed.STOP)){
-                	
-                			newState = State.STATE_OPEN;
-                	}
+                //#transition 'T5.3', 'T5.4', 'T5.5'
+                if (mAtFloor.get(index).getValue()) {
+                    if (mDoorReversal.getValue() || mDoorReversalOpp.getValue()) {
+                        newState = State.STATE_OPEN;
+                        // state actions for 'REVERSING'
+                        reversalCount++;
+                    }
+                    else if ((mDriveSpeed.getSpeed() == Speed.STOP) &&
+                        ((mCarWeight.getValue() >= Elevator.MaxCarCapacity) || 
+                         mHallCall.get(indexHallCall).getValue() ||
+                         mCarCall.get(indexCarCall).getValue())) {
+                            newState = State.STATE_OPEN;
+                    }
                 }
                 
-                //#transition 'T5.4'
+                //#transition 'T5.6'
                 if (mDoorClosed.getValue()) {
-                	newState = State.STATE_STOP_CLOSING;
+                    newState = State.STATE_STOP_CLOSING;
                 }
                 break;
             case STATE_STOP_CLOSING:
-            	//state actions for 'DOOR STOP CLOSING'
-            	localDoorMotor.set(DoorCommand.STOP);
+                //state actions for 'DOOR STOP CLOSING'
+                localDoorMotor.set(DoorCommand.STOP);
                 mDoorMotor.set(DoorCommand.STOP);
+                reversalCount = 0;
 
                 //Index for getting current AtFloor
                 int index1 = ReplicationComputer.computeReplicationId(currentFloor, hallway);             
 
-//                System.out.println("doorcontrol[" + hallway + "]: " + mDesiredFloor.getHallway());
-                //#transition 'T5.5'
+                // System.out.println("doorcontrol[" + hallway + "]: " + mDesiredFloor.getHallway());
+                //#transition 'T5.7'
                 if(mAtFloor.get(index1).getValue()){
-                	if (((mDesiredFloor.getFloor() == currentFloor) &&
+                    if (((mDesiredFloor.getFloor() == currentFloor) &&
                             ((mDesiredFloor.getHallway() == hallway) || 
                             (mDesiredFloor.getHallway() == Hallway.BOTH)) &&
-                	    (mDriveSpeed.getDirection() == Direction.STOP) && 
-                	    (mDriveSpeed.getSpeed() == Speed.STOP)) || 
-                	    (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
-                			newState = State.STATE_OPEN;
-                			reversalCount = 0;
-                	}
-                	
+                        (mDriveSpeed.getDirection() == Direction.STOP) && 
+                        (mDriveSpeed.getSpeed() == Speed.STOP)) || 
+                        (mCarWeight.getValue() >= Elevator.MaxCarCapacity)) {
+                            newState = State.STATE_OPEN;
+                            reversalCount = 0;
+                    }
+                    
                 }
          
                 break;
