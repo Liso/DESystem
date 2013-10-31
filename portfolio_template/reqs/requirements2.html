@@ -67,6 +67,8 @@
 
 
 
+
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -1064,7 +1066,7 @@
     5.5&nbsp;&nbsp;&nbsp; If CarWeight(x) &gt;= MaxCarCapacity, the
     doors shall open completely until the car is no longer overloaded.
     <h3> TIME-TRIGGERED BEHAVIORS: </h3>
-    5.6 &nbsp;&nbsp; If any mAtFloor[f, b] is True and f equals
+    5.6 &nbsp;&nbsp; If any mAtFloor[f, b] is true and f equals
     mDesiredFloor.f, and mDriveSpeed = (0, d) or mDriveSpeed = (s, Stop)
     then: <br>
     &nbsp;&nbsp;&nbsp; 5.6.1&nbsp; DoorMotor[b, r] shall be commanded to
@@ -1096,7 +1098,7 @@
     &nbsp;&nbsp;&nbsp; 5.15.1 DoorMotor[b,r] shall be commanded to Open.<br>
     &nbsp;&nbsp;&nbsp; 5.15.2 ReversalCount shall increment.<br>
     5.16 mDoorMotor[b,r] shall be set to the current value of
-    DoorMotor[b,r]<br>
+    DoorMotor[b,r]
     <p class="MsoNormal" style=""> </p>
     <h3>Time-Triggered Statechart</h3>
     <p><a href="doorcontrol_state_diagram.png"><img alt="DoorControl
@@ -1155,8 +1157,7 @@
           <td style="vertical-align: top;">T5.7<br>
           </td>
           <td style="vertical-align: top;">Any mAtFloor[f, b] = True AND
-            f = mDesiredFloor.f AND mDriveSpeed = (0, d) OR (s, Stop)<br>
-          </td>
+            f = mDesiredFloor.f AND mDriveSpeed = (0, d) OR (s, Stop)</td>
         </tr>
         <tr>
           <td style="vertical-align: top;">T5.8</td>
@@ -2099,11 +2100,11 @@
     <h3>TIME-TRIGGERED STATE CHART: </h3>
     &nbsp; <br>
     <a href="drivecontrol_state_diagram.png"><img alt=""
-        src="drivecontrol_state_diagram.png" height="561" border="0"
+        src="drivecontrol_state_diagram.png" border="0" height="561"
         width="748"></a><br>
     <br>
     <br>
-    <table height="424" border="1" cellpadding="2" cellspacing="2"
+    <table border="1" cellpadding="2" cellspacing="2" height="424"
       width="699">
       <tbody>
         <tr>
@@ -2193,8 +2194,8 @@
     <h2>&nbsp;<br>
     </h2>
     <h3>Requirements-to-Statecharts Traceability</h3>
-    <table style="text-align: left;" height="664" border="1"
-      cellpadding="2" cellspacing="2" width="688">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="664" width="688">
       <tbody>
         <tr>
           <td style="vertical-align: top; background-color: rgb(204,
@@ -2609,8 +2610,8 @@
     <p class="MsoNormal" style=""> </p>
     <h3>Time-Triggered Statechart</h3>
     <p> <a href="lanterncontrol_state_diagram.png"><img alt="Testlight
-          Statechart" src="lanterncontrol_state_diagram.png"
-          height="282" border="0" width="522"></a><br clear="left">
+          Statechart" src="lanterncontrol_state_diagram.png" border="0"
+          height="282" width="522"></a><br clear="left">
     </p>
     <br style="font-weight: bold;">
     <table style="text-align: left;" border="1" cellpadding="2"
@@ -2763,11 +2764,11 @@
     </h3>
     &nbsp; <a href="hallbuttoncontrol_state_diagram.png"><img
         alt="statechart-HallButtonControl"
-        src="hallbuttoncontrol_state_diagram.png" height="275"
-        border="0" width="505"></a><br>
+        src="hallbuttoncontrol_state_diagram.png" border="0"
+        height="275" width="505"></a><br>
     <br>
-    <table style="text-align: left;" height="185" border="1"
-      cellpadding="2" cellspacing="2" width="526">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="185" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -2956,11 +2957,11 @@
     <h3>Time-Triggered Statechart</h3>
     <p><a href="carbuttoncontrol_state_diagram.png"><img
           alt="CarButtonControl Statechart"
-          src="carbuttoncontrol_state_diagram.png" height="273"
-          border="0" width="426"></a><br clear="left">
+          src="carbuttoncontrol_state_diagram.png" border="0"
+          height="273" width="426"></a><br clear="left">
     </p>
-    <table style="text-align: left;" height="185" border="1"
-      cellpadding="2" cellspacing="2" width="526">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="185" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -3149,8 +3150,8 @@
     <h3>Time-Triggered Statechart</h3>
     <p> <a href="carpositioncontrol_state_diagram.png"><img
           alt="Testlight Statechart"
-          src="carpositioncontrol_state_diagram.png" height="271"
-          border="0" width="328"></a><br clear="left">
+          src="carpositioncontrol_state_diagram.png" border="0"
+          height="271" width="328"></a><br clear="left">
     </p>
     <br style="font-weight: bold;">
     <table style="text-align: left;" border="1" cellpadding="2"
@@ -3316,7 +3317,7 @@
         src="dispatcher_state_diagram.png"></a><br>
     <br>
     <br>
-    <table height="111" border="1" cellpadding="2" cellspacing="2"
+    <table border="1" cellpadding="2" cellspacing="2" height="111"
       width="720">
       <tbody>
         <tr>
@@ -3392,8 +3393,8 @@
     <h3>Requirements-to-Statecharts Traceability <br>
     </h3>
     <h3>Requirements-to-Statecharts Traceability</h3>
-    <table style="text-align: left;" height="326" border="1"
-      cellpadding="2" cellspacing="2" width="719">
+    <table style="text-align: left;" border="1" cellpadding="2"
+      cellspacing="2" height="326" width="719">
       <tbody>
         <tr>
           <td style="vertical-align: top; background-color: rgb(204,
