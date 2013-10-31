@@ -336,7 +336,7 @@ public class DoorControl extends Controller {
                         newState = State.STATE_NUDGE;
                     }
                     else {
-                        // #transition '5.3'
+                        // #transition '5.2'
                         newState = State.STATE_CLOSE;
                     }
                 }
