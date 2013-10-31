@@ -34,7 +34,7 @@ public class DriveControl extends Controller {
     private HashMap<Integer, HoistwayLimitSensorCanPayloadTranslator> mHoistwayLimitArray;
     private LevelingCanPayloadTranslator mLevelSensorArray[];
     private CarWeightCanPayloadTranslator mCarWeight;
-    
+
     Utility.AtFloorArray mAtFloorArray;
 
     private enum State {
@@ -52,15 +52,15 @@ public class DriveControl extends Controller {
 
     public DriveControl(SimTime period, boolean flag) {
         super("DriveControl", flag);
-        
+
         this.period = period;
-        
+
         // Initializing physical interface
         localDrive = DrivePayload.getWriteablePayload();
         physicalInterface.sendTimeTriggered(localDrive, period);
         localDriveSpeed = DriveSpeedPayload.getReadablePayload();
         physicalInterface.registerTimeTriggered(localDriveSpeed);
-        
+
         // Initializing network messages
         simulator.payloads.CanMailbox.WriteableCanMailbox writeablecanmailbox =
                 CanMailbox.getWriteableCanMailbox(
@@ -90,7 +90,7 @@ public class DriveControl extends Controller {
                 MessageDictionary.EMERGENCY_BRAKE_CAN_ID);
         mSafety = new SafetySensorCanPayloadTranslator(readablecanmailbox);
         canInterface.registerTimeTriggered(readablecanmailbox);
-        
+
         mDoorClosedArray = 
                 new HashMap<Integer, DoorClosedCanPayloadTranslator>();
         mDoorMotorArray =
@@ -102,24 +102,24 @@ public class DriveControl extends Controller {
         int numDirections = directions.length;
         Side sides[] = Side.values();
         int numSides = sides.length;
-        
+
         // Setting up mailboxes so we can check the status of each of the doors
         for (int i = 0; i < hallwayCount; i++) {
             Hallway hallway = (Hallway) hallways[i];
             for (int j = 0; j < numSides; j++) {
                 Side side = sides[j];
                 int doorId = ReplicationComputer.computeReplicationId(hallway,
-                                                                  side);
+                        side);
                 simulator.payloads.CanMailbox.ReadableCanMailbox
-                    doorClosedMailbox =
-                        CanMailbox.getReadableCanMailbox(
-                            MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
-                            doorId);
+                doorClosedMailbox =
+                CanMailbox.getReadableCanMailbox(
+                        MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
+                        doorId);
                 mDoorClosedArray.put(doorId, new DoorClosedCanPayloadTranslator(
                         doorClosedMailbox, hallway, side));
                 canInterface.registerTimeTriggered(doorClosedMailbox);
                 simulator.payloads.CanMailbox.ReadableCanMailbox
-                    doorMotorMailbox = CanMailbox.getReadableCanMailbox(
+                doorMotorMailbox = CanMailbox.getReadableCanMailbox(
                         MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID +
                         doorId);
                 mDoorMotorArray.put(doorId,
@@ -138,10 +138,10 @@ public class DriveControl extends Controller {
             Direction direction = (Direction) directions[i];
             int directionId = ReplicationComputer.computeReplicationId(direction);
             simulator.payloads.CanMailbox.ReadableCanMailbox
-                hoistwayLimitMailbox =
-                    CanMailbox.getReadableCanMailbox(
-                            MessageDictionary.HOISTWAY_LIMIT_BASE_CAN_ID +
-                            directionId);
+            hoistwayLimitMailbox =
+            CanMailbox.getReadableCanMailbox(
+                    MessageDictionary.HOISTWAY_LIMIT_BASE_CAN_ID +
+                    directionId);
             mHoistwayLimitArray.put(directionId,
                     new HoistwayLimitSensorCanPayloadTranslator(
                             hoistwayLimitMailbox, direction));
@@ -153,12 +153,12 @@ public class DriveControl extends Controller {
         for (int i = 0; i < numDirections; i++) {
             Direction direction = (Direction) directions[i];
             simulator.payloads.CanMailbox.ReadableCanMailbox
-                levelSensorMailbox = CanMailbox.getReadableCanMailbox(
-                        MessageDictionary.LEVELING_BASE_CAN_ID +
-                        ReplicationComputer.computeReplicationId(direction));
+            levelSensorMailbox = CanMailbox.getReadableCanMailbox(
+                    MessageDictionary.LEVELING_BASE_CAN_ID +
+                    ReplicationComputer.computeReplicationId(direction));
             mLevelSensorArray[ReplicationComputer.computeReplicationId(direction)] =
                     new LevelingCanPayloadTranslator(levelSensorMailbox,
-                                                     direction);
+                            direction);
             canInterface.registerTimeTriggered(levelSensorMailbox);
         }
 
@@ -176,7 +176,7 @@ public class DriveControl extends Controller {
             for (int j = 0; j < numSides; j++) {
                 Side side = sides[j];
                 int doorId = ReplicationComputer.computeReplicationId(hallway,
-                                                                      side);
+                        side);
                 if (!mDoorClosedArray.get(doorId).getValue() ||
                         (mDoorMotorArray.get(doorId).getDoorCommand() == DoorCommand.OPEN))
                     return true;
@@ -213,30 +213,30 @@ public class DriveControl extends Controller {
         int position = mCarLevelPosition.getValue();
         int commitPointUp = (int)(((5*(desiredFloor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 200;
         int commitPointDown = (int)(((5*(desiredFloor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 200;
-        
+
         switch (state) {
         case STATE_STOP:
-        	//State Actions
+            //State Actions
             localDrive.set(Speed.STOP, Direction.STOP);
-            
+
             //#transition 'T6.5.1'
             if (isSafetyViolation()) {
                 newstate = State.STATE_EMERGENCY;
                 break;
             }
-            
-            //#transition 'T6.12'
+
             if (isOverweight) {
-            	if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
-			       !mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
-            		//#transition 'T6.8'
-            		newstate = State.STATE_LEVEL_UP;
-            		break;
-            	}
+                if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
+                        !mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
+                    //#transition 'T6.8'
+                    newstate = State.STATE_LEVEL_UP;
+                    break;
+                }
+                //#transition 'T6.12'
                 newstate=State.STATE_STOP;                               
                 break;
             }
-            
+
             if ((desiredFloor != currentFloor) && !isAnyDoorOpen() && !isOverweight) {
                 if ((desiredFloor - currentFloor > 0) && (localDriveSpeed.speed() == 0)) {
                     //#transition 'T6.1'
@@ -248,27 +248,27 @@ public class DriveControl extends Controller {
                 }
                 break;
             }
-            
+
             if (isLevel || !isAnyDoorOpen()) {
                 break;
             }
-            
+
             if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
-			!mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
+                    !mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
                 //#transition 'T6.8'
                 newstate = State.STATE_LEVEL_UP;
             }
-            
+
             else if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()&&
-			!mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue()) {
+                    !mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue()) {
                 //#transition 'T6.9'
                 newstate = State.STATE_LEVEL_DOWN;
             }
             break;
         case STATE_LEVEL_UP:
-        	//State Actions
+            //State Actions
             localDrive.set(Speed.LEVEL, Direction.UP);
-            
+
             if (isSafetyViolation()) {
                 //#transition 'T6.5.*'
                 newstate = State.STATE_EMERGENCY;
@@ -279,9 +279,9 @@ public class DriveControl extends Controller {
             }
             break;
         case STATE_LEVEL_DOWN:
-        	//State Actions
+            //State Actions
             localDrive.set(Speed.LEVEL, Direction.DOWN);
-            
+
             if (isSafetyViolation()) {
                 //#transition 'T6.5.*'
                 newstate = State.STATE_EMERGENCY;
@@ -292,11 +292,12 @@ public class DriveControl extends Controller {
             }
             break;
         case STATE_SLOW_UP:
-        	//State Actions
+            //State Actions
             localDrive.set(Speed.SLOW, Direction.UP);
-            
+
             if((localDriveSpeed.speed() == 0.25) && (position < commitPointUp)){
-            	newstate = State.STATE_FAST_UP;
+                //#transition 'T6.14'
+                newstate = State.STATE_FAST_UP;
             }
             if (isSafetyViolation()) {
                 //#transition 'T6.5.2'
@@ -314,13 +315,14 @@ public class DriveControl extends Controller {
             }
             break;
         case STATE_SLOW_DOWN:
-        	//State Actions
+            //State Actions
             localDrive.set(Speed.SLOW, Direction.DOWN);
-            
+
             if((localDriveSpeed.speed() == 0.25) && (position > commitPointDown)){
-            	newstate = State.STATE_FAST_DOWN;
+                //#transition 'T6.15'
+                newstate = State.STATE_FAST_DOWN;
             }
-            
+
             if (isSafetyViolation()) {
                 //#transition 'T6.5.3'
                 newstate = State.STATE_EMERGENCY;
@@ -338,58 +340,60 @@ public class DriveControl extends Controller {
                 break;
             }
             break;
-            
+
         case STATE_FAST_UP:
-        	
-        	localDrive.set(Speed.FAST, Direction.UP);
-        	
-            if(position > commitPointUp){
-            	newstate = State.STATE_SLOW_UP;
+
+            localDrive.set(Speed.FAST, Direction.UP);
+
+            if(position > commitPointUp) {
+                //#transition 'T6.13'
+                newstate = State.STATE_SLOW_UP;
             }
             break;
         case STATE_FAST_DOWN:
-        	
-        	localDrive.set(Speed.FAST, Direction.DOWN);
-        	
-            if(position < commitPointDown){
-            	newstate = State.STATE_SLOW_DOWN;
+
+            localDrive.set(Speed.FAST, Direction.DOWN);
+
+            if(position < commitPointDown) {
+                //#transition 'T6.16'
+                newstate = State.STATE_SLOW_DOWN;
             }
             break;
         case STATE_EMERGENCY:
-        	//State Actions
+            //State Actions
             localDrive.set(Speed.STOP, Direction.STOP);
-            
+
             break;
         default:
             throw new RuntimeException("State " + state + " was not recognized.");
         }
-        
+
         //To Convert Speed from double values to enumerated values 
         Speed targetSpeed;
         int newlocalDriveSpeed = (int)(localDriveSpeed.speed()*100);
 
         if(newlocalDriveSpeed == 0)
-        	targetSpeed = Speed.STOP;
+            targetSpeed = Speed.STOP;
         else if(newlocalDriveSpeed <=5)
-        	targetSpeed = Speed.LEVEL;
+            targetSpeed = Speed.LEVEL;
         else if(newlocalDriveSpeed <=25)
-        	targetSpeed = Speed.SLOW;
+            targetSpeed = Speed.SLOW;
         else if(newlocalDriveSpeed <=100)
-        	targetSpeed = Speed.FAST;
+            targetSpeed = Speed.FAST;
         else
-        	throw new RuntimeException("Unknown Speed");
-        
+            throw new RuntimeException("Unknown Speed");
+
         //Set the network Messages
         mDriveSpeed.set(targetSpeed,localDriveSpeed.direction());
         mDriveCommand.setSpeed(localDrive.speed());
         mDriveCommand.setDirection(localDrive.direction());
-        
+
         if (state != newstate)
             log(new Object[] { "Transition from ", state, " to ", newstate });
-        
+
         setState("STATE", state.toString());
         state = newstate;
-        
+
         // Schedule the next iteration of the controller
         // You must do this at the end of the timer callback in order to
         // restart the timer

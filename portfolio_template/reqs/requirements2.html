@@ -1106,8 +1106,8 @@
           Statechart" src="doorcontrol_state_diagram.png" border="0"></a><br>
       <br clear="left">
     </p>
-    <table style="text-align: left;" border="1" cellpadding="2"
-      cellspacing="2" height="185" width="526">
+    <table style="text-align: left;" height="185" border="1"
+      cellpadding="2" cellspacing="2" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -2076,36 +2076,39 @@
     <h3> TIME-TRIGGERED BEHAVIORS: </h3>
     6.6&nbsp;&nbsp;&nbsp; If mEmergencyBrake is equal to true then Drive
     shall be set to (Stop,Stop).<br>
-    6.7&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and d =
-    mDesiredFloor.d is not equal to Stop, then Drive shall be commanded
-    to (Slow,d).<br>
-    6.8&nbsp;&nbsp;&nbsp; If DriveSpeed is equal to Slow and Commit
-    point for mDesiredFloor.f has not been reached, then Drive shall be
-    commanded to (Fast,d) where d = mDesiredFloor.d.<br>
-    6.9&nbsp;&nbsp;&nbsp; If DriveSpeed is equal to Fast and Commit
-    point for mDesiredFloor.f has been reached, then Drive shall be
-    commanded to (Slow,d) where d = mDesiredFloor.d.<br>
-    6.10&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is equal
+    6.7&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and
+    mDesiredFloor.f is greater than&nbsp; CurrentFloor, then Drive shall
+    be commanded to (Slow,Up).<br>
+    6.8 &nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and
+    mDesiredFloor.f is less than&nbsp; CurrentFloor, then Drive shall be
+    commanded to (Slow,Down).<br>
+    6.9 &nbsp;&nbsp; If DriveSpeed is equal to Slow and Commit point for
+    mDesiredFloor.f has not been reached, then Drive shall be commanded
+    to (Fast,d).<br>
+    6.10&nbsp; If DriveSpeed is equal to Fast and Commit point for
+    mDesiredFloor.f has been reached, then Drive shall be commanded to
+    (Slow,d).<br>
+    6.11&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is equal
     to True and mDesiredFloor.f is equal to f, then Drive shall be set
     to (Stop,Stop).<br>
-    6.11&nbsp; If any mLevel[d] is equal to false and mAtFloor[f, b] is
+    6.12&nbsp; If any mLevel[d] is equal to false and mAtFloor[f, b] is
     equal to True and mDesiredFloor.f&nbsp; is equal to f, then Drive
     shall be set to (Level,d).<br>
-    6.12&nbsp; If (mCarWeight&gt;= MaxCarCapacity) then Drive shall be
+    6.13&nbsp; If (mCarWeight&gt;= MaxCarCapacity) then Drive shall be
     set to (Stop,Stop).<br>
-    6.13&nbsp; If mHoistwayLimit[d]&nbsp; is equal to true, then Drive
+    6.14&nbsp; If mHoistwayLimit[d]&nbsp; is equal to true, then Drive
     shall be commanded to (Stop,Stop).<br>
-    6.14&nbsp; mDriveSpeed shall always be set to current value of&nbsp;
+    6.15&nbsp; mDriveSpeed shall always be set to current value of&nbsp;
     DriveSpeed.<br>
     <br>
     <h3>TIME-TRIGGERED STATE CHART: </h3>
     &nbsp; <br>
     <a href="drivecontrol_state_diagram.png"><img alt=""
-        src="drivecontrol_state_diagram.png" border="0" height="561"
+        src="drivecontrol_state_diagram.png" height="561" border="0"
         width="748"></a><br>
     <br>
     <br>
-    <table border="1" cellpadding="2" cellspacing="2" height="424"
+    <table height="424" border="1" cellpadding="2" cellspacing="2"
       width="699">
       <tbody>
         <tr>
@@ -2195,8 +2198,8 @@
     <h2>&nbsp;<br>
     </h2>
     <h3>Requirements-to-Statecharts Traceability</h3>
-    <table style="text-align: left;" border="1" cellpadding="2"
-      cellspacing="2" height="664" width="688">
+    <table style="text-align: left;" height="664" border="1"
+      cellpadding="2" cellspacing="2" width="688">
       <tbody>
         <tr>
           <td style="vertical-align: top; background-color: rgb(204,
@@ -2611,8 +2614,8 @@
     <p class="MsoNormal" style=""> </p>
     <h3>Time-Triggered Statechart</h3>
     <p> <a href="lanterncontrol_state_diagram.png"><img alt="Testlight
-          Statechart" src="lanterncontrol_state_diagram.png" border="0"
-          height="282" width="522"></a><br clear="left">
+          Statechart" src="lanterncontrol_state_diagram.png"
+          height="282" border="0" width="522"></a><br clear="left">
     </p>
     <br style="font-weight: bold;">
     <table style="text-align: left;" border="1" cellpadding="2"
@@ -2765,11 +2768,11 @@
     </h3>
     &nbsp; <a href="hallbuttoncontrol_state_diagram.png"><img
         alt="statechart-HallButtonControl"
-        src="hallbuttoncontrol_state_diagram.png" border="0"
-        height="275" width="505"></a><br>
+        src="hallbuttoncontrol_state_diagram.png" height="275"
+        border="0" width="505"></a><br>
     <br>
-    <table style="text-align: left;" border="1" cellpadding="2"
-      cellspacing="2" height="185" width="526">
+    <table style="text-align: left;" height="185" border="1"
+      cellpadding="2" cellspacing="2" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -2958,11 +2961,11 @@
     <h3>Time-Triggered Statechart</h3>
     <p><a href="carbuttoncontrol_state_diagram.png"><img
           alt="CarButtonControl Statechart"
-          src="carbuttoncontrol_state_diagram.png" border="0"
-          height="273" width="426"></a><br clear="left">
+          src="carbuttoncontrol_state_diagram.png" height="273"
+          border="0" width="426"></a><br clear="left">
     </p>
-    <table style="text-align: left;" border="1" cellpadding="2"
-      cellspacing="2" height="185" width="526">
+    <table style="text-align: left;" height="185" border="1"
+      cellpadding="2" cellspacing="2" width="526">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;
@@ -3151,8 +3154,8 @@
     <h3>Time-Triggered Statechart</h3>
     <p> <a href="carpositioncontrol_state_diagram.png"><img
           alt="Testlight Statechart"
-          src="carpositioncontrol_state_diagram.png" border="0"
-          height="271" width="328"></a><br clear="left">
+          src="carpositioncontrol_state_diagram.png" height="271"
+          border="0" width="328"></a><br clear="left">
     </p>
     <br style="font-weight: bold;">
     <table style="text-align: left;" border="1" cellpadding="2"
@@ -3318,7 +3321,7 @@
         src="dispatcher_state_diagram.png"></a><br>
     <br>
     <br>
-    <table border="1" cellpadding="2" cellspacing="2" height="111"
+    <table height="111" border="1" cellpadding="2" cellspacing="2"
       width="720">
       <tbody>
         <tr>
@@ -3418,8 +3421,8 @@
     <h3>Requirements-to-Statecharts Traceability <br>
     </h3>
     <h3>Requirements-to-Statecharts Traceability</h3>
-    <table style="text-align: left;" border="1" cellpadding="2"
-      cellspacing="2" height="326" width="719">
+    <table style="text-align: left;" height="326" border="1"
+      cellpadding="2" cellspacing="2" width="719">
       <tbody>
         <tr>
           <td style="vertical-align: top; background-color: rgb(204,
