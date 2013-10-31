@@ -258,9 +258,8 @@ public class Dispatcher extends Controller {
         		}
         	}
         }
-        System.out.println("CurrentFloor is " + currentFloor);
+    
 
-        System.out.println(state);
         switch (state) {
         case STATE_STOP:
             // state actions for state S11.1 'SET TARGET'
@@ -291,8 +290,6 @@ public class Dispatcher extends Controller {
             			
             					flag = 1;
             					targetFloor = floor;
-            					System.out.println("TargetFloor is " + targetFloor);
-            					System.out.println("CurrentFloor is " + currentFloor);
             					if(mHallCall.get(indexHallCall).getValue()){
             						if(targetFloor > currentAtFloor){
             							newState = State.STATE_UP;
@@ -405,7 +402,6 @@ public class Dispatcher extends Controller {
         			   indexHallCall = ReplicationComputer.computeReplicationId(floor, hall, d);
         			   		if(mHallCall.get(indexHallCall).getValue()){
         			   			if((targetFlag == 0) && (position < commitPointUp)){
-        			   				System.out.println("Inside this function");
         			   				targetFloor = floor;
         			   				currentDirection = d;
         			   				targetFlag = 1;
@@ -436,11 +432,7 @@ public class Dispatcher extends Controller {
 		                    	indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
 		                    	
 	                    		if (mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()) { 
-	                    			System.out.println("got a Car call for hallway" + hallway + "floor" + floor);
-	                    			System.out.println(position);
-	                    			System.out.println(commitPointUp);
 	                    			if(position <= commitPointUp){
-	                    				System.out.println("TargetFloor not changed");
 	                    				currentDirection = Direction.UP;
 	                    				targetFloor = floor;
 	                    			}
@@ -497,7 +489,6 @@ public class Dispatcher extends Controller {
             int flag2 = 0;
             if(targetFloor == currentAtFloor){
             	flag2 =2;
-            	System.out.println("Reached target floor in state up");
             	for(int i = currentAtFloor ; i < Elevator.numFloors; i++){
             		int floor = i +1 ;
                     for (Hallway h : Hallway.replicationValues) {
@@ -521,15 +512,12 @@ public class Dispatcher extends Controller {
             	int indexCurrentCall = ReplicationComputer.computeReplicationId(currentAtFloor, h, Direction.DOWN);
             
             		if(mHallCall.get(indexCurrentCall).getValue()){
-            			System.out.println("Going to state down from state up");
             			targetFloor = currentAtFloor;
                 		currentDirection = Direction.DOWN;
                 		desiredDirection = Direction.DOWN;
                 		newState = State.STATE_DOWN;
             		}
             		else{
-            			
-            			System.out.println("Going to state reached floor from state up");
             			newState = State.STATE_REACHED_FLOOR;
             		}
             	}

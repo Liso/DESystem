@@ -9,7 +9,8 @@
 
 package simulator.elevatorcontrol;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
+
 import jSimPack.SimTime;
 import simulator.elevatormodules.*;
 import simulator.framework.*;
@@ -23,6 +24,9 @@ public class CarPositionControl extends Controller {
 
 	private SimTime period ;
 	// Translator for AtFloor message -- Specific to Message
+	
+    private int currentAtFloor = 0;
+    private int currentFloor = 0;
 
 	private enum State {
 		STATE_DISPLAY;
@@ -36,12 +40,16 @@ public class CarPositionControl extends Controller {
 	private CarLevelPositionCanPayloadTranslator networkCarLevelPosTranslator;
 	//network message for future extension
 	private WriteableCanMailbox networkCPI;
+	
+    private ReadableCanMailbox networkCarLevelPosition;
+    private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
 
 	//define all mAtFloor in an array;
 	private ReadableCanMailbox[][] networkAtFloor=new ReadableCanMailbox[8][2];
 	//define a HashMap to represent 4 status of hallway. 
-	LinkedHashMap<Integer, Hallway> hallway=new LinkedHashMap<Integer, Hallway>();
-	AtFloorCanPayloadTranslator mAtFloor;
+    //received at floor message
+    private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor =
+            new HashMap<Integer, AtFloorCanPayloadTranslator>();
 	
 	//current state
 	State state = State.STATE_DISPLAY;
@@ -52,10 +60,6 @@ public class CarPositionControl extends Controller {
 		this.period = period;
 		
 		//Initializing the Hallway values
-		hallway.put(1, Hallway.FRONT);
-		hallway.put(2, Hallway.BACK);
-		hallway.put(3, Hallway.BOTH);
-		hallway.put(4, Hallway.NONE);
 		
 		//Send Physical message to CarPositionIndicator
 		localCPI = CarPositionIndicatorPayload.getWriteablePayload();
@@ -70,6 +74,12 @@ public class CarPositionControl extends Controller {
 		//Register mailbox to be sent onto network periodically
 		canInterface.sendTimeTriggered(networkCPI, period);
 		
+        networkCarLevelPosition = CanMailbox.getReadableCanMailbox(
+                MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
+        mCarLevelPosition = new CarLevelPositionCanPayloadTranslator(
+                networkCarLevelPosition);
+        canInterface.registerTimeTriggered(networkCarLevelPosition);
+		
 		
 		//Message for CarLevel Position Indicator - Future Expansion
 		ReadableCanMailbox networkCarLevelPosIndicator = CanMailbox
@@ -82,14 +92,16 @@ public class CarPositionControl extends Controller {
 		state = State.STATE_DISPLAY;
 		
 		//register all mAtFloor
-		for (int i = 1; i < 9; i++) {
-			for (int j = 1; j < 3; j++) {
-				networkAtFloor[i-1][j-1] = CanMailbox.getReadableCanMailbox(
-		                MessageDictionary.AT_FLOOR_BASE_CAN_ID +
-		                ReplicationComputer.computeReplicationId(i, hallway.get(j)));
-				canInterface.registerTimeTriggered(networkAtFloor[i-1][j-1]);
-			}
-		}
+        for (int i = 0; i < Elevator.numFloors; i++) {
+            int floor = i + 1;
+            for (Hallway h : Hallway.replicationValues) {
+                int index = ReplicationComputer.computeReplicationId(floor, h);
+                ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + index);
+                AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
+                canInterface.registerTimeTriggered(m);
+                mAtFloor.put(index, t);
+            }
+        }
 		
 		//Start timer
 		timer.start(period);
@@ -99,24 +111,42 @@ public class CarPositionControl extends Controller {
 	@Override
 	public void timerExpired(Object callbackData) {
 		State newState = state;
+	    boolean isAtFloor = false;
+	    int index;
+	    int position = mCarLevelPosition.getValue();
 		
+	      for (int i = 0; i < Elevator.numFloors; i++) {
+	            int floor = i + 1;
+	            for (Hallway h : Hallway.replicationValues) {
+	            	
+	                index = ReplicationComputer.computeReplicationId(floor, h);
+	                if (mAtFloor.get(index).getValue()) {
+	                    isAtFloor = true;
+	                    currentAtFloor = floor;
+	                }
+	            }
+	        }
+	        if(isAtFloor == true){
+	        	currentFloor  =currentAtFloor;
+	        }
+	        else{
+	        	for(int i = 0; i < Elevator.numFloors; i++){
+	        		int floor = i + 1;
+	        		if((position >= ((5000*(floor - 1)) - 50)) && (position < ((5000*floor) -50))){
+	        			currentFloor = floor;
+	        		}
+	        	}
+	        }
 		switch (state) {		
 			case STATE_DISPLAY:
 				//look up the current floor.
-				for (int i = 1; i < 9; i++) {
-					for (int j = 1; j < 3; j++) {
-						//# transition 'T10.1'
-						if ((new AtFloorCanPayloadTranslator(networkAtFloor[i-1][j-1], i,
-								hallway.get(j))).getValue()) {
-							mAtFloor=new AtFloorCanPayloadTranslator(networkAtFloor[i-1][j-1],
-								i, hallway.get(j));
+				
+				
 							// State Actions to Display Current Floor
-							localCPI.set(i);
-							mCPI.set(i);
-							break;
-						}
-					}
-				}
+							localCPI.set(currentFloor);
+							mCPI.set(currentFloor);
+							
+			
 			
 				//Sets State to iterate Continuously 
 				newState = State.STATE_DISPLAY;
