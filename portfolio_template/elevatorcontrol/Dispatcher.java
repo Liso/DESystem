@@ -225,17 +225,19 @@ public class Dispatcher extends Controller {
     public void timerExpired(Object callbackData) {
         State newState = state;
 
-        boolean isAtFloor = false;
-        int nHallway = 0;
+        boolean isAtFloor = false; //Checks if it is at a floor
+        int nHallway = 0; //
         int index = 0;
         int indexHallCall;
         int indexCarCall;
-        int commitPointUp;
-        int commitPointDown;
-        boolean desiredHallwayOpen = false;
-        int acc = 1;
-        int position = mCarLevelPosition.getValue();
-        double currentSpeed = localDriveSpeed.speed();
+        int commitPointUp; //Commit Point in the Up direction
+        int commitPointDown; //Commit Point in the Down direction
+        boolean desiredHallwayOpen = false; //Checks if the Desired Hallway Open
+        int acc = 1; //Acceleration Value
+        int position = mCarLevelPosition.getValue(); //Gets the current car position in mm
+        double currentSpeed = localDriveSpeed.speed();//Gets the current speed of elevator
+        
+        /*To get current floor of the elevator */
         for (int i = 0; i < Elevator.numFloors; i++) {
             int floor = i + 1;
             for (Hallway h : Hallway.replicationValues) {
@@ -247,6 +249,7 @@ public class Dispatcher extends Controller {
                 }
             }
         }
+        //To get current floor if elevator is not at any floor
         if(isAtFloor == true){
         	currentFloor  =currentAtFloor;
         }
@@ -262,10 +265,10 @@ public class Dispatcher extends Controller {
 
         switch (state) {
         case STATE_STOP:
-            // state actions for state S11.1 'SET TARGET'
+            // state actions for state S11.1 'SET STOP'
             mDesiredFloor.set(targetFloor, Hallway.NONE, Direction.STOP);
 
-            // #transition 'T11.1'
+            // #transition 'T11.9'
             // all doors are closed
             if (!(mDoorClosedFrontLeft.getValue() && 
                     mDoorClosedFrontRight.getValue() && 
@@ -291,17 +294,19 @@ public class Dispatcher extends Controller {
             					flag = 1;
             					targetFloor = floor;
             					if(mHallCall.get(indexHallCall).getValue()){
-            						if(targetFloor > currentAtFloor){
+            						//#transition 'T11.7'
+            						if(targetFloor > currentAtFloor){           							
             							newState = State.STATE_UP;
             							currentDirection = d;
             							desiredDirection = Direction.UP;
             						}
+            						//#transition 'T11.8'
             						else if(targetFloor < currentAtFloor) {
             							newState = State.STATE_DOWN;
             							currentDirection = d;
             							desiredDirection = Direction.DOWN;
             						}    
-            					
+            						//#transition 'T11.3'
             						else if(targetFloor == currentAtFloor){
             							newState = State.STATE_REACHED_FLOOR;
             							currentDirection = d;
@@ -310,17 +315,19 @@ public class Dispatcher extends Controller {
             					}
             					
             					else{
+            						//#transition 'T11.7'
             						if(targetFloor > currentAtFloor){
             							newState = State.STATE_UP;
             							currentDirection = Direction.UP;
             							desiredDirection = Direction.STOP;
             						}
+            						//#transition 'T11.8'
             						else if(targetFloor < currentAtFloor) {
             							newState = State.STATE_DOWN;
             							currentDirection = Direction.DOWN;
             							desiredDirection = Direction.STOP;
             						}    
-            					
+            						//#transition 'T11.3'
             						else if(targetFloor == currentAtFloor){
             							newState = State.STATE_REACHED_FLOOR;
             							desiredDirection = Direction.STOP;
@@ -332,7 +339,7 @@ public class Dispatcher extends Controller {
             		}
            		}
            	}
-            
+            //To set Hallway for target FLoor
             nHallway = 0;
             for (Hallway h : Hallway.replicationValues) {
             	indexCarCall = ReplicationComputer.computeReplicationId(targetFloor, h);
@@ -356,7 +363,7 @@ public class Dispatcher extends Controller {
             
             break;
         case STATE_UP:
-            // state actions for state S11.1 'SET TARGET'
+            // state actions for state S11.2 'SET UP'
         	
             mDesiredFloor.set(targetFloor, hallway, desiredDirection);
             if (hallway == Hallway.FRONT)
@@ -368,7 +375,7 @@ public class Dispatcher extends Controller {
                 mDesiredDwellBack.setDwell(dwell);
             }
 
-            // #transition 'T11.1'
+            // #transition 'T11.2'
             // all doors are closed
             if (!(mDoorClosedFrontLeft.getValue() && 
                     mDoorClosedFrontRight.getValue() && 
@@ -377,6 +384,8 @@ public class Dispatcher extends Controller {
                 if (!isAtFloor)
                     newState = State.STATE_RESET;
             }
+            
+            //Checking Up Hall Call for target FLoor
             boolean Calls = false;
             for(Hallway h : Hallway.replicationValues){
             	int indextargetHallCall = ReplicationComputer.computeReplicationId(targetFloor,h,Direction.UP);
@@ -388,10 +397,11 @@ public class Dispatcher extends Controller {
             }
             
             int targetFlag = 0;
-
+            	//If Up HallCall false, checks floors above targetFloor for HallCalls and Car Calls
         		  if(Calls == false){
         	   for(int i = targetFloor; i < Elevator.numFloors; i++){
         		   int floor = i;
+        		   //To set commit point
         		   if(currentSpeed == 0){
                    	commitPointUp = (5000*(floor -1)) + 100;
                    }
@@ -419,6 +429,8 @@ public class Dispatcher extends Controller {
         		   }
         	   }
            }
+        		  
+        		  //To set nearest HallCall or CarCall in the Up direction
                 for (int i = 0; i < Elevator.numFloors; i++) {
                     int floor = i + 1;
                     if(currentSpeed == 0.0){
@@ -441,6 +453,7 @@ public class Dispatcher extends Controller {
                     }
                     
                 }
+                //Setting DesiredDirection. It does not change while doors are open.
                 if (!(mDoorClosedFrontLeft.getValue() && 
                         mDoorClosedFrontRight.getValue() && 
                         mDoorClosedBackLeft.getValue() && 
@@ -457,6 +470,7 @@ public class Dispatcher extends Controller {
                     		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
                     		
                     		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                    			//Sets desiredDirection to Down if there are Hall oR car Calls above targetFloor
                     			desiredDirection = Direction.UP;
                     			dirflag = 1;
                     		}
@@ -473,6 +487,8 @@ public class Dispatcher extends Controller {
                           		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
                           		
                           		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                          			//Sets desiredDirection to Down if there's no Hall or Car Calls above targetFloor
+                          			// and there are Hall or Car calls below target Floor
                           			desiredDirection = Direction.DOWN;
                           			dirflag1 = 1;
                           		}
@@ -481,6 +497,7 @@ public class Dispatcher extends Controller {
                       }
                 }
                 if(dirflag ==0 && dirflag1 == 0){
+                	//If there are no Hall or Car Calls above and below Desired Floor
                 	desiredDirection = Direction.STOP;
                 }
                 }
@@ -497,6 +514,7 @@ public class Dispatcher extends Controller {
                     		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
                     		
                     		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                    			//#transition 'T11.1'
                     			flag2 =1;
                     			newState = State.STATE_REACHED_FLOOR_UP;
                     			desiredDirection = Direction.UP;
@@ -512,12 +530,14 @@ public class Dispatcher extends Controller {
             	int indexCurrentCall = ReplicationComputer.computeReplicationId(currentAtFloor, h, Direction.DOWN);
             
             		if(mHallCall.get(indexCurrentCall).getValue()){
+            			//#transition 'T11.14'
             			targetFloor = currentAtFloor;
                 		currentDirection = Direction.DOWN;
                 		desiredDirection = Direction.DOWN;
                 		newState = State.STATE_DOWN;
             		}
             		else{
+            			//#transition 'T11.11'
             			newState = State.STATE_REACHED_FLOOR;
             		}
             	}
@@ -547,15 +567,10 @@ public class Dispatcher extends Controller {
         		}
             }
             
-            
-                	
-
-                // make sure that the last is false as well
-                // #transition 'T11.9'
 
             break;      
         case STATE_DOWN:
-            // state actions for state S11.1 'SET TARGET'
+            // state actions for state S11.3 'SET DOWN'
             mDesiredFloor.set(targetFloor, hallway, desiredDirection);
             if (hallway == Hallway.FRONT)
                 mDesiredDwellFront.setDwell(dwell);
@@ -566,7 +581,7 @@ public class Dispatcher extends Controller {
                 mDesiredDwellBack.setDwell(dwell);
             }
 
-            // #transition 'T11.1'
+            // #transition 'T11.5'
             // all doors are closed
             if (!(mDoorClosedFrontLeft.getValue() && 
                     mDoorClosedFrontRight.getValue() && 
@@ -575,7 +590,7 @@ public class Dispatcher extends Controller {
                 if (!isAtFloor)
                     newState = State.STATE_RESET;
             }
-
+        	//If Down HallCall false, checks floors below targetFloor for HallCalls and Car Calls
             Calls = false;
             for(Hallway h : Hallway.replicationValues){
             	int indextargetHallCall = ReplicationComputer.computeReplicationId(targetFloor,h,Direction.DOWN);
@@ -620,6 +635,7 @@ public class Dispatcher extends Controller {
         		   }
         	   }
            }
+        		   //Sets target to nearest Floor in the down direction
                 for (int i = 0; i < currentFloor ; i++) {
                     int floor = i + 1;
                     if(currentSpeed == 0){
@@ -643,7 +659,7 @@ public class Dispatcher extends Controller {
                     }
                     
                 }
-            
+            //Setting desiredDirection
                 if (!(mDoorClosedFrontLeft.getValue() && 
                         mDoorClosedFrontRight.getValue() && 
                         mDoorClosedBackLeft.getValue() && 
@@ -698,6 +714,7 @@ public class Dispatcher extends Controller {
                         		indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
                         		
                         		if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
+                        			//#transition 'T11.12'
                         			flag3 =1;
                         			newState = State.STATE_REACHED_FLOOR_DOWN;
                         			desiredDirection = Direction.DOWN;
@@ -713,12 +730,14 @@ public class Dispatcher extends Controller {
                 	int indexCurrentCall = ReplicationComputer.computeReplicationId(currentAtFloor, h, Direction.UP);
                 	if(flag3 == 2){
                 		if(mHallCall.get(indexCurrentCall).getValue()){
+                			//#transition 'T11.15'
                 			targetFloor = currentAtFloor;
                 			currentDirection = Direction.UP;
                 			desiredDirection = Direction.UP;
                 			newState = State.STATE_UP;
                 		}
                 		else{
+                			//#transition 'T11.6'
                 			newState = State.STATE_REACHED_FLOOR;
                 		}
                 	}	
@@ -747,13 +766,10 @@ public class Dispatcher extends Controller {
                             hallway = h;
             		}
                 }
-                // make sure that the last is false as well
-                // #transition 'T11.9'
-
             break;       
             
         case STATE_REACHED_FLOOR_UP:
-        	
+            // state actions for state S11.4 'REACHED FLOOR UP'
             mDesiredFloor.set(targetFloor, hallway, Direction.UP);
             desiredHallwayOpen = false;
         	if(hallway == Hallway.BOTH){
@@ -778,6 +794,7 @@ public class Dispatcher extends Controller {
         			desiredHallwayOpen = true;     			
         		}
         	}
+        	//If desired Hallway is open, check Hall Calls in Up Direction or Car calls above current floor
             if (desiredHallwayOpen){
                 int flag1 = 0;
                 for(int i = currentAtFloor; i < Elevator.numFloors; i++){
@@ -790,7 +807,7 @@ public class Dispatcher extends Controller {
                 				
                 			if(flag1 == 0){
                 				if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
-                			
+                					//#transition 'T11.10'
                 					flag1 = 1;
                 					targetFloor = floor;
                 					currentDirection = Direction.UP;
@@ -810,6 +827,7 @@ public class Dispatcher extends Controller {
                     		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.DOWN);
                     		
                     		if(mHallCall.get(indexHallCall).getValue()){
+                    			//#transition 'T11.10'
                     			targetFloor = floor;
                     			currentDirection = Direction.DOWN;
                     			desiredDirection = Direction.UP;
@@ -844,7 +862,7 @@ public class Dispatcher extends Controller {
             break;
             
         case STATE_REACHED_FLOOR_DOWN:
-        	
+            // state actions for state S11.4 'REACHED FLOOR DOWN'
             mDesiredFloor.set(targetFloor, hallway, Direction.DOWN);
             desiredHallwayOpen = false;
         	if(hallway == Hallway.BOTH){
@@ -881,7 +899,7 @@ public class Dispatcher extends Controller {
                  				
                  			if(flag1 != 1){
                  				if(mHallCall.get(indexHallCall).getValue() || mCarCall.get(indexCarCall).getValue()){
-                 			
+                 					//#transition 'T11.13'
                  					flag1 = 1;
                  					targetFloor = floor;
                  					currentDirection = Direction.DOWN;
@@ -900,6 +918,7 @@ public class Dispatcher extends Controller {
                      		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.UP);
                      		
                      		if(mHallCall.get(indexHallCall).getValue()){
+                     			//#transition 'T11.13'
                      			targetFloor = floor;
                      			currentDirection = Direction.UP;
                      			desiredDirection = Direction.DOWN;
@@ -933,7 +952,7 @@ public class Dispatcher extends Controller {
             break;
             
         case STATE_REACHED_FLOOR:
-        	
+            // state actions for state S11.6 'REACHED FLOOR'
             mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
             desiredHallwayOpen = false;
         	if(hallway == Hallway.BOTH){
@@ -958,14 +977,15 @@ public class Dispatcher extends Controller {
         			desiredHallwayOpen = true;     			
         		}
         	}
-        	
+        	//Make sure doors open atleast once before going to stop state
             if (desiredHallwayOpen){
+            	//#transition 'T11.4'
             	newState = State.STATE_STOP;
             }
         	
         	break;
         case STATE_RESET:
-            // state actions for state S11.2 'RESET'
+            // state actions for state S11.7 'RESET'
             mDesiredFloor.set(1, Hallway.NONE, Direction.STOP);
             break;
         default:
