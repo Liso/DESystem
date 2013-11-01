@@ -2077,29 +2077,26 @@
     <h3> TIME-TRIGGERED BEHAVIORS: </h3>
     6.6&nbsp;&nbsp;&nbsp; If mEmergencyBrake is equal to true then Drive
     shall be set to (Stop,Stop).<br>
-    6.7&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and
-    mDesiredFloor.f is greater than&nbsp; CurrentFloor, then Drive shall
-    be commanded to (Slow,Up).<br>
-    6.8 &nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and
-    mDesiredFloor.f is less than&nbsp; CurrentFloor, then Drive shall be
-    commanded to (Slow,Down).<br>
-    6.9 &nbsp;&nbsp; If DriveSpeed is equal to Slow and Commit point for
-    mDesiredFloor.f has not been reached, then Drive shall be commanded
-    to (Fast,d).<br>
-    6.10&nbsp; If DriveSpeed is equal to Fast and Commit point for
-    mDesiredFloor.f has been reached, then Drive shall be commanded to
-    (Slow,d).<br>
-    6.11&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is equal
+    6.7&nbsp;&nbsp;&nbsp; If mDoorClosed[b, r] is equal to true and d =
+    mDesiredFloor.d is not equal to Stop, then Drive shall be commanded
+    to (Slow,d).<br>
+    6.8&nbsp;&nbsp;&nbsp; If DriveSpeed is equal to Slow and Commit
+    point for mDesiredFloor.f has not been reached, then Drive shall be
+    commanded to (Fast,d) where d = mDesiredFloor.d.<br>
+    6.9&nbsp;&nbsp;&nbsp; If DriveSpeed is equal to Fast and Commit
+    point for mDesiredFloor.f has been reached, then Drive shall be
+    commanded to (Slow,d) where d = mDesiredFloor.d.<br>
+    6.10&nbsp; If mLevel[d] is equal to true and mAtFloor[f,b] is equal
     to True and mDesiredFloor.f is equal to f, then Drive shall be set
     to (Stop,Stop).<br>
-    6.12&nbsp; If any mLevel[d] is equal to false and mAtFloor[f, b] is
+    6.11&nbsp; If any mLevel[d] is equal to false and mAtFloor[f, b] is
     equal to True and mDesiredFloor.f&nbsp; is equal to f, then Drive
     shall be set to (Level,d).<br>
-    6.13&nbsp; If (mCarWeight&gt;= MaxCarCapacity) then Drive shall be
+    6.12&nbsp; If (mCarWeight&gt;= MaxCarCapacity) then Drive shall be
     set to (Stop,Stop).<br>
-    6.14&nbsp; If mHoistwayLimit[d]&nbsp; is equal to true, then Drive
+    6.13&nbsp; If mHoistwayLimit[d]&nbsp; is equal to true, then Drive
     shall be commanded to (Stop,Stop).<br>
-    6.15&nbsp; mDriveSpeed shall always be set to current value of&nbsp;
+    6.14&nbsp; mDriveSpeed shall always be set to current value of&nbsp;
     DriveSpeed.<br>
     <br>
     <h3>TIME-TRIGGERED STATE CHART: </h3>
@@ -3598,24 +3595,22 @@
         <tr>
           <td valign="top" width="25%">T11.1<br>
           </td>
-          <td valign="top">Any mDoorClosed[b,r] is true <br>
-            AND CurrentDirection is UP <br>
+          <td valign="top">Target floor is equal to CurrentFloor<br>
             AND any mHallCall[f, b, d] is true OR any mCarCall[f, b] is
-            true, where f &gt; CurrentFloor</td>
+            true</td>
         </tr>
         <tr>
           <td valign="top" width="25%">T11.2<br>
           </td>
-          <td valign="top">all mAtFloor[f, b] are False AND any
-            mDoorClosed [b, r] is False </td>
+          <td valign="top">Any mDoorClosed[b,r] is true and isAtFloor is
+            false<br>
+          </td>
         </tr>
         <tr>
           <td valign="top" width="25%">T11.3<br>
           </td>
-          <td valign="top">Any mDoorClosed[b,r] is true <br>
-            AND CurrentDirection is UP <br>
-            AND any mHallCall[f, b, d] is false OR any mCarCall[f, b] is
-            false, where f &gt; CurrentFloor</td>
+          <td valign="top"><br>
+          </td>
         </tr>
         <tr>
           <td valign="top" width="25%">T11.4</td>
