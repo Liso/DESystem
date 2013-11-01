@@ -84,6 +84,7 @@
 +0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
 
 +0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.5s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false
 
 ;#transition 'T11.7'
 +0.5s I 0s N HALL_CALL_[1][FRONT][UP]_CAN_ID Boolean = true
@@ -114,7 +115,9 @@
 +0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
 
 +0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.5s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID AtFloor 1 FRONT = false
 
+;#transition 'T11.7'
 +0.50s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean = true
 +0.50s I 0s N CAR_CALL_[7][FRONT]_CAN_ID Boolean = true
 
@@ -124,18 +127,32 @@
 +0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor ==4
 +0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
 
+;#transition 'T11.1'
 0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
 
-;#state 'S11.6 'REACHED FLOOR'
+;#state 'S11.6 'REACHED FLOOR UP'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 4
+
+;#transition 'T11.10'
++0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
+
+;#state 'S11.2 SET_UP'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
 +0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
-+0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor ==7
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
+
+
++0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
+0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
 
 
 ;#transition 'T11.2'
 +0.05s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
 
-;#state 'S11.2 RESET'
+;#state 'S11.7 RESET'
 +0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
 +0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
 +0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
