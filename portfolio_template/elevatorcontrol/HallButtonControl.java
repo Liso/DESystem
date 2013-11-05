@@ -55,11 +55,6 @@ public class HallButtonControl extends Controller {
     // Translator for HallCall message -- Generic Translator
     private BooleanCanPayloadTranslator mHallCall;
 
-    // Send network message for HallLight
-    private WriteableCanMailbox networkHallLightOut;
-    // Translator for HallLight message -- Generic Translator
-    private BooleanCanPayloadTranslator mHallLight;
-
     // Receive AtFloor Message
     private ReadableCanMailbox networkAtFloor;
     // Translator for AtFloor message -- Specific to Message
@@ -161,15 +156,6 @@ public class HallButtonControl extends Controller {
         // periodically with a period specified by the period parameter.
         canInterface.sendTimeTriggered(networkHallCall, period);
 
-        // Create a can mailbox for HallLight.
-        networkHallLightOut = CanMailbox.getWriteableCanMailbox(
-                MessageDictionary.HALL_LIGHT_BASE_CAN_ID +
-                ReplicationComputer.computeReplicationId(floor, hallway,
-                                                         direction));
-        // Create a translator for HallLight.
-        mHallLight = new BooleanCanPayloadTranslator(networkHallLightOut);
-        // Broadcast HallLight on network periodically
-        canInterface.sendTimeTriggered(networkHallLightOut, period);
 
         // Create a can mailbox for AtFloor.
         networkAtFloor = CanMailbox.getReadableCanMailbox(
@@ -253,7 +239,6 @@ public class HallButtonControl extends Controller {
                 // State actions for 'OFF'
                 localHallLight.set(false);
                 mHallCall.set(false);
-                mHallLight.set(false);
 
                 // #transition 'T8.1'
                 if(localHallCall.pressed() == true){
@@ -266,7 +251,6 @@ public class HallButtonControl extends Controller {
                 // State actions for 'ON'
                 localHallLight.set(true);
                 mHallCall.set(true);
-                mHallLight.set(true);
 
                 // #transition 'T8.2'
                 if (!localHallCall.pressed() && mAtFloor.getValue() &&
