@@ -22,10 +22,8 @@ import simulator.framework.ReplicationComputer;
 import simulator.framework.Side;
 import simulator.payloads.CanMailbox;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
-import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.CarLanternPayload;
 import simulator.payloads.CarLanternPayload.WriteableCarLanternPayload;
-import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
 
 
@@ -44,12 +42,6 @@ public class LanternControl extends Controller{
 	private WriteableCarLanternPayload localCarLantern;
 	
 	//Network Interfaces 
-	
-	//Network message for CarLantern
-	private WriteableCanMailbox networkCarLantern;
-	//Translator for mCarLantern -  Generic Translator
-	private BooleanCanPayloadTranslator mCarLantern;
-	
 	private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor = new HashMap<Integer, AtFloorCanPayloadTranslator>();
 	private HashMap<Integer, DoorClosedCanPayloadTranslator> mDoorClosed = new HashMap<Integer, DoorClosedCanPayloadTranslator>();
  // Receive DesiredFloor Message
@@ -97,13 +89,6 @@ public class LanternControl extends Controller{
 		//Register payload to be sent periodically
 		physicalInterface.sendTimeTriggered(localCarLantern, period);
 		
-		//Create a canMailbox for networkCarLantern
-		networkCarLantern = CanMailbox.getWriteableCanMailbox(
-				MessageDictionary.CAR_LANTERN_BASE_CAN_ID +
-				ReplicationComputer.computeReplicationId(direction));
-		mCarLantern = new BooleanCanPayloadTranslator(networkCarLantern);
-		//Register the network Message periodically
-		canInterface.sendTimeTriggered(networkCarLantern, period);
         
 		//Register for AtFloor messages
 		for (int i = 0; i < Elevator.numFloors; i++) {
@@ -142,7 +127,6 @@ public class LanternControl extends Controller{
 				//State actions for STATE OFF
 				
 				localCarLantern.set(false);
-				mCarLantern.set(false);
 				
 				boolean aDoorIsOpen = false;
 				for(Hallway h : Hallway.replicationValues){
@@ -172,7 +156,6 @@ public class LanternControl extends Controller{
 				//State actions for State ON
 				
 				localCarLantern.set(true);
-				mCarLantern.set(true);
 				
 				boolean allDoorsClosed = true;
 				// #transition 'T7.1'

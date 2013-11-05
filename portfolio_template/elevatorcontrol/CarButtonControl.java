@@ -52,11 +52,6 @@ public class CarButtonControl extends Controller{
     private WriteableCanMailbox networkCarCall;
     // Translator for CarCall message -- Generic Translator
     private BooleanCanPayloadTranslator mCarCall;
-
-    // Send network message for CarLight
-    private WriteableCanMailbox networkCarLightOut;
-    // Translator for CarLight message -- Generic Translator
-    private BooleanCanPayloadTranslator mCarLight;
     
     // Receive AtFloor Message
     private ReadableCanMailbox networkAtFloor;
@@ -144,15 +139,6 @@ public class CarButtonControl extends Controller{
         // periodically with a period specified by the period parameter.
         canInterface.sendTimeTriggered(networkCarCall, period);
         
-        // Create a can mailbox for CarLight.
-        networkCarLightOut = CanMailbox.getWriteableCanMailbox(
-                MessageDictionary.CAR_LIGHT_BASE_CAN_ID +
-                ReplicationComputer.computeReplicationId(floor, hallway));
-        // Create a translator for CarLight.
-        mCarLight = new BooleanCanPayloadTranslator(networkCarLightOut);
-        // Broadcast CarLight on network periodically
-        canInterface.sendTimeTriggered(networkCarLightOut, period);
-        
         // Create a can mailbox for AtFloor.
         networkAtFloor = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.AT_FLOOR_BASE_CAN_ID +
@@ -227,7 +213,6 @@ public class CarButtonControl extends Controller{
                 // State actions for 'OFF'
                 mCarCall.set(false);
                 localCarLight.set(false);
-                mCarLight.set(false);
                 
                 // #transition 'T9.1'
                 if (localCarCall.pressed()) {
@@ -239,7 +224,6 @@ public class CarButtonControl extends Controller{
                 // State actions for 'ON'
                 mCarCall.set(true);
                 localCarLight.set(true);
-                mCarLight.set(true);
                 
                 // #transition 'T9.2'
                 if (mAtFloor.getValue() && aDoorIsOpen &&

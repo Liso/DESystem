@@ -24,7 +24,6 @@ public class DriveControl extends Controller {
     private SimTime period;
     private WriteableDrivePayload localDrive;
     private ReadableDriveSpeedPayload localDriveSpeed;
-    private DriveCommandCanPayloadTranslator mDriveCommand;
     private DriveSpeedCanPayloadTranslator mDriveSpeed;
     private DesiredFloorCanPayloadTranslator mDesiredFloor;
     private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
@@ -65,8 +64,6 @@ public class DriveControl extends Controller {
         simulator.payloads.CanMailbox.WriteableCanMailbox writeablecanmailbox =
                 CanMailbox.getWriteableCanMailbox(
                         MessageDictionary.DRIVE_COMMAND_CAN_ID);
-        mDriveCommand = new DriveCommandCanPayloadTranslator(
-                writeablecanmailbox);
         canInterface.sendTimeTriggered(writeablecanmailbox, period);
         writeablecanmailbox = CanMailbox.getWriteableCanMailbox(
                 MessageDictionary.DRIVE_SPEED_CAN_ID);
@@ -385,8 +382,6 @@ public class DriveControl extends Controller {
 
         //Set the network Messages
         mDriveSpeed.set(targetSpeed,localDriveSpeed.direction());
-        mDriveCommand.setSpeed(localDrive.speed());
-        mDriveCommand.setDirection(localDrive.direction());
 
         if (state != newstate)
             log(new Object[] { "Transition from ", state, " to ", newstate });

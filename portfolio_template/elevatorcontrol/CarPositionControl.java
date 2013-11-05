@@ -34,12 +34,6 @@ public class CarPositionControl extends Controller {
 	
 	//physical CarPosition indicator;
 	private WriteableCarPositionIndicatorPayload localCPI;
-	//network CarPosition indicator
-	private IntegerCanPayloadTranslator mCPI;
-	
-	private CarLevelPositionCanPayloadTranslator networkCarLevelPosTranslator;
-	//network message for future extension
-	private WriteableCanMailbox networkCPI;
 	
     private ReadableCanMailbox networkCarLevelPosition;
     private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
@@ -67,26 +61,13 @@ public class CarPositionControl extends Controller {
 		physicalInterface.sendTimeTriggered(localCPI, period);
 		
 		
-		networkCPI = CanMailbox
-				.getWriteableCanMailbox(MessageDictionary.CAR_POSITION_CAN_ID);
-		//Network Message for CarPositionIndicator
-		mCPI = new IntegerCanPayloadTranslator(networkCPI);
-		//Register mailbox to be sent onto network periodically
-		canInterface.sendTimeTriggered(networkCPI, period);
-		
         networkCarLevelPosition = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
         mCarLevelPosition = new CarLevelPositionCanPayloadTranslator(
                 networkCarLevelPosition);
         canInterface.registerTimeTriggered(networkCarLevelPosition);
 		
-		
-		//Message for CarLevel Position Indicator - Future Expansion
-		ReadableCanMailbox networkCarLevelPosIndicator = CanMailbox
-				.getReadableCanMailbox(MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
-		networkCarLevelPosTranslator = new CarLevelPositionCanPayloadTranslator(
-				networkCarLevelPosIndicator);
-		canInterface.registerTimeTriggered(networkCarLevelPosIndicator);
+	
 		
 		//Set Current State to Display
 		state = State.STATE_DISPLAY;
@@ -144,7 +125,6 @@ public class CarPositionControl extends Controller {
 				
 							// State Actions to Display Current Floor
 							localCPI.set(currentFloor);
-							mCPI.set(currentFloor);
 							
 			
 			
