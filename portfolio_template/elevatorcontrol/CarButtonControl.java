@@ -12,8 +12,6 @@
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
-import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
-import simulator.elevatormodules.AtFloorCanPayloadTranslator;
 import simulator.framework.Controller;
 import simulator.framework.Hallway;
 import simulator.framework.ReplicationComputer;
@@ -25,7 +23,6 @@ import simulator.payloads.CarCallPayload;
 import simulator.payloads.CarCallPayload.ReadableCarCallPayload;
 import simulator.payloads.CarLightPayload;
 import simulator.payloads.CarLightPayload.WriteableCarLightPayload;
-import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
 /*
  * HallButton Control is used to take input Hall Calls from the passengers
@@ -51,32 +48,32 @@ public class CarButtonControl extends Controller{
     // Send network message for CarCall
     private WriteableCanMailbox networkCarCall;
     // Translator for CarCall message -- Generic Translator
-    private BooleanCanPayloadTranslator mCarCall;
+    private BitCanPayloadTranslator mCarCall;
     
     // Receive AtFloor Message
     private ReadableCanMailbox networkAtFloor;
     // Translator for AtFloor message -- Specific to Message
-    private AtFloorCanPayloadTranslator mAtFloor;
+    private BitCanPayloadTranslator mAtFloor;
     
     // Receive DoorClosedFrontLeft
     private ReadableCanMailbox networkDoorClosedFrontLeft;
     // Translator for DoorClosed message -- Specific to Message
-    private DoorClosedCanPayloadTranslator mDoorClosedFrontLeft;
+    private BitCanPayloadTranslator mDoorClosedFrontLeft;
     
     // Receive DoorClosedFrontRight
     private ReadableCanMailbox networkDoorClosedFrontRight;
     // Translator for DoorClosed message -- Specific to Message
-    private DoorClosedCanPayloadTranslator mDoorClosedFrontRight;
+    private BitCanPayloadTranslator mDoorClosedFrontRight;
     
     // Receive DoorClosedBackLeft
     private ReadableCanMailbox networkDoorClosedBackLeft;
     // Translator for DoorClosed message -- Specific to Message
-    private DoorClosedCanPayloadTranslator mDoorClosedBackLeft;
+    private BitCanPayloadTranslator mDoorClosedBackLeft;
     
     // Receive DoorClosedBackRight
     private ReadableCanMailbox networkDoorClosedBackRight;
     // Translator for DoorClosed message -- Specific to Message
-    private DoorClosedCanPayloadTranslator mDoorClosedBackRight;        
+    private BitCanPayloadTranslator mDoorClosedBackRight;        
     
     // These variables keep track of current instance
     
@@ -134,7 +131,7 @@ public class CarButtonControl extends Controller{
                 ReplicationComputer.computeReplicationId(floor, hallway));
         // Create a translator with a reference to the CanMailbox.  Use the 
         // translator to read and write values to the mailbox
-        mCarCall = new BooleanCanPayloadTranslator(networkCarCall);
+        mCarCall = new BitCanPayloadTranslator(networkCarCall);
         // Register the mailbox to have its value broadcast on the network
         // periodically with a period specified by the period parameter.
         canInterface.sendTimeTriggered(networkCarCall, period);
@@ -143,8 +140,7 @@ public class CarButtonControl extends Controller{
         networkAtFloor = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.AT_FLOOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(floor, hallway));
-        mAtFloor = new AtFloorCanPayloadTranslator(networkAtFloor, floor,
-                                                   hallway);
+        mAtFloor = new BitCanPayloadTranslator(networkAtFloor);
         // Register to receive periodic updates to the mailbox via the CAN
         // network. The period of updates will be determined by the sender of
         // the message.
@@ -156,8 +152,8 @@ public class CarButtonControl extends Controller{
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(Hallway.FRONT,
                                                          Side.LEFT));
-        mDoorClosedFrontLeft = new DoorClosedCanPayloadTranslator(
-                networkDoorClosedFrontLeft, Hallway.FRONT, Side.LEFT);
+        mDoorClosedFrontLeft = new BitCanPayloadTranslator(
+                networkDoorClosedFrontLeft);
         //Register for Updates
         canInterface.registerTimeTriggered(networkDoorClosedFrontLeft);
         
@@ -166,8 +162,8 @@ public class CarButtonControl extends Controller{
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(Hallway.FRONT,
                                                          Side.RIGHT));
-        mDoorClosedFrontRight = new DoorClosedCanPayloadTranslator(
-                networkDoorClosedFrontRight, Hallway.FRONT, Side.RIGHT);
+        mDoorClosedFrontRight = new BitCanPayloadTranslator(
+                networkDoorClosedFrontRight);
         //Register for Updates
         canInterface.registerTimeTriggered(networkDoorClosedFrontRight);
         
@@ -176,8 +172,8 @@ public class CarButtonControl extends Controller{
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(Hallway.BACK,
                                                          Side.LEFT));
-        mDoorClosedBackLeft = new DoorClosedCanPayloadTranslator(
-                networkDoorClosedBackLeft, Hallway.BACK, Side.LEFT);
+        mDoorClosedBackLeft = new BitCanPayloadTranslator(
+                networkDoorClosedBackLeft);
         //Register for Updates
         canInterface.registerTimeTriggered(networkDoorClosedBackLeft);
         
@@ -186,8 +182,8 @@ public class CarButtonControl extends Controller{
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(Hallway.BACK,
                                                          Side.RIGHT));
-        mDoorClosedBackRight = new DoorClosedCanPayloadTranslator(
-                networkDoorClosedBackRight, Hallway.BACK, Side.RIGHT);
+        mDoorClosedBackRight = new BitCanPayloadTranslator(
+                networkDoorClosedBackRight);
         //Register for Updates
         canInterface.registerTimeTriggered(networkDoorClosedBackRight);
         

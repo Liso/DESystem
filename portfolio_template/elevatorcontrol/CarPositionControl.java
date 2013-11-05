@@ -16,8 +16,6 @@ import simulator.elevatormodules.*;
 import simulator.framework.*;
 import simulator.payloads.*;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
-import simulator.payloads.CanMailbox.WriteableCanMailbox;
-import simulator.payloads.translators.IntegerCanPayloadTranslator;
 import simulator.payloads.CarPositionIndicatorPayload.*;
 
 public class CarPositionControl extends Controller {
@@ -36,14 +34,12 @@ public class CarPositionControl extends Controller {
 	private WriteableCarPositionIndicatorPayload localCPI;
 	
     private ReadableCanMailbox networkCarLevelPosition;
-    private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
+    private IntCanPayloadTranslator mCarLevelPosition;
 
-	//define all mAtFloor in an array;
-	private ReadableCanMailbox[][] networkAtFloor=new ReadableCanMailbox[8][2];
 	//define a HashMap to represent 4 status of hallway. 
     //received at floor message
-    private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor =
-            new HashMap<Integer, AtFloorCanPayloadTranslator>();
+    private HashMap<Integer, BitCanPayloadTranslator> mAtFloor =
+            new HashMap<Integer, BitCanPayloadTranslator>();
 	
 	//current state
 	State state = State.STATE_DISPLAY;
@@ -63,7 +59,7 @@ public class CarPositionControl extends Controller {
 		
         networkCarLevelPosition = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
-        mCarLevelPosition = new CarLevelPositionCanPayloadTranslator(
+        mCarLevelPosition = new IntCanPayloadTranslator(
                 networkCarLevelPosition);
         canInterface.registerTimeTriggered(networkCarLevelPosition);
 		
@@ -78,7 +74,7 @@ public class CarPositionControl extends Controller {
             for (Hallway h : Hallway.replicationValues) {
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + index);
-                AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
+                BitCanPayloadTranslator t = new BitCanPayloadTranslator(m);
                 canInterface.registerTimeTriggered(m);
                 mAtFloor.put(index, t);
             }

@@ -25,7 +25,7 @@ public class DesiredDwellCanPayloadTranslator extends CanPayloadTranslator {
      * @param payload
      */
     public DesiredDwellCanPayloadTranslator(WriteableCanMailbox payload, Hallway hallway) {
-        super(payload, 4, MessageDictionary.DESIRED_DWELL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway));
+        super(payload, 1, MessageDictionary.DESIRED_DWELL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway));
     }
 
     /**
@@ -35,7 +35,7 @@ public class DesiredDwellCanPayloadTranslator extends CanPayloadTranslator {
      * @param payload
      */
     public DesiredDwellCanPayloadTranslator(ReadableCanMailbox payload, Hallway hallway) {
-        super(payload, 4, MessageDictionary.DESIRED_DWELL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway));
+        super(payload, 1, MessageDictionary.DESIRED_DWELL_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway));
     }
     
     /**
@@ -44,7 +44,7 @@ public class DesiredDwellCanPayloadTranslator extends CanPayloadTranslator {
      */
     public void setDwell(SimTime dwell) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, (int)dwell.getTruncSeconds(), 0, 32);
+        addIntToBitset(b, (int)dwell.getTruncSeconds(), 0, 3);
         setMessagePayload(b, getByteSize());
     }
     
@@ -53,7 +53,7 @@ public class DesiredDwellCanPayloadTranslator extends CanPayloadTranslator {
      * @return the direction value from the can payload
      */
     public SimTime getDwell() {
-        int val = getIntFromBitset(getMessagePayload(), 0, 32);
+        int val = getIntFromBitset(getMessagePayload(), 0, 3);
         SimTime dwell = new SimTime(val,
                 SimTime.SimTimeUnit.SECOND);
        return dwell;

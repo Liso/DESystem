@@ -26,13 +26,13 @@ public class DriveControl extends Controller {
     private ReadableDriveSpeedPayload localDriveSpeed;
     private DriveSpeedCanPayloadTranslator mDriveSpeed;
     private DesiredFloorCanPayloadTranslator mDesiredFloor;
-    private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
-    private HashMap<Integer, DoorClosedCanPayloadTranslator> mDoorClosedArray;
+    private IntCanPayloadTranslator mCarLevelPosition;
+    private HashMap<Integer, BitCanPayloadTranslator> mDoorClosedArray;
     private HashMap<Integer, DoorMotorCommandCanPayloadTranslator> mDoorMotorArray;
-    private SafetySensorCanPayloadTranslator mSafety;
-    private HashMap<Integer, HoistwayLimitSensorCanPayloadTranslator> mHoistwayLimitArray;
-    private LevelingCanPayloadTranslator mLevelSensorArray[];
-    private CarWeightCanPayloadTranslator mCarWeight;
+    private BitCanPayloadTranslator mSafety;
+    private HashMap<Integer, BitCanPayloadTranslator> mHoistwayLimitArray;
+    private BitCanPayloadTranslator mLevelSensorArray[];
+    private IntCanPayloadTranslator mCarWeight;
 
     Utility.AtFloorArray mAtFloorArray;
 
@@ -76,20 +76,20 @@ public class DriveControl extends Controller {
         canInterface.registerTimeTriggered(readablecanmailbox);
         readablecanmailbox = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
-        mCarLevelPosition = new CarLevelPositionCanPayloadTranslator(
+        mCarLevelPosition = new IntCanPayloadTranslator(
                 readablecanmailbox);
         canInterface.registerTimeTriggered(readablecanmailbox);
         readablecanmailbox = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.CAR_WEIGHT_CAN_ID);
-        mCarWeight = new CarWeightCanPayloadTranslator(readablecanmailbox);
+        mCarWeight = new IntCanPayloadTranslator(readablecanmailbox);
         canInterface.registerTimeTriggered(readablecanmailbox);
         readablecanmailbox = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.EMERGENCY_BRAKE_CAN_ID);
-        mSafety = new SafetySensorCanPayloadTranslator(readablecanmailbox);
+        mSafety = new BitCanPayloadTranslator(readablecanmailbox);
         canInterface.registerTimeTriggered(readablecanmailbox);
 
         mDoorClosedArray = 
-                new HashMap<Integer, DoorClosedCanPayloadTranslator>();
+                new HashMap<Integer, BitCanPayloadTranslator>();
         mDoorMotorArray =
                 new HashMap<Integer, DoorMotorCommandCanPayloadTranslator>();
 
@@ -112,8 +112,8 @@ public class DriveControl extends Controller {
                 CanMailbox.getReadableCanMailbox(
                         MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + 
                         doorId);
-                mDoorClosedArray.put(doorId, new DoorClosedCanPayloadTranslator(
-                        doorClosedMailbox, hallway, side));
+                mDoorClosedArray.put(doorId, new BitCanPayloadTranslator(
+                        doorClosedMailbox));
                 canInterface.registerTimeTriggered(doorClosedMailbox);
                 simulator.payloads.CanMailbox.ReadableCanMailbox
                 doorMotorMailbox = CanMailbox.getReadableCanMailbox(
@@ -130,7 +130,7 @@ public class DriveControl extends Controller {
         // Setting up the network messages for the top and bottom hoistway
         // limits
         mHoistwayLimitArray = 
-                new HashMap<Integer, HoistwayLimitSensorCanPayloadTranslator>();
+                new HashMap<Integer, BitCanPayloadTranslator>();
         for (int i = 0; i < numDirections; i++) {
             Direction direction = (Direction) directions[i];
             int directionId = ReplicationComputer.computeReplicationId(direction);
@@ -140,13 +140,13 @@ public class DriveControl extends Controller {
                     MessageDictionary.HOISTWAY_LIMIT_BASE_CAN_ID +
                     directionId);
             mHoistwayLimitArray.put(directionId,
-                    new HoistwayLimitSensorCanPayloadTranslator(
-                            hoistwayLimitMailbox, direction));
+                    new BitCanPayloadTranslator(
+                            hoistwayLimitMailbox));
             canInterface.registerTimeTriggered(hoistwayLimitMailbox);
         }
 
         // Setting up network messages for the level sensors
-        mLevelSensorArray = new LevelingCanPayloadTranslator[2];
+        mLevelSensorArray = new BitCanPayloadTranslator[2];
         for (int i = 0; i < numDirections; i++) {
             Direction direction = (Direction) directions[i];
             simulator.payloads.CanMailbox.ReadableCanMailbox
@@ -154,8 +154,7 @@ public class DriveControl extends Controller {
                     MessageDictionary.LEVELING_BASE_CAN_ID +
                     ReplicationComputer.computeReplicationId(direction));
             mLevelSensorArray[ReplicationComputer.computeReplicationId(direction)] =
-                    new LevelingCanPayloadTranslator(levelSensorMailbox,
-                            direction);
+                    new BitCanPayloadTranslator(levelSensorMailbox);
             canInterface.registerTimeTriggered(levelSensorMailbox);
         }
 
@@ -202,7 +201,7 @@ public class DriveControl extends Controller {
         int acc = 1;
         int desiredFloor = mDesiredFloor.getFloor();
         int currentFloor = mAtFloorArray.getCurrentFloor();
-        boolean isOverweight = mCarWeight.getWeight() >= Elevator.MaxCarCapacity;
+        boolean isOverweight = mCarWeight.getValue() >= Elevator.MaxCarCapacity;
         boolean isLevel =
                 mLevelSensorArray[ReplicationComputer.computeReplicationId(
                         Direction.DOWN)].getValue() &&

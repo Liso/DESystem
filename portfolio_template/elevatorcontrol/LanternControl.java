@@ -12,8 +12,6 @@ package simulator.elevatorcontrol;
 import java.util.HashMap;
 
 import jSimPack.SimTime;
-import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
-import simulator.elevatormodules.AtFloorCanPayloadTranslator;
 import simulator.framework.Controller;
 import simulator.framework.Direction;
 import simulator.framework.Elevator;
@@ -42,8 +40,8 @@ public class LanternControl extends Controller{
 	private WriteableCarLanternPayload localCarLantern;
 	
 	//Network Interfaces 
-	private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor = new HashMap<Integer, AtFloorCanPayloadTranslator>();
-	private HashMap<Integer, DoorClosedCanPayloadTranslator> mDoorClosed = new HashMap<Integer, DoorClosedCanPayloadTranslator>();
+	private HashMap<Integer, BitCanPayloadTranslator> mAtFloor = new HashMap<Integer, BitCanPayloadTranslator>();
+	private HashMap<Integer, BitCanPayloadTranslator> mDoorClosed = new HashMap<Integer, BitCanPayloadTranslator>();
  // Receive DesiredFloor Message
     private ReadableCanMailbox networkDesiredFloor;
     // Translator for DesiredFloor message -- Specific to Message
@@ -96,7 +94,7 @@ public class LanternControl extends Controller{
             for (Hallway h : Hallway.replicationValues) {
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 ReadableCanMailbox networkAtFloor = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + index);
-                AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(networkAtFloor, floor, h);
+                BitCanPayloadTranslator t = new BitCanPayloadTranslator(networkAtFloor);
                 canInterface.registerTimeTriggered(networkAtFloor);
                 mAtFloor.put(index, t);
             }
@@ -107,7 +105,7 @@ public class LanternControl extends Controller{
 			for(Side s : Side.values()){
 				int index = ReplicationComputer.computeReplicationId(h, s);
 				ReadableCanMailbox networkDoorClosed = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + index);
-				DoorClosedCanPayloadTranslator d = new DoorClosedCanPayloadTranslator(networkDoorClosed, h, s);
+				BitCanPayloadTranslator d = new BitCanPayloadTranslator(networkDoorClosed);
 				canInterface.registerTimeTriggered(networkDoorClosed);
 				mDoorClosed.put(index, d);
 			}

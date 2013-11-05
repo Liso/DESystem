@@ -13,7 +13,6 @@ package simulator.elevatorcontrol;
 import java.util.HashMap;
 
 import jSimPack.SimTime;
-import simulator.elevatormodules.*;
 import simulator.framework.Controller;
 import simulator.framework.Direction;
 import simulator.framework.DoorCommand;
@@ -27,8 +26,6 @@ import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.DoorMotorPayload;
 import simulator.payloads.DoorMotorPayload.WriteableDoorMotorPayload;
-import simulator.payloads.translators.BooleanCanPayloadTranslator;
-
 /**
 * @author Yue Chen
 */
@@ -51,33 +48,33 @@ public class DoorControl extends Controller {
     //received door opened message
     private ReadableCanMailbox networkDoorOpened;
     //translator for the doorOpened message -- this translator is specific
-    private DoorOpenedCanPayloadTranslator mDoorOpened;
+    private BitCanPayloadTranslator mDoorOpened;
     
     //received door reversal message
     private ReadableCanMailbox networkDoorReversal;
     //translator for the doorReversal message -- this translator is specific
-    private DoorReversalCanPayloadTranslator mDoorReversal;
+    private BitCanPayloadTranslator mDoorReversal;
     
     //received door reversal message for Opp Side
     private ReadableCanMailbox networkDoorReversalOpp;
     //translator for the doorReversal message -- this translator is specific
-    private DoorReversalCanPayloadTranslator mDoorReversalOpp;
+    private BitCanPayloadTranslator mDoorReversalOpp;
     //received car weight message
     private ReadableCanMailbox networkCarWeight;
     //translator for the CarWeight message -- this translator is specific
-    private CarWeightCanPayloadTranslator mCarWeight;
+    private IntCanPayloadTranslator mCarWeight;
     
     //received door closed message
     private ReadableCanMailbox networkDoorClosed;
     //translator for the doorClosed message -- this translator is specific
-    private DoorClosedCanPayloadTranslator mDoorClosed;
+    private BitCanPayloadTranslator mDoorClosed;
     
     //received at floor message
-    private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor = new HashMap<Integer, AtFloorCanPayloadTranslator>();
+    private HashMap<Integer, BitCanPayloadTranslator> mAtFloor = new HashMap<Integer, BitCanPayloadTranslator>();
     
-    private HashMap<Integer, BooleanCanPayloadTranslator> mCarCall = new HashMap<Integer, BooleanCanPayloadTranslator>();
+    private HashMap<Integer, BitCanPayloadTranslator> mCarCall = new HashMap<Integer, BitCanPayloadTranslator>();
     
-    private HashMap<Integer, BooleanCanPayloadTranslator> mHallCall = new HashMap<Integer, BooleanCanPayloadTranslator>();
+    private HashMap<Integer, BitCanPayloadTranslator> mHallCall = new HashMap<Integer, BitCanPayloadTranslator>();
     
     //received desired floor message
     private ReadableCanMailbox networkDesiredFloor;
@@ -166,34 +163,32 @@ public class DoorControl extends Controller {
         networkDoorOpened = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_OPEN_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(hallway, side));
-        mDoorOpened = new DoorOpenedCanPayloadTranslator(networkDoorOpened,
-                                                         hallway, side);
+        mDoorOpened = new BitCanPayloadTranslator(networkDoorOpened);
         canInterface.registerTimeTriggered(networkDoorOpened);
         
         networkDoorReversal = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(hallway, side));
-        mDoorReversal = new DoorReversalCanPayloadTranslator(
-                networkDoorReversal, hallway, side);
+        mDoorReversal = new BitCanPayloadTranslator(
+                networkDoorReversal);
         canInterface.registerTimeTriggered(networkDoorReversal);
 
      networkDoorReversalOpp = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_REVERSAL_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(hallway, Oppside));
-        mDoorReversalOpp = new DoorReversalCanPayloadTranslator(
-                networkDoorReversalOpp, hallway, Oppside);
+        mDoorReversalOpp = new BitCanPayloadTranslator(
+                networkDoorReversalOpp);
         canInterface.registerTimeTriggered(networkDoorReversalOpp);
 
         networkCarWeight = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.CAR_WEIGHT_CAN_ID);
-        mCarWeight = new CarWeightCanPayloadTranslator(networkCarWeight);
+        mCarWeight = new IntCanPayloadTranslator(networkCarWeight);
         canInterface.registerTimeTriggered(networkCarWeight);
 
         networkDoorClosed = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID +
                 ReplicationComputer.computeReplicationId(hallway, side));
-        mDoorClosed = new DoorClosedCanPayloadTranslator(networkDoorClosed,
-                                                         hallway, side);
+        mDoorClosed = new BitCanPayloadTranslator(networkDoorClosed);
         canInterface.registerTimeTriggered(networkDoorClosed);
 
         networkDesiredFloor = CanMailbox.getReadableCanMailbox(
@@ -208,7 +203,7 @@ public class DoorControl extends Controller {
                 
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + index);
-                AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
+                BitCanPayloadTranslator t = new BitCanPayloadTranslator(m);
                 canInterface.registerTimeTriggered(m);
                 mAtFloor.put(index, t);
                 
@@ -216,7 +211,7 @@ public class DoorControl extends Controller {
                 ReadableCanMailbox networkCarCall = CanMailbox.getReadableCanMailbox(
                         MessageDictionary.CAR_CALL_BASE_CAN_ID + 
                         ReplicationComputer.computeReplicationId(floor, hallway));
-                BooleanCanPayloadTranslator nCarCall = new BooleanCanPayloadTranslator(networkCarCall);
+                BitCanPayloadTranslator nCarCall = new BitCanPayloadTranslator(networkCarCall);
                 canInterface.registerTimeTriggered(networkCarCall);
                 mCarCall.put(index, nCarCall);
                 
@@ -225,7 +220,7 @@ public class DoorControl extends Controller {
                     ReadableCanMailbox networkHallCall = CanMailbox.getReadableCanMailbox(
                             MessageDictionary.HALL_CALL_BASE_CAN_ID + 
                             ReplicationComputer.computeReplicationId(floor, hallway, d));
-                    BooleanCanPayloadTranslator nHallCall = new BooleanCanPayloadTranslator(networkHallCall);
+                    BitCanPayloadTranslator nHallCall = new BitCanPayloadTranslator(networkHallCall);
                     canInterface.registerTimeTriggered(networkHallCall);
                     mHallCall.put(indexHallCall, nHallCall);
                 }

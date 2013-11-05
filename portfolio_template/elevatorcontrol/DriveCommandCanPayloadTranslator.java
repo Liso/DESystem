@@ -18,11 +18,11 @@ import simulator.payloads.translators.CanPayloadTranslator;
 public class DriveCommandCanPayloadTranslator extends CanPayloadTranslator {
 
     public DriveCommandCanPayloadTranslator(WriteableCanMailbox p) {
-        super(p, 8, MessageDictionary.DRIVE_COMMAND_CAN_ID);
+        super(p, 1, MessageDictionary.DRIVE_COMMAND_CAN_ID);
     }
     
     public DriveCommandCanPayloadTranslator(ReadableCanMailbox p) {
-        super(p, 8, MessageDictionary.DRIVE_COMMAND_CAN_ID);
+        super(p, 1, MessageDictionary.DRIVE_COMMAND_CAN_ID);
     }
 
     /**
@@ -42,12 +42,12 @@ public class DriveCommandCanPayloadTranslator extends CanPayloadTranslator {
     
     public void setSpeed(Speed speed) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, speed.ordinal(), 0, 32);
+        addIntToBitset(b, speed.ordinal(), 0, 2);
         setMessagePayload(b, getByteSize());
     }
 
     public Speed getSpeed() {
-        int val = getIntFromBitset(getMessagePayload(), 0, 32);
+        int val = getIntFromBitset(getMessagePayload(), 0, 2);
         for (Speed s : Speed.values()) {
             if (s.ordinal() == val) {
                 return s;
@@ -58,12 +58,12 @@ public class DriveCommandCanPayloadTranslator extends CanPayloadTranslator {
 
     public void setDirection(Direction dir) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, dir.ordinal(), 32, 32);
+        addIntToBitset(b, dir.ordinal(), 2, 4);
         setMessagePayload(b, getByteSize());
     }
 
     public Direction getDirection() {
-        int val = getIntFromBitset(getMessagePayload(), 32, 32);
+        int val = getIntFromBitset(getMessagePayload(), 2, 4);
         for (Direction d : Direction.values()) {
             if (d.ordinal() == val) {
                 return d;

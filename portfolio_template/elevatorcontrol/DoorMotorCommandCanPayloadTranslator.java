@@ -20,11 +20,11 @@ import simulator.payloads.translators.CanPayloadTranslator;
 
 public class DoorMotorCommandCanPayloadTranslator extends CanPayloadTranslator {
     public DoorMotorCommandCanPayloadTranslator(WriteableCanMailbox p, Hallway hallway, Side side) {
-        super(p, 4, MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway, side));
+        super(p, 1, MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway, side));
     }
     
     public DoorMotorCommandCanPayloadTranslator(ReadableCanMailbox p, Hallway hallway, Side side) {
-        super(p, 4, MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway, side));
+        super(p, 1, MessageDictionary.DOOR_MOTOR_COMMAND_BASE_CAN_ID + ReplicationComputer.computeReplicationId(hallway, side));
     }
 
     /**
@@ -42,12 +42,12 @@ public class DoorMotorCommandCanPayloadTranslator extends CanPayloadTranslator {
     
     public void setDoorCommand(DoorCommand doorCommand) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, doorCommand.ordinal(), 0, 32);
+        addIntToBitset(b, doorCommand.ordinal(), 0, 2);
         setMessagePayload(b, getByteSize());
     }
 
     public DoorCommand getDoorCommand() {
-        int val = getIntFromBitset(getMessagePayload(), 0, 32);
+        int val = getIntFromBitset(getMessagePayload(), 0, 2);
         for (DoorCommand dc : DoorCommand.values()) {
             if (dc.ordinal() == val) {
                 return dc;

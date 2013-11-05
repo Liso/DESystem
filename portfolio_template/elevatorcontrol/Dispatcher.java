@@ -12,9 +12,6 @@ package simulator.elevatorcontrol;
 import java.util.HashMap;
 
 import jSimPack.SimTime;
-import simulator.elevatormodules.AtFloorCanPayloadTranslator;
-import simulator.elevatormodules.CarLevelPositionCanPayloadTranslator;
-import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
 import simulator.framework.Controller;
 import simulator.framework.Direction;
 import simulator.framework.Elevator;
@@ -26,7 +23,6 @@ import simulator.payloads.DriveSpeedPayload;
 import simulator.payloads.CanMailbox.ReadableCanMailbox;
 import simulator.payloads.CanMailbox.WriteableCanMailbox;
 import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
-import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
 public class Dispatcher extends Controller {
 
@@ -40,7 +36,7 @@ public class Dispatcher extends Controller {
     private ReadableDriveSpeedPayload localDriveSpeed;
     
     private ReadableCanMailbox networkCarLevelPosition;
-    private CarLevelPositionCanPayloadTranslator mCarLevelPosition;
+    private IntCanPayloadTranslator mCarLevelPosition;
 
     private WriteableCanMailbox networkDesiredDwellFront;
     // translator for the door motor command message --
@@ -53,34 +49,34 @@ public class Dispatcher extends Controller {
     private DesiredDwellCanPayloadTranslator mDesiredDwellBack;
 
     //received at floor message
-    private HashMap<Integer, AtFloorCanPayloadTranslator> mAtFloor =
-            new HashMap<Integer, AtFloorCanPayloadTranslator>();
+    private HashMap<Integer, BitCanPayloadTranslator> mAtFloor =
+            new HashMap<Integer, BitCanPayloadTranslator>();
     
-    private HashMap<Integer, BooleanCanPayloadTranslator> mCarCall = 
-    		new HashMap<Integer, BooleanCanPayloadTranslator>();
+    private HashMap<Integer, BitCanPayloadTranslator> mCarCall = 
+    		new HashMap<Integer, BitCanPayloadTranslator>();
     
-    private HashMap<Integer, BooleanCanPayloadTranslator> mHallCall = 
-    		new HashMap<Integer, BooleanCanPayloadTranslator>();
+    private HashMap<Integer, BitCanPayloadTranslator> mHallCall = 
+    		new HashMap<Integer, BitCanPayloadTranslator>();
 
     //received door closed message
     private ReadableCanMailbox networkDoorClosedFrontLeft;
     //translator for the doorClosed message -- this translator is specific
-    private DoorClosedCanPayloadTranslator mDoorClosedFrontLeft;
+    private BitCanPayloadTranslator mDoorClosedFrontLeft;
 
     //received door closed message
     private ReadableCanMailbox networkDoorClosedFrontRight;
     //translator for the doorClosed message -- this translator is specific
-    private DoorClosedCanPayloadTranslator mDoorClosedFrontRight;
+    private BitCanPayloadTranslator mDoorClosedFrontRight;
 
     //received door closed message
     private ReadableCanMailbox networkDoorClosedBackLeft;
     //translator for the doorClosed message -- this translator is specific
-    private DoorClosedCanPayloadTranslator mDoorClosedBackLeft;
+    private BitCanPayloadTranslator mDoorClosedBackLeft;
 
     //received door closed message
     private ReadableCanMailbox networkDoorClosedBackRight;
     //translator for the doorClosed message -- this translator is specific
-    private DoorClosedCanPayloadTranslator mDoorClosedBackRight;
+    private BitCanPayloadTranslator mDoorClosedBackRight;
 
     private static Hallway hallway = Hallway.NONE;
     private static int targetFloor = 1;
@@ -126,7 +122,7 @@ public class Dispatcher extends Controller {
 
         networkCarLevelPosition = CanMailbox.getReadableCanMailbox(
                 MessageDictionary.CAR_LEVEL_POSITION_CAN_ID);
-        mCarLevelPosition = new CarLevelPositionCanPayloadTranslator(
+        mCarLevelPosition = new IntCanPayloadTranslator(
                 networkCarLevelPosition);
         canInterface.registerTimeTriggered(networkCarLevelPosition);
         
@@ -149,14 +145,14 @@ public class Dispatcher extends Controller {
             for (Hallway h : Hallway.replicationValues) {
                 int index = ReplicationComputer.computeReplicationId(floor, h);
                 ReadableCanMailbox m = CanMailbox.getReadableCanMailbox(MessageDictionary.AT_FLOOR_BASE_CAN_ID + index);
-                AtFloorCanPayloadTranslator t = new AtFloorCanPayloadTranslator(m, floor, h);
+                BitCanPayloadTranslator t = new BitCanPayloadTranslator(m);
                 canInterface.registerTimeTriggered(m);
                 mAtFloor.put(index, t);
                 
                 ReadableCanMailbox networkCarCall = CanMailbox.getReadableCanMailbox(
                 		MessageDictionary.CAR_CALL_BASE_CAN_ID + 
                 		ReplicationComputer.computeReplicationId(floor, h));
-                BooleanCanPayloadTranslator nCarCall = new BooleanCanPayloadTranslator(networkCarCall);
+                BitCanPayloadTranslator nCarCall = new BitCanPayloadTranslator(networkCarCall);
                 canInterface.registerTimeTriggered(networkCarCall);
                 mCarCall.put(index, nCarCall);
                 
@@ -165,7 +161,7 @@ public class Dispatcher extends Controller {
 	                ReadableCanMailbox networkHallCall = CanMailbox.getReadableCanMailbox(
 	                		MessageDictionary.HALL_CALL_BASE_CAN_ID + 
 	                		ReplicationComputer.computeReplicationId(floor, h, d));
-	                BooleanCanPayloadTranslator nHallCall = new BooleanCanPayloadTranslator(networkHallCall);
+	                BitCanPayloadTranslator nHallCall = new BitCanPayloadTranslator(networkHallCall);
 	                canInterface.registerTimeTriggered(networkHallCall);
 	                mHallCall.put(indexHallCall, nHallCall);
                 }
@@ -178,8 +174,7 @@ public class Dispatcher extends Controller {
                 ReplicationComputer.computeReplicationId(Hallway.FRONT,
                                                          Side.LEFT));
         mDoorClosedFrontLeft =
-                new DoorClosedCanPayloadTranslator(networkDoorClosedFrontLeft,
-                                                   Hallway.FRONT, Side.LEFT);
+                new BitCanPayloadTranslator(networkDoorClosedFrontLeft);
         canInterface.registerTimeTriggered(networkDoorClosedFrontLeft);
 
         networkDoorClosedFrontRight = CanMailbox.getReadableCanMailbox(
@@ -187,8 +182,7 @@ public class Dispatcher extends Controller {
                 ReplicationComputer.computeReplicationId(Hallway.FRONT,
                                                          Side.RIGHT));
         mDoorClosedFrontRight =
-                new DoorClosedCanPayloadTranslator(networkDoorClosedFrontRight,
-                                                   Hallway.FRONT, Side.RIGHT);
+                new BitCanPayloadTranslator(networkDoorClosedFrontRight);
         canInterface.registerTimeTriggered(networkDoorClosedFrontRight);
 
         networkDoorClosedBackLeft = CanMailbox.getReadableCanMailbox(
@@ -196,8 +190,7 @@ public class Dispatcher extends Controller {
                 ReplicationComputer.computeReplicationId(Hallway.BACK,
                                                          Side.LEFT));
         mDoorClosedBackLeft =
-                new DoorClosedCanPayloadTranslator(networkDoorClosedBackLeft,
-                                                   Hallway.BACK, Side.LEFT);
+                new BitCanPayloadTranslator(networkDoorClosedBackLeft);
         canInterface.registerTimeTriggered(networkDoorClosedBackLeft);
 
         networkDoorClosedBackRight = CanMailbox.getReadableCanMailbox(
@@ -205,8 +198,7 @@ public class Dispatcher extends Controller {
                 ReplicationComputer.computeReplicationId(Hallway.BACK,
                                                          Side.RIGHT));
         mDoorClosedBackRight =
-                new DoorClosedCanPayloadTranslator(networkDoorClosedBackRight,
-                                                   Hallway.BACK, Side.RIGHT);
+                new BitCanPayloadTranslator(networkDoorClosedBackRight);
         canInterface.registerTimeTriggered(networkDoorClosedBackRight);
 
         mDesiredFloor.set(targetFloor, hallway, Direction.STOP);
@@ -801,7 +793,6 @@ public class Dispatcher extends Controller {
                 	int floor = i + 1;
                 	
                 	for(Hallway h : Hallway.replicationValues){
-                		for(Direction d : Direction.replicationValues){
                 			indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.UP);
                 			indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
                 				
@@ -813,9 +804,8 @@ public class Dispatcher extends Controller {
                 					currentDirection = Direction.UP;
                 					desiredDirection = Direction.UP;
                 					newState = State.STATE_UP;
-                				}       				
+                				}
                 			}
-                		}
                		}
                	}
                 if(flag1 == 0){
@@ -893,7 +883,6 @@ public class Dispatcher extends Controller {
                  	int floor = i ;
                  	
                  	for(Hallway h : Hallway.replicationValues){
-                 		for(Direction d : Direction.replicationValues){
                  			indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.DOWN);
                  			indexCarCall = ReplicationComputer.computeReplicationId(floor, h);
                  				
@@ -906,7 +895,6 @@ public class Dispatcher extends Controller {
                  					newState = State.STATE_DOWN;
                  				}       				
                  			}
-                 		}
                 	}
                 }
                  if(flag1 == 0){
