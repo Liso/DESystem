@@ -1,3 +1,9 @@
+/* 
+** Course and Semester : 18-649 Fall 2013
+** Name : Sri Harsha Koppaka
+** AndrewID : skoppaka
+*/
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -5,6 +11,7 @@
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
+import simulator.elevatormodules.DoorClosedCanPayloadTranslator;
 import simulator.framework.Controller;
 import simulator.framework.Direction;
 import simulator.framework.Hallway;
@@ -17,6 +24,7 @@ import simulator.payloads.HallCallPayload;
 import simulator.payloads.HallCallPayload.ReadableHallCallPayload;
 import simulator.payloads.HallLightPayload;
 import simulator.payloads.HallLightPayload.WriteableHallLightPayload;
+import simulator.payloads.translators.BooleanCanPayloadTranslator;
 
 /**
  * This testlight uses hall calls and hall lights, so it can be instantiated for 
@@ -28,7 +36,7 @@ import simulator.payloads.HallLightPayload.WriteableHallLightPayload;
  *
  * @author Justin Ray
  */
-public class TestLight extends Controller {
+public class Testlight extends Controller {
 
     /***************************************************************************
      * Declarations
@@ -43,13 +51,13 @@ public class TestLight extends Controller {
     // receive hall call from the other button
     private WriteableCanMailbox networkHallLightOut;
     // translator for the hall light message -- this is a generic translator
-    private BitCanPayloadTranslator mHallLight;
+    private BooleanCanPayloadTranslator mHallLight;
 
     //received door closed message
     private ReadableCanMailbox networkDoorClosedFrontLeft;
     //translator for the doorClosed message -- this translator is specific
     //to this messages, and is provided the elevatormodules package
-    private BitCanPayloadTranslator mDoorClosedFrontLeft;
+    private DoorClosedCanPayloadTranslator mDoorClosedFrontLeft;
     
     //these variables keep track of which instance this is.
     private final Hallway hallway;
@@ -82,7 +90,7 @@ public class TestLight extends Controller {
      * For your elevator controllers, you should make sure that the constructor matches
      * the method signatures in ControllerBuilder.makeAll().
      */
-    public TestLight(SimTime period, int floor, Hallway hallway, Direction direction, boolean verbose) {
+    public Testlight(SimTime period, int floor, Hallway hallway, Direction direction, boolean verbose) {
         //call to the Controller superclass constructor is required
         super("TestLight" + ReplicationComputer.makeReplicationString(floor, hallway, direction), verbose);
         
@@ -135,7 +143,7 @@ public class TestLight extends Controller {
          * of the course.  When we get to network scheduling, you may wish to write
          * your own translators, although you can do so at any time.
          */
-        mHallLight = new BitCanPayloadTranslator(networkHallLightOut);
+        mHallLight = new BooleanCanPayloadTranslator(networkHallLightOut);
         //register the mailbox to have its value broadcast on the network periodically
         //with a period specified by the period parameter.
         canInterface.sendTimeTriggered(networkHallLightOut, period);
@@ -149,7 +157,7 @@ public class TestLight extends Controller {
          * of message.
          */
         networkDoorClosedFrontLeft = CanMailbox.getReadableCanMailbox(MessageDictionary.DOOR_CLOSED_SENSOR_BASE_CAN_ID + ReplicationComputer.computeReplicationId(Hallway.FRONT, Side.LEFT));
-        mDoorClosedFrontLeft = new BitCanPayloadTranslator(networkDoorClosedFrontLeft);
+        mDoorClosedFrontLeft = new DoorClosedCanPayloadTranslator(networkDoorClosedFrontLeft, Hallway.FRONT, Side.LEFT);
         //register to receive periodic updates to the mailbox via the CAN network
         //the period of updates will be determined by the sender of the message
         canInterface.registerTimeTriggered(networkDoorClosedFrontLeft);
@@ -164,7 +172,7 @@ public class TestLight extends Controller {
 
     /*
      * The timer callback is where the main controller code is executed.  For time
-     * triggered design, this consists mainly of a switch block with a case blcok for
+     * triggered design, this consists mainly of a switch block with a case block for
      * each state.  Each case block executes actions for that state, then executes
      * a transition to the next state if the transition conditions are met.
      */
@@ -207,15 +215,15 @@ public class TestLight extends Controller {
                 break;
             case STATE_DOOR_NOT_CLOSED:
                 //state actions for 'DOOR NOT CLOSED'
-                TODO: //set the hall light physical and network messages to On / True
+                //TODO:  set the hall light physical and network messages to On / True
                 localHallLight.set(true);
                 mHallLight.set(true);
                 counter = SimTime.ZERO;
                 
                 //transitions -- note that transition conditions are mutually exclusive
                 //#transition 'TL.T.5'
-                TODO: //Fix the transition logic so it matches what is specified in the statechart logic
-                if ( mDoorClosedFrontLeft.getValue() == true && localHallCall.pressed() == true) {
+                //TODO:  Fix the transition logic so it matches what is specified in the statechart logic
+                if ( (mDoorClosedFrontLeft.getValue() == true) && ( localHallCall.pressed() == true)) {
                     newState = State.STATE_FLASH_OFF;
                 } else {
                     newState = state;
