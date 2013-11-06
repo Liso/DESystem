@@ -44,7 +44,7 @@ public class DesiredDwellCanPayloadTranslator extends CanPayloadTranslator {
      */
     public void setDwell(SimTime dwell) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, (int)dwell.getTruncSeconds(), 0, 3);
+        addUnsignedIntToBitset(b, (int)dwell.getTruncSeconds(), 0, 3);
         setMessagePayload(b, getByteSize());
     }
     
@@ -53,7 +53,7 @@ public class DesiredDwellCanPayloadTranslator extends CanPayloadTranslator {
      * @return the direction value from the can payload
      */
     public SimTime getDwell() {
-        int val = getIntFromBitset(getMessagePayload(), 0, 3);
+        int val = getUnsignedIntFromBitset(getMessagePayload(), 0, 3);
         SimTime dwell = new SimTime(val,
                 SimTime.SimTimeUnit.SECOND);
        return dwell;

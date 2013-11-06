@@ -43,12 +43,12 @@ public class IntCanPayloadTranslator extends CanPayloadTranslator {
     
     public void setValue(int value) {
         BitSet b = new BitSet();
-        addIntToBitset(b, value, 0, 16);
+        addUnsignedIntToBitset(b, value, 0, 16);
         setMessagePayload(b, getByteSize());
     }
     
     public int getValue() {
-        return getIntFromBitset(getMessagePayload(), 0, 16);
+        return getUnsignedIntFromBitset(getMessagePayload(), 0, 16);
     }
     
     @Override

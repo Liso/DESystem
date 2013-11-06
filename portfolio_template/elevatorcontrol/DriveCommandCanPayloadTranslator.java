@@ -42,12 +42,12 @@ public class DriveCommandCanPayloadTranslator extends CanPayloadTranslator {
     
     public void setSpeed(Speed speed) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, speed.ordinal(), 0, 2);
+        addUnsignedIntToBitset(b, speed.ordinal(), 0, 2);
         setMessagePayload(b, getByteSize());
     }
 
     public Speed getSpeed() {
-        int val = getIntFromBitset(getMessagePayload(), 0, 2);
+        int val = getUnsignedIntFromBitset(getMessagePayload(), 0, 2);
         for (Speed s : Speed.values()) {
             if (s.ordinal() == val) {
                 return s;
@@ -58,12 +58,12 @@ public class DriveCommandCanPayloadTranslator extends CanPayloadTranslator {
 
     public void setDirection(Direction dir) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, dir.ordinal(), 2, 4);
+        addUnsignedIntToBitset(b, dir.ordinal(), 2, 4);
         setMessagePayload(b, getByteSize());
     }
 
     public Direction getDirection() {
-        int val = getIntFromBitset(getMessagePayload(), 2, 4);
+        int val = getUnsignedIntFromBitset(getMessagePayload(), 2, 4);
         for (Direction d : Direction.values()) {
             if (d.ordinal() == val) {
                 return d;

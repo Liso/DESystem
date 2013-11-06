@@ -44,7 +44,7 @@ public class BitCanPayloadTranslator extends CanPayloadTranslator {
     
     public void setValue(boolean value) {       
         BitSet b = new BitSet(1);
-        b.set(1, value);
+        b.set(0, value);
         setMessagePayload(b, getByteSize());
     }
     

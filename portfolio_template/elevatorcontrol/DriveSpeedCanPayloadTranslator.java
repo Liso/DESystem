@@ -42,12 +42,12 @@ public class DriveSpeedCanPayloadTranslator extends CanPayloadTranslator {
     
     public void setSpeed(Speed speed) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, speed.ordinal(), 0, 7);
+        addUnsignedIntToBitset(b, speed.ordinal(), 0, 7);
         setMessagePayload(b, getByteSize());
     }
 
     public Speed getSpeed() {
-        int val = getIntFromBitset(getMessagePayload(), 0, 7);
+        int val = getUnsignedIntFromBitset(getMessagePayload(), 0, 7);
         for (Speed s : Speed.values()) {
             if (s.ordinal() == val) {
                 return s;
@@ -58,12 +58,12 @@ public class DriveSpeedCanPayloadTranslator extends CanPayloadTranslator {
     
     public void setDirection(Direction dir) {
         BitSet b = getMessagePayload();
-        addIntToBitset(b, dir.ordinal(), 7, 2);
+        addUnsignedIntToBitset(b, dir.ordinal(), 7, 2);
         setMessagePayload(b, getByteSize());
     }
 
     public Direction getDirection() {
-        int val = getIntFromBitset(getMessagePayload(), 7, 2);
+        int val = getUnsignedIntFromBitset(getMessagePayload(), 7, 2);
         for (Direction d : Direction.values()) {
             if (d.ordinal() == val) {
                 return d;
@@ -71,19 +71,6 @@ public class DriveSpeedCanPayloadTranslator extends CanPayloadTranslator {
         }
         throw new RuntimeException("Unrecognized Direction Value " + val);
     }
-
-    public static void addDoubleToBitset(BitSet b, double value, int startLocation,
-            int bitSize) {
-    	int intValue = (int)(value * 100);
-        addIntToBitset(b, intValue, startLocation, bitSize);
-    }
-
-    public static double getDoubleFromBitset(BitSet b, int startLocation, int bitSize) {
-    	double value = getIntFromBitset(b, startLocation, bitSize) / 100;
-    	return value;
-    }
-
-
     
     @Override
     public String payloadToString() {
