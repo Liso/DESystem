@@ -65,7 +65,7 @@ public class DesiredFloorCanPayloadTranslator extends CanPayloadTranslator {
      */
     public void setFloor(int floor) {
         BitSet b = getMessagePayload();
-        addUnsignedIntToBitset(b, floor, 0, 3);
+        addUnsignedIntToBitset(b, floor-1, 0, 3);
         setMessagePayload(b, getByteSize());
     }
 
@@ -74,7 +74,7 @@ public class DesiredFloorCanPayloadTranslator extends CanPayloadTranslator {
      * @return the floor value from the can message payload
      */
     public int getFloor() {
-        return getUnsignedIntFromBitset(getMessagePayload(), 0, 3);
+        return getUnsignedIntFromBitset(getMessagePayload(), 0, 3)+1;
     }
 
     /**

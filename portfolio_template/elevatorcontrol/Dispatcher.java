@@ -253,8 +253,7 @@ public class Dispatcher extends Controller {
         		}
         	}
         }
-    
-
+        
         switch (state) {
         case STATE_STOP:
             // state actions for state S11.1 'SET STOP'
@@ -262,6 +261,7 @@ public class Dispatcher extends Controller {
 
             // #transition 'T11.9'
             // all doors are closed
+            
             if (!(mDoorClosedFrontLeft.getValue() && 
                     mDoorClosedFrontRight.getValue() && 
                     mDoorClosedBackLeft.getValue() && 
@@ -975,6 +975,8 @@ public class Dispatcher extends Controller {
         case STATE_RESET:
             // state actions for state S11.7 'RESET'
             mDesiredFloor.set(1, Hallway.NONE, Direction.STOP);
+            
+           
             break;
         default:
             throw new RuntimeException("State " + state +
