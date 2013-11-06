@@ -44,7 +44,6 @@
 ;# arc '1A/2b'
 ;# arc '1A/2c'
 +0.25s  A F HallLight 4 FRONT UP : lighted == true 
-+0s  A N HALL_LIGHT_[4][FRONT][UP]_CAN_ID Boolean : getValue == true
 +0s    A N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT : getValue == false
 +0s    A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
 +0s    A N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT : getDoorCommand == STOP
