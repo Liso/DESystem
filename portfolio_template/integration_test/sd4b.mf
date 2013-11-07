@@ -7,21 +7,23 @@
 #INCLUDE defines.mf ;include CAN id and period definitions
 
 ;intialize
-+0s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
 +0s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = true
-+0s  I  0s N CAR_WEIGHT_CAN_ID CarWeight = 14001
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT = true
-+0s  I  0s N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT = true
-+0s  I  0s N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT = true
-+1s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = false
-+0s  I  0s N CAR_WEIGHT_CAN_ID CarWeight = 1000
++0s  I  0s N CAR_WEIGHT_CAN_ID Int = 14001
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
++0s  I  0s N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID Bit = true
++0s  I  0s N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
+
+
++2s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = false
++0s  I  0s N CAR_WEIGHT_CAN_ID Int = 10000
 
 ;# arc '1c'
-+1s  A N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT : getValue == true
-+0s  A N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID DoorOpened FRONT RIGHT : getValue == true
-+0s  A N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID DoorOpened BACK RIGHT : getValue == true
-+0s  A N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID DoorOpened BACK LEFT : getValue == true
++1s  A N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit : getValue == true
++0s  A N DOOR_OPEN_SENSOR_[FRONT][RIGHT]_CAN_ID Bit : getValue == true
++0s  A N DOOR_OPEN_SENSOR_[BACK][RIGHT]_CAN_ID Bit : getValue == true
++0s  A N DOOR_OPEN_SENSOR_[BACK][LEFT]_CAN_ID Bit : getValue == true
 
 ;# arc '1d'
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP

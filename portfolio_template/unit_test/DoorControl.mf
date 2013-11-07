@@ -19,7 +19,7 @@
 0.04s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ; #transition 'T5.6'
-+0.04s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.04s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 2 FRONT DOWN
 
 ; #state S5.4 'STOP_CLOSING'
@@ -29,9 +29,9 @@
 
 ; #transition 'T5.7'
 +0.04s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT DOWN
-+0s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
 +0s  I  0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
-+0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 
 ; #state S5.1 'DOOR_OPEN'
 +0.14s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -39,7 +39,7 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -57,8 +57,8 @@
 ;#####################################################################################################
 
 ; #transition 'T5.3'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
-+0s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Boolean = true
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -66,8 +66,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -81,9 +81,9 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ; #transition 'T5.3'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
-+0s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Boolean = true
++0s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -91,8 +91,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -106,9 +106,9 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ; #transition 'T5.3'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
-+0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean = true
++0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -116,8 +116,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -131,9 +131,9 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ; #transition 'T5.3'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
-+0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean = true
++0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -141,8 +141,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -156,8 +156,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ; #transition 'T5.3'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
-+0s I 0s N CAR_CALL_[4][FRONT]_CAN_ID Boolean = true
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N CAR_CALL_[4][FRONT]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -165,8 +165,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N CAR_CALL_[4][FRONT]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N CAR_CALL_[4][FRONT]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -180,8 +180,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ; #transition 'T5.3'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
-+0s I 0s N CAR_WEIGHT_CAN_ID CarWeight = 19000
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N CAR_WEIGHT_CAN_ID Int = 19000
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -189,8 +189,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N CAR_WEIGHT_CAN_ID CarWeight = 0
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N CAR_WEIGHT_CAN_ID Int = 0
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -208,8 +208,8 @@
 ;#####################################################################################################
 
 ; #transition 'T5.4'
-+0.01s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
-+0.02s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
++0.01s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0.02s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #transition 'T5.5'
 ; #state S5.1 'DOOR_OPEN'
@@ -218,8 +218,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
-+0.0s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0.0s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -233,8 +233,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ; #transition 'T5.4'
-+0.01s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
-+0.1s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
++0.01s  I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0.1s  I 0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #transition 'T5.5'
 ; #state S5.1 'DOOR_OPEN'
@@ -243,8 +243,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
-+0.0s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = false
++0.02s  I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0.0s  I 0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -258,8 +258,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ; #transition 'T5.4'
-+0.01s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
-+0.1s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][RIGHT]_CAN_ID DoorReversal FRONT RIGHT = true
++0.01s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0.1s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
 
 ; #transition 'T5.5'
 ; #state S5.1 'DOOR_OPEN'
@@ -268,8 +268,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
-+0.0s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][RIGHT]_CAN_ID DoorReversal FRONT RIGHT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0.0s  I  0s N DOOR_REVERSAL_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = false
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -287,9 +287,9 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ; #transition 'T5.9'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT DOWN
-+0s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Boolean = true
++0s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -297,8 +297,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -312,9 +312,9 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ; #transition 'T5.9'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
-+0s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Boolean = true
++0s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -322,8 +322,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -337,9 +337,9 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ; #transition 'T5.9'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
-+0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean = true
++0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -347,8 +347,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -362,9 +362,9 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ; #transition 'T5.9'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
-+0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean = true
++0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -372,8 +372,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -387,8 +387,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ; #transition 'T5.9'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
-+0s I 0s N CAR_CALL_[4][FRONT]_CAN_ID Boolean = true
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N CAR_CALL_[4][FRONT]_CAN_ID Bit = true
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -396,8 +396,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s I 0s N CAR_CALL_[4][FRONT]_CAN_ID Boolean = false
-+0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.02s I 0s N CAR_CALL_[4][FRONT]_CAN_ID Bit = false
++0s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -411,8 +411,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ; #transition 'T5.9'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
-+0s I 0s N CAR_WEIGHT_CAN_ID CarWeight = 19000
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N CAR_WEIGHT_CAN_ID Int = 19000
 
 ; #state S5.1 'DOOR_OPEN'
 +0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
@@ -420,8 +420,8 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ; #transition 'T5.1'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
-+0s I 0s N CAR_WEIGHT_CAN_ID CarWeight = 0
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0s N CAR_WEIGHT_CAN_ID Int = 0
 
 ; #state S5.2 'STOP_OPENING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
@@ -435,9 +435,9 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
 
 ; #transition 'T5.10'
-+0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0.02s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 NONE STOP
-+0.02s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0.02s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ; #state S5.2 'STOP_CLOSING'
 +0.1s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_CLOSING

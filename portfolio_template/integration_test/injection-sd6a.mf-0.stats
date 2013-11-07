@@ -3,8 +3,8 @@
 ;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd6a.cf -mf sd6a.mf -head header.txt
-RandomSeed = 1381981754052
+Command line = -mf sd6a.mf -cf sd6a.cf
+RandomSeed = 1383799105343
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,18 +13,13 @@ Message File = sd6a.mf
 Controller File = sd6a.cf
 
 Assertion Results:
-@3.0s:  PASSED CarPositionControl::checkState(STATE) ?== STATE_DISPLAY PASSED
-@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3fd3304e :: getValue ?== 5 PASSED
-@3.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@385b5df0 :: floor ?== 5 PASSED
-@3.0s:  PASSED DriveControl::checkState(STATE) ?== STATE_STOP PASSED
-@3.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@79b5459e :: speed ?== STOP PASSED
-@3.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@4782b18d :: direction ?== STOP PASSED
-@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@33891d5d :: getSpeed ?== STOP PASSED
-@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@77411b30 :: getDirection ?== STOP PASSED
+@2.0s:  FAILED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@76745477 :: floor ?== 5 FAILED
+@2.0s:  FAILED simulator.payloads.DrivePayload$ReadableDrivePayload@79b5459e :: speed ?== STOP FAILED
+@2.0s:  FAILED simulator.payloads.DrivePayload$ReadableDrivePayload@4782b18d :: direction ?== STOP FAILED
 
 
 ******************Summary******************
-Passed:  8
-Failed:  0
-Total :  8
+Passed:  0
+Failed:  3
+Total :  3
 

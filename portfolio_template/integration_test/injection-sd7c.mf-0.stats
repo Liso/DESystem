@@ -3,8 +3,8 @@
 ;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd7c.cf -mf sd7c.mf -head header.txt
-RandomSeed = 1381981756185
+Command line = -mf sd7c.mf -cf sd7c.cf
+RandomSeed = 1383799157611
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,20 +13,18 @@ Message File = sd7c.mf
 Controller File = sd7c.cf
 
 Assertion Results:
-@1.5s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_CLOSE PASSED
-@1.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@398f1ef8 :: command ?== CLOSE PASSED
-@1.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7a29120 :: getDoorCommand ?== CLOSE PASSED
-@3.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@56acf892 :: getValue ?== true PASSED
-@3.5s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_CLOSING PASSED
-@3.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@617ce686 :: command ?== STOP PASSED
-@3.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@33a626ac :: getDoorCommand ?== STOP PASSED
-@3.6s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@5ec09652 :: lighted ?== false PASSED
-@3.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2a5ebf99 :: getValue ?== false PASSED
-@3.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1a13cae7 :: getValue ?== false PASSED
+@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2a6788c4 :: command ?== CLOSE PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79e0123b :: getDoorCommand ?== CLOSE PASSED
+@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7b0acf26 :: getValue ?== true PASSED
+@2.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@620ee765 :: command ?== STOP PASSED
+@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7bc8b313 :: getDoorCommand ?== STOP PASSED
+@2.6s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@72ad25d0 :: lighted ?== false PASSED
+@2.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5a874bd3 :: getValue ?== false PASSED
+@2.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7ed69cff :: getValue ?== false PASSED
 
 
 ******************Summary******************
-Passed:  10
+Passed:  8
 Failed:  0
-Total :  10
+Total :  8
 

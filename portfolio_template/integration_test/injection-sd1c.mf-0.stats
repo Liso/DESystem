@@ -3,8 +3,8 @@
 ;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd1c.cf -mf sd1c.mf -head header.txt
-RandomSeed = 1381981745263
+Command line = -mf sd1c.mf -cf sd1c.cf
+RandomSeed = 1383743353946
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,14 +13,14 @@ Message File = sd1c.mf
 Controller File = sd1c.cf
 
 Assertion Results:
-@0.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1c7b745a :: command ?== CLOSE PASSED
-@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2f9006c9 :: getValue ?== false PASSED
-@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2a6788c4 :: getValue ?== true PASSED
-@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79e0123b :: getDirection ?== UP PASSED
-@0.7s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@7d6c848f :: lighted ?== false PASSED
-@2.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@7b0acf26 :: lighted ?== true PASSED
-@5.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@620ee765 :: getValue ?== true PASSED
-@5.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7bc8b313 :: getDoorCommand ?== STOP PASSED
+@0.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4d3806b6 :: command ?== CLOSE PASSED
+@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f72cbae :: getValue ?== false PASSED
+@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@d394424 :: getValue ?== true PASSED
+@0.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@242e983d :: getDirection ?== UP PASSED
+@0.7s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@361b8504 :: lighted ?== false PASSED
+@2.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@24812051 :: lighted ?== true PASSED
+@5.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@204a6ccc :: getValue ?== true PASSED
+@5.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@797dfcf1 :: getDoorCommand ?== STOP PASSED
 
 
 ******************Summary******************

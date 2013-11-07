@@ -3,8 +3,8 @@
 ;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd8c.cf -mf sd8c.mf -head header.txt
-RandomSeed = 1381981758890
+Command line = -mf sd8c.mf -cf sd8c.cf
+RandomSeed = 1383799194554
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,8 +13,8 @@ Message File = sd8c.mf
 Controller File = sd8c.cf
 
 Assertion Results:
-@0.2s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@613500b1 :: speed ?== STOP PASSED
-@0.2s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@35cd1217 :: direction ?== STOP PASSED
+@0.2s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@7b0acf26 :: speed ?== STOP PASSED
+@0.2s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@620ee765 :: direction ?== STOP PASSED
 
 
 ******************Summary******************

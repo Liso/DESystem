@@ -3,8 +3,8 @@
 ;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd1a.cf -mf sd1a.mf -head header.txt
-RandomSeed = 1381981743586
+Command line = -mf sd1a.mf -cf sd1a.cf
+RandomSeed = 1383799391263
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -14,27 +14,26 @@ Controller File = sd1a.cf
 
 Assertion Results:
 @0.5s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_CLOSING PASSED
-@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@3564e3e2 :: command ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@458db581 :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@68833813 :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3bdd6a67 :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6f866002 :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f9849e5 :: getValue ?== false PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@211c7a72 :: getDirection ?== UP PASSED
-@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@1f34137c :: lighted ?== false PASSED
-@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@3a332b9a :: lighted ?== false PASSED
-@1.85s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7c70bdc6 :: getValue ?== true PASSED
-@2.1s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@4503e0e9 :: lighted ?== true PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@757583b9 :: getValue ?== true PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6f92322e :: getValue ?== false PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@920ab60 :: getDoorCommand ?== STOP PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4208719e :: getDoorCommand ?== STOP PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@76745477 :: getDoorCommand ?== STOP PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79b5459e :: getDoorCommand ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5360297a :: command ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1de04033 :: getDoorCommand ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4d3806b6 :: getDoorCommand ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@698fcb66 :: getDoorCommand ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@699a3d76 :: getDoorCommand ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2aa89e44 :: getValue ?== false PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6f0cdf59 :: getDirection ?== UP PASSED
+@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@48b9e55c :: lighted ?== false PASSED
+@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@1970b890 :: lighted ?== false PASSED
+@1.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@48a70acd :: getValue ?== true PASSED
+@1.95s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@1ea01711 :: lighted ?== true PASSED
+@1.95s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@762cd5a3 :: getValue ?== false PASSED
+@1.95s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3e697087 :: getDoorCommand ?== STOP PASSED
+@1.95s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2dd1282d :: getDoorCommand ?== STOP PASSED
+@1.95s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@70a5d82a :: getDoorCommand ?== STOP PASSED
+@1.95s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@10747b4 :: getDoorCommand ?== STOP PASSED
 
 
 ******************Summary******************
-Passed:  18
+Passed:  17
 Failed:  0
-Total :  18
+Total :  17
 

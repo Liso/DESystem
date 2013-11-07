@@ -3,8 +3,8 @@
 ;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd1b.cf -mf sd1b.mf -head header.txt
-RandomSeed = 1381981744593
+Command line = -mf sd1b.mf -cf sd1b.cf
+RandomSeed = 1383743248956
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,12 +13,12 @@ Message File = sd1b.mf
 Controller File = sd1b.cf
 
 Assertion Results:
-@0.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6d13cf51 :: command ?== CLOSE PASSED
-@1.15s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@7b0acf26 :: lighted ?== true PASSED
-@1.15s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@620ee765 :: getValue ?== true PASSED
-@1.25s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7bc8b313 :: command ?== OPEN PASSED
-@2.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@72ad25d0 :: lighted ?== false PASSED
-@2.45s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5a874bd3 :: command ?== STOP PASSED
+@0.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5360297a :: command ?== CLOSE PASSED
+@1.15s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@1de04033 :: lighted ?== true PASSED
+@1.15s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4d3806b6 :: getValue ?== true PASSED
+@1.25s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@698fcb66 :: command ?== OPEN PASSED
+@2.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@699a3d76 :: lighted ?== false PASSED
+@2.45s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2aa89e44 :: command ?== STOP PASSED
 
 
 ******************Summary******************

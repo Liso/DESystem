@@ -15,13 +15,13 @@
 
 ;set conditions for T6.1
 1s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
-1s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-1s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed  FRONT LEFT = true
-1s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed  FRONT RIGHT = true
-1s  I  0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed  BACK LEFT = true
-1s  I  0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed  BACK RIGHT = true
+1s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
+1s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
+1s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
+1s  I  0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID Bit = true
+1s  I  0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
 1s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = false
-1s  I  0s N CAR_WEIGHT_CAN_ID CarWeight = 1000
+1s  I  0s N CAR_WEIGHT_CAN_ID Int = 1000
 1s  I  0s N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT = STOP
 1s  I  0s N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT = STOP
 1s  I  0s N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT = STOP
@@ -44,8 +44,6 @@
 +1s  A S DriveControl : STATE == STATE_FAST_UP
 +0s  A F Drive : speed == FAST
 +0s  A F Drive : direction == UP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == FAST
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
 
 ;set conditions for T6.13
 +1s  I 0s F DriveSpeed = UP 1
@@ -55,14 +53,12 @@
 +1s  A S DriveControl : STATE == STATE_SLOW_UP
 +0s  A F Drive : speed == SLOW 
 +0s  A F Drive : direction == UP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
 
 ;set conditions for T6.6
-+1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
-+0s  I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = false
++1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Bit = true
++0s  I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = false
 +0s  I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
-+0.2s  I 0s N AT_FLOOR_[6][FRONT]_CAN_ID AtFloor 6 FRONT = true
++0.2s  I 0s N AT_FLOOR_[6][FRONT]_CAN_ID Bit = true
 
 ;T6.6
 +1s  A S DriveControl : STATE == STATE_LEVEL_UP
@@ -72,8 +68,8 @@
 +0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
 
 ;set conditions for T6.7
-+1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
-+0s	I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
++1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Bit = true
++0s	I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Bit = true
 +0s  I 0s F DriveSpeed = UP 0
 
 
@@ -86,13 +82,13 @@
 
 ;set conditions for T6.4
 +1s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT DOWN
-+0s  I  0s N AT_FLOOR_[6][FRONT]_CAN_ID AtFloor 6 FRONT = true
-+0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed  FRONT LEFT = true
-+0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed  FRONT RIGHT = true
-+0s  I  0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed  BACK LEFT = true
-+0s  I  0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed  BACK RIGHT = true
++0s  I  0s N AT_FLOOR_[6][FRONT]_CAN_ID Bit = true
++0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
++0s  I  0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID Bit = true
++0s  I  0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
 +0s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = false
-+0s  I  0s N CAR_WEIGHT_CAN_ID CarWeight = 1000
++0s  I  0s N CAR_WEIGHT_CAN_ID Int = 1000
 +0s  I  0s N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT = STOP
 +0s  I  0s N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT = STOP
 +0s  I  0s N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT = STOP
@@ -102,8 +98,6 @@
 +1s  A S DriveControl : STATE == STATE_SLOW_DOWN
 +0s  A F Drive : speed == SLOW
 +0s  A F Drive : direction == DOWN
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
 
 
 ;set conditions for T6.15
@@ -114,8 +108,6 @@
 +1s  A S DriveControl : STATE == STATE_FAST_DOWN
 +0s  A F Drive : speed == FAST
 +0s  A F Drive : direction == DOWN
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == FAST
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN  
 
 ;set conditions for T6.16
 +1s  I 0s F DriveSpeed = DOWN 1
@@ -125,52 +117,41 @@
 +1s  A S DriveControl : STATE == STATE_SLOW_DOWN
 +0s  A F Drive : speed == SLOW
 +0s  A F Drive : direction == DOWN
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
 
 ;set conditions for T6.11
-+1s  I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
-+0s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = false
-+0s  I 0s N AT_FLOOR_[6][FRONT]_CAN_ID AtFloor 6 FRONT = false
++1s  I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Bit = true
++0s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Bit = false
++0s  I 0s N AT_FLOOR_[6][FRONT]_CAN_ID Bit = false
 +0s  I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
-+0.2s  I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0.2s  I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
 
 ;T6.11
 +1s  A S DriveControl : STATE == STATE_LEVEL_DOWN
 +0s  A F Drive : speed == LEVEL
 +0s  A F Drive : direction == DOWN
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == DOWN
 
 ;set conditions for T6.10
-+1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
-+0s I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
++1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Bit = true
++0s I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Bit = true
 
 ;T6.10
 +1s  A S DriveControl : STATE == STATE_STOP
 +0s  A F Drive : speed == STOP
 +0s  A F Drive : direction == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
 
 ;set conditions for T6.12
 +1s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = true
-+0s  I  0s N CAR_WEIGHT_CAN_ID CarWeight = 2000
++0s  I  0s N CAR_WEIGHT_CAN_ID Int = 2000
 
 ;T6.12
 +1s  A S DriveControl : STATE == STATE_STOP
 +0s  A F Drive : speed == STOP
 +0s  A F Drive : direction == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
 
 ;set conditions for T6.5.*
-+1s  I 0s N EMERGENCY_BRAKE_CAN_ID SafetySensor = true
++1s  I 0s N EMERGENCY_BRAKE_CAN_ID Bit = true
 
 ;T6.5.*
 +1s  A S DriveControl : STATE == STATE_EMERGENCY
 +0s  A F Drive : speed == STOP
 +0s  A F Drive : direction == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
-

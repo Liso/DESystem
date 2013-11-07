@@ -8,7 +8,7 @@
 #INCLUDE defines.mf ;include CAN id and period definitions
 
 ;intialize
-0.0s I 0.0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true 
+0.0s I 0.0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true 
 
 ;check that the door is closing initially
 0.2s  A F DoorMotor FRONT LEFT : command == CLOSE
@@ -24,7 +24,7 @@
 0.8s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ;set conditions for T5.1
-1.20s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
+1.20s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ;T5.1
 ;check that the door is open

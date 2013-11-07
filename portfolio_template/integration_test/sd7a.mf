@@ -8,12 +8,12 @@
 #INCLUDE defines.mf
 
 ; Pre-conditions
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 +0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
-+0s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
++0s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 
 ;#arc 7A/1a'
-+0.1s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0.1s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
 
 ;#arc 7A/1b'
 +0.5s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == STOP
@@ -26,8 +26,8 @@
 +0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ;#arc '7A/2a'
-+0.2s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
-+0.2s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
++0.2s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0.2s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ;#arc '7A/2b'
 ;check that the door is open

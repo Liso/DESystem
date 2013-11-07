@@ -11,25 +11,25 @@
 ;Check that Lantern is OFF Initially
 ;# state 'S7.2 OFF'
 +0.4s  A F CarLantern UP : lighted == false
-+0s   A N CAR_LANTERN_[UP]_CAN_ID Boolean : getValue == false
-+0s   A N CAR_LANTERN_[DOWN]_CAN_ID Boolean : getValue == false
++0s   A N CAR_LANTERN_[UP]_CAN_ID Bit : getValue == false
++0s   A N CAR_LANTERN_[DOWN]_CAN_ID Bit : getValue == false
 
 ;#transition 'T7.1'
 +1.5s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
-+0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++0s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
 
 ;# state 'S7.1 ON'
 +0.8s  A F CarLantern UP : lighted == true
-+0.2s   A N CAR_LANTERN_[UP]_CAN_ID Boolean : getValue == true
++0.2s   A N CAR_LANTERN_[UP]_CAN_ID Bit : getValue == true
 
 ;#transition 'T7.2'
-+2s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
++2s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
 
 ;# state 'S7.2 OFF'
 +0.8s  A F CarLantern UP : lighted == false
-+0s   A N CAR_LANTERN_[UP]_CAN_ID Boolean : getValue == false
-+0s   A N CAR_LANTERN_[DOWN]_CAN_ID Boolean : getValue == false
++0s   A N CAR_LANTERN_[UP]_CAN_ID Bit : getValue == false
++0s   A N CAR_LANTERN_[DOWN]_CAN_ID Bit : getValue == false

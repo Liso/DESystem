@@ -8,8 +8,8 @@
 #INCLUDE defines.mf
 
 ; Pre-conditions
-+0.0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
-+0.0s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = true
++0.0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0.0s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID Bit = true
 +0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP 
 
 ;#arc '8A/1'
@@ -17,10 +17,10 @@
 +0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ;#arc '8A/2a'
-+0.1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = true
-+0.0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID DoorClosed FRONT RIGHT = true
-+0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID DoorClosed BACK LEFT = true
-+0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID DoorClosed BACK RIGHT = true
++0.1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0.0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
++0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID Bit = true
++0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
 
 ;#arc '8A/2b'
 ;check that the door is closed
@@ -36,8 +36,8 @@
 +0.0s I 0s F DriveSpeed = UP 0.2
 
 ;#arc '8A/4a'
-+0.1s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID AtFloor 3 FRONT = false 
-+0.0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID AtFloor 4 FRONT = true
++0.1s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID Bit = false 
++0.0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
 
 ;#arc '8A/4b'
 +0.5s A F Drive : speed == LEVEL
@@ -48,8 +48,8 @@
 +0.0s I 0s F DriveSpeed = UP 0.02
 
 ;#arc '8A/4d'
-+0.1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
-+0s I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
++0.1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Bit = true
++0s I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Bit = true
 
 ;#arc '8A/4e'
 +0.5s A F Drive : speed == STOP

@@ -3,8 +3,8 @@
 ;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd4b.cf -mf sd4b.mf -head header.txt
-RandomSeed = 1381981751498
+Command line = -mf sd4b.mf -cf sd4b.cf
+RandomSeed = 1383799061675
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,17 +13,17 @@ Message File = sd4b.mf
 Controller File = sd4b.cf
 
 Assertion Results:
-@2.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4d674592 :: getValue ?== true PASSED
-@2.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@16360771 :: getValue ?== true PASSED
-@2.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@71ee88dd :: getValue ?== true PASSED
-@2.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@144b6a6c :: getValue ?== true PASSED
-@2.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6a0f0c67 :: getDoorCommand ?== STOP PASSED
-@2.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1d076683 :: getDoorCommand ?== STOP PASSED
-@2.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6684b1e0 :: getValue ?== false PASSED
-@5.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@293e86f :: getDoorCommand ?== CLOSE PASSED
-@5.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2d07c405 :: getDoorCommand ?== CLOSE PASSED
-@5.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@58d300ed :: getDoorCommand ?== CLOSE PASSED
-@5.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@ea69ae7 :: getDoorCommand ?== CLOSE PASSED
+@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2a5ebf99 :: getValue ?== true PASSED
+@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1a13cae7 :: getValue ?== true PASSED
+@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@192277ed :: getValue ?== true PASSED
+@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@c0af84e :: getValue ?== true PASSED
+@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@455ef45a :: getDoorCommand ?== STOP PASSED
+@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3e1c65f7 :: getDoorCommand ?== STOP PASSED
+@3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1c7b745a :: getValue ?== false PASSED
+@6.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7344119b :: getDoorCommand ?== CLOSE PASSED
+@6.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@65cd1dff :: getDoorCommand ?== CLOSE PASSED
+@6.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f73089d :: getDoorCommand ?== CLOSE PASSED
+@6.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7b0acf26 :: getDoorCommand ?== CLOSE PASSED
 
 
 ******************Summary******************
