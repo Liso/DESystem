@@ -2,42 +2,63 @@
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
-;Author : Yue Chen (yuechen)
+;Author : Jiangtian Nie(jnie)
 
 ;include CAN id and period definitions
 #INCLUDE defines.mf
 
 ; Pre-conditions
 +0.0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
-+0.0s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID Bit = true
-+0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP 
++0.0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
++0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP 
 
 ;#arc '8A/1'
 +0.5s  A F DoorMotor FRONT LEFT : command == CLOSE
 +0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 
 ;#arc '8A/2a'
-+0.1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 +0.0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
 +0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID Bit = true
 +0.0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
 
 ;#arc '8A/2b'
 ;check that the door is closed
-+0.3s  A F DoorMotor FRONT LEFT : command == STOP
++1s  A F DoorMotor FRONT LEFT : command == STOP
 +0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
 
 ;#arc '8A/3a'
-+0.1s A F Drive : speed == SLOW 
++1s A F Drive : speed == SLOW 
 +0.0s A F Drive : direction == UP
 
 ;#arc '8A/3b'
-+0.1s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = SLOW UP
++1s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = SLOW UP
 +0.0s I 0s F DriveSpeed = UP 0.2
 
+;#arc '8A/3c'
++1s  I 0s F DriveSpeed = UP 0.25
++0s  I 0s N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 24700
+
+;#arc '8A/3d'
++1s  A F Drive : speed == FAST
++0s  A F Drive : direction == UP
+
+;#arc '8A/3e'
++1s  I 0s F DriveSpeed = UP 1
+
+;#arc '8A/3f'
++0s  I 0s N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 24800
+
+;#arc '8A/3g'
++1s  A F Drive : speed == SLOW
++0s  A F Drive : direction == UP
+
+;#arc '8A/3h'
++1s  I 0s F DriveSpeed = UP 0.25
+
 ;#arc '8A/4a'
-+0.1s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID Bit = false 
-+0.0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
++0.1s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = false 
++0.0s I 0s N AT_FLOOR_[6][FRONT]_CAN_ID Bit = true
 
 ;#arc '8A/4b'
 +0.5s A F Drive : speed == LEVEL

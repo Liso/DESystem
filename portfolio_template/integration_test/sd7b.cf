@@ -6,3 +6,6 @@
 
 DoorControl FRONT LEFT 0.01s true
 HallButtonControl 4 FRONT DOWN 0.1s true
+Dispatcher 8 0.05s true
+LanternControl DOWN 0.2s true
+LanternControl UP 0.2s true
