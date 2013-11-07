@@ -9,7 +9,4 @@ HallButtonControl hallbuttoncontrol.cf hallbuttoncontrol.mf
 CarButtonControl carbuttoncontrol.cf carbuttoncontrol.mf
 LanternControl lanterncontrol.cf lanterncontrol.mf
 Dispatcher dispatcher.cf dispatcher.mf 
-Dispatcher dispatcher.cf dispatcher2.mf 
-Dispatcher dispatcher.cf dispatcher3.mf 
-Dispatcher dispatcher.cf dispatcher4.mf
 CarPositionControl carpositioncontrol.cf carpositioncontrol.mf
