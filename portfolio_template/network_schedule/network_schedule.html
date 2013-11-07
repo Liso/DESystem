@@ -16,6 +16,8 @@
 
 
 
+
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -24,20 +26,1279 @@
     <hr style="width: 100%; height: 2px;">
     <h2>CAN Message Dictionary<br>
     </h2>
-    Add a summary here<br>
+    Message Dictionary for all the Messages being sent out in the network.<br>
     <br>
-    Add you message dictionary table here<br>
     <br>
-    <h2>Network Schedule Analaysis</h2>
+    <table x:str="" style="border-collapse: collapse; width: 100%;"
+      cellpadding="5" cellspacing="0" border="1">
+      <colgroup><col style="width: 122pt;" width="163"> <col
+          style="width: 110pt;" width="146"> <col style="width: 73pt;"
+          width="98"> <col style="width: 61pt;" width="82"> <col
+          style="width: 97pt;" width="130"> <col style="width: 89pt;"
+          width="118"> <col style="width: 67pt;" width="89"> </colgroup><tbody>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl24" style="height: 13.2pt; width: 122pt;
+            font-weight: bold;" height="18" width="163">Sender Node Name</td>
+          <td class="xl24" style="border-left: medium none; width:
+            110pt; font-weight: bold;" width="146">Message Name</td>
+          <td class="xl24" style="border-left: medium none; width: 73pt;
+            font-weight: bold;" width="98">Deadline (ms)</td>
+          <td class="xl24" style="border-left: medium none; width: 61pt;
+            font-weight: bold;" width="82">Message ID</td>
+          <td class="xl24" style="border-left: medium none; width: 97pt;
+            font-weight: bold;" width="130">Source Node Type</td>
+          <td class="xl24" style="border-left: medium none; width: 89pt;
+            font-weight: bold;" width="118">Replication Type</td>
+          <td class="xl24" style="border-left: medium none; width: 67pt;
+            font-weight: bold;" width="89">Base CAN ID</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Door Control</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">DoorMotorCommand</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">10</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1000<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">183</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">hall,side</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;"
+x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2HEX(1*POWER(2,27)+D2*POWER(2,16)+E2*POWER(2,8))),8))">0x0BE8B700</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Level Sensor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">Level</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">10</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1050<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">150<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">direction</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;"
+x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2HEX(1*POWER(2,27)+D3*POWER(2,16)+E3*POWER(2,8))),8))">0x0C1A9600</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Door reversal Sensor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">DoorReversal</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">10</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1100<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">100<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">hallway,side</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;"
+x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2HEX(1*POWER(2,27)+D4*POWER(2,16)+E4*POWER(2,8))),8))"><br>
+            0x0C4C6400</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Drive Control</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">DriveSpeed</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">10</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1150<br>
+          </td>
+          <td class="xl25" x:num="" style="border-top: medium none;
+            border-left: medium none; text-align: right;">181<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">none</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;"
+x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2HEX(1*POWER(2,27)+D5*POWER(2,16)+E5*POWER(2,8))),8))">0x0C7EB500</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Drive Control</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">DriveCommand</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">10</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1200<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">181<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">none</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;"
+x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2HEX(1*POWER(2,27)+D6*POWER(2,16)+E6*POWER(2,8))),8))">0x0CB0B500</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">At Floor Sensor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">AtFloor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">50</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1250<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">40<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">floor,hallway</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;"
+x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2HEX(1*POWER(2,27)+D7*POWER(2,16)+E7*POWER(2,8))),8))">0x0CE22800</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Car Level Position Sensor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">CarLevelPosition</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">50</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1300<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">60<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">none</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;"
+x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2HEX(1*POWER(2,27)+D8*POWER(2,16)+E8*POWER(2,8))),8))">0x0D143C00</td>
+        </tr>
+        <tr>
+          <td valign="top">Dispatcher<br>
+          </td>
+          <td valign="top">DesiredDwell<br>
+          </td>
+          <td align="right" valign="top">50<br>
+          </td>
+          <td align="right" valign="top">1350<br>
+          </td>
+          <td align="right" valign="top">182<br>
+          </td>
+          <td valign="top">hallway<br>
+          </td>
+          <td valign="top">0x0D46B600<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Dispatcher<br>
+          </td>
+          <td valign="top">DesiredFloor<br>
+          </td>
+          <td align="right" valign="top">50<br>
+          </td>
+          <td align="right" valign="top">1400<br>
+          </td>
+          <td align="right" valign="top">182<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0D78B600<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Safety Sensor<br>
+          </td>
+          <td valign="top">EmergencyBrake<br>
+          </td>
+          <td align="right" valign="top">50<br>
+          </td>
+          <td align="right" valign="top">1450<br>
+          </td>
+          <td align="right" valign="top">20<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0DAA1400<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Car Button<br>
+          </td>
+          <td valign="top">CarCall<br>
+          </td>
+          <td align="right" valign="top">100<br>
+          </td>
+          <td align="right" valign="top">1500<br>
+          </td>
+          <td align="right" valign="top">185<br>
+          </td>
+          <td valign="top">floor,hallway<br>
+          </td>
+          <td valign="top">0x0DDCB900<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Closed Sensor<br>
+          </td>
+          <td valign="top">DoorClosed<br>
+          </td>
+          <td align="right" valign="top">100<br>
+          </td>
+          <td align="right" valign="top">1550<br>
+          </td>
+          <td align="right" valign="top">80<br>
+          </td>
+          <td valign="top">hallway,side<br>
+          </td>
+          <td valign="top">0x0E0E5000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Hall Button <br>
+          </td>
+          <td valign="top">HallCall<br>
+          </td>
+          <td align="right" valign="top">100<br>
+          </td>
+          <td align="right" valign="top">1600<br>
+          </td>
+          <td align="right" valign="top">184<br>
+          </td>
+          <td valign="top">floor,hallway,side<br>
+          </td>
+          <td valign="top">0x0E40B800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Opened Sensor<br>
+          </td>
+          <td valign="top">DoorOpened<br>
+          </td>
+          <td align="right" valign="top">200<br>
+          </td>
+          <td align="right" valign="top">1650<br>
+          </td>
+          <td align="right" valign="top">160<br>
+          </td>
+          <td valign="top">hallway,side<br>
+          </td>
+          <td valign="top">0x0E72A000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Hoistway Limit Sensor<br>
+          </td>
+          <td valign="top">HoistwayLimit<br>
+          </td>
+          <td align="right" valign="top">200<br>
+          </td>
+          <td align="right" valign="top">1700<br>
+          </td>
+          <td align="right" valign="top">180<br>
+          </td>
+          <td valign="top">direction<br>
+          </td>
+          <td valign="top">0x0EA4B400<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Weight Sensor<br>
+          </td>
+          <td valign="top">CarWeight<br>
+          </td>
+          <td align="right" valign="top">200<br>
+          </td>
+          <td align="right" valign="top">1750<br>
+          </td>
+          <td align="right" valign="top">120<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0ED67800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Weight Sensor<br>
+            <br>
+          </td>
+          <td valign="top">CarWeightAlarm<br>
+          </td>
+          <td align="right" valign="top">200<br>
+          </td>
+          <td align="right" valign="top">1800<br>
+          </td>
+          <td align="right" valign="top">140<br>
+          </td>
+          <td valign="top">none<br>
+          </td>
+          <td valign="top">0x0F088C00<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
     <br>
-    Add a summary here<br>
     <br>
-    Add your network schedule analysis<br>
+    <h2>Network Schedule Analysis</h2>
+    Network Schedule Analysis for all the Messages being sent out in the
+    network.<br>
     <br>
-    Add a link to your Excel schedule file here.<br>
+    <br>
+    <table x:str="" style="border-collapse: collapse; width: 100%;"
+      cellpadding="5" cellspacing="0" border="1">
+      <colgroup><col style="width: 122pt;" width="163"> <col
+          style="width: 110pt;" width="146"> <col style="width: 67pt;"
+          width="90"> <col style="width: 94pt;" width="126"> <col
+          style="width: 73pt;" width="98"> <col style="width: 63pt;"
+          width="84"> <col style="width: 48pt;" span="2" width="64"> <col
+          style="width: 51pt;" width="68"> <col style="width: 48pt;"
+          width="64"> <col style="width: 59pt;" width="78"> <col
+          style="width: 61pt;" width="82"> <col style="width: 48pt;"
+          span="2" width="64"> </colgroup><tbody>
+        <tr style="height: 13.2pt;" height="18">
+          <td colspan="5" rowspan="1" style="height: 13.2pt; width:
+            122pt; font-weight: bold;" height="18" width="163"><br>
+          </td>
+          <td style="width: 159pt; font-weight: bold; text-align:
+            center; background-color: rgb(255, 255, 153);" colspan="3"
+            class="xl26" width="212">Field 1</td>
+          <td colspan="3" align="center" valign="middle"><b>Field 2</b><br>
+          </td>
+          <td style="background-color: rgb(255,255,153);" colspan="3"
+            align="center" valign="middle"><b>Field 3</b><br>
+          </td>
+          <td rowspan="2" class="xl33" style="border-bottom: 0.5pt solid
+            black; width: 51pt; font-weight: bold;" width="68">Total Bit
+            Len</td>
+          <td rowspan="2" class="xl33" style="border-bottom: 0.5pt solid
+            black; width: 48pt; font-weight: bold;" width="64">Total
+            Byte Len</td>
+          <td rowspan="2" class="xl32" style="width: 59pt; font-weight:
+            bold; background-color: rgb(255, 255, 153);" width="78">Best
+            Case Msg Len</td>
+          <td rowspan="2" class="xl32" style="width: 61pt; font-weight:
+            bold; background-color: rgb(255, 255, 153);" width="82">Worst
+
+            Case Msg Len</td>
+          <td rowspan="2" class="xl32" style="width: 48pt; font-weight:
+            bold;" width="64">Best Case BW (bits/sec)</td>
+          <td rowspan="2" class="xl32" style="width: 48pt; font-weight:
+            bold;" width="64">Worst Case BW (bits/sec)</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl24" style="height: 13.2pt; font-weight: bold;"
+            height="18">Sender Node Name</td>
+          <td class="xl24" style="border-left: medium none; font-weight:
+            bold;">Message Name</td>
+          <td class="xl27" style="border-left: medium none; font-weight:
+            bold;">Base CAN ID</td>
+          <td style="font-weight: bold;" class="xl27">Replication Count</td>
+          <td style="font-weight: bold;" class="xl27">Deadline (ms)</td>
+          <td style="border-top-width: medium; border-top-style: none;
+            border-top-color: -moz-use-text-color; font-weight: bold;
+            background-color: rgb(255, 255, 153);" class="xl26">Desc</td>
+          <td class="xl26" style="border-top: medium none; border-left:
+            medium none; font-weight: bold; background-color: rgb(255,
+            255, 153);">Type</td>
+          <td class="xl26" style="border-top: medium none; border-left:
+            medium none; font-weight: bold; background-color: rgb(255,
+            255, 153);" align="right">Bit Len</td>
+          <td align="center" valign="middle"><b>Desc</b><b><br>
+            </b> </td>
+          <td align="center" valign="middle"><b>Type</b><b><br>
+            </b> </td>
+          <td align="center" valign="middle"><b>Bit Len</b><b><br>
+            </b> </td>
+          <td style="background-color: rgb(255,255,153);" align="center"
+            valign="middle"><b>Desc</b><b><br>
+            </b> </td>
+          <td style="background-color: rgb(255, 255, 153);"
+            align="center" valign="middle"><b>Type</b><b><br>
+            </b> </td>
+          <td style="background-color: rgb(255, 255, 153);"
+            align="center" valign="middle"><b>Bit Len</b><b><br>
+            </b> </td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Door Control</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">DoorMotorCommand</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">0x0BE8B700</td>
+          <td class="xl28" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">4<br>
+          </td>
+          <td class="xl28" style="border-top: medium none;" x:num=""
+            align="right">10<br>
+          </td>
+          <td class="xl29" style="border-top: medium none;
+            background-color: rgb(255, 255, 153);">door command</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);">enum<br>
+          </td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            align="right">2<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=SUM(H3)" align="right">2</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=CEILING(I3/8,1)"
+            align="right">1</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=J3*8+67" align="right">75</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=K3+FLOOR((54+J3*8)/4,1)" align="right">90</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=K3*(1000/$E3)*$D3"
+            align="right">30000</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=L3*(1000/$E3)*$D3"
+            align="right">36000<br>
+          </td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Level Sensor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">Level</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">0x0C1A9600</td>
+          <td class="xl28" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">2<br>
+          </td>
+          <td class="xl28" style="border-top: medium none;" x:num=""
+            align="right">10<br>
+          </td>
+          <td class="xl29" style="border-top: medium none;
+            background-color: rgb(255, 255, 153);">Level sensing</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);">boolean</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            align="right">1</td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=SUM(H4)" align="right">1</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=CEILING(I4/8,1)"
+            align="right">1</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=J4*8+67" align="right">75</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=K4+FLOOR((54+J4*8)/4,1)" align="right">90</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=K4*(1000/$E4)*$D4"
+            align="right">15000</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=L4*(1000/$E4)*$D4"
+            align="right">18000</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Door reversal Sensor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">DoorReversal</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">0x0C4C6400</td>
+          <td class="xl28" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">4<br>
+          </td>
+          <td class="xl28" style="border-top: medium none;" x:num=""
+            align="right">10<br>
+          </td>
+          <td class="xl29" style="border-top: medium none;
+            background-color: rgb(255, 255, 153);">Door reversing</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);">boolean</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            align="right">1<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=SUM(H5)" align="right">1<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=CEILING(I5/8,1)"
+            align="right">1</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=J5*8+67" align="right">75</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=K5+FLOOR((54+J5*8)/4,1)" align="right">90</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=K5*(1000/$E5)*$D5"
+            align="right">30000<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=L5*(1000/$E5)*$D5"
+            align="right">36000<br>
+          </td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Drive Control</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">DriveSpeed</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">0x0C7EB500</td>
+          <td class="xl28" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1<br>
+          </td>
+          <td class="xl28" style="border-top: medium none;" x:num=""
+            align="right">10</td>
+          <td class="xl29" style="border-top: medium none;
+            background-color: rgb(255, 255, 153);">current drive speed</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);">double</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            align="right">7<br>
+          </td>
+          <td valign="top">direction<br>
+          </td>
+          <td valign="top">enum<br>
+          </td>
+          <td valign="top">2<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=SUM(H6)" align="right">9<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=CEILING(I6/8,1)"
+            align="right">2<br>
+          </td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=J6*8+67" align="right">83<br>
+          </td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=K6+FLOOR((54+J6*8)/4,1)" align="right">100</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=K6*(1000/$E6)*$D6"
+            align="right">8300<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=L6*(1000/$E6)*$D6"
+            align="right">10000<br>
+          </td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Drive Control</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">DriveCommand</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">0x0CB0B500</td>
+          <td class="xl28" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1<br>
+          </td>
+          <td class="xl28" style="border-top: medium none;" x:num=""
+            align="right">10</td>
+          <td class="xl29" style="border-top: medium none;
+            background-color: rgb(255, 255, 153);">commanded speed</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);">enum</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            align="right">2<br>
+          </td>
+          <td valign="top">direction<br>
+          </td>
+          <td valign="top">enum<br>
+          </td>
+          <td valign="top">2<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=SUM(H7)" align="right">4<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=CEILING(I7/8,1)"
+            align="right">1</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=J7*8+67" align="right">75</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=K7+FLOOR((54+J7*8)/4,1)" align="right">90</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=K7*(1000/$E7)*$D7"
+            align="right">7500</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=L7*(1000/$E7)*$D7"
+            align="right">9000</td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">At Floor Sensor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">AtFloor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">0x0CE22800</td>
+          <td class="xl28" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">10</td>
+          <td class="xl28" style="border-top: medium none;" x:num=""
+            align="right">50<br>
+          </td>
+          <td class="xl29" style="border-top: medium none;
+            background-color: rgb(255, 255, 153);">At a floor sensing</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);">boolean</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            align="right">1<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=SUM(H8)" align="right">1<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=CEILING(I8/8,1)"
+            align="right">1</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=J8*8+67" align="right">75</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=K8+FLOOR((54+J8*8)/4,1)" align="right">90</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=K8*(1000/$E8)*$D8"
+            align="right">15000<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=L8*(1000/$E8)*$D8"
+            align="right">18000<br>
+          </td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td class="xl25" style="border-top: medium none; height:
+            13.2pt;" height="18">Car Level Position Sensor</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">CarLevelPosition</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;">0x0D143C00</td>
+          <td class="xl28" style="border-top: medium none; border-left:
+            medium none;" x:num="" align="right">1</td>
+          <td class="xl28" style="border-top: medium none;" x:num=""
+            align="right">50</td>
+          <td class="xl29" style="border-top: medium none;
+            background-color: rgb(255, 255, 153);">car position sensing</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);">integer</td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            align="right">16<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=SUM(H9)" align="right"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">16<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=CEILING(I9/8,1)"
+            align="right">2<br>
+          </td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=J9*8+67" align="right">83<br>
+          </td>
+          <td class="xl29" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(255, 255, 153);" x:num=""
+            x:fmla="=K9+FLOOR((54+J9*8)/4,1)" align="right">100</td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=K9*(1000/$E9)*$D9"
+            align="right">1660<br>
+          </td>
+          <td class="xl25" style="border-top: medium none; border-left:
+            medium none;" x:num="" x:fmla="=L9*(1000/$E9)*$D9"
+            align="right">2000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Dispatcher<br>
+          </td>
+          <td valign="top">DesiredDwell<br>
+          </td>
+          <td valign="top">0x0D46B600<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">50<br>
+          </td>
+          <td style="background-color: rgb(255, 255, 153);" valign="top">setting
+            dwell<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">long<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">3<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">3<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">75<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">90<br>
+          </td>
+          <td align="right" valign="top">1500<br>
+          </td>
+          <td align="right" valign="top">1800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Dispatcher<br>
+          </td>
+          <td valign="top"><br>
+            DesiredFloor<br>
+          </td>
+          <td valign="top">0x0D78B600<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">50<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">setting floor<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">integer<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">3<br>
+          </td>
+          <td valign="top">hallway<br>
+          </td>
+          <td valign="top">enum<br>
+          </td>
+          <td align="right" valign="top">2<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">direction<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">enum<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">2<br>
+          </td>
+          <td align="right" valign="top">7<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">75<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">90<br>
+          </td>
+          <td align="right" valign="top">1500<br>
+          </td>
+          <td align="right" valign="top">1800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Safety Sensor<br>
+          </td>
+          <td valign="top">EmergencyBrake<br>
+          </td>
+          <td valign="top">0x0DAA1400<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">50<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">Ebrake<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">boolean<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">1<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">75<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">90<br>
+          </td>
+          <td align="right" valign="top">1500<br>
+          </td>
+          <td align="right" valign="top">1800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Car Button<br>
+          </td>
+          <td valign="top">CarCall<br>
+          </td>
+          <td valign="top">0x0DDCB900<br>
+          </td>
+          <td align="right" valign="top">10<br>
+          </td>
+          <td align="right" valign="top">100<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">car button pressed<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">boolean<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">1<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">75<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">90<br>
+          </td>
+          <td align="right" valign="top">7500<br>
+          </td>
+          <td align="right" valign="top">9000<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Closed Sensor<br>
+          </td>
+          <td valign="top">DoorClosed<br>
+          </td>
+          <td valign="top">0x0E0E5000<br>
+          </td>
+          <td align="right" valign="top">4<br>
+          </td>
+          <td align="right" valign="top">100<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">check door closed<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">boolean<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">1<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">75<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">90<br>
+          </td>
+          <td align="right" valign="top">3000<br>
+          </td>
+          <td align="right" valign="top">3600<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Hall Button <br>
+          </td>
+          <td valign="top">HallCall<br>
+          </td>
+          <td valign="top">0x0E40B800<br>
+          </td>
+          <td align="right" valign="top">17<br>
+          </td>
+          <td align="right" valign="top">100<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">hall button pressed<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">boolean<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">1<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">75<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">90<br>
+          </td>
+          <td align="right" valign="top">12750<br>
+          </td>
+          <td align="right" valign="top">15300<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Door Opened Sensor<br>
+          </td>
+          <td valign="top">DoorOpened<br>
+          </td>
+          <td valign="top">0x0E72A000<br>
+          </td>
+          <td align="right" valign="top">4<br>
+          </td>
+          <td align="right" valign="top">200<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">check door opened<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">boolean<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">1<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">75<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">90<br>
+          </td>
+          <td align="right" valign="top">1500<br>
+          </td>
+          <td align="right" valign="top">1800<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Hoistway Limit Sensor<br>
+          </td>
+          <td valign="top">HoistwayLimit<br>
+          </td>
+          <td valign="top">0x0EA4B400<br>
+          </td>
+          <td align="right" valign="top">2<br>
+          </td>
+          <td align="right" valign="top">200<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">hoistway end sensor<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">boolean<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">1<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">75<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">90<br>
+          </td>
+          <td align="right" valign="top">750<br>
+          </td>
+          <td align="right" valign="top">900<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Weight Sensor<br>
+          </td>
+          <td valign="top">CarWeight<br>
+          </td>
+          <td valign="top">0x0ED67800<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">200<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">car weight sensing<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">integer<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">14<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">14<br>
+          </td>
+          <td align="right" valign="top">2<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">83<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">100<br>
+          </td>
+          <td align="right" valign="top">415<br>
+          </td>
+          <td align="right" valign="top">500<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">Weight Sensor<br>
+          </td>
+          <td valign="top">CarWeightAlarm<br>
+          </td>
+          <td valign="top">0x0F088C00<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">200<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">car weight alarm<br>
+          </td>
+          <td bgcolor="#ffff99" valign="top">boolean<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">1<br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top"><br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" valign="top">1<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">75<br>
+          </td>
+          <td align="right" bgcolor="#ffff99" valign="top">90<br>
+          </td>
+          <td align="right" valign="top">375<br>
+          </td>
+          <td align="right" valign="top">450<br>
+          </td>
+        </tr>
+        <tr style="height: 13.2pt;" height="18">
+          <td colspan="17" rowspan="1" style="height: 13.2pt;"
+            height="18"><br>
+          </td>
+          <td class="xl30" style="border-top: medium none;
+            background-color: rgb(153, 255, 153);">Total bw</td>
+          <td class="xl31" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(153, 255, 153);" x:num=""
+            x:fmla="=SUM(M3:M9)" align="right">138250<br>
+          </td>
+          <td class="xl31" style="border-top: medium none; border-left:
+            medium none; background-color: rgb(153, 255, 153);" x:num=""
+            x:fmla="=SUM(N3:N9)" align="right">165950<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    Network Schedule Analysis Excel File : <a
+      href="network-schedule-template.xls">network-schedule-template.xls</a><br>
     <br>
     <h2>Simulation Analysis</h2>
+    Running the simulation with bandwidth of 200kbps, we obtain the
+    results
+    listed below.&nbsp; Multiplying the network bandwidth by the
+    utilization gives us the actual bandwidth used:<br>
+    &nbsp; 200000 * 0.7333 = 146660 bps<br>
+    This is between the best- and worst-case values predicted by our
+    analysis.<br>
     <br>
-    Compare theoretical and simulated results.<br>
+    <b>Simulator Parameters:</b><br>
+    Command line = -pf proj10acceptance3.pass -b 200 -gui<br>
+    RandomSeed = 1383856129987<br>
+    CanNetworkBitTime = 5000 ns<br>
+    Effective Can Bitrate = 199999.99999999997<br>
+    Run Time = null<br>
+    Real time rate = null<br>
+    Acceptance Test File = proj10acceptance3.pass<br>
+    <br>
+    [Elevator] @0.000000000: Starting Simulation<br>
+    [Elevator] @60.000000000: Progress indicator<br>
+    [Elevator] @120.000000000: Progress indicator<br>
+    [Elevator] @180.000000000: Progress indicator<br>
+    [Elevator] @240.000000000: Progress indicator<br>
+    [Elevator] @300.000000000: Progress indicator<br>
+    [Elevator] @360.000000000: Progress indicator<br>
+    [Elevator] @420.000000000: Progress indicator<br>
+    [Elevator] @480.000000000: Progress indicator<br>
+    [Elevator] @540.000000000: Progress indicator<br>
+    [Elevator] @600.000000000: Progress indicator<br>
+    [Elevator] @660.000000000: Progress indicator<br>
+    [Elevator] @697.095000000: Simulation Finished<br>
+    <br>
+    Network Utilization Summary:<br>
+    Recent: 73.33 % Max: 73.33 %&nbsp; Overall:&nbsp; 73.33 %<br>
+    <br>
+    STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY<br>
+    -----------------------------------------------------<br>
+    <br>
+    Passenger Delivery Summary<br>
+    Delivered: 61<br>
+    Stranded: 0<br>
+    Total: 61<br>
+    <br>
+    Deliver Stats (lower is better):<br>
+    Average_delivery_time: 209.348<br>
+    Maximum_delivery_time:&nbsp; 565.037<br>
+    Delivery_performance_score:&nbsp; 1402.429<br>
+    <br>
+    Satisfaction Stats (higher is better):<br>
+    Average_satisfaction_score: 100.000<br>
+    Min_satisfaction_score:&nbsp; 100.000<br>
+    Satisfaction_performance_score:&nbsp; 500.000<br>
+    <br>
+    697.095s simulation seconds<br>
+    &nbsp;12.907 real seconds<br>
+    &nbsp;effective rate 54.01<br>
   </body>
 </html>

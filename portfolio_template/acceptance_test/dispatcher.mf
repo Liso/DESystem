@@ -1,0 +1,276 @@
+;Message File - Unit Test for Dispatcher
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+;Author : Sally Stevenson
+
+#INCLUDE defines.mf
+
+;Initial message values
+0s I 0s N HALL_CALL_[1][FRONT][UP]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[1][BACK][UP]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[2][BACK][UP]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[2][BACK][DOWN]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[3][FRONT][UP]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[3][FRONT][DOWN]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[5][FRONT][UP]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[5][FRONT][DOWN]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[6][FRONT][UP]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[6][FRONT][DOWN]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[7][FRONT][UP]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[7][FRONT][DOWN]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[7][BACK][UP]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[7][BACK][DOWN]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[8][FRONT][DOWN]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[1][FRONT]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[1][BACK]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[2][BACK]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[3][FRONT]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[4][FRONT]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[5][FRONT]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[6][FRONT]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[7][FRONT]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[7][BACK]_CAN_ID Bit = false
+0s I 0s N CAR_CALL_[8][FRONT]_CAN_ID Bit = false
+0s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID Bit = true
+0s I 0s N AT_FLOOR_[1][BACK]_CAN_ID Bit = true
+0s I 0s N AT_FLOOR_[2][BACK]_CAN_ID Bit = false
+0s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID Bit = false
+0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = false
+0s I 0s N AT_FLOOR_[5][FRONT]_CAN_ID Bit = false
+0s I 0s N AT_FLOOR_[6][FRONT]_CAN_ID Bit = false
+0s I 0s N AT_FLOOR_[7][FRONT]_CAN_ID Bit = false
+0s I 0s N AT_FLOOR_[7][BACK]_CAN_ID Bit = false
+0s I 0s N AT_FLOOR_[8][FRONT]_CAN_ID Bit = false
+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID Bit = true
+0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
+
+;check initial output
+;#state 'S11.1 SET_STOP'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
++0s A N DESIRED_DWELL_[BACK]_CAN_ID DesiredDwell BACK : getDwell == 5s
+
+;#transition 'T11.7'
++0.5s I 0s N CAR_CALL_[3][FRONT]_CAN_ID Bit = true
+
+;#state 'S11.2 SET_UP'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
+
++0.2s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID Bit = false
++0s I 0s N AT_FLOOR_[1][BACK]_CAN_ID Bit = false
+
+;#transition 'T11.11'
++3s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID Bit = true
+
+;#state 'S11.6 'REACHED FLOOR'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
+
++0s I 0s N CAR_CALL_[3][FRONT]_CAN_ID Bit = false
+
+;#transition 'T11.11'
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = false
+
+;#state 'S11.1 'SET STOP'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 3
+
++0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
+
+
+;#transition 'T11.7'
++0.5s I 0s N HALL_CALL_[1][FRONT][UP]_CAN_ID Bit = true
+
+;#state 'S11.3 SET_DOWN'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
+
++0.5s I 0s N AT_FLOOR_[3][FRONT]_CAN_ID Bit = false
+
+;#transition 'T11.6'
++0.5s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID Bit = true
+
+
+
+;#state 'S11.11 'REACHED FLOOR'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+
++0.5s I 0s N HALL_CALL_[1][FRONT][UP]_CAN_ID Bit = false
+
+;#transition 'T11.11'
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = false
+
+;#state 'S11.1 'SET STOP'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
+
+
+;#transition 'T11.7'
++0.50s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = true
++0.50s I 0s N CAR_CALL_[7][FRONT]_CAN_ID Bit = true
+
+;#state 'S11.2 SET_UP'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 4
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
+
++0.5s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID Bit = false
+
+;#transition 'T11.1'
++0.5s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
+
++0.50s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = false
+
+;#state 'S11.6 'REACHED FLOOR UP'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 4
+
+;#transition 'T11.10'
++0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = false
+
+;#state 'S11.2 SET_UP'
++1.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 7
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
+
++0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
+
++0.2s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = false
+
+;#state 'S11.2 SET_UP'
++1.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 7
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
+
+;#transition 'T11.11'
++0.5s I 0s N AT_FLOOR_[7][FRONT]_CAN_ID Bit = true
+
++0.50s I 0s N CAR_CALL_[7][FRONT]_CAN_ID Bit = false
+
+;#state 'S11.6 'REACHED FLOOR'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 7
+
+
+;#transition 'T11.11'
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = false
+
+;#state 'S11.1 'SET STOP'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 7
+
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
+
+
+;#transition 'T11.8'
++0.50s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = true
++0.50s I 0s N CAR_CALL_[1][FRONT]_CAN_ID Bit = true
+
+;#state 'S11.3 SET_DOWN'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == DOWN
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 4
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
+
+;#transition 'T11.12'
++0.0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
++0.5s I 0s N AT_FLOOR_[7][FRONT]_CAN_ID Bit = false
+
+;#state 'S11.4 'REACHED FLOOR DOWN'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == DOWN
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 4
+
++0.50s I 0s N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit = false
+
+;#transition 'T11.13'
++0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = false
+
+;#state 'S11.3 SET_DOWN'
++1.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == DOWN
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
+
++0.5s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
+
++0.2s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = false
+
+;#state 'S11.3 SET_DOWN'
++1.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
+
+;#transition 'T11.6'
++0.5s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID Bit = true
+
++0.50s I 0s N CAR_CALL_[1][FRONT]_CAN_ID Bit = false
+
+;#state 'S11.6 'REACHED FLOOR'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+
++0.5s I 0s N HALL_CALL_[1][FRONT][UP]_CAN_ID Bit = false
+
+;#transition 'T11.11'
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = false
+
+;#state 'S11.1 'SET STOP'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
+
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
+
+
++0.5s I 0s N AT_FLOOR_[1][FRONT]_CAN_ID Bit = true
+
+;#transition 'T11.2'
++2s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
+
+
+;#state 'S11.7 RESET'
++1s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == STOP
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == NONE
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 1
++0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
++0s A N DESIRED_DWELL_[BACK]_CAN_ID DesiredDwell BACK : getDwell == 5s

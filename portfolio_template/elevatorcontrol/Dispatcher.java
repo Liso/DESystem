@@ -423,7 +423,7 @@ public class Dispatcher extends Controller {
            }
         		  
         		  //To set nearest HallCall or CarCall in the Up direction
-                for (int i = 0; i < Elevator.numFloors; i++) {
+                for (int i = 1; i < Elevator.numFloors; i++) {
                     int floor = i + 1;
                     if(currentSpeed == 0.0){
                     	commitPointUp = (5000*(floor -1)) + 100;
