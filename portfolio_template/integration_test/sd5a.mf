@@ -13,11 +13,11 @@
 0.4s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
 1.20s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 1.20s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = false
-2s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++8s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0.4s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
 +0.80s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 +0s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = false
-+0.80s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit= false
++8s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 
 ;#arc '5A/1'
 +0.2s  A F DoorMotor FRONT LEFT : command == CLOSE
@@ -32,6 +32,7 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
 ;#arc '5A/4a'
++0.2s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = false
 +0.4s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
 ;#arc '5A/4b'
@@ -40,5 +41,6 @@
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
 
 ;#arc '5A/6'
-+5s A F DoorMotor FRONT LEFT : command == NUDGE
++8s A F DoorMotor FRONT LEFT : command == NUDGE
++0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_NUDGE
 +0s A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
