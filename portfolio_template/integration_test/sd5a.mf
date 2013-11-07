@@ -7,27 +7,38 @@
 
 #INCLUDE defines.mf ;include CAN id and period definitions
 
-;intialize
-0.0s I 0.0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true 
-
-;check that the door is closing initially
-0.2s  A F DoorMotor FRONT LEFT : command == CLOSE
-0.2s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
-
-;set conditions for T5.4
+; Triggering the pre-conditions
+0.0s I 0.0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
++0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
 0.4s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
-
-;T5.5
-;check that the door is openning
-0.8s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
-0.8s  A F DoorMotor FRONT LEFT : command == OPEN
-0.8s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
-
-;set conditions for T5.1
 1.20s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
+1.20s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = false
+2s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0.4s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
++0.80s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = false
++0.80s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit= false
 
-;T5.1
-;check that the door is open
-1.7s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
-1.7s  A F DoorMotor FRONT LEFT : command == STOP
-1.7s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
+;#arc '5A/1'
++0.2s  A F DoorMotor FRONT LEFT : command == CLOSE
++0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
+
+;#arc '5A/2c'
++0.2s I 0.0s N DOOR_REVERSAL_SENSOR_[FRONT][LEFT]_CAN_ID DoorReversal FRONT LEFT = true
+
+;#arc '5A/3'
++0.4s  A S DoorControl[FRONT][LEFT] : STATE == STATE_OPEN
++0s  A F DoorMotor FRONT LEFT : command == OPEN
++0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
+
+;#arc '5A/4a'
++0.4s  I  0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
+
+;#arc '5A/4b'
++0.2s  A S DoorControl[FRONT][LEFT] : STATE == STATE_STOP_OPENING
++0s  A F DoorMotor FRONT LEFT : command == STOP
++0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
+
+;#arc '5A/6'
++5s A F DoorMotor FRONT LEFT : command == NUDGE
++0s A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == NUDGE
