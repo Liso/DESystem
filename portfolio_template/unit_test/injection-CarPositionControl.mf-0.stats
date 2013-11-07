@@ -1,10 +1,7 @@
-;Course and Semester : 18649 Fall 2013
-;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
-;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf carpositioncontrol.cf -mf carpositioncontrol.mf -head header.txt
-RandomSeed = 1381980313825
+Command line = -cf carpositioncontrol.cf -mf carpositioncontrol.mf
+RandomSeed = 1383813402562
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -15,12 +12,11 @@ Controller File = carpositioncontrol.cf
 Assertion Results:
 @0.5s:  PASSED CarPositionControl::checkState(STATE) ?== STATE_DISPLAY PASSED
 @3.0s:  PASSED CarPositionControl::checkState(STATE) ?== STATE_DISPLAY PASSED
-@5.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2a9dfb04 :: getValue ?== 2 PASSED
-@7.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@48b49e4 :: floor ?== 2 PASSED
+@5.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@1b710c15 :: floor ?== 2 PASSED
 
 
 ******************Summary******************
-Passed:  4
+Passed:  3
 Failed:  0
-Total :  4
+Total :  3
 

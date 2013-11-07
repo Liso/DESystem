@@ -10,8 +10,6 @@
 0.04s  A S DriveControl : STATE == STATE_STOP
 0.04s  A F Drive : speed == STOP 
 0.04s  A F Drive : direction == STOP
-0.04s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP 
-0.04s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
 
 ;set conditions for T6.1
 1s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 6 FRONT UP
@@ -32,8 +30,6 @@
 2s  A S DriveControl : STATE == STATE_SLOW_UP
 2s  A F Drive : speed == SLOW 
 2s  A F Drive : direction == UP
-2s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == SLOW
-2s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
 
 
 ;set conditions for T6.14
@@ -64,8 +60,6 @@
 +1s  A S DriveControl : STATE == STATE_LEVEL_UP
 +0s  A F Drive : speed == LEVEL
 +0s  A F Drive : direction == UP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == LEVEL
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == UP
 
 ;set conditions for T6.7
 +1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Bit = true
@@ -77,8 +71,6 @@
 +1s  A S DriveControl : STATE == STATE_STOP
 +0s  A F Drive : speed == STOP
 +0s  A F Drive : direction == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
 
 ;set conditions for T6.4
 +1s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT DOWN

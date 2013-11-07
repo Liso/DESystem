@@ -71,7 +71,7 @@
 +0s  A N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit : getValue == true
 
 ;#transition 'T8.2'
-+2.5s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID bit = true
++2.5s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
 +0s  I  0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID Bit = false
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
 
