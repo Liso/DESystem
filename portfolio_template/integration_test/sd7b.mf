@@ -2,15 +2,14 @@
 ;Course and Semester : 18649 Fall 2013
 ;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
 ;			Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
-;Author : Sally Stevenson (ststeven)
+;Author : Jiangtian Nie (jnie)
 
 ;include CAN id and period definitions
 #INCLUDE defines.mf
 
 ; Pre-conditions
-0s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
 0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
-0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
+0s I 0s N AT_FLOOR_[5][FRONT]_CAN_ID Bit = true
 0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 0s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 0s I 0s F HallCall 4 FRONT DOWN = false
@@ -21,8 +20,20 @@
 ;#arc '7B/2c'
 +0.35s A F HallLight 4 FRONT DOWN : lighted == true
 
+;#arc '7B/2d'
++0s  A N HALL_CALL_[4][FRONT][DOWN]_CAN_ID Bit : getValue == true 
+
+;#arc '7B/2e'
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == DOWN
+
+;set condition for 7B/3
++0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
++0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true 
++0s  I  0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
+
+
 ;#arc '7B/3'
-+0s A F DoorMotor FRONT LEFT : command == OPEN
++0.5s A F DoorMotor FRONT LEFT : command == OPEN
 
 ;#arc '7B/4a'
 +0.05s I 0s F HallCall 4 FRONT DOWN = false
@@ -31,8 +42,33 @@
 ;#arc '7B/4b'
 +0.35s A F HallLight 4 FRONT DOWN : lighted == false
 
-;#arc '7B/5a'
-+0.05s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
-;#arc '7B/5b'
-+0.05s A F DoorMotor FRONT LEFT : command == STOP
+
+;#arc '7B/5'
++0.8s  A F CarLantern DOWN : lighted == true
+
+;#arc '7B/6a'
++1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
+
+;#arc '7B/6b'
++1s A F DoorMotor FRONT LEFT : command == STOP
+
+
+;#arc '7B/8'
++5s A F DoorMotor FRONT LEFT : command == CLOSE
+
+;#arc '7B/9a'
++1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
+
+;#arc '7B/9b'
++1s A F DoorMotor FRONT LEFT : command == STOP
+
+;#arc '7B/10a'
++1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
++0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID Bit = true
++0s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
+
+;#arc '7B/10b'
++1s  A F CarLantern DOWN : lighted == false

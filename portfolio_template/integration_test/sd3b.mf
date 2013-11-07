@@ -14,23 +14,25 @@
 0s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = false
 
 ;#arc '3B/1'
-+0.5s A F DoorMotor FRONT LEFT : command == OPEN
++1s A F DoorMotor FRONT LEFT : command == OPEN
 
 ;#arc '3B/2a'
-+0.1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
-+0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID DoorClosed FRONT LEFT = false
++1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID DoorOpened FRONT LEFT = true
 
 ;#arc '3B/2b'
 +0.05s A F DoorMotor FRONT LEFT : command == STOP
 
 ;#arc '3B/4a'
-+0.05s I 0s N CAR_WEIGHT_CAN_ID CarWeight = 15000
++1s I 0s N CAR_WEIGHT_CAN_ID CarWeight = 15000
+
+;#arc '3B/4b'
++0s  I  0s N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm = true
 
 ;#arc '3B/5'
-+0.1s  A F Drive : speed == STOP
++1s  A F Drive : speed == STOP
 +0s  A F Drive : direction == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getSpeed == STOP
-+0s  A N DRIVE_COMMAND_CAN_ID DriveCommand : getDirection == STOP
 
 ;#arc '3B/6'
 +0.5s A F DoorMotor FRONT LEFT : command == STOP
+
+
