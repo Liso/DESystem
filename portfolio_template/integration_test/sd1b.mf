@@ -21,7 +21,7 @@
 +1s A F HallLight 1 FRONT UP : lighted == true
 
 ;#arc '1B/5a;
-+0s A N HALL_CALL_[1][FRONT][UP]_CAN_ID Boolean : getValue == true
++0s A N HALL_CALL_[1][FRONT][UP]_CAN_ID Bit : getValue == true
 
 ;#arc '1B/5b'
 +0.1s A F DoorMotor FRONT LEFT : command == OPEN
