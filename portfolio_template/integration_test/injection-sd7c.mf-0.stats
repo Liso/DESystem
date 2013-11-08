@@ -1,10 +1,7 @@
-;Course and Semester : 18649 Fall 2013
-;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
-;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -mf sd7c.mf -cf sd7c.cf
-RandomSeed = 1383799157611
+Command line = -cf sd7c.cf -mf sd7c.mf
+RandomSeed = 1383873758810
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -15,12 +12,12 @@ Controller File = sd7c.cf
 Assertion Results:
 @0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2a6788c4 :: command ?== CLOSE PASSED
 @0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79e0123b :: getDoorCommand ?== CLOSE PASSED
-@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7b0acf26 :: getValue ?== true PASSED
-@2.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@620ee765 :: command ?== STOP PASSED
-@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7bc8b313 :: getDoorCommand ?== STOP PASSED
-@2.6s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@72ad25d0 :: lighted ?== false PASSED
+@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f73089d :: getValue ?== true PASSED
+@2.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7b0acf26 :: command ?== STOP PASSED
+@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@620ee765 :: getDoorCommand ?== STOP PASSED
+@2.6s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@7bc8b313 :: lighted ?== false PASSED
+@2.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@72ad25d0 :: getValue ?== false PASSED
 @2.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5a874bd3 :: getValue ?== false PASSED
-@2.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7ed69cff :: getValue ?== false PASSED
 
 
 ******************Summary******************

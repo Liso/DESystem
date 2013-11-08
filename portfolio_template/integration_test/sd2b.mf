@@ -18,7 +18,7 @@
 
 
 ;#arc '2B/2c'
-+0.50s  A N CAR_CALL_[4][FRONT]_CAN_ID Boolean : getValue == true
++0.50s  A N CAR_CALL_[4][FRONT]_CAN_ID Bit : getValue == true
 
 
 

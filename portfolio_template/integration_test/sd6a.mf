@@ -23,9 +23,9 @@
 
 
 ;# arc '1a/1b'
-;+0s A F CarPositionIndicator : floor == 4 
-;+0s  A F Drive : speed == SLOW 
-;+0s  A F Drive : direction == UP
++1s A F CarPositionIndicator : floor == 4 
++0s  A F Drive : speed == SLOW 
++0s  A F Drive : direction == UP
 
 +1s  I  0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = false
 
@@ -35,7 +35,7 @@
 +0s  I  0s N LEVEL_SENSOR_[DOWN]_CAN_ID Bit = true
 
 ;# arc '1b'
-+0s A F CarPositionIndicator : floor == 5 
++1s A F CarPositionIndicator : floor == 5 
 
 ;# arc '2'
 +0s  A F Drive : speed == STOP

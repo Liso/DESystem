@@ -10,7 +10,7 @@ SD2B sd2b.cf sd2b.mf
 SD3A sd3a.cf sd3a.mf
 SD3B sd3b.cf sd3b.mf
 SD4A sd4a.cf sd4a.mf
-SD4B sd4a.cf sd4b.mf
+SD4B sd4b.cf sd4b.mf
 SD5A sd5a.cf sd5a.mf
 SD5B sd5b.cf sd5b.mf
 SD6A sd6a.cf sd6a.mf

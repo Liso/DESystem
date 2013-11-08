@@ -1,10 +1,7 @@
-;Course and Semester : 18649 Fall 2013
-;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
-;Jaingtian Nie (jnie)
 
 Simulator Parameters:
 Command line = -cf sd3a.cf -mf sd3a.mf
-RandomSeed = 1383863989029
+RandomSeed = 1383874219790
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,17 +10,20 @@ Message File = sd3a.mf
 Controller File = sd3a.cf
 
 Assertion Results:
-@2.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@6f96093 :: speed ?== LEVEL PASSED
-@2.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@7c721098 :: direction ?== DOWN PASSED
-@4.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@5a86506a :: speed ?== STOP PASSED
-@4.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@b2e0415 :: direction ?== STOP PASSED
-@6.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2e45105c :: command ?== OPEN PASSED
-@8.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@27b7516d :: lighted ?== false PASSED
-@10.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@806bc2f :: command ?== STOP PASSED
+@2.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@555bf03d :: speed ?== LEVEL PASSED
+@2.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@5e335678 :: direction ?== DOWN PASSED
+@4.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@6e92992c :: speed ?== STOP PASSED
+@4.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@28098d94 :: direction ?== STOP PASSED
+@5.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7a0e046e :: getSpeed ?== STOP PASSED
+@5.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@38351fbf :: getDirection ?== STOP PASSED
+@6.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7442df79 :: command ?== OPEN PASSED
+@6.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@806bc2f :: getDoorCommand ?== OPEN PASSED
+@8.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@555214b9 :: lighted ?== false PASSED
+@10.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@58d67b44 :: command ?== STOP PASSED
 
 
 ******************Summary******************
-Passed:  7
+Passed:  10
 Failed:  0
-Total :  7
+Total :  10
 

@@ -39,7 +39,7 @@
 +0.3s  I  0s F HallCall 4 FRONT UP = false
 
 ;# arc '1A/2a'
-+0.25s  A N HALL_CALL_[4][FRONT][UP]_CAN_ID Boolean : getValue == true
++0.25s  A N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit : getValue == true
 
 ;# arc '1A/2b'
 ;# arc '1A/2c'

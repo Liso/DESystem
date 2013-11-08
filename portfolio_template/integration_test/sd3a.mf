@@ -46,7 +46,8 @@
 +0s  A F Drive : direction == STOP
 
 ;# 'SD3A/2a'
-+1s  A  0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
++1s  A  N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == STOP
++0s  A  N DRIVE_SPEED_CAN_ID DriveSpeed : getDirection == STOP
 
 ;# 'SD3A/2b'
 +1s  A F DoorMotor FRONT LEFT : command == OPEN

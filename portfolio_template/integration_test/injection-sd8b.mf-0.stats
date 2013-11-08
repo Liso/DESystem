@@ -1,10 +1,7 @@
-;Course and Semester : 18649 Fall 2013
-;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
-;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -mf sd8b.mf -cf sd8b.cf
-RandomSeed = 1383799183431
+Command line = -cf sd8b.cf -mf sd8b.mf
+RandomSeed = 1383873786602
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,11 +10,11 @@ Message File = sd8b.mf
 Controller File = sd8b.cf
 
 Assertion Results:
-@0.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@6eb1a0f9 :: speed ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@22666c7a :: direction ?== STOP PASSED
-@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6982237d :: getFloor ?== 1 PASSED
-@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@57ec9545 :: getDirection ?== STOP PASSED
-@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2c8e2a4 :: getHallway ?== NONE PASSED
+@0.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@4fbf7435 :: speed ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@725bcf3a :: direction ?== STOP PASSED
+@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5ee819a8 :: getFloor ?== 1 PASSED
+@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6d3c121b :: getDirection ?== STOP PASSED
+@1.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@52977e69 :: getHallway ?== NONE PASSED
 
 
 ******************Summary******************
