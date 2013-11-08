@@ -9,27 +9,35 @@
 
 ; Pre-conditions
 +0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
-+0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
 +0s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 
 ;#arc 7A/1a'
-+0.1s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
++0.0s I 0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT UP
 
 ;#arc 7A/1b'
++0.1s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
+
+;#arc 7A/1c'
 +0.5s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == STOP
 +0s A N DRIVE_SPEED_CAN_ID DriveSpeed : getDirection == STOP
 
-;#arc '7A/1c'
+;#arc '7A/1d'
 +0.5s A F DoorMotor FRONT LEFT : command == OPEN
 
-;#arc '7A/1d'
+;#arc '7A/1e'
 +0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
 
-;#arc '7A/2a'
+;#arc '7A/1f'
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
+
+;#arc '7A/2'
++0.8s  A F CarLantern UP : lighted == true
+
+;#arc '7A/3a'
 +0.2s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0.2s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
-;#arc '7A/2b'
+;#arc '7A/3b'
 ;check that the door is open
 +0.5s  A F DoorMotor FRONT LEFT : command == STOP
 
