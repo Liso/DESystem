@@ -29,36 +29,37 @@
 
 
 ;Preconditions
-;# 'SD3A/1b'
 +0.5s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = false
 +0s	 I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
-
 +0.0s I  0s F HallCall 4 FRONT UP = true
-
-;+0.5s  A F HallLight 4 FRONT UP : lighted == true
 
 ;# 'SD3A/1b'
 +2s  A F Drive : speed == LEVEL
 +0s  A F Drive : direction == DOWN
 
-;# 'SD3A/1d'
+;# 'SD3A/1c'
 +0s	 I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Leveling DOWN = true
 +0s I 0s N LEVEL_SENSOR_[UP]_CAN_ID Leveling UP = true
 
-;# 'SD3A/1e'
+;# 'SD3A/1d'
 +2s  A F Drive : speed == STOP
 +0s  A F Drive : direction == STOP
 
 ;# 'SD3A/2a'
-+1s  I  0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
++1s  A  0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
 
 ;# 'SD3A/2b'
 +1s  A F DoorMotor FRONT LEFT : command == OPEN
 
-;# 'SD3A/2D'
+;# 'SD3A/2c
++0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == OPEN
+
+;# 'SD3A/2d'
 +1s  I  0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
+
+;# 'SD3A/3a'
 +0s  I  0s N DESIRED_FLOOR_CAN_ID DesiredFloor = 4 FRONT STOP
-+0s I  0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = true
+
 +0.0s I  0s F HallCall 4 FRONT UP = false
 
 ;# 'SD3A/3b'

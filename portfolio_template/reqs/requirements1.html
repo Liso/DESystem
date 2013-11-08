@@ -24,6 +24,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -117,7 +118,7 @@
     <br>
     The setup of hallway entrances is as follows:<br>
     <table style="text-align: left; width: 271px; height: 256px;"
-      border="1" cellpadding="2" cellspacing="2">
+      cellpadding="2" cellspacing="2" border="1">
       <tbody>
         <tr>
           <td> Floor Number<br>
@@ -825,21 +826,6 @@
           </td>
         </tr>
         <tr>
-          <td> Drive Control </td>
-          <td> mDrive </td>
-          <td> none </td>
-          <td style="vertical-align: top;">2<br>
-          </td>
-          <td>The commanded speed and direction of the car<br>
-            <ul>
-              <li>Speed - one of {STOP, SLOW, FAST}<br>
-              </li>
-              <li>Direction - one of {STOP, UP, DOWN}<br>
-              </li>
-            </ul>
-          </td>
-        </tr>
-        <tr>
           <td> Dispatcher </td>
           <td> mDesiredDwell* </td>
           <td> hallway </td>
@@ -890,16 +876,6 @@
           </td>
         </tr>
         <tr>
-          <td> Hall Button<span style="">&nbsp;</span> </td>
-          <td> mHallLight </td>
-          <td> floor, hall, direction </td>
-          <td style="vertical-align: top;">1<br>
-          </td>
-          <td>Indicate the state of the hall light&nbsp; One of {true,
-            false}<br>
-          </td>
-        </tr>
-        <tr>
           <td> Car Button </td>
           <td> mCarCall </td>
           <td> floor, hall </td>
@@ -908,26 +884,16 @@
           <td>Indicate the presence of a car call for a certain floor
             and hall.&nbsp; One of {true, false}</td>
         </tr>
-        <tr>
-          <td> Car Button </td>
-          <td> mCarLight </td>
-          <td> floor, hall </td>
-          <td style="vertical-align: top;">1<br>
-          </td>
-          <td>Indicate the state of the car light&nbsp; One of {true,
-            false}</td>
-        </tr>
       </tbody>
     </table>
     <br>
     <h3><a name="removedmessages"></a>Removed messages</h3>
     <ul>
-      <li>Starting in Project 10, you will be allowed to remove unused
-        messages.&nbsp; Any message that is otherwise removed from the
-        documentation should be listed here.&nbsp; See the project 10
-        writeup for more details.&nbsp; <span style="font-weight: bold;
-          color: rgb(204, 0, 0);">You MAY NOT remove messages from the
-          message dictionary prior to Project 10.</span><br>
+      <li>mCarLantern.</li>
+      <li>mDrive</li>
+      <li>mHallLight</li>
+      <li>mCarLight</li>
+      <li>mCarPositionIndicator<br>
       </li>
     </ul>
     <br>
