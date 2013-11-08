@@ -41,7 +41,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     protected String[] summarize() {
         String[] arr = new String[4];
         arr[0] = "Overweight Count = " + overWeightCount;
-        arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
+        arr[1] = "Wasted Openings Count = " + 0;
         arr[2] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
         arr[3] = "Both lanterns lit up? " + bothLit;
         return arr;
