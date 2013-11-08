@@ -1,55 +1,56 @@
 
 Simulator Parameters:
-Command line = -pf proj7acceptance1.pass -b 200 -gui
-RandomSeed = 1383857768203
+Command line = -pf proj7acceptance1.pass -b 200 -gui -monitor Proj7RuntimeMonitor
+RandomSeed = 1383871800296
 CanNetworkBitTime = 5000 ns
 Effective Can Bitrate = 199999.99999999997
 Run Time = null
 Real time rate = null
 Acceptance Test File = proj7acceptance1.pass
+Monitors: Proj7RuntimeMonitor  
 
 STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
 -----------------------------------------------------
 
 
 These passengers were delivered:
-Passenger 0: INJECTED AT 600.0s and DELIVERED in 50.148s
+Passenger 0: INJECTED AT 600.0s and DELIVERED in 50.468s
   Satisfaction score: 100.0
-Passenger 1: INJECTED AT 905.7s and DELIVERED in 35.56s
+Passenger 1: INJECTED AT 905.7s and DELIVERED in 36.021s
   Satisfaction score: 100.0
-Passenger 2: INJECTED AT 974.6s and DELIVERED in 45.157s
+Passenger 2: INJECTED AT 974.6s and DELIVERED in 45.101s
   Satisfaction score: 100.0
-Passenger 3: INJECTED AT 1531.4s and DELIVERED in 11.26s
+Passenger 3: INJECTED AT 1531.4s and DELIVERED in 11.04s
   Satisfaction score: 100.0
-Passenger 4: INJECTED AT 2082.0s and DELIVERED in 25.412s
+Passenger 4: INJECTED AT 2082.0s and DELIVERED in 25.54s
   Satisfaction score: 100.0
-Passenger 5: INJECTED AT 2217.5s and DELIVERED in 45.832s
+Passenger 5: INJECTED AT 2217.5s and DELIVERED in 46.056s
   Satisfaction score: 100.0
-Passenger 6: INJECTED AT 2805.4s and DELIVERED in 19.133s
+Passenger 6: INJECTED AT 2805.4s and DELIVERED in 19.145s
   Satisfaction score: 100.0
-Passenger 7: INJECTED AT 3269.2s and DELIVERED in 40.365s
+Passenger 7: INJECTED AT 3269.2s and DELIVERED in 40.483s
   Satisfaction score: 100.0
-Passenger 8: INJECTED AT 3705.3s and DELIVERED in 56.143s
+Passenger 8: INJECTED AT 3705.3s and DELIVERED in 55.961s
   Satisfaction score: 100.0
-Passenger 9: INJECTED AT 4204.2s and DELIVERED in 27.003s
+Passenger 9: INJECTED AT 4204.2s and DELIVERED in 27.225s
   Satisfaction score: 50.0
-    @4228.603000000: 0.50 Failed to exit at 7, FRONT even though the doors opened.
-Passenger 10: INJECTED AT 4487.2s and DELIVERED in 36.006s
+    @4228.745000000: 0.50 Failed to exit at 7, FRONT even though the doors opened.
+Passenger 10: INJECTED AT 4487.2s and DELIVERED in 36.243s
   Satisfaction score: 100.0
-Passenger 11: INJECTED AT 4917.5s and DELIVERED in 45.636s
+Passenger 11: INJECTED AT 4917.5s and DELIVERED in 45.976s
   Satisfaction score: 100.0
-Passenger 12: INJECTED AT 5104.0s and DELIVERED in 36.332s
+Passenger 12: INJECTED AT 5104.0s and DELIVERED in 35.377s
   Satisfaction score: 100.0
-Passenger 13: INJECTED AT 5553.4s and DELIVERED in 41.089s
+Passenger 13: INJECTED AT 5553.4s and DELIVERED in 41.319s
   Satisfaction score: 100.0
-Passenger 14: INJECTED AT 5713.7s and DELIVERED in 32.393s
+Passenger 14: INJECTED AT 5713.7s and DELIVERED in 31.782s
   Satisfaction score: 50.0
-    @5743.373000000: 0.50 Failed to exit at 7, BACK even though the doors opened.
-Passenger 15: INJECTED AT 6184.5s and DELIVERED in 55.847s
+    @5743.042000000: 0.50 Failed to exit at 7, BACK even though the doors opened.
+Passenger 15: INJECTED AT 6184.5s and DELIVERED in 56.2s
   Satisfaction score: 100.0
-Passenger 16: INJECTED AT 6407.5s and DELIVERED in 60.54s
+Passenger 16: INJECTED AT 6407.5s and DELIVERED in 60.941s
   Satisfaction score: 100.0
-Passenger 17: INJECTED AT 6866.1s and DELIVERED in 38.788s
+Passenger 17: INJECTED AT 6866.1s and DELIVERED in 39.152s
   Satisfaction score: 100.0
 
 Passenger Delivery Summary
@@ -58,9 +59,9 @@ Stranded: 0
 Total: 18
 
 Deliver Stats (lower is better):
-Average_delivery_time: 39.036
-Maximum_delivery_time:  60.540
-Delivery_performance_score:  216.683
+Average_delivery_time: 39.113
+Maximum_delivery_time:  60.941
+Delivery_performance_score:  217.392
 
 Satisfaction Stats (higher is better):
 Average_satisfaction_score: 94.444
@@ -72,4 +73,13 @@ Satisfaction_performance_score:  427.778
 
 Network Utilization Summary:
 Recent: 73.33 % Max: 73.33 %  Overall:  73.33 %
+
+Monitors Warning Results: 
+RuntimeMonitor generated 0 warnings.
+
+Monitors Summmary Results: 
+Overweight Count = 0
+Wasted Openings Count = 0
+Wasted Time Dealing with Reversal = 0.0s
+Both lanterns lit up? false
 

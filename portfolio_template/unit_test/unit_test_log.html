@@ -23,6 +23,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -36,8 +37,8 @@
     of the portfolio.&nbsp; Be sure to include all information listed in
     the project handouts.<br>
     <br>
-    <table style="text-align: left; width: 100%;" border="1"
-      cellpadding="2" cellspacing="2">
+    <table style="text-align: left; width: 100%;" cellpadding="2"
+      cellspacing="2" border="1">
       <tbody>
         <tr>
           <td style="vertical-align: top;">Controller Name<br>
@@ -68,11 +69,16 @@
             STOP OPENING<br>
             STATE 5.3 CLOSE<br>
             STATE 5.4 STOP CLOSING<br>
+            STATE 5.5 REVERSE<br>
+            STATE 5.6 NUDGE<br>
             Transition 5.1, Transition 5.2<br>
             Transition 5.3, Transition 5.4<br>
-            Transition 5.5<br>
+            Transition 5.5, Transition 5.5<br>
+            Transition 5.6, Transition 5.7<br>
+            Transition 5.8, Transition 5.9<br>
+            Transition 5.10<br>
           </td>
-          <td style="vertical-align: top;">17<br>
+          <td style="vertical-align: top;">152<br>
           </td>
           <td style="vertical-align: top;">0<br>
           </td>
@@ -91,14 +97,16 @@
             <a href="drivecontrol2.mf">drivecontrol2.mf</a><br>
           </td>
           <td style="vertical-align: top;">STATE 6.1 STOP, STATE 6.2
-            LEVEL_DOWN, STATE 6.3 DRIVE_UP, STATE 6.4 LEVEL_UP, STATE
-            6.5 DRIVE_DOWN, STATE 6.6 EMERGENCY<br>
+            LEVEL_DOWN, STATE 6.3 SLOW_UP, STATE 6.4 LEVEL_UP, STATE 6.5
+            SLOW_DOWN, STATE 6.6 EMERGENCY, STATE 6.7 FAST_UP, STATE 6.8
+            FAST_DOWN<br>
             Transition 6.1 , Transition 6.2 , Transition 6.3, Transition
             6.4, Transition 6.5.*, Transition 6.6, Transition 6.7,
             Transition 6.8, Transition 6.9, Transition 6.10, Transition
-            6.11, Transition 6.12, </td>
-          <td style="vertical-align: top;">65 for drivecontrol.mf<br>
-            50 for drivecontrol2.mf </td>
+            6.11, Transition 6.12, Transition 6.13, Transition 6.14,
+            Transition 6.15</td>
+          <td style="vertical-align: top;">39 for drivecontrol.mf<br>
+            30 for drivecontrol2.mf </td>
           <td style="vertical-align: top;">0 for drivecontrol.mf<br>
             0 for drivecontrol2.mf </td>
           <td style="vertical-align: top;"><a
@@ -119,7 +127,7 @@
           <td style="vertical-align: top;">STATE 8.1 ON , STATE 8.2 OFF<br>
             Transition 8.1, Transition 8.2<br>
           </td>
-          <td style="vertical-align: top;">21<br>
+          <td style="vertical-align: top;">14<br>
           </td>
           <td style="vertical-align: top;">0<br>
           </td>
@@ -139,7 +147,7 @@
             Light Off<br>
             Transition 9.1, Transition 9.2<br>
           </td>
-          <td style="vertical-align: top;">39<br>
+          <td style="vertical-align: top;">26<br>
           </td>
           <td style="vertical-align: top;">0<br>
           </td>
@@ -155,22 +163,37 @@
           <td style="vertical-align: top;"><a href="dispatcher.cf">dispatcher.cf</a><br>
           </td>
           <td style="vertical-align: top;"><a href="dispatcher.mf">dispatcher.mf</a><br>
-            <a href="dispatcher2.mf">dispatcher2.mf</a><br>
-            <a href="dispatcher3.mf">dispatcher3.mf</a><br>
-            <a href="dispatcher4.mf">dispatcher4.mf</a><br>
+            <br>
           </td>
-          <td style="vertical-align: top;">STATE 11.1 TARGET, STATE 11.2
-            RESET<br>
+          <td style="vertical-align: top;">STATE 11.1 SET_STOP, STATE
+            11.2 SET_UP,<br>
+            STATE 11.3 SET_DOWN,<br>
+            STATE 11.4 REACHED_FLOOR_DOWN,<br>
+            STATE 11.5 REACHED_FLOOR_UP,<br>
+            STATE 11.6 REACHED FLOOR, STATE 11.7 RESET<br>
             Transition 11.1,<br>
-            Transition 11.2</td>
-          <td style="vertical-align: top;">132<br>
+            Transition 11.2,<br>
+            Transition 11.3,<br>
+            Transition 11.4,<br>
+            Transition 11.5,<br>
+            Transition 11.6,<br>
+            Transition 11.7,<br>
+            Transition 11.8,<br>
+            Transition 11.9,<br>
+            Transition 11.10,<br>
+            Transition 11.11,<br>
+            Transition 11.12,<br>
+            Transition 11.13,<br>
+            Transition 11.14,<br>
+            Transition 11.15,<br>
           </td>
-          <td style="vertical-align: top;">32</td>
+          <td style="vertical-align: top;">72<br>
+          </td>
+          <td style="vertical-align: top;">0<br>
+          </td>
           <td style="vertical-align: top;"><a
               href="injection-dispatcher.mf-0.stats">injection-dispatcher.mf-0.stats</a><br>
-            <a href="injection-dispatcher2.mf-0.stats">injection-dispatcher2.mf-0.stats</a><br>
-            <a href="injection-dispatcher3.mf-0.stats">injection-dispatcher3.mf-0.stats</a><br>
-            <a href="injection-dispatcher4.mf-0.stats">injection-dispatcher4.mf-0.stats</a><br>
+            <br>
           </td>
           <td style="vertical-align: top;"><br>
           </td>
@@ -185,7 +208,7 @@
           <td valign="top">STATE 7.1 ON, STATE 7.2 OFF<br>
             Transition 7.1, Transition 7.2<br>
           </td>
-          <td valign="top">8<br>
+          <td valign="top">3<br>
           </td>
           <td valign="top">0<br>
           </td>
@@ -204,7 +227,7 @@
           <td valign="top">STATE 10.1 DISPLAY<br>
             Transition 10.1<br>
           </td>
-          <td valign="top">4<br>
+          <td valign="top">3<br>
           </td>
           <td valign="top">0<br>
           </td>
