@@ -32,8 +32,7 @@
 +0.0s A F Drive : direction == UP
 
 ;#arc '8A/3b'
-+1s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = SLOW UP
-+0.0s I 0s F DriveSpeed = UP 0.2
++0.1s I 0s F DriveSpeed = UP 0.2
 
 ;#arc '8A/3c'
 +1s  I 0s F DriveSpeed = UP 0.25
@@ -65,8 +64,7 @@
 +0.0s A F Drive : direction == UP
 
 ;#arc '8A/4c'
-+0.1s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = LEVEL UP
-+0.0s I 0s F DriveSpeed = UP 0.02
++0.1s I 0s F DriveSpeed = UP 0.02
 
 ;#arc '8A/4d'
 +0.1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Bit = true
@@ -77,8 +75,7 @@
 +0.0s A F Drive : direction == STOP
 
 ;#arc '8A/4f'
-+0.1s I 0s N DRIVE_SPEED_CAN_ID DriveSpeed = STOP STOP
-+0.0s I 0s F DriveSpeed = STOP 0.0
++0.1s I 0s F DriveSpeed = STOP 0.0
 
 ;#arc '8A/4g'
 +0.5s A N DRIVE_SPEED_CAN_ID DriveSpeed : getSpeed == STOP
