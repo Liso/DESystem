@@ -16,31 +16,46 @@
 0s I 0s N DOOR_CLOSED_SENSOR_[BACK][LEFT]_CAN_ID Bit = true
 0s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
 0s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
+0s I 0s N HALL_CALL_[1][FRONT][UP]_CAN_ID Bit = true
+0s I 0s N HALL_CALL_[4][FRONT][UP]_CAN_ID Bit = true
 
 ;#arc '9A/1'
 +0.1s A F DoorMotor FRONT LEFT : command == OPEN
 
++0.1s I 0s N HALL_CALL_[1][FRONT][UP]_CAN_ID Bit = false
+
 +0.1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
++0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][RIGHT]_CAN_ID Bit = false
+
+
 
 ;#arc '9A/2a'
-+0.2s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 2
++0.5s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getFloor == 4
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getHallway == FRONT
++0s A N DESIRED_FLOOR_CAN_ID DesiredFloor : getDirection == UP
 
 ;#arc '9A/2b'
 +0s A N DESIRED_DWELL_[FRONT]_CAN_ID DesiredDwell FRONT : getDwell == 5s
 +0s A N DESIRED_DWELL_[BACK]_CAN_ID DesiredDwell BACK : getDwell == 5s
 
 ;#arc '9A/3a'
-+0.1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
++1s A F CarLantern UP : lighted == true
 
 ;#arc '9A/3b'
++0s A F CarLantern DOWN : lighted == false
+
+;#arc '9A/4a'
++0.1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
+
+;#arc '9A/4b'
 +0.1s A F DoorMotor FRONT LEFT : command == STOP
 
-;#arc '9A/4'
-+5.5s A F DoorMotor FRONT LEFT : command == CLOSE
+;#arc '9A/5'
++8s A F DoorMotor FRONT LEFT : command == CLOSE
 
-;#arc '9A/5a'
+;#arc '9A/6a'
 +0.1s I 0s N DOOR_OPEN_SENSOR_[FRONT][LEFT]_CAN_ID Bit = false
 +0s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true
 
-;#arc '9A/5b'
-+0.1s A F DoorMotor FRONT LEFT : command == STOP
+;#arc '9A/6b'
++0.2s A F DoorMotor FRONT LEFT : command == STOP
