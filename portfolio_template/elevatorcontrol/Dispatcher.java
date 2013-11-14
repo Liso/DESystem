@@ -398,7 +398,7 @@ public class Dispatcher extends Controller {
                    	commitPointUp = (5000*(floor -1)) + 100;
                    }
                    else
-        		   commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 200;
+        		   commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 600;
         		   for(Hallway hall : Hallway.replicationValues){
         			   for(Direction d : Direction.replicationValues){
         			   indexHallCall = ReplicationComputer.computeReplicationId(floor, hall, d);
@@ -429,7 +429,7 @@ public class Dispatcher extends Controller {
                     	commitPointUp = (5000*(floor -1)) + 100;
                     }
                     else
-                    	commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 200;
+                    	commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 600;
                     if (Math.abs(floor - currentFloor) <= Math.abs(targetFloor - currentFloor)) {
 	                    for (Hallway h : Hallway.replicationValues) {                    	
 	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.UP);
@@ -602,7 +602,7 @@ public class Dispatcher extends Controller {
                    	commitPointDown = (5000*(floor -1)) - 100;
                    }
                    else
-                	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 200;
+                	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 600;
         		   for(Hallway hall : Hallway.replicationValues){
         			   for(Direction d : Direction.replicationValues){
         			   indexHallCall = ReplicationComputer.computeReplicationId(floor, hall, d);
@@ -634,7 +634,7 @@ public class Dispatcher extends Controller {
                        	commitPointDown = (5000*(floor -1)) - 100;
                        }
                        else
-                    	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 200;
+                    	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 600;
                     if (Math.abs(floor - currentFloor) <= Math.abs(targetFloor - currentFloor)) {
 	                    for (Hallway h : Hallway.replicationValues) {
                     	
