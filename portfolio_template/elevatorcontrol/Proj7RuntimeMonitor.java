@@ -50,14 +50,14 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         protected String[] summarize() {
             String[] arr = new String[9];
             arr[0] = "Overweight Count = " + overWeightCount;
-            arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
-            arr[2] = "Wasted Stops Count = " + wastedStopCount;
+            arr[1] = "R-T6:Wasted Stops Count = " + wastedStopCount;
+            arr[2] = "R-T7:Wasted Openings Count = " + wastedOpeningCount;
             arr[3] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
             arr[4] = "Both Lanterns Lit Up Count = " + bothLitCount;
-            arr[5] = "Omitted Pending Calls Count = " + omittedCallsCount;
-            arr[6] = "Lantern Flicker Count = " + lanternFlickerCount;
-            arr[7] = "Conflict Direction Count = " + conflictDirectionCount;
-            arr[8] = "Number of times Nudged before Reversing atleast once = " + Noreversalcount;
+            arr[5] = "R-T8.1:Omitted Pending Calls Count = " + omittedCallsCount;
+            arr[6] = "R-T8.2:Lantern Flicker Count = " + lanternFlickerCount;
+            arr[7] = "R-T8.3:Conflict Direction Count = " + conflictDirectionCount;
+            arr[8] = "R-T10:Number of times Nudged before Reversing atleast once = " + Noreversalcount;
             return arr;
         }
 
@@ -80,7 +80,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     private void doorOpening(Hallway hallway) {
         CheckHallorCarCall(hallway);
         if (!wasCall) {
-            message("Wasted Opening");
+            message("R-T.7 Violated: Door Opened in Hallway without pending call.");
             wastedOpeningCount++;
         }
         wasCall = false;
@@ -108,7 +108,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
      * @param hallway which door the event pertains to
      */
     private void doorReopening(Hallway hallway) {
-        message("Logging wasted time for reversal");
+        //message("Logging wasted time for reversal");
         watch.start();
         //System.out.println(hallway.toString() + " Door Reopening");
     }
@@ -195,7 +195,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
                         !wasHallCall[currentFloor-1][Hallway.BACK.ordinal()][Direction.UP.ordinal()] &&
                         !wasHallCall[currentFloor-1][Hallway.FRONT.ordinal()][Direction.DOWN.ordinal()] &&
                         !wasHallCall[currentFloor-1][Hallway.BACK.ordinal()][Direction.DOWN.ordinal()]){
-                    message("Wasted Stop");
+                    message("R-T.6 Violated: Car stopped at floor without any pending calls");
                     wastedStopCount++;	
                 }      	
                 hasMoved = false;
