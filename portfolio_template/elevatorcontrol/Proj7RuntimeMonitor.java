@@ -30,10 +30,11 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     boolean wasHallCall[][][] = new boolean[Elevator.numFloors][2][2];
     boolean litLantern[] = new boolean[2];
     boolean wasCall = false;
-    boolean bothLit = false;
+    int bothLitCount = 0;
     int wastedOpeningCount = 0;
     int wastedStopCount = 0;
     int overWeightCount = 0;
+    int lanternFlickerCount = 0;
     Hallway hallway = Hallway.NONE;
 
     public Proj7RuntimeMonitor() {
@@ -41,12 +42,13 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
     protected String[] summarize() {
-        String[] arr = new String[5];
+        String[] arr = new String[6];
         arr[0] = "Overweight Count = " + overWeightCount;
         arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
         arr[2] = "Wasted Stops Count = " + wastedStopCount;
         arr[3] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
-        arr[4] = "Both lanterns lit up? " + bothLit;
+        arr[4] = "Both Lanterns Lit Up Count " + bothLitCount;
+        arr[5] = "Lantern Flicker Count " + lanternFlickerCount;
         return arr;
     }
 
@@ -101,7 +103,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     private void doorClosed(Hallway hallway) {
         //System.out.println(hallway.toString() + " Door Closed");
         //once all doors are closed, check to see if the car was overweight
-        if (!doorState.anyDoorOpen()) {
+        if (!anyDoorOpen()) {
         	watch.stop();
             if (wasOverweight) {
                 message("Overweight");
@@ -193,13 +195,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     
     @Override
     public void receive(ReadableCarLanternPayload msg) {
-    	if(msg.lighted()) {
-    		litLantern[msg.getDirection().ordinal()] = true;
-    		if(hallway != Hallway.NONE)
-        	wasHallCall[currentFloor-1][hallway.ordinal()][msg.getDirection().ordinal()] = false;
-        }
-    	else
-    		litLantern[msg.getDirection().ordinal()] = false;
+    	checkLantern(msg);
     }
 
     private static enum DoorState {
@@ -210,9 +206,40 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         CLOSING
     }
     
-    private void checkLantern() {
+    private void checkLantern(ReadableCarLanternPayload msg) {
+    	
+    	if (msg.getDirection() == Direction.STOP) {
+    		if ((litLantern[0] || litLantern[1]) && anyDoorOpen()) {
+    			lanternFlickerCount++;
+                }
+    		litLantern[0] = false;
+
+    	}
+    	else if(msg.lighted()) {
+    		if (msg.getDirection() == Direction.UP) {
+    			if (litLantern[Direction.DOWN.ordinal()] == true) {
+        			lanternFlickerCount++;
+                        }
+    		}
+    		else {
+    			if (litLantern[Direction.UP.ordinal()] == true) {
+
+        			lanternFlickerCount++;
+                        }
+    		}
+    		litLantern[msg.getDirection().ordinal()] = true;
+    		if(hallway != Hallway.NONE)
+        	wasHallCall[currentFloor-1][hallway.ordinal()][msg.getDirection().ordinal()] = false;
+        }
+    	else {
+    		if (anyDoorOpen() && litLantern[msg.getDirection().ordinal()] ) {
+
+                }
+    		litLantern[msg.getDirection().ordinal()] = false;
+    	}
+    	
     	if (litLantern[0] && litLantern[1])
-    		bothLit = true;
+    		bothLitCount++;
     }
     private void updateCurrentFloor(ReadableAtFloorPayload lastAtFloor) {
         if (lastAtFloor.getFloor() == currentFloor) {
@@ -258,6 +285,39 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     	}	
     }
     
+    
+    //door utility methods
+    public boolean allDoorsCompletelyOpen(Hallway h) {
+        return doorOpeneds[h.ordinal()][Side.LEFT.ordinal()].isOpen()
+                && doorOpeneds[h.ordinal()][Side.RIGHT.ordinal()].isOpen();
+    }
+
+    public boolean anyDoorOpen() {
+        return anyDoorOpen(Hallway.FRONT) || anyDoorOpen(Hallway.BACK);
+
+    }
+
+    public boolean anyDoorOpen(Hallway h) {
+        return !doorCloseds[h.ordinal()][Side.LEFT.ordinal()].isClosed()
+                || !doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed();
+    }
+
+    public boolean allDoorsClosed(Hallway h) {
+        return (doorCloseds[h.ordinal()][Side.LEFT.ordinal()].isClosed()
+                && doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed());
+    }
+
+    public boolean allDoorMotorsStopped(Hallway h) {
+        return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.STOP && doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.STOP;
+    }
+
+    public boolean anyDoorMotorOpening(Hallway h) {
+        return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.OPEN || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.OPEN;
+    }
+
+    public boolean anyDoorMotorClosing(Hallway h) {
+        return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.CLOSE || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.CLOSE;
+    }
     /**
      * Utility class for keeping track of the door state.
      * 
@@ -327,39 +387,9 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             state[h.ordinal()] = newState;
         }
 
-        //door utility methods
-        public boolean allDoorsCompletelyOpen(Hallway h) {
-            return doorOpeneds[h.ordinal()][Side.LEFT.ordinal()].isOpen()
-                    && doorOpeneds[h.ordinal()][Side.RIGHT.ordinal()].isOpen();
-        }
 
-        public boolean anyDoorOpen() {
-            return anyDoorOpen(Hallway.FRONT) || anyDoorOpen(Hallway.BACK);
-
-        }
-
-        public boolean anyDoorOpen(Hallway h) {
-            return !doorCloseds[h.ordinal()][Side.LEFT.ordinal()].isClosed()
-                    || !doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed();
-        }
-
-        public boolean allDoorsClosed(Hallway h) {
-            return (doorCloseds[h.ordinal()][Side.LEFT.ordinal()].isClosed()
-                    && doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed());
-        }
-
-        public boolean allDoorMotorsStopped(Hallway h) {
-            return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.STOP && doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.STOP;
-        }
-
-        public boolean anyDoorMotorOpening(Hallway h) {
-            return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.OPEN || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.OPEN;
-        }
-
-        public boolean anyDoorMotorClosing(Hallway h) {
-            return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.CLOSE || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.CLOSE;
-        }
     }
+    
 
     /**
      * Keep track of time and decide whether to or not to include the last interval
