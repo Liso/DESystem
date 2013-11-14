@@ -37,6 +37,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     int wastedStopCount = 0;
     int overWeightCount = 0;
     int lanternFlickerCount = 0;
+    int omittedCallsCount = 0;
     int Noreversalcount = 0;
     Hallway hallway = Hallway.NONE;
     boolean doorReversalTriggeredBefore = false;
@@ -47,15 +48,16 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
         protected String[] summarize() {
-            String[] arr = new String[8];
+            String[] arr = new String[9];
             arr[0] = "Overweight Count = " + overWeightCount;
             arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
             arr[2] = "Wasted Stops Count = " + wastedStopCount;
             arr[3] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
-            arr[4] = "Both Lanterns Lit Up Count " + bothLitCount;
-            arr[5] = "Lantern Flicker Count " + lanternFlickerCount;
-            arr[6] = "Conflict Direction Count " + conflictDirectionCount;
-            arr[7] = "Number of times Nudged before Reversing atleast once = " + Noreversalcount;
+            arr[4] = "Both Lanterns Lit Up Count = " + bothLitCount;
+            arr[5] = "Omitted Pending Calls Count = " + omittedCallsCount;
+            arr[6] = "Lantern Flicker Count = " + lanternFlickerCount;
+            arr[7] = "Conflict Direction Count = " + conflictDirectionCount;
+            arr[8] = "Number of times Nudged before Reversing atleast once = " + Noreversalcount;
             return arr;
         }
 
@@ -158,6 +160,10 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
         public void receive(ReadableDoorOpenPayload msg) {
+		if (CheckPendingCall() && lanternDirection == Direction.STOP) {
+			message("R-T.8.1 Violated: Lantern doesn't turn on when there is pending calls");
+			omittedCallsCount++;
+		}
             doorState.receive(msg);
         }
 
@@ -196,6 +202,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             }
             if ((msg.speed() > 0.05) && (lanternDirection != Direction.STOP) && (driveActualSpeed.direction() != lanternDirection))
             {
+            	message("R-T.8.3 Violated: The car is moving to the opposite direction");
                 conflictDirectionCount++;
             }
 
@@ -237,6 +244,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
         if (msg.getDirection() == Direction.STOP) {
             if ((litLantern[0] || litLantern[1]) && anyDoorOpen()) {
+            	message("R-T.8.2 Violated: The direction indicated changes");
                 lanternFlickerCount++;
             }
             litLantern[0] = false;
@@ -247,12 +255,13 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         else if(msg.lighted()) {
             if (msg.getDirection() == Direction.UP) {
                 if (litLantern[Direction.DOWN.ordinal()] == true) {
+                	message("R-T.8.2 Violated: The direction indicated changes");
                     lanternFlickerCount++;
                 }
             }
             else {
                 if (litLantern[Direction.UP.ordinal()] == true) {
-
+                	message("R-T.8.2 Violated: The direction indicated changes");
                     lanternFlickerCount++;
                 }
             }
@@ -265,6 +274,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         }
         else {
             if (anyDoorOpen() && litLantern[msg.getDirection().ordinal()] ) {
+            	message("R-T.8.2 Violated: The direction indicated changes");
                 lanternFlickerCount++;
             }
             litLantern[msg.getDirection().ordinal()] = false;
@@ -273,8 +283,10 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         if (anyDoorOpen() && !hasMoved && !litLantern[0] && !litLantern[1])
             lanternDirection = Direction.STOP;
 
-        if (litLantern[0] && litLantern[1])
+        if (litLantern[0] && litLantern[1]) {
+        	message("Both lanterns are lit at the same time");
             bothLitCount++;
+        }
     }
     private void updateCurrentFloor(ReadableAtFloorPayload lastAtFloor) {
         if (lastAtFloor.getFloor() == currentFloor) {
@@ -307,6 +319,22 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     }
 
 
+	public boolean CheckPendingCall(){
+		for (int floor = 0; floor < Elevator.numFloors; floor++) {
+			for (Hallway h : Hallway.replicationValues) {
+
+				if (carCalls[floor][h.ordinal()].isPressed())
+					return true;
+				for(Direction d : Direction.replicationValues){
+					if (hallCalls[floor][h.ordinal()][d.ordinal()].pressed())
+						return true;
+				}
+				
+			}
+		}
+		return false;
+	}
+	
     public void CheckHallorCarCall(Hallway h){
         for(Direction d : Direction.replicationValues){
             //    		System.out.println("currentFloor: " + currentFloor);
