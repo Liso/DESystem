@@ -33,6 +33,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     boolean bothLit = false;
     int wastedOpeningCount = 0;
     int overWeightCount = 0;
+    Hallway hallway = Hallway.NONE;
 
     public Proj7RuntimeMonitor() {
     }
@@ -41,13 +42,15 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     protected String[] summarize() {
         String[] arr = new String[4];
         arr[0] = "Overweight Count = " + overWeightCount;
-        arr[1] = "Wasted Openings Count = " + 0;
+        arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
         arr[2] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
         arr[3] = "Both lanterns lit up? " + bothLit;
         return arr;
     }
 
     public void timerExpired(Object callbackData) {
+
+//        System.out.println("CF: "+ currentFloor);
         //do nothing
     }
 
@@ -164,7 +167,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     @Override
     public void receive(ReadableHallCallPayload msg) {
     	if(msg.pressed())
-    	wasHallCall[msg.getFloor()-1][msg.getHallway().ordinal()][msg.getDirection().ordinal()] = true;	
+    	    wasHallCall[msg.getFloor()-1][msg.getHallway().ordinal()][msg.getDirection().ordinal()] = true;	
     }
     
     @Override
@@ -175,8 +178,10 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     
     @Override
     public void receive(ReadableCarLanternPayload msg) {
-    	if(msg.lighted())
+    	if(msg.lighted()) {
     		litLantern[msg.getDirection().ordinal()] = true;
+        	wasHallCall[currentFloor-1][hallway.ordinal()][msg.getDirection().ordinal()] = false;
+        }
     	else
     		litLantern[msg.getDirection().ordinal()] = false;
     }
@@ -226,11 +231,13 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     public void CheckHallorCarCall(Hallway h){
     	for(Direction d : Direction.replicationValues){
-    		if(wasCarCall[currentFloor-1][h.ordinal()] || 
+//    		System.out.println("currentFloor: " + currentFloor);
+                if(wasCarCall[currentFloor-1][h.ordinal()] || 
     			wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()]){
     			wasCall = true;
+                        hallway = h;
     			wasCarCall[currentFloor-1][h.ordinal()] = false;
-    			wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()] = false;
+//    			wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()] = false;
     		}
     	}	
     }
