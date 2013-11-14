@@ -24,6 +24,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -108,21 +109,23 @@
     warning message.<br>
     <b>R-T8.1</b>: This requirements is violated only if a door is open
     at a hallway with pending calls at any other floor and the car
-    lantern does not turn on. In order to get rid of the lag in the lantern control, 
-      we check the lantern when the door is completely open. If the open is fully open 
-      AND there are pending calls AND neither the lantern is on, we throw a warning 
-      message and increment the count for the omited calls. <br>
+    lantern does not turn on. In order to get rid of the lag in the
+    lantern control, we check the lantern when the door is completely
+    open. If the open is fully open AND there are pending calls AND
+    neither the lantern is on, we throw a warning message and increment
+    the count for the omited calls. <br>
     <b>R-T8.2</b>: This requirements is violated only if the doors are
-    open when a lantern is lit, and the direction indicated changes. Before turn on 
-      any lantern, we check the other lantern is lit or not. If both lanterns are lit 
-      at the same time, we throw a warning message and increment the count for the 
-      lantern flicker. <br>
+    open when a lantern is lit, and the direction indicated changes.
+    Before turn on any lantern, we check the other lantern is lit or
+    not. If both lanterns are lit at the same time, we throw a warning
+    message and increment the count for the lantern flicker. <br>
     <b>R-T8.3</b>: This requirements is violated only if a car lantern
-    is lit and the car services any call in the opposite direction. Every time when 
-      car stops AND any door is open AND any lantern turns on, we record the direction 
-      of the lit lantern. When the car moves to the opposite direction to the recorded 
-      lantern direction, we throw a warning message and increment the count for the 
-      conflict direction. <br>
+    is lit and the car services any call in the opposite direction.
+    Every time when car stops AND any door is open AND any lantern turns
+    on, we record the direction of the lit lantern. When the car moves
+    to the opposite direction to the recorded lantern direction, we
+    throw a warning message and increment the count for the conflict
+    direction. <br>
     <b>R-T9</b>: This requirements is violated only if our drive control
     does not command the drive to change from SLOW_SPEED to FAST_SPEED
     whenever possible. We check that the drive speed reaches the fast
@@ -134,7 +137,7 @@
     reversal has occured. Thus, whenever we stop at a floor, we keep
     track of whether a door reversal has occurred. If it has, no
     violation can occur for this stop. If no door reversal has occurred
-    and a door reversal happens, a violation has occurred and we throw a
+    and the door begins nudging, a violation has occurred and we throw a
     warning.<br>
     <h2><a name="instructions"></a>Verification Instructions</h2>
     <br>
@@ -173,14 +176,15 @@
     <br>
     <h2><a name="results"></a>Verification Results</h2>
     <br>
-    <table style="text-align: left; width: 100%;" cellpadding="2"
-      cellspacing="2" border="1">
+    <table style="text-align: left; width: 100%;" border="1"
+      cellpadding="2" cellspacing="2">
       <tbody>
         <tr>
           <td style="vertical-align: top; font-weight: bold;">Acceptance
             Test Name<br>
           </td>
           <td style="vertical-align: top; font-weight: bold;">Verification
+
 
 
 
