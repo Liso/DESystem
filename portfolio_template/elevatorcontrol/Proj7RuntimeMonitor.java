@@ -15,6 +15,7 @@ import simulator.payloads.CarWeightPayload.ReadableCarWeightPayload;
 import simulator.payloads.DoorClosedPayload.ReadableDoorClosedPayload;
 import simulator.payloads.DoorMotorPayload.ReadableDoorMotorPayload;
 import simulator.payloads.DoorOpenPayload.ReadableDoorOpenPayload;
+import simulator.payloads.DoorReversalPayload.ReadableDoorReversalPayload;
 import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
 import simulator.payloads.HallCallPayload.ReadableHallCallPayload;
 
@@ -36,7 +37,9 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     int wastedStopCount = 0;
     int overWeightCount = 0;
     int lanternFlickerCount = 0;
+    int Noreversalcount = 0;
     Hallway hallway = Hallway.NONE;
+    boolean doorReversalTriggeredBefore = false;
     Direction lanternDirection = Direction.STOP;
 
     public Proj7RuntimeMonitor() {
@@ -44,7 +47,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
         protected String[] summarize() {
-            String[] arr = new String[7];
+            String[] arr = new String[8];
             arr[0] = "Overweight Count = " + overWeightCount;
             arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
             arr[2] = "Wasted Stops Count = " + wastedStopCount;
@@ -52,6 +55,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             arr[4] = "Both Lanterns Lit Up Count " + bothLitCount;
             arr[5] = "Lantern Flicker Count " + lanternFlickerCount;
             arr[6] = "Conflict Direction Count " + conflictDirectionCount;
+            arr[7] = "Number of times Nudged before Reversing atleast once = " + Noreversalcount;
             return arr;
         }
 
@@ -86,6 +90,14 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
      */
     private void doorClosing(Hallway hallway) {
         //System.out.println(hallway.toString() + " Door Closing");
+    }
+    
+    private void doorNudging(Hallway hallway) {
+        //System.out.println(hallway.toString() + " Door Nudging");
+        if (!doorReversalTriggeredBefore) {
+            message("R-T.10 Violated: Door started nudging before at least one door reversal occured.");
+            Noreversalcount++;
+        }
     }
 
     /**
@@ -153,6 +165,12 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         public void receive(ReadableDoorMotorPayload msg) {
             doorState.receive(msg);
         }
+    
+    public void receive(ReadableDoorReversalPayload msg) {
+        if (anyDoorMotorClosing(msg.getHallway())) {
+            doorReversalTriggeredBefore = true;
+        }
+    }
 
     @Override
         public void receive(ReadableCarWeightPayload msg) {
@@ -211,7 +229,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         CLOSED,
             OPENING,
             OPEN,
-            CLOSING
+            CLOSING,
+            NUDGING
     }
 
     private void checkLantern(ReadableCarLanternPayload msg) {
@@ -334,6 +353,10 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     public boolean anyDoorMotorClosing(Hallway h) {
         return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.CLOSE || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.CLOSE;
     }
+    
+    public boolean anyDoorMotorNudging(Hallway h) {
+        return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.NUDGE || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.NUDGE;
+    }
     /**
      * Utility class for keeping track of the door state.
      * 
@@ -375,6 +398,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             newState = DoorState.CLOSING;
         } else if (anyDoorMotorOpening(h)) {
             newState = DoorState.OPENING;
+        } else if (anyDoorMotorNudging(h)) {
+            newState = DoorState.NUDGING;
         }
 
         if (newState != previousState) {
@@ -394,6 +419,9 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
                     break;
                 case CLOSING:
                     doorClosing(h);
+                    break;
+                case NUDGING:
+                    doorNudging(h);
                     break;
 
             }
