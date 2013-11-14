@@ -12,15 +12,7 @@ import simulator.framework.Speed;
 import simulator.payloads.DrivePayload.ReadableDrivePayload;
 import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
 
-/**
- * This example monitor shows how to use the RuntimeMonitor hooks to check for
- * fast speed between floors.  You will need to implement additional checks
- * to fulfill the project 12 requirements.
- *
- * See the documentation of simulator.framework.RuntimeMonitor for more details.
- *
- * @author Justin Ray
- */
+
 public class RTSpeed extends RuntimeMonitor {
 
     protected int currentFloor = MessageDictionary.NONE;
@@ -30,6 +22,7 @@ public class RTSpeed extends RuntimeMonitor {
     private double currentSpeed;
     private SimTime beginTime;
     private SimTime endTime;
+    int inappropriateNotFastCount=0;
 
     public RTSpeed() {
         //initialization goes here
@@ -75,7 +68,9 @@ public class RTSpeed extends RuntimeMonitor {
     	if(beginTime!=null){
     		if (Harness.getTime()==SimTime.add(beginTime,new SimTime(300,SimTimeUnit.MILLISECOND))){
     			if (currentSpeed<=0.25){
-    				message("RT-9 violated: The Drive shall be commanded to fast speed to the maximum degree practicable.(Delay to be Fast)");
+    				message("RT-9 violated: The Drive shall be commanded to fast speed to the maximum degree practicable."
+    						+ "(Delay to be Fast)");
+    				inappropriateNotFastCount++;
     			}
     			beginTime=null;	
     		}
@@ -94,6 +89,7 @@ public class RTSpeed extends RuntimeMonitor {
     			if (offset.isGreaterThan(new SimTime(300,SimTimeUnit.MILLISECOND))){
     				message("RT-9 violated: The Drive shall be commanded to fast speed to the maximum degree practicable."
     						+ "(Too early to escape from fast)");
+    				inappropriateNotFastCount++;
     			}
     			endTime=null;
     		}
