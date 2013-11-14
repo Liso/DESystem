@@ -32,6 +32,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     boolean wasCall = false;
     boolean bothLit = false;
     int wastedOpeningCount = 0;
+    int wastedStopCount = 0;
     int overWeightCount = 0;
     Hallway hallway = Hallway.NONE;
 
@@ -40,11 +41,12 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
     protected String[] summarize() {
-        String[] arr = new String[4];
+        String[] arr = new String[5];
         arr[0] = "Overweight Count = " + overWeightCount;
         arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
-        arr[2] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
-        arr[3] = "Both lanterns lit up? " + bothLit;
+        arr[2] = "Wasted Stops Count = " + wastedStopCount;
+        arr[3] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
+        arr[4] = "Both lanterns lit up? " + bothLit;
         return arr;
     }
 
@@ -154,9 +156,22 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
     public void receive(ReadableDriveSpeedPayload msg) {
-        if (msg.speed() > 0) {
+        if (msg.speed() > 0.05) {
             hasMoved = true;
         }
+        if(hasMoved == true && msg.speed() ==0){
+        	if(!wasCarCall[currentFloor-1][Hallway.FRONT.ordinal()] && 
+        			!wasCarCall[currentFloor-1][Hallway.BACK.ordinal()] &&
+        			!wasHallCall[currentFloor-1][Hallway.FRONT.ordinal()][Direction.UP.ordinal()] &&
+        			!wasHallCall[currentFloor-1][Hallway.BACK.ordinal()][Direction.UP.ordinal()] &&
+        	        !wasHallCall[currentFloor-1][Hallway.FRONT.ordinal()][Direction.DOWN.ordinal()] &&
+        			!wasHallCall[currentFloor-1][Hallway.BACK.ordinal()][Direction.DOWN.ordinal()]){
+        		message("Wasted Stop");
+            	wastedStopCount++;	
+        	}      	
+        	hasMoved = false;
+        }
+       
     }
 
     @Override
@@ -180,6 +195,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     public void receive(ReadableCarLanternPayload msg) {
     	if(msg.lighted()) {
     		litLantern[msg.getDirection().ordinal()] = true;
+    		if(hallway != Hallway.NONE)
         	wasHallCall[currentFloor-1][hallway.ordinal()][msg.getDirection().ordinal()] = false;
         }
     	else
