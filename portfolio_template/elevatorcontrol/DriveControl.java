@@ -207,8 +207,8 @@ public class DriveControl extends Controller {
                         Direction.DOWN)].getValue() &&
                         mLevelSensorArray[ReplicationComputer .computeReplicationId(Direction.UP)].getValue();
         int position = mCarLevelPosition.getValue();
-        int commitPointUp = (int)(((5*(desiredFloor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 200;
-        int commitPointDown = (int)(((5*(desiredFloor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 200;
+        int commitPointUp = (int)(((5*(desiredFloor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 600;
+        int commitPointDown = (int)(((5*(desiredFloor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 600;
 
         switch (state) {
         case STATE_STOP:
@@ -304,9 +304,16 @@ public class DriveControl extends Controller {
                     //#transition 'T6.3'
                     newstate = State.STATE_STOP;
                 }
-                else {
-                    //#transition 'T6.6'
+                else if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
+                        !mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
+                    //#transition 'T6.8'
                     newstate = State.STATE_LEVEL_UP;
+                }
+
+                else if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()&&
+                        !mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue()) {
+                    //#transition 'T6.9'
+                    newstate = State.STATE_STOP;
                 }
             }
             break;
@@ -329,8 +336,15 @@ public class DriveControl extends Controller {
                     //#transition 'T6.2'
                     newstate = State.STATE_STOP;
                 }
-                else {
-                    //#transition 'T6.11'
+                else if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue() &&
+                        !mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()) {
+                    //#transition 'T6.8'
+                    newstate = State.STATE_STOP;
+                }
+
+                else if (mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.UP)].getValue()&&
+                        !mLevelSensorArray[ReplicationComputer.computeReplicationId(Direction.DOWN)].getValue()) {
+                    //#transition 'T6.9'
                     newstate = State.STATE_LEVEL_DOWN;
                 }
                 break;
@@ -374,7 +388,7 @@ public class DriveControl extends Controller {
             targetSpeed = Speed.LEVEL;
         else if(newlocalDriveSpeed <=25)
             targetSpeed = Speed.SLOW;
-        else if(newlocalDriveSpeed <=100)
+        else if(newlocalDriveSpeed <=500)
             targetSpeed = Speed.FAST;
         else
             throw new RuntimeException("Unknown Speed");
