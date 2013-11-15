@@ -66,7 +66,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             arr[5] = "R-T8.1:Omitted Pending Calls Count = " + omittedCallsCount;
             arr[6] = "R-T8.2:Lantern Flicker Count = " + lanternFlickerCount;
             arr[7] = "R-T8.3:Conflict Direction Count = " + conflictDirectionCount;
-            arr[8] = "R-T9:Inappropriate Not Fast Speed:"+inappropriateNotFastCount;
+            arr[8] = "R-T9:Inappropriate Not Fast Speed Count = "+inappropriateNotFastCount;
             arr[9] = "R-T10:Number of times Nudged before Reversing atleast once = " + Noreversalcount;
             return arr;
         }
