@@ -86,6 +86,7 @@ public class Dispatcher extends Controller {
     private int currentFloor = 0;
     private Direction desiredDirection = Direction.STOP;
     private Direction currentDirection = Direction.STOP;
+    private int cushion = 600;
 
     //store the period for the controller
     private SimTime period;
@@ -398,7 +399,7 @@ public class Dispatcher extends Controller {
                    	commitPointUp = (5000*(floor -1)) + 100;
                    }
                    else
-        		   commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 600;
+        		   commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - cushion;
         		   for(Hallway hall : Hallway.replicationValues){
         			   for(Direction d : Direction.replicationValues){
         			   indexHallCall = ReplicationComputer.computeReplicationId(floor, hall, d);
@@ -429,7 +430,7 @@ public class Dispatcher extends Controller {
                     	commitPointUp = (5000*(floor -1)) + 100;
                     }
                     else
-                    	commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 600;
+                    	commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - cushion;
                     if (Math.abs(floor - currentFloor) <= Math.abs(targetFloor - currentFloor)) {
 	                    for (Hallway h : Hallway.replicationValues) {                    	
 	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.UP);
@@ -602,7 +603,7 @@ public class Dispatcher extends Controller {
                    	commitPointDown = (5000*(floor -1)) - 100;
                    }
                    else
-                	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 600;
+                	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + cushion;
         		   for(Hallway hall : Hallway.replicationValues){
         			   for(Direction d : Direction.replicationValues){
         			   indexHallCall = ReplicationComputer.computeReplicationId(floor, hall, d);
@@ -634,7 +635,7 @@ public class Dispatcher extends Controller {
                        	commitPointDown = (5000*(floor -1)) - 100;
                        }
                        else
-                    	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 600;
+                    	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + cushion;
                     if (Math.abs(floor - currentFloor) <= Math.abs(targetFloor - currentFloor)) {
 	                    for (Hallway h : Hallway.replicationValues) {
                     	

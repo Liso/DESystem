@@ -33,6 +33,7 @@ public class DriveControl extends Controller {
     private HashMap<Integer, BitCanPayloadTranslator> mHoistwayLimitArray;
     private BitCanPayloadTranslator mLevelSensorArray[];
     private IntCanPayloadTranslator mCarWeight;
+    private int cushion = 600;
 
     Utility.AtFloorArray mAtFloorArray;
 
@@ -207,9 +208,8 @@ public class DriveControl extends Controller {
                         Direction.DOWN)].getValue() &&
                         mLevelSensorArray[ReplicationComputer .computeReplicationId(Direction.UP)].getValue();
         int position = mCarLevelPosition.getValue();
-        int commitPointUp = (int)(((5*(desiredFloor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 600;
-        int commitPointDown = (int)(((5*(desiredFloor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 600;
-
+        int commitPointUp = (int)(((5*(desiredFloor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - cushion;
+        int commitPointDown = (int)(((5*(desiredFloor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + cushion;
         switch (state) {
         case STATE_STOP:
             //State Actions
@@ -357,8 +357,7 @@ public class DriveControl extends Controller {
 
             if(position > commitPointUp) {
                 //#transition 'T6.13'
-                newstate = State.STATE_SLOW_UP;
-            }
+                newstate = State.STATE_SLOW_UP;            }
             break;
         case STATE_FAST_DOWN:
 

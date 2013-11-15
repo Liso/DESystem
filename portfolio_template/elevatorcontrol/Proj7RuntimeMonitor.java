@@ -1,8 +1,6 @@
 package simulator.elevatorcontrol;
 
-
 import jSimPack.SimTime;
-import jSimPack.SimTime.SimTimeUnit;
 import simulator.framework.Direction;
 import simulator.framework.DoorCommand;
 import simulator.framework.Elevator;
@@ -10,74 +8,42 @@ import simulator.framework.Hallway;
 import simulator.framework.Harness;
 import simulator.framework.RuntimeMonitor;
 import simulator.framework.Side;
-import simulator.framework.Speed;
 import simulator.payloads.AtFloorPayload.ReadableAtFloorPayload;
 import simulator.payloads.CarCallPayload.ReadableCarCallPayload;
-import simulator.payloads.CarLanternPayload.ReadableCarLanternPayload;
 import simulator.payloads.CarWeightPayload.ReadableCarWeightPayload;
 import simulator.payloads.DoorClosedPayload.ReadableDoorClosedPayload;
 import simulator.payloads.DoorMotorPayload.ReadableDoorMotorPayload;
 import simulator.payloads.DoorOpenPayload.ReadableDoorOpenPayload;
-import simulator.payloads.DoorReversalPayload.ReadableDoorReversalPayload;
-import simulator.payloads.DrivePayload.ReadableDrivePayload;
 import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
 import simulator.payloads.HallCallPayload.ReadableHallCallPayload;
 
 public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
-    protected int currentFloor = MessageDictionary.NONE;
-    Stopwatch watch = new Stopwatch();
+	protected int currentFloor = MessageDictionary.NONE;
+	Stopwatch watch = new Stopwatch();
     DoorStateMachine doorState = new DoorStateMachine();
     WeightStateMachine weightState = new WeightStateMachine();
     boolean hasMoved = false;
     boolean wasOverweight = false;
     boolean wasCarCall[][] = new boolean[Elevator.numFloors][2];
     boolean wasHallCall[][][] = new boolean[Elevator.numFloors][2][2];
-    boolean litLantern[] = new boolean[2];
     boolean wasCall = false;
-    boolean wasLanternLit = false;
-    boolean wasPendingCall = false;
-    int bothLitCount = 0;
-    int conflictDirectionCount = 0;
     int wastedOpeningCount = 0;
-    int wastedStopCount = 0;
     int overWeightCount = 0;
-    int lanternFlickerCount = 0;
-    int omittedCallsCount = 0;
-    int Noreversalcount = 0;
-    int inappropriateNotFastCount=0;
-    ConditionalStopwatch timer = new ConditionalStopwatch();
-    
-    private Speed command=null;
-    private double currentSpeed;
-    private SimTime beginTime;
-    private SimTime endTime;
-    Hallway hallway = Hallway.NONE;
-    boolean doorReversalTriggeredBefore = false;
-    Direction lanternDirection = Direction.STOP;
 
     public Proj7RuntimeMonitor() {
     }
 
     @Override
-        protected String[] summarize() {
-            String[] arr = new String[10];
-            arr[0] = "Overweight Count = " + overWeightCount;
-            arr[1] = "R-T6:Wasted Stops Count = " + wastedStopCount;
-            arr[2] = "R-T7:Wasted Openings Count = " + wastedOpeningCount;
-            arr[3] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
-            arr[4] = "Both Lanterns Lit Up Count = " + bothLitCount;
-            arr[5] = "R-T8.1:Omitted Pending Calls Count = " + omittedCallsCount;
-            arr[6] = "R-T8.2:Lantern Flicker Count = " + lanternFlickerCount;
-            arr[7] = "R-T8.3:Conflict Direction Count = " + conflictDirectionCount;
-            arr[8] = "R-T9:Inappropriate Not Fast Speed Count = "+inappropriateNotFastCount;
-            arr[9] = "R-T10:Number of times Nudged before Reversing atleast once = " + Noreversalcount;
-            return arr;
-        }
+    protected String[] summarize() {
+        String[] arr = new String[3];
+        arr[0] = "Overweight Count = " + overWeightCount;
+        arr[1] = "Wasted Openings Count = " + wastedOpeningCount;
+        arr[2] = "Wasted Time Dealing with Reversal = " + watch.getAccumulatedTime();
+        return arr;
+    }
 
     public void timerExpired(Object callbackData) {
-
-        //        System.out.println("CF: "+ currentFloor);
         //do nothing
     }
 
@@ -92,10 +58,10 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
      * @param hallway which door the event pertains to
      */
     private void doorOpening(Hallway hallway) {
-        CheckHallorCarCall(hallway);
+    	CheckHallorCarCall(hallway);
         if (!wasCall) {
-            message("R-T.7 Violated: Door Opened in Hallway without pending call.");
-            wastedOpeningCount++;
+        	message("Wasted Opening");
+        	wastedOpeningCount++;
         }
         wasCall = false;
     }
@@ -107,14 +73,6 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     private void doorClosing(Hallway hallway) {
         //System.out.println(hallway.toString() + " Door Closing");
     }
-    
-    private void doorNudging(Hallway hallway) {
-        //System.out.println(hallway.toString() + " Door Nudging");
-        if (!doorReversalTriggeredBefore) {
-            message("R-T.10 Violated: Door started nudging before at least one door reversal occured.");
-            Noreversalcount++;
-        }
-    }
 
     /**
      * Called once if the door starts opening after it started closing but before
@@ -122,8 +80,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
      * @param hallway which door the event pertains to
      */
     private void doorReopening(Hallway hallway) {
-        //message("Logging wasted time for reversal");
-        watch.start();
+    	message("Logging wasted time for reversal");
+    	watch.start();
         //System.out.println(hallway.toString() + " Door Reopening");
     }
 
@@ -134,8 +92,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     private void doorClosed(Hallway hallway) {
         //System.out.println(hallway.toString() + " Door Closed");
         //once all doors are closed, check to see if the car was overweight
-        if (!anyDoorOpen()) {
-            watch.stop();
+        if (!doorState.anyDoorOpen()) {
+        	watch.stop();
             if (wasOverweight) {
                 message("Overweight");
                 overWeightCount++;
@@ -168,177 +126,57 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
      * These mostly forward messages to the appropriate state machines
      **************************************************************************/
     @Override
-        public void receive(ReadableDoorClosedPayload msg) {
-    	if (allDoorsClosed() && (CheckPendingCall() || wasPendingCall) && !wasLanternLit) {
-    		timer.start();
-    	}
-    	
-    	if (allDoorsClosed() && timer.isRunning) {
-    		if (timer.getAccumulatedTime().getFracMilliseconds() >= 200) {
-    			timer.reset();
-    			if ((CheckPendingCall() || wasPendingCall) && !wasLanternLit) {
-    				message("R-T.8.1 Violated: Lantern doesn't turn on when there is pending calls");
-    				omittedCallsCount++;
-    			}
-    			wasPendingCall = false;
-        		wasLanternLit = false;
-    		}
-    	}
-    	
-    	if (msg.isClosed() == false) {
-    			for (Direction d : Direction.replicationValues) {
-    				if (hallCalls[currentFloor - 1][msg.getHallway().ordinal()][d.ordinal()].pressed())
-    					wasPendingCall = true;
-    			}
-    	}
-    		
-    		
-            doorState.receive(msg);
-        }
+    public void receive(ReadableDoorClosedPayload msg) {
+        doorState.receive(msg);
+    }
 
     @Override
-        public void receive(ReadableDoorOpenPayload msg) {
-    	/*
-		if (CheckPendingCall() && lanternDirection == Direction.STOP) {
-			message("R-T.8.1 Violated: Lantern doesn't turn on when there is pending calls");
-			omittedCallsCount++;
-		}
-		*/
-            doorState.receive(msg);
-        }
+    public void receive(ReadableDoorOpenPayload msg) {
+        doorState.receive(msg);
+    }
 
     @Override
-        public void receive(ReadableDoorMotorPayload msg) {
-            doorState.receive(msg);
-        }
-    
-    public void receive(ReadableDoorReversalPayload msg) {
-        if (anyDoorMotorClosing(msg.getHallway())) {
-            doorReversalTriggeredBefore = true;
+    public void receive(ReadableDoorMotorPayload msg) {
+        doorState.receive(msg);
+    }
+
+    @Override
+    public void receive(ReadableCarWeightPayload msg) {
+        weightState.receive(msg);
+    }
+
+    @Override
+    public void receive(ReadableDriveSpeedPayload msg) {
+        if (msg.speed() > 0) {
+            hasMoved = true;
         }
     }
 
     @Override
-        public void receive(ReadableCarWeightPayload msg) {
-            weightState.receive(msg);
-        }
+    public void receive(ReadableAtFloorPayload msg) {
+    	updateCurrentFloor(msg);
+    }
     
     @Override
-    public void receive(ReadableDrivePayload msg) {
-        getSpeed(msg);
+    public void receive(ReadableHallCallPayload msg) {
+    	if(msg.pressed())
+    	wasHallCall[msg.getFloor()-1][msg.getHallway().ordinal()][msg.getDirection().ordinal()] = true;	
     }
-
+    
     @Override
-        public void receive(ReadableDriveSpeedPayload msg) {
-    		getCurrentSpeed(msg);
-        	checkDelayFast();
-        	checkSlowEarly();
-            if (msg.speed() > 0.05) {
-                hasMoved = true;
-            }
-            if(hasMoved == true && msg.speed() ==0){
-                if(!wasCarCall[currentFloor-1][Hallway.FRONT.ordinal()] && 
-                        !wasCarCall[currentFloor-1][Hallway.BACK.ordinal()] &&
-                        !wasHallCall[currentFloor-1][Hallway.FRONT.ordinal()][Direction.UP.ordinal()] &&
-                        !wasHallCall[currentFloor-1][Hallway.BACK.ordinal()][Direction.UP.ordinal()] &&
-                        !wasHallCall[currentFloor-1][Hallway.FRONT.ordinal()][Direction.DOWN.ordinal()] &&
-                        !wasHallCall[currentFloor-1][Hallway.BACK.ordinal()][Direction.DOWN.ordinal()]){
-                    message("R-T.6 Violated: Car stopped at floor without any pending calls");
-                    wastedStopCount++;	
-                }      	
-                hasMoved = false;
-            }
-            if ((msg.speed() > 0.05) && (lanternDirection != Direction.STOP) && (driveActualSpeed.direction() != lanternDirection))
-            {
-            	message("R-T.8.3 Violated: The car is moving to the opposite direction");
-                conflictDirectionCount++;
-            }
-
-
-        }
-
-    @Override
-        public void receive(ReadableAtFloorPayload msg) {
-            updateCurrentFloor(msg);
-        }
-
-    @Override
-        public void receive(ReadableHallCallPayload msg) {
-            if(msg.pressed())
-                wasHallCall[msg.getFloor()-1][msg.getHallway().ordinal()][msg.getDirection().ordinal()] = true;	
-        }
-
-    @Override
-        public void receive(ReadableCarCallPayload msg) {
-            if(msg.pressed())
-                wasCarCall[msg.getFloor()-1][msg.getHallway().ordinal()] = true;
-        }
-
-    @Override
-        public void receive(ReadableCarLanternPayload msg) {
-    	if (msg.lighted())
-    		wasLanternLit = true;
-    	
-    	checkLantern(msg);
-        }
+    public void receive(ReadableCarCallPayload msg) {
+    	if(msg.pressed())
+    	wasCarCall[msg.getFloor()-1][msg.getHallway().ordinal()] = true;
+    }
 
     private static enum DoorState {
 
         CLOSED,
-            OPENING,
-            OPEN,
-            CLOSING,
-            NUDGING
+        OPENING,
+        OPEN,
+        CLOSING
     }
-
-    private void checkLantern(ReadableCarLanternPayload msg) {
-
-        if (msg.getDirection() == Direction.STOP) {
-            if ((litLantern[0] || litLantern[1]) && anyDoorOpen()) {
-            	message("R-T.8.2 Violated: The direction indicated changes");
-                lanternFlickerCount++;
-            }
-            litLantern[0] = false;
-            if (!hasMoved)
-                lanternDirection = Direction.STOP;
-
-        }
-        else if(msg.lighted()) {
-            if (msg.getDirection() == Direction.UP) {
-                if (litLantern[Direction.DOWN.ordinal()] == true) {
-                	message("R-T.8.2 Violated: The direction indicated changes");
-                    lanternFlickerCount++;
-                }
-            }
-            else {
-                if (litLantern[Direction.UP.ordinal()] == true) {
-                	message("R-T.8.2 Violated: The direction indicated changes");
-                    lanternFlickerCount++;
-                }
-            }
-            litLantern[msg.getDirection().ordinal()] = true;
-            if(hallway != Hallway.NONE)
-                wasHallCall[currentFloor-1][hallway.ordinal()][msg.getDirection().ordinal()] = false;
-
-
-            lanternDirection = msg.getDirection();
-        }
-        else {
-            if (anyDoorOpen() && litLantern[msg.getDirection().ordinal()] ) {
-            	message("R-T.8.2 Violated: The direction indicated changes");
-                lanternFlickerCount++;
-            }
-            litLantern[msg.getDirection().ordinal()] = false;
-        }
-
-        if (anyDoorOpen() && !hasMoved && !litLantern[0] && !litLantern[1])
-            lanternDirection = Direction.STOP;
-
-        if (litLantern[0] && litLantern[1]) {
-        	message("Both lanterns are lit at the same time");
-            bothLitCount++;
-        }
-    }
+    
     private void updateCurrentFloor(ReadableAtFloorPayload lastAtFloor) {
         if (lastAtFloor.getFloor() == currentFloor) {
             //the atFloor message is for the currentfloor, so check both sides to see if they are both false
@@ -353,7 +191,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             }
         }
     }
-
+    
     /**
      * Utility class to detect weight changes
      */
@@ -368,79 +206,19 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             oldWeight = msg.weight();
         }
     }
+    
 
-
-	public boolean CheckPendingCall(){
-		for (int floor = 0; floor < Elevator.numFloors; floor++) {
-			for (Hallway h : Hallway.replicationValues) {
-
-				if (carCalls[floor][h.ordinal()].isPressed())
-					return true;
-				for(Direction d : Direction.replicationValues){
-					if (hallCalls[floor][h.ordinal()][d.ordinal()].pressed())
-						return true;
-				}
-				
-			}
-		}
-		return false;
-	}
-	
     public void CheckHallorCarCall(Hallway h){
-        for(Direction d : Direction.replicationValues){
-            //    		System.out.println("currentFloor: " + currentFloor);
-            if(wasCarCall[currentFloor-1][h.ordinal()] || 
-                    wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()]){
-                wasCall = true;
-                hallway = h;
-                wasCarCall[currentFloor-1][h.ordinal()] = false;
-                //    			wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()] = false;
-            }
-        }	
-    }
-
-
-    //door utility methods
-    public boolean allDoorsCompletelyOpen(Hallway h) {
-        return doorOpeneds[h.ordinal()][Side.LEFT.ordinal()].isOpen()
-            && doorOpeneds[h.ordinal()][Side.RIGHT.ordinal()].isOpen();
-    }
-
-    public boolean anyDoorOpen() {
-        return anyDoorOpen(Hallway.FRONT) || anyDoorOpen(Hallway.BACK);
-
-    }
-
-    public boolean anyDoorOpen(Hallway h) {
-        return !doorCloseds[h.ordinal()][Side.LEFT.ordinal()].isClosed()
-            || !doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed();
-    }
-
-    public boolean allDoorsClosed() {
-        return (allDoorsClosed(Hallway.BACK)
-                && allDoorsClosed(Hallway.FRONT));
+    	for(Direction d : Direction.replicationValues){
+    		if(wasCarCall[currentFloor-1][h.ordinal()] || 
+    			wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()]){
+    			wasCall = true;
+    			wasCarCall[currentFloor-1][h.ordinal()] = false;
+    			wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()] = false;
+    		}
+    	}	
     }
     
-    public boolean allDoorsClosed(Hallway h) {
-        return (doorCloseds[h.ordinal()][Side.LEFT.ordinal()].isClosed()
-                && doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed());
-    }
-
-    public boolean allDoorMotorsStopped(Hallway h) {
-        return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.STOP && doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.STOP;
-    }
-
-    public boolean anyDoorMotorOpening(Hallway h) {
-        return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.OPEN || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.OPEN;
-    }
-
-    public boolean anyDoorMotorClosing(Hallway h) {
-        return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.CLOSE || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.CLOSE;
-    }
-    
-    public boolean anyDoorMotorNudging(Hallway h) {
-        return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.NUDGE || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.NUDGE;
-    }
     /**
      * Utility class for keeping track of the door state.
      * 
@@ -478,46 +256,71 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             } else if (allDoorsCompletelyOpen(h) && allDoorMotorsStopped(h)) {
                 newState = DoorState.OPEN;
                 //} else if (anyDoorMotorClosing(h) && anyDoorOpen(h)) {
-        } else if (anyDoorMotorClosing(h)) {
-            newState = DoorState.CLOSING;
-        } else if (anyDoorMotorOpening(h)) {
-            newState = DoorState.OPENING;
-        } else if (anyDoorMotorNudging(h)) {
-            newState = DoorState.NUDGING;
-        }
-
-        if (newState != previousState) {
-            switch (newState) {
-                case CLOSED:
-                    doorClosed(h);
-                    break;
-                case OPEN:
-                    doorOpened(h);
-                    break;
-                case OPENING:
-                    if (previousState == DoorState.CLOSING) {
-                        doorReopening(h);
-                    } else {
-                        doorOpening(h);         
-                    }
-                    break;
-                case CLOSING:
-                    doorClosing(h);
-                    break;
-                case NUDGING:
-                    doorNudging(h);
-                    break;
-
+            } else if (anyDoorMotorClosing(h)) {
+                newState = DoorState.CLOSING;
+            } else if (anyDoorMotorOpening(h)) {
+                newState = DoorState.OPENING;
             }
+            
+            if (newState != previousState) {
+                switch (newState) {
+                    case CLOSED:
+                        doorClosed(h);
+                        break;
+                    case OPEN:
+                        doorOpened(h);
+                        break;
+                    case OPENING:
+                        if (previousState == DoorState.CLOSING) {
+                            doorReopening(h);
+                        } else {
+                            doorOpening(h);         
+                        }
+                        break;
+                    case CLOSING:
+                        doorClosing(h);
+                        break;
+
+                }
+            }
+
+            //set the newState
+            state[h.ordinal()] = newState;
         }
 
-        //set the newState
-        state[h.ordinal()] = newState;
+        //door utility methods
+        public boolean allDoorsCompletelyOpen(Hallway h) {
+            return doorOpeneds[h.ordinal()][Side.LEFT.ordinal()].isOpen()
+                    && doorOpeneds[h.ordinal()][Side.RIGHT.ordinal()].isOpen();
         }
 
+        public boolean anyDoorOpen() {
+            return anyDoorOpen(Hallway.FRONT) || anyDoorOpen(Hallway.BACK);
 
+        }
+
+        public boolean anyDoorOpen(Hallway h) {
+            return !doorCloseds[h.ordinal()][Side.LEFT.ordinal()].isClosed()
+                    || !doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed();
+        }
+
+        public boolean allDoorsClosed(Hallway h) {
+            return (doorCloseds[h.ordinal()][Side.LEFT.ordinal()].isClosed()
+                    && doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed());
+        }
+
+        public boolean allDoorMotorsStopped(Hallway h) {
+            return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.STOP && doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.STOP;
+        }
+
+        public boolean anyDoorMotorOpening(Hallway h) {
+            return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.OPEN || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.OPEN;
+        }
+
+        public boolean anyDoorMotorClosing(Hallway h) {
+            return doorMotors[h.ordinal()][Side.LEFT.ordinal()].command() == DoorCommand.CLOSE || doorMotors[h.ordinal()][Side.RIGHT.ordinal()].command() == DoorCommand.CLOSE;
+        }
     }
-
 
     /**
      * Keep track of time and decide whether to or not to include the last interval
@@ -567,52 +370,6 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         public boolean isRunning() {
             return isRunning;
         }
-    }
-    
-    private void getSpeed(ReadableDrivePayload msg){
-    	command=msg.speed();
-    }
-    
-    private void getCurrentSpeed(ReadableDriveSpeedPayload msg){
-    	currentSpeed=msg.speed();
-    }
-    
-    //check whether the car get to fast in time.
-    private void checkDelayFast(){
-    	if (command==Speed.SLOW&&currentSpeed==0.01){
-    		beginTime=Harness.getTime();
-    	}
-
-    	
-    	if(beginTime!=null){
-    		if (Harness.getTime()==SimTime.add(beginTime,new SimTime(300,SimTimeUnit.MILLISECOND))){
-    			if (currentSpeed<=0.25){
-    				message("RT-9 violated: The Drive shall be commanded to fast speed to the maximum degree practicable."
-    						+ "(Delay to be Fast)");
-    				inappropriateNotFastCount++;
-    			}
-    			beginTime=null;	
-    		}
-    	}
-    }
-    
-    //check whether the car get to slow too soon.
-    private void checkSlowEarly(){
-    	if ((currentSpeed==(0.25+0.01))&&command==Speed.SLOW){
-    		endTime=Harness.getTime();
-    	}
-    	
-    	if(endTime!=null){
-    		if (command!=Speed.SLOW){
-    			SimTime offset=SimTime.subtract(Harness.getTime(), endTime);
-    			if (offset.isGreaterThan(new SimTime(300,SimTimeUnit.MILLISECOND))){
-    				message("RT-9 violated: The Drive shall be commanded to fast speed to the maximum degree practicable."
-    						+ "(Too early to escape from fast)");
-    				inappropriateNotFastCount++;
-    			}
-    			endTime=null;
-    		}
-    	}
     }
 
     /**

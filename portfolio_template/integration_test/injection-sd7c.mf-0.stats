@@ -1,7 +1,10 @@
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd7c.cf -mf sd7c.mf
-RandomSeed = 1383873758810
+Command line = -cf sd7c.cf -mf sd7c.mf -head header.txt
+RandomSeed = 1384480358474
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -10,8 +13,8 @@ Message File = sd7c.mf
 Controller File = sd7c.cf
 
 Assertion Results:
-@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2a6788c4 :: command ?== CLOSE PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79e0123b :: getDoorCommand ?== CLOSE PASSED
+@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7344119b :: command ?== CLOSE PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@65cd1dff :: getDoorCommand ?== CLOSE PASSED
 @2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f73089d :: getValue ?== true PASSED
 @2.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7b0acf26 :: command ?== STOP PASSED
 @2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@620ee765 :: getDoorCommand ?== STOP PASSED

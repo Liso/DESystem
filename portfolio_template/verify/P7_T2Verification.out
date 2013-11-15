@@ -1,0 +1,75 @@
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+
+
+Simulator Parameters:
+Command line = -pf proj7acceptance2.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
+RandomSeed = 1384480419956
+CanNetworkBitTime = 5000 ns
+Effective Can Bitrate = 199999.99999999997
+Run Time = null
+Real time rate = null
+Acceptance Test File = proj7acceptance2.pass
+Monitors: Proj11RuntimeMonitor  
+
+
+[Elevator] @0.000000000: Starting Simulation
+[Elevator] @60.000000000: Progress indicator
+[Elevator] @120.000000000: Progress indicator
+[Elevator] @180.000000000: Progress indicator
+[Elevator] @240.000000000: Progress indicator
+[Elevator] @300.000000000: Progress indicator
+[Elevator] @360.000000000: Progress indicator
+[Elevator] @420.000000000: Progress indicator
+[Elevator] @480.000000000: Progress indicator
+[Elevator] @540.000000000: Progress indicator
+[Elevator] @600.000000000: Progress indicator
+[Elevator] @660.000000000: Progress indicator
+[Elevator] @720.000000000: Progress indicator
+[Elevator] @780.000000000: Progress indicator
+[Elevator] @840.000000000: Progress indicator
+[Elevator] @877.863000000: Simulation Finished
+
+Network Utilization Summary:
+Recent: 73.33 % Max: 73.33 %  Overall:  73.33 %
+
+Monitors Warning Results: 
+RuntimeMonitor generated 0 warnings.
+
+Monitors Summmary Results: 
+Overweight Count = 0
+R-T6:Wasted Stops Count = 0
+R-T7:Wasted Openings Count = 0
+Wasted Time Dealing with Reversal = 25.84s
+Both Lanterns Lit Up Count = 0
+R-T8.1:Omitted Pending Calls Count = 0
+R-T8.2:Lantern Flicker Count = 0
+R-T8.3:Conflict Direction Count = 0
+R-T9:Inappropriate Not Fast Speed Count = 0
+R-T10:Number of times Nudged before Reversing atleast once = 0
+
+STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
+-----------------------------------------------------
+
+
+Passenger Delivery Summary
+Delivered: 51
+Stranded: 0
+Total: 51
+
+Deliver Stats (lower is better):
+Average_delivery_time: 80.042
+Maximum_delivery_time:  178.814
+Delivery_performance_score:  498.983
+
+Satisfaction Stats (higher is better):
+Average_satisfaction_score: 97.613
+Min_satisfaction_score:  28.243
+Satisfaction_performance_score:  418.693
+
+
+
+877.863s simulation seconds
+ 11.346 real seconds
+ effective rate 77.37

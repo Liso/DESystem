@@ -1,7 +1,10 @@
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf hallbuttoncontrol.cf -mf hallbuttoncontrol.mf
-RandomSeed = 1383812826159
+Command line = -cf hallbuttoncontrol.cf -mf hallbuttoncontrol.mf -head header.txt
+RandomSeed = 1384480335669
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -10,8 +13,8 @@ Message File = hallbuttoncontrol.mf
 Controller File = hallbuttoncontrol.cf
 
 Assertion Results:
-@0.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@635b9f9a :: lighted ?== false PASSED
-@0.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6337e2dc :: getValue ?== false PASSED
+@0.3s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@144b6a6c :: lighted ?== false PASSED
+@0.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6a0f0c67 :: getValue ?== false PASSED
 @1.2s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@1d076683 :: lighted ?== true PASSED
 @1.2s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6684b1e0 :: getValue ?== true PASSED
 @3.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@51f45f2a :: lighted ?== false PASSED

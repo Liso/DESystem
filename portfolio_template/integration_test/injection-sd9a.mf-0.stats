@@ -1,7 +1,10 @@
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd9a.cf -mf sd9a.mf
-RandomSeed = 1383873800812
+Command line = -cf sd9a.cf -mf sd9a.mf -head header.txt
+RandomSeed = 1384480362172
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -10,17 +13,17 @@ Message File = sd9a.mf
 Controller File = sd9a.cf
 
 Assertion Results:
-@0.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@637533df :: command ?== OPEN PASSED
-@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@895772a :: getFloor ?== 4 PASSED
-@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2ff1bf46 :: getHallway ?== FRONT PASSED
-@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@32bd630e :: getDirection ?== UP PASSED
-@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@611c048e :: getDwell ?== 5.0s PASSED
-@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7fe27dce :: getDwell ?== 5.0s PASSED
-@1.8s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@4fbf7435 :: lighted ?== true PASSED
-@1.8s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@725bcf3a :: lighted ?== false PASSED
-@2.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5ee819a8 :: command ?== STOP PASSED
-@10.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@57ec49db :: command ?== CLOSE PASSED
-@10.3s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@46cfd5ee :: command ?== STOP PASSED
+@0.1s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@23a0a87c :: command ?== OPEN PASSED
+@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@cc26acd :: getFloor ?== 4 PASSED
+@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2844a541 :: getHallway ?== FRONT PASSED
+@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2fb24628 :: getDirection ?== UP PASSED
+@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@766f3870 :: getDwell ?== 5.0s PASSED
+@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6eb1a0f9 :: getDwell ?== 5.0s PASSED
+@1.8s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@22666c7a :: lighted ?== true PASSED
+@1.8s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@6982237d :: lighted ?== false PASSED
+@2.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@57ec9545 :: command ?== STOP PASSED
+@10.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2c8e2a4 :: command ?== CLOSE PASSED
+@10.3s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@57ec49db :: command ?== STOP PASSED
 
 
 ******************Summary******************

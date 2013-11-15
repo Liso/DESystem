@@ -1,7 +1,10 @@
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -cf sd5b.cf -mf sd5b.mf
-RandomSeed = 1383873383550
+Command line = -cf sd5b.cf -mf sd5b.mf -head header.txt
+RandomSeed = 1384480355002
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -10,14 +13,14 @@ Message File = sd5b.mf
 Controller File = sd5b.cf
 
 Assertion Results:
-@0.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@c0af84e :: command ?== CLOSE PASSED
-@0.2s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@455ef45a :: getDoorCommand ?== CLOSE PASSED
+@0.2s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2433cf0f :: command ?== CLOSE PASSED
+@0.2s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5cfc644a :: getDoorCommand ?== CLOSE PASSED
 @0.8s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_OPEN PASSED
-@0.8s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@3a6a5afc :: command ?== OPEN PASSED
-@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6d13cf51 :: getDoorCommand ?== OPEN PASSED
+@0.8s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1c7b745a :: command ?== OPEN PASSED
+@0.8s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2f9006c9 :: getDoorCommand ?== OPEN PASSED
 @1.7s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_OPENING PASSED
-@1.7s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2a6788c4 :: command ?== STOP PASSED
-@1.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@79e0123b :: getDoorCommand ?== STOP PASSED
+@1.7s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7344119b :: command ?== STOP PASSED
+@1.7s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@65cd1dff :: getDoorCommand ?== STOP PASSED
 
 
 ******************Summary******************

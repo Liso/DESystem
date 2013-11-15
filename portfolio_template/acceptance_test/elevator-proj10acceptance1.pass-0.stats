@@ -1,52 +1,55 @@
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
 
 Simulator Parameters:
-Command line = -pf proj10acceptance1.pass -b 200 -gui -monitor Proj7RuntimeMonitor
-RandomSeed = 1383871347812
+Command line = -pf proj10acceptance1.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
+RandomSeed = 1384480451357
 CanNetworkBitTime = 5000 ns
 Effective Can Bitrate = 199999.99999999997
 Run Time = null
 Real time rate = null
 Acceptance Test File = proj10acceptance1.pass
-Monitors: Proj7RuntimeMonitor  
+Monitors: Proj11RuntimeMonitor  
 
 STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
 -----------------------------------------------------
 
 
 These passengers were delivered:
-Passenger 0: INJECTED AT 0.0s and DELIVERED in 23.764s
+Passenger 0: INJECTED AT 0.0s and DELIVERED in 20.517s
   Satisfaction score: 100.0
-Passenger 2: INJECTED AT 0.6s and DELIVERED in 43.9s
+Passenger 2: INJECTED AT 0.6s and DELIVERED in 37.259s
   Satisfaction score: 100.0
-Passenger 1: INJECTED AT 0.3s and DELIVERED in 65.238s
+Passenger 1: INJECTED AT 0.3s and DELIVERED in 55.316s
   Satisfaction score: 100.0
-Passenger 14: INJECTED AT 66.2s and DELIVERED in 45.332s
+Passenger 14: INJECTED AT 66.2s and DELIVERED in 28.983s
   Satisfaction score: 100.0
-Passenger 13: INJECTED AT 58.0s and DELIVERED in 69.409s
+Passenger 13: INJECTED AT 58.0s and DELIVERED in 53.534s
   Satisfaction score: 100.0
-Passenger 12: INJECTED AT 7.1s and DELIVERED in 150.701s
+Passenger 9: INJECTED AT 5.0s and DELIVERED in 132.159s
   Satisfaction score: 100.0
-Passenger 10: INJECTED AT 6.0s and DELIVERED in 167.881s
+Passenger 12: INJECTED AT 7.1s and DELIVERED in 144.885s
   Satisfaction score: 100.0
-Passenger 5: INJECTED AT 3.0s and DELIVERED in 186.996s
+Passenger 10: INJECTED AT 6.0s and DELIVERED in 161.757s
   Satisfaction score: 100.0
-Passenger 7: INJECTED AT 3.0s and DELIVERED in 188.551s
+Passenger 7: INJECTED AT 3.0s and DELIVERED in 180.233s
   Satisfaction score: 100.0
-Passenger 4: INJECTED AT 2.0s and DELIVERED in 204.009s
+Passenger 4: INJECTED AT 2.0s and DELIVERED in 195.811s
   Satisfaction score: 100.0
-Passenger 11: INJECTED AT 7.0s and DELIVERED in 200.627s
+Passenger 11: INJECTED AT 7.0s and DELIVERED in 192.206s
   Satisfaction score: 100.0
-Passenger 8: INJECTED AT 4.0s and DELIVERED in 217.348s
+Passenger 8: INJECTED AT 4.0s and DELIVERED in 209.203s
   Satisfaction score: 100.0
-Passenger 3: INJECTED AT 1.0s and DELIVERED in 221.979s
+Passenger 3: INJECTED AT 1.0s and DELIVERED in 213.414s
   Satisfaction score: 100.0
-Passenger 6: INJECTED AT 3.0s and DELIVERED in 234.861s
+Passenger 6: INJECTED AT 3.0s and DELIVERED in 225.91s
   Satisfaction score: 100.0
-Passenger 16: INJECTED AT 101.0s and DELIVERED in 167.846s
+Passenger 16: INJECTED AT 101.0s and DELIVERED in 158.706s
   Satisfaction score: 100.0
-Passenger 15: INJECTED AT 100.0s and DELIVERED in 199.812s
+Passenger 15: INJECTED AT 100.0s and DELIVERED in 190.978s
   Satisfaction score: 100.0
-Passenger 9: INJECTED AT 5.0s and DELIVERED in 336.993s
+Passenger 5: INJECTED AT 3.0s and DELIVERED in 325.855s
   Satisfaction score: 100.0
 
 Passenger Delivery Summary
@@ -55,9 +58,9 @@ Stranded: 0
 Total: 17
 
 Deliver Stats (lower is better):
-Average_delivery_time: 160.309
-Maximum_delivery_time:  336.993
-Delivery_performance_score:  978.228
+Average_delivery_time: 148.631
+Maximum_delivery_time:  325.855
+Delivery_performance_score:  920.379
 
 Satisfaction Stats (higher is better):
 Average_satisfaction_score: 100.000
@@ -75,7 +78,13 @@ RuntimeMonitor generated 0 warnings.
 
 Monitors Summmary Results: 
 Overweight Count = 1
-Wasted Openings Count = 0
-Wasted Time Dealing with Reversal = 10.56s
-Both lanterns lit up? false
+R-T6:Wasted Stops Count = 0
+R-T7:Wasted Openings Count = 0
+Wasted Time Dealing with Reversal = 10.8s
+Both Lanterns Lit Up Count = 0
+R-T8.1:Omitted Pending Calls Count = 0
+R-T8.2:Lantern Flicker Count = 0
+R-T8.3:Conflict Direction Count = 0
+R-T9:Inappropriate Not Fast Speed Count = 0
+R-T10:Number of times Nudged before Reversing atleast once = 0
 
