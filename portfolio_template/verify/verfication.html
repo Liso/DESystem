@@ -110,10 +110,11 @@
     <b>R-T8.1</b>: This requirements is violated only if a door is open
     at a hallway with pending calls at any other floor and the car
     lantern does not turn on. In order to get rid of the lag in the
-    lantern control, we check the lantern when the door is completely
-    open. If the open is fully open AND there are pending calls AND
-    neither the lantern is on, we throw a warning message and increment
-    the count for the omited calls. <br>
+    lantern control, we add delay in the monitor before we check the requirement.&nbsp; 
+      When 200 ms passes after the door is fully closed, we check if there were 
+      pending calls AND neither lantern was on while the door was open. We throw a 
+      warning message and increment the count for the omited calls in case the lantern 
+      wasn&#39;t on with pending calls. <br>
     <b>R-T8.2</b>: This requirements is violated only if the doors are
     open when a lantern is lit, and the direction indicated changes.
     Before turn on any lantern, we check the other lantern is lit or
