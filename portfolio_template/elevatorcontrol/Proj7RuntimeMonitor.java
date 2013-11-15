@@ -1,6 +1,7 @@
 package simulator.elevatorcontrol;
 
 import jSimPack.SimTime;
+import jSimPack.SimTime.SimTimeUnit;
 import simulator.framework.Direction;
 import simulator.framework.DoorCommand;
 import simulator.framework.Elevator;
@@ -8,6 +9,7 @@ import simulator.framework.Hallway;
 import simulator.framework.Harness;
 import simulator.framework.RuntimeMonitor;
 import simulator.framework.Side;
+import simulator.framework.Speed;
 import simulator.payloads.AtFloorPayload.ReadableAtFloorPayload;
 import simulator.payloads.CarCallPayload.ReadableCarCallPayload;
 import simulator.payloads.CarLanternPayload.ReadableCarLanternPayload;
@@ -16,6 +18,7 @@ import simulator.payloads.DoorClosedPayload.ReadableDoorClosedPayload;
 import simulator.payloads.DoorMotorPayload.ReadableDoorMotorPayload;
 import simulator.payloads.DoorOpenPayload.ReadableDoorOpenPayload;
 import simulator.payloads.DoorReversalPayload.ReadableDoorReversalPayload;
+import simulator.payloads.DrivePayload.ReadableDrivePayload;
 import simulator.payloads.DriveSpeedPayload.ReadableDriveSpeedPayload;
 import simulator.payloads.HallCallPayload.ReadableHallCallPayload;
 
@@ -39,6 +42,12 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     int lanternFlickerCount = 0;
     int omittedCallsCount = 0;
     int Noreversalcount = 0;
+    int inappropriateNotFastCount=0;
+    
+    private Speed command=null;
+    private double currentSpeed;
+    private SimTime beginTime;
+    private SimTime endTime;
     Hallway hallway = Hallway.NONE;
     boolean doorReversalTriggeredBefore = false;
     Direction lanternDirection = Direction.STOP;
@@ -48,7 +57,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
         protected String[] summarize() {
-            String[] arr = new String[9];
+            String[] arr = new String[10];
             arr[0] = "Overweight Count = " + overWeightCount;
             arr[1] = "R-T6:Wasted Stops Count = " + wastedStopCount;
             arr[2] = "R-T7:Wasted Openings Count = " + wastedOpeningCount;
@@ -57,7 +66,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             arr[5] = "R-T8.1:Omitted Pending Calls Count = " + omittedCallsCount;
             arr[6] = "R-T8.2:Lantern Flicker Count = " + lanternFlickerCount;
             arr[7] = "R-T8.3:Conflict Direction Count = " + conflictDirectionCount;
-            arr[8] = "R-T10:Number of times Nudged before Reversing atleast once = " + Noreversalcount;
+            arr[8] = "R-T9:Inappropriate Not Fast Speed:"+inappropriateNotFastCount;
+            arr[9] = "R-T10:Number of times Nudged before Reversing atleast once = " + Noreversalcount;
             return arr;
         }
 
@@ -182,9 +192,17 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         public void receive(ReadableCarWeightPayload msg) {
             weightState.receive(msg);
         }
+    
+    @Override
+    public void receive(ReadableDrivePayload msg) {
+        getSpeed(msg);
+    }
 
     @Override
         public void receive(ReadableDriveSpeedPayload msg) {
+    		getCurrentSpeed(msg);
+        	checkDelayFast();
+        	checkSlowEarly();
             if (msg.speed() > 0.05) {
                 hasMoved = true;
             }
@@ -511,6 +529,52 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
         public boolean isRunning() {
             return isRunning;
         }
+    }
+    
+    private void getSpeed(ReadableDrivePayload msg){
+    	command=msg.speed();
+    }
+    
+    private void getCurrentSpeed(ReadableDriveSpeedPayload msg){
+    	currentSpeed=msg.speed();
+    }
+    
+    //check whether the car get to fast in time.
+    private void checkDelayFast(){
+    	if (command==Speed.SLOW&&currentSpeed==0.01){
+    		beginTime=Harness.getTime();
+    	}
+
+    	
+    	if(beginTime!=null){
+    		if (Harness.getTime()==SimTime.add(beginTime,new SimTime(300,SimTimeUnit.MILLISECOND))){
+    			if (currentSpeed<=0.25){
+    				message("RT-9 violated: The Drive shall be commanded to fast speed to the maximum degree practicable."
+    						+ "(Delay to be Fast)");
+    				inappropriateNotFastCount++;
+    			}
+    			beginTime=null;	
+    		}
+    	}
+    }
+    
+    //check whether the car get to slow too soon.
+    private void checkSlowEarly(){
+    	if ((currentSpeed==(0.25+0.01))&&command==Speed.SLOW){
+    		endTime=Harness.getTime();
+    	}
+    	
+    	if(endTime!=null){
+    		if (command!=Speed.SLOW){
+    			SimTime offset=SimTime.subtract(Harness.getTime(), endTime);
+    			if (offset.isGreaterThan(new SimTime(300,SimTimeUnit.MILLISECOND))){
+    				message("RT-9 violated: The Drive shall be commanded to fast speed to the maximum degree practicable."
+    						+ "(Too early to escape from fast)");
+    				inappropriateNotFastCount++;
+    			}
+    			endTime=null;
+    		}
+    	}
     }
 
     /**
