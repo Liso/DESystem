@@ -1,5 +1,6 @@
 package simulator.elevatorcontrol;
 
+
 import jSimPack.SimTime;
 import jSimPack.SimTime.SimTimeUnit;
 import simulator.framework.Direction;
@@ -34,6 +35,8 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     boolean wasHallCall[][][] = new boolean[Elevator.numFloors][2][2];
     boolean litLantern[] = new boolean[2];
     boolean wasCall = false;
+    boolean wasLanternLit = false;
+    boolean wasPendingCall = false;
     int bothLitCount = 0;
     int conflictDirectionCount = 0;
     int wastedOpeningCount = 0;
@@ -43,6 +46,7 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
     int omittedCallsCount = 0;
     int Noreversalcount = 0;
     int inappropriateNotFastCount=0;
+    ConditionalStopwatch timer = new ConditionalStopwatch();
     
     private Speed command=null;
     private double currentSpeed;
@@ -165,15 +169,41 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
      **************************************************************************/
     @Override
         public void receive(ReadableDoorClosedPayload msg) {
+    	if (allDoorsClosed() && (CheckPendingCall() || wasPendingCall) && !wasLanternLit) {
+    		timer.start();
+    	}
+    	
+    	if (allDoorsClosed() && timer.isRunning) {
+    		if (timer.getAccumulatedTime().getFracMilliseconds() >= 200) {
+    			timer.reset();
+    			if ((CheckPendingCall() || wasPendingCall) && !wasLanternLit) {
+    				message("R-T.8.1 Violated: Lantern doesn't turn on when there is pending calls");
+    				omittedCallsCount++;
+    			}
+    			wasPendingCall = false;
+        		wasLanternLit = false;
+    		}
+    	}
+    	
+    	if (msg.isClosed() == false) {
+    			for (Direction d : Direction.replicationValues) {
+    				if (hallCalls[currentFloor - 1][msg.getHallway().ordinal()][d.ordinal()].pressed())
+    					wasPendingCall = true;
+    			}
+    	}
+    		
+    		
             doorState.receive(msg);
         }
 
     @Override
         public void receive(ReadableDoorOpenPayload msg) {
+    	/*
 		if (CheckPendingCall() && lanternDirection == Direction.STOP) {
 			message("R-T.8.1 Violated: Lantern doesn't turn on when there is pending calls");
 			omittedCallsCount++;
 		}
+		*/
             doorState.receive(msg);
         }
 
@@ -246,7 +276,10 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
 
     @Override
         public void receive(ReadableCarLanternPayload msg) {
-            checkLantern(msg);
+    	if (msg.lighted())
+    		wasLanternLit = true;
+    	
+    	checkLantern(msg);
         }
 
     private static enum DoorState {
@@ -383,6 +416,11 @@ public class Proj7RuntimeMonitor extends RuntimeMonitor{
             || !doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed();
     }
 
+    public boolean allDoorsClosed() {
+        return (allDoorsClosed(Hallway.BACK)
+                && allDoorsClosed(Hallway.FRONT));
+    }
+    
     public boolean allDoorsClosed(Hallway h) {
         return (doorCloseds[h.ordinal()][Side.LEFT.ordinal()].isClosed()
                 && doorCloseds[h.ordinal()][Side.RIGHT.ordinal()].isClosed());
