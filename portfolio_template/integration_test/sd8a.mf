@@ -27,6 +27,8 @@
 +1s  A F DoorMotor FRONT LEFT : command == STOP
 +0.0s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == STOP
 
++0.0s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = false
+
 ;#arc '8A/3a'
 +1s A F Drive : speed == SLOW 
 +0.0s A F Drive : direction == UP
@@ -36,7 +38,7 @@
 
 ;#arc '8A/3c'
 +1s  I 0s F DriveSpeed = UP 0.25
-+0s  I 0s N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 24700
++0s  I 0s N CAR_LEVEL_POSITION_CAN_ID CarLevelPosition = 20000
 
 ;#arc '8A/3d'
 +1s  A F Drive : speed == FAST
@@ -56,8 +58,10 @@
 +1s  I 0s F DriveSpeed = UP 0.25
 
 ;#arc '8A/4a'
-+0.1s I 0s N AT_FLOOR_[4][FRONT]_CAN_ID Bit = false 
 +0.0s I 0s N AT_FLOOR_[6][FRONT]_CAN_ID Bit = true
+
++0.1s  I 0s N LEVEL_SENSOR_[UP]_CAN_ID Bit = false
++0s I 0s N LEVEL_SENSOR_[DOWN]_CAN_ID Bit = true
 
 ;#arc '8A/4b'
 +0.5s A F Drive : speed == LEVEL

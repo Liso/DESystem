@@ -5,7 +5,7 @@
 
 Simulator Parameters:
 Command line = -pf proj7acceptance1.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
-RandomSeed = 1384480363269
+RandomSeed = 1384787353854
 CanNetworkBitTime = 5000 ns
 Effective Can Bitrate = 199999.99999999997
 Run Time = null
@@ -129,7 +129,7 @@ Monitors: Proj11RuntimeMonitor
 [Elevator] @6720.000000000: Progress indicator
 [Elevator] @6780.000000000: Progress indicator
 [Elevator] @6840.000000000: Progress indicator
-[Elevator] @6890.807000000: Simulation Finished
+[Elevator] @6889.934000000: Simulation Finished
 
 Network Utilization Summary:
 Recent: 73.33 % Max: 73.33 %  Overall:  73.33 %
@@ -159,17 +159,17 @@ Stranded: 0
 Total: 18
 
 Deliver Stats (lower is better):
-Average_delivery_time: 27.145
-Maximum_delivery_time:  35.171
-Delivery_performance_score:  143.751
+Average_delivery_time: 26.925
+Maximum_delivery_time:  34.281
+Delivery_performance_score:  141.981
 
 Satisfaction Stats (higher is better):
-Average_satisfaction_score: 94.444
-Min_satisfaction_score:  50.000
-Satisfaction_performance_score:  427.778
+Average_satisfaction_score: 100.000
+Min_satisfaction_score:  100.000
+Satisfaction_performance_score:  500.000
 
 
 
-6890.807s simulation seconds
- 56.527 real seconds
- effective rate 121.90
+6889.934s simulation seconds
+ 55.325 real seconds
+ effective rate 124.54

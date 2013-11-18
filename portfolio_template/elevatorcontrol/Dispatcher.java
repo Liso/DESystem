@@ -86,7 +86,6 @@ public class Dispatcher extends Controller {
     private int currentFloor = 0;
     private Direction desiredDirection = Direction.STOP;
     private Direction currentDirection = Direction.STOP;
-    private int cushion = 600;
 
     //store the period for the controller
     private SimTime period;
@@ -254,7 +253,7 @@ public class Dispatcher extends Controller {
         		}
         	}
         }
-        
+
         switch (state) {
         case STATE_STOP:
             // state actions for state S11.1 'SET STOP'
@@ -395,11 +394,11 @@ public class Dispatcher extends Controller {
         	   for(int i = targetFloor; i < Elevator.numFloors; i++){
         		   int floor = i;
         		   //To set commit point
-        		   if(currentSpeed == 0){
+        		   if(currentSpeed <= 0.05){
                    	commitPointUp = (5000*(floor -1)) + 100;
                    }
                    else
-        		   commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - cushion;
+        		   commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 600;
         		   for(Hallway hall : Hallway.replicationValues){
         			   for(Direction d : Direction.replicationValues){
         			   indexHallCall = ReplicationComputer.computeReplicationId(floor, hall, d);
@@ -424,13 +423,14 @@ public class Dispatcher extends Controller {
            }
         		  
         		  //To set nearest HallCall or CarCall in the Up direction
-                for (int i = 1; i < Elevator.numFloors; i++) {
+                for (int i = 0; i < Elevator.numFloors; i++) {
                     int floor = i + 1;
-                    if(currentSpeed == 0.0){
+                    if(currentSpeed <= 0.05){
                     	commitPointUp = (5000*(floor -1)) + 100;
                     }
-                    else
-                    	commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - cushion;
+                    else {
+                    	commitPointUp = (int)(((5*(floor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - 600;
+			}
                     if (Math.abs(floor - currentFloor) <= Math.abs(targetFloor - currentFloor)) {
 	                    for (Hallway h : Hallway.replicationValues) {                    	
 	                    		indexHallCall = ReplicationComputer.computeReplicationId(floor, h, Direction.UP);
@@ -599,11 +599,11 @@ public class Dispatcher extends Controller {
         		   if(Calls == false){
         	   for(int i = targetFloor; i > 0; i--){
         		   int floor = i;
-        		   if(currentSpeed == 0){
+        		   if(currentSpeed <= 0.05){
                    	commitPointDown = (5000*(floor -1)) - 100;
                    }
                    else
-                	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + cushion;
+                	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 600;
         		   for(Hallway hall : Hallway.replicationValues){
         			   for(Direction d : Direction.replicationValues){
         			   indexHallCall = ReplicationComputer.computeReplicationId(floor, hall, d);
@@ -631,11 +631,11 @@ public class Dispatcher extends Controller {
         		   //Sets target to nearest Floor in the down direction
                 for (int i = 0; i < currentFloor ; i++) {
                     int floor = i + 1;
-                    if(currentSpeed == 0){
+                    if(currentSpeed <= 0.05){
                        	commitPointDown = (5000*(floor -1)) - 100;
                        }
                        else
-                    	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + cushion;
+                    	   commitPointDown = (int)(((5*(floor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + 600;
                     if (Math.abs(floor - currentFloor) <= Math.abs(targetFloor - currentFloor)) {
 	                    for (Hallway h : Hallway.replicationValues) {
                     	

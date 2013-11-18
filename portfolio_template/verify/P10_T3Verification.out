@@ -5,7 +5,7 @@
 
 Simulator Parameters:
 Command line = -pf proj10acceptance3.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
-RandomSeed = 1384480460868
+RandomSeed = 1384787449276
 CanNetworkBitTime = 5000 ns
 Effective Can Bitrate = 199999.99999999997
 Run Time = null
@@ -18,19 +18,20 @@ Monitors: Proj11RuntimeMonitor
 [Elevator] @60.000000000: Progress indicator
 [Elevator] @120.000000000: Progress indicator
 [Elevator] @180.000000000: Progress indicator
-[RuntimeMonitor] @231.740000000: Overweight
+[RuntimeMonitor] @213.340000000: Overweight
 [Elevator] @240.000000000: Progress indicator
+[RuntimeMonitor] @242.140000000: Overweight
 [Elevator] @300.000000000: Progress indicator
-[RuntimeMonitor] @348.340000000: Overweight
+[RuntimeMonitor] @359.140000000: Overweight
 [Elevator] @360.000000000: Progress indicator
-[RuntimeMonitor] @363.740000000: Overweight
-[RuntimeMonitor] @379.340000000: Overweight
+[RuntimeMonitor] @385.140000000: Overweight
+[RuntimeMonitor] @411.140000000: Overweight
 [Elevator] @420.000000000: Progress indicator
-[RuntimeMonitor] @474.740000000: Overweight
 [Elevator] @480.000000000: Progress indicator
+[RuntimeMonitor] @489.940000000: Overweight
 [Elevator] @540.000000000: Progress indicator
 [Elevator] @600.000000000: Progress indicator
-[Elevator] @645.913000000: Simulation Finished
+[Elevator] @648.676000000: Simulation Finished
 
 Network Utilization Summary:
 Recent: 73.33 % Max: 73.33 %  Overall:  73.33 %
@@ -39,10 +40,10 @@ Monitors Warning Results:
 RuntimeMonitor generated 0 warnings.
 
 Monitors Summmary Results: 
-Overweight Count = 5
+Overweight Count = 6
 R-T6:Wasted Stops Count = 0
 R-T7:Wasted Openings Count = 0
-Wasted Time Dealing with Reversal = 54.36s
+Wasted Time Dealing with Reversal = 48.76s
 Both Lanterns Lit Up Count = 0
 R-T8.1:Omitted Pending Calls Count = 0
 R-T8.2:Lantern Flicker Count = 0
@@ -60,9 +61,9 @@ Stranded: 0
 Total: 61
 
 Deliver Stats (lower is better):
-Average_delivery_time: 187.691
-Maximum_delivery_time:  553.763
-Delivery_performance_score:  1304.525
+Average_delivery_time: 192.912
+Maximum_delivery_time:  452.653
+Delivery_performance_score:  1224.302
 
 Satisfaction Stats (higher is better):
 Average_satisfaction_score: 100.000
@@ -71,6 +72,6 @@ Satisfaction_performance_score:  500.000
 
 
 
-645.913s simulation seconds
- 6.944 real seconds
- effective rate 93.02
+648.676s simulation seconds
+ 8.746 real seconds
+ effective rate 74.17

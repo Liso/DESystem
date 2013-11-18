@@ -5,7 +5,7 @@
 
 Simulator Parameters:
 Command line = -pf proj11acceptance3.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
-RandomSeed = 1384480514224
+RandomSeed = 1384787506308
 CanNetworkBitTime = 5000 ns
 Effective Can Bitrate = 199999.99999999997
 Run Time = null
@@ -26,7 +26,7 @@ Monitors: Proj11RuntimeMonitor
 [Elevator] @540.000000000: Progress indicator
 [Elevator] @600.000000000: Progress indicator
 [Elevator] @660.000000000: Progress indicator
-[Elevator] @671.310000000: Simulation Finished
+[Elevator] @682.522000000: Simulation Finished
 
 Network Utilization Summary:
 Recent: 73.33 % Max: 73.33 %  Overall:  73.33 %
@@ -38,7 +38,7 @@ Monitors Summmary Results:
 Overweight Count = 0
 R-T6:Wasted Stops Count = 0
 R-T7:Wasted Openings Count = 0
-Wasted Time Dealing with Reversal = 8.68s
+Wasted Time Dealing with Reversal = 25.41s
 Both Lanterns Lit Up Count = 0
 R-T8.1:Omitted Pending Calls Count = 0
 R-T8.2:Lantern Flicker Count = 0
@@ -56,9 +56,9 @@ Stranded: 0
 Total: 56
 
 Deliver Stats (lower is better):
-Average_delivery_time: 110.970
-Maximum_delivery_time:  246.928
-Delivery_performance_score:  690.810
+Average_delivery_time: 119.028
+Maximum_delivery_time:  276.187
+Delivery_performance_score:  752.297
 
 Satisfaction Stats (higher is better):
 Average_satisfaction_score: 100.000
@@ -67,6 +67,6 @@ Satisfaction_performance_score:  500.000
 
 
 
-671.31s simulation seconds
- 7.004 real seconds
- effective rate 95.85
+682.522s simulation seconds
+ 7.925 real seconds
+ effective rate 86.12

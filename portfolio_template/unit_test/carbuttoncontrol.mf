@@ -99,13 +99,10 @@
 4s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = true
 4s I 0s F CarCall 8 FRONT = false
 
-; #state 'S9.2 Light On'
-4.35s A N CAR_CALL_[8][FRONT]_CAN_ID Bit : getValue == true
-4.35s A F CarLight 8 FRONT : lighted == true
 
-4.4s I 0s N AT_FLOOR_[8][FRONT]_CAN_ID Bit = false
+4.4s I 0s N AT_FLOOR_[8][FRONT]_CAN_ID Bit = true
 4.4s I 0s N DOOR_CLOSED_SENSOR_[BACK][RIGHT]_CAN_ID Bit = false
 
-; #state 'S9.2 Light On'
-4.75s A N CAR_CALL_[8][FRONT]_CAN_ID Bit : getValue == true
-4.75s A F CarLight 8 FRONT : lighted == true
+; #state 'S9.2 Light Off'
+4.75s A F CarLight 8 FRONT : lighted == false
+4.75s A N CAR_CALL_[8][FRONT]_CAN_ID Bit : getValue == false

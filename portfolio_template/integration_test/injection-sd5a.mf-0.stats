@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd5a.cf -mf sd5a.mf -head header.txt
-RandomSeed = 1384480353592
+RandomSeed = 1384787340935
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
