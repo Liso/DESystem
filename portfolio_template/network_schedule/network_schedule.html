@@ -18,6 +18,7 @@
 
 
 
+
     Sally Stevenson (ststeven)<br>
     &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -26,7 +27,8 @@
     <hr style="width: 100%; height: 2px;">
     <h2>CAN Message Dictionary<br>
     </h2>
-    Message Dictionary for all the Messages being sent out in the network.<br>
+    Message Dictionary for all the Messages being sent out in the
+    network.<br>
     <br>
     <br>
     <table x:str="" style="border-collapse: collapse; width: 100%;"
@@ -390,6 +392,7 @@ x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2H
           <td rowspan="2" class="xl32" style="width: 61pt; font-weight:
             bold; background-color: rgb(255, 255, 153);" width="82">Worst
 
+
             Case Msg Len</td>
           <td rowspan="2" class="xl32" style="width: 48pt; font-weight:
             bold;" width="64">Best Case BW (bits/sec)</td>
@@ -605,7 +608,7 @@ x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2H
             medium none; background-color: rgb(255, 255, 153);">double</td>
           <td class="xl29" style="border-top: medium none; border-left:
             medium none; background-color: rgb(255, 255, 153);" x:num=""
-            align="right">7<br>
+            align="right">9<br>
           </td>
           <td valign="top">direction<br>
           </td>
@@ -620,7 +623,7 @@ x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2H
           <td bgcolor="#ffff99" valign="top"><br>
           </td>
           <td class="xl25" style="border-top: medium none; border-left:
-            medium none;" x:num="" x:fmla="=SUM(H6)" align="right">9<br>
+            medium none;" x:num="" x:fmla="=SUM(H6)" align="right">11<br>
           </td>
           <td class="xl25" style="border-top: medium none; border-left:
             medium none;" x:num="" x:fmla="=CEILING(I6/8,1)"
@@ -812,6 +815,7 @@ x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2H
           <td align="right" valign="top">50<br>
           </td>
           <td style="background-color: rgb(255, 255, 153);" valign="top">setting
+
             dwell<br>
           </td>
           <td bgcolor="#ffff99" valign="top">long<br>
@@ -1246,8 +1250,7 @@ x:fmla="=CONCATENATE(&quot;0x&quot;,RIGHT(CONCATENATE(&quot;00000000&quot;,DEC2H
     <br>
     <h2>Simulation Analysis</h2>
     Running the simulation with bandwidth of 200kbps, we obtain the
-    results
-    listed below.&nbsp; Multiplying the network bandwidth by the
+    results listed below.&nbsp; Multiplying the network bandwidth by the
     utilization gives us the actual bandwidth used:<br>
     &nbsp; 200000 * 0.7333 = 146660 bps<br>
     This is between the best- and worst-case values predicted by our

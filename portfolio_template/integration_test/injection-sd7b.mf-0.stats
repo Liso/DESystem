@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd7b.cf -mf sd7b.mf -head header.txt
-RandomSeed = 1384787345262
+RandomSeed = 1385066393609
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -22,7 +22,7 @@ Assertion Results:
 @5.05s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1c43882a :: command ?== STOP PASSED
 @10.05s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1bd871 :: command ?== CLOSE PASSED
 @12.05s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@67ba0609 :: command ?== STOP PASSED
-@14.05s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@74a893ff :: lighted ?== false PASSED
+@14.05s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@678c862e :: lighted ?== false PASSED
 
 
 ******************Summary******************

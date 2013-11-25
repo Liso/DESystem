@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd8c.cf -mf sd8c.mf -head header.txt
-RandomSeed = 1384787352015
+RandomSeed = 1385066402640
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null

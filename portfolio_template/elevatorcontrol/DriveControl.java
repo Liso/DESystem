@@ -201,13 +201,16 @@ public class DriveControl extends Controller {
         double currentSpeed = localDriveSpeed.speed();
         int acc = 1;
         int desiredFloor = mDesiredFloor.getFloor();
+	int position = mCarLevelPosition.getValue();
         int currentFloor = mAtFloorArray.getCurrentFloor();
         boolean isOverweight = mCarWeight.getValue() >= Elevator.MaxCarCapacity;
-        boolean isLevel =
-                mLevelSensorArray[ReplicationComputer.computeReplicationId(
+        boolean isLevel = false;
+                if(mLevelSensorArray[ReplicationComputer.computeReplicationId(
                         Direction.DOWN)].getValue() &&
-                        mLevelSensorArray[ReplicationComputer .computeReplicationId(Direction.UP)].getValue();
-        int position = mCarLevelPosition.getValue();
+                        mLevelSensorArray[ReplicationComputer .computeReplicationId(Direction.UP)].getValue()){
+				isLevel = true;
+		}		
+        
         int commitPointUp = (int)(((5*(desiredFloor - 1)) - ((currentSpeed * currentSpeed)/(2*acc))) * 1000) - cushion;
         int commitPointDown = (int)(((5*(desiredFloor - 1)) + ((currentSpeed * currentSpeed)/(2*acc))) * 1000) + cushion;
         switch (state) {

@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd1a.cf -mf sd1a.mf -head header.txt
-RandomSeed = 1384787323995
+RandomSeed = 1385066365159
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -14,22 +14,22 @@ Controller File = sd1a.cf
 
 Assertion Results:
 @0.5s:  PASSED DoorControl[FRONT][LEFT]::checkState(STATE) ?== STATE_STOP_CLOSING PASSED
-@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@48a70acd :: command ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1970b890 :: command ?== STOP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@48a70acd :: getDoorCommand ?== STOP PASSED
 @0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1ea01711 :: getDoorCommand ?== STOP PASSED
 @0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@762cd5a3 :: getDoorCommand ?== STOP PASSED
 @0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@3e697087 :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2dd1282d :: getDoorCommand ?== STOP PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@70a5d82a :: getValue ?== false PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@10747b4 :: getDirection ?== UP PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2dd1282d :: getValue ?== false PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@70a5d82a :: getDirection ?== UP PASSED
+@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@10747b4 :: lighted ?== false PASSED
 @0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@4eb3ea0f :: lighted ?== false PASSED
-@0.5s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@7d4af469 :: lighted ?== false PASSED
-@1.85s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5f30f268 :: getValue ?== true PASSED
-@2.1s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@637533df :: lighted ?== true PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@895772a :: getValue ?== false PASSED
-@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2ff1bf46 :: getDoorCommand ?== STOP PASSED
+@1.85s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@637533df :: getValue ?== true PASSED
+@2.1s:  PASSED simulator.payloads.HallLightPayload$ReadableHallLightPayload@895772a :: lighted ?== true PASSED
+@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2ff1bf46 :: getValue ?== false PASSED
 @2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@32bd630e :: getDoorCommand ?== STOP PASSED
 @2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@611c048e :: getDoorCommand ?== STOP PASSED
 @2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7fe27dce :: getDoorCommand ?== STOP PASSED
+@2.1s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4fbf7435 :: getDoorCommand ?== STOP PASSED
 
 
 ******************Summary******************

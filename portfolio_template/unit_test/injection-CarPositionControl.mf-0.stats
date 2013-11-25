@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf carpositioncontrol.cf -mf carpositioncontrol.mf -head header.txt
-RandomSeed = 1384787315449
+RandomSeed = 1385066352202
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -15,7 +15,7 @@ Controller File = carpositioncontrol.cf
 Assertion Results:
 @0.5s:  PASSED CarPositionControl::checkState(STATE) ?== STATE_DISPLAY PASSED
 @3.0s:  PASSED CarPositionControl::checkState(STATE) ?== STATE_DISPLAY PASSED
-@5.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@1b710c15 :: floor ?== 2 PASSED
+@5.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@268c0162 :: floor ?== 2 PASSED
 
 
 ******************Summary******************

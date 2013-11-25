@@ -237,7 +237,7 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor{
                 hasMoved = true;
             }
             if(hasMoved == true && msg.speed() ==0){
-                if(!wasCarCall[currentFloor-1][Hallway.FRONT.ordinal()] && 
+                if(currentFloor != MessageDictionary.NONE && !wasCarCall[currentFloor-1][Hallway.FRONT.ordinal()] && 
                         !wasCarCall[currentFloor-1][Hallway.BACK.ordinal()] &&
                         !wasHallCall[currentFloor-1][Hallway.FRONT.ordinal()][Direction.UP.ordinal()] &&
                         !wasHallCall[currentFloor-1][Hallway.BACK.ordinal()][Direction.UP.ordinal()] &&
@@ -317,7 +317,7 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor{
                 }
             }
             litLantern[msg.getDirection().ordinal()] = true;
-            if(hallway != Hallway.NONE)
+            if(hallway != Hallway.NONE && currentFloor != MessageDictionary.NONE)
                 wasHallCall[currentFloor-1][hallway.ordinal()][msg.getDirection().ordinal()] = false;
 
 
@@ -389,8 +389,8 @@ public class Proj11RuntimeMonitor extends RuntimeMonitor{
     public void CheckHallorCarCall(Hallway h){
         for(Direction d : Direction.replicationValues){
             //    		System.out.println("currentFloor: " + currentFloor);
-            if(wasCarCall[currentFloor-1][h.ordinal()] || 
-                    wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()]){
+            if((currentFloor != MessageDictionary.NONE)&&(wasCarCall[currentFloor-1][h.ordinal()] || 
+                    wasHallCall[currentFloor-1][h.ordinal()][d.ordinal()])){
                 wasCall = true;
                 hallway = h;
                 wasCarCall[currentFloor-1][h.ordinal()] = false;

@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd3b.cf -mf sd3b.mf -head header.txt
-RandomSeed = 1384787332901
+RandomSeed = 1385066377236
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,11 +13,11 @@ Message File = sd3b.mf
 Controller File = sd3b.cf
 
 Assertion Results:
-@1.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@766f3870 :: command ?== OPEN PASSED
-@2.05s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6eb1a0f9 :: command ?== STOP PASSED
-@4.05s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@22666c7a :: speed ?== STOP PASSED
-@4.05s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@6982237d :: direction ?== STOP PASSED
-@4.55s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6d3c121b :: command ?== STOP PASSED
+@1.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6eb1a0f9 :: command ?== OPEN PASSED
+@2.05s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@725bcf3a :: command ?== STOP PASSED
+@4.05s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@5ee819a8 :: speed ?== STOP PASSED
+@4.05s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@6d3c121b :: direction ?== STOP PASSED
+@4.55s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@52977e69 :: command ?== STOP PASSED
 
 
 ******************Summary******************

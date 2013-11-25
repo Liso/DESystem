@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd9a.cf -mf sd9a.mf -head header.txt
-RandomSeed = 1384787352532
+RandomSeed = 1385066404001
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -22,8 +22,8 @@ Assertion Results:
 @1.8s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@4fbf7435 :: lighted ?== true PASSED
 @1.8s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@725bcf3a :: lighted ?== false PASSED
 @2.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@5ee819a8 :: command ?== STOP PASSED
-@10.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@6d3c121b :: command ?== CLOSE PASSED
-@10.3s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@52977e69 :: command ?== STOP PASSED
+@10.0s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2c8e2a4 :: command ?== CLOSE PASSED
+@10.3s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@57ec49db :: command ?== STOP PASSED
 
 
 ******************Summary******************
