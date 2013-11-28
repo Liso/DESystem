@@ -33,7 +33,7 @@
 ;# arc '2'
 +0s  A N CAR_WEIGHT_ALARM_CAN_ID CarWeightAlarm : getValue == false
 
-+3s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
++5s  A N DOOR_MOTOR_COMMAND_[FRONT][LEFT]_CAN_ID DoorMotorCommand FRONT LEFT : getDoorCommand == CLOSE
 +0s  A N DOOR_MOTOR_COMMAND_[BACK][LEFT]_CAN_ID DoorMotorCommand BACK LEFT : getDoorCommand == CLOSE
 +0s  A N DOOR_MOTOR_COMMAND_[FRONT][RIGHT]_CAN_ID DoorMotorCommand FRONT RIGHT : getDoorCommand == CLOSE
 +0s  A N DOOR_MOTOR_COMMAND_[BACK][RIGHT]_CAN_ID DoorMotorCommand BACK RIGHT : getDoorCommand == CLOSE

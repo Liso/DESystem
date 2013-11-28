@@ -55,7 +55,7 @@
 
 
 ;#arc '7B/8'
-+5s A F DoorMotor FRONT LEFT : command == CLOSE
++7s A F DoorMotor FRONT LEFT : command == CLOSE
 
 ;#arc '7B/9a'
 +1s I 0s N DOOR_CLOSED_SENSOR_[FRONT][LEFT]_CAN_ID Bit = true

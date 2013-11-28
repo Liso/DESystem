@@ -102,7 +102,7 @@ public class DoorControl extends Controller {
     
     //additional internal state variables
     private SimTime countDown = SimTime.ZERO;
-    private final static SimTime dwell = new SimTime(5,
+    private final static SimTime dwell = new SimTime(7,
             SimTime.SimTimeUnit.SECOND);
 
     //enumerate states
