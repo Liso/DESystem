@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd7c.cf -mf sd7c.mf -head header.txt
-RandomSeed = 1385066395837
+RandomSeed = 1386613897436
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,14 +13,14 @@ Message File = sd7c.mf
 Controller File = sd7c.cf
 
 Assertion Results:
-@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@7344119b :: command ?== CLOSE PASSED
-@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@65cd1dff :: getDoorCommand ?== CLOSE PASSED
-@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@793aac5f :: getValue ?== true PASSED
-@2.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@2a606e6 :: command ?== STOP PASSED
-@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4079ca2e :: getDoorCommand ?== STOP PASSED
-@2.6s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@3564e3e2 :: lighted ?== false PASSED
-@2.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@458db581 :: getValue ?== false PASSED
-@2.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@68833813 :: getValue ?== false PASSED
+@0.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@123a08e :: command ?== CLOSE PASSED
+@0.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@2fcb4f :: getDoorCommand ?== CLOSE PASSED
+@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1a5469e :: getValue ?== true PASSED
+@2.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@25a311 :: command ?== STOP PASSED
+@2.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@13cc996 :: getDoorCommand ?== STOP PASSED
+@2.6s:  PASSED simulator.payloads.CarLanternPayload$ReadableCarLanternPayload@1aac78d :: lighted ?== false PASSED
+@2.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7ca7f0 :: getValue ?== false PASSED
+@2.6s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@19c5ce6 :: getValue ?== false PASSED
 
 
 ******************Summary******************

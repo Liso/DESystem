@@ -1,0 +1,208 @@
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+
+
+Simulator Parameters:
+Command line = -pf normal_final.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
+RandomSeed = 1386614025983
+CanNetworkBitTime = 5000 ns
+Effective Can Bitrate = 199999.99999999997
+Run Time = null
+Real time rate = null
+Acceptance Test File = normal_final.pass
+Monitors: Proj11RuntimeMonitor  
+
+
+[Elevator] @0.000000000: Starting Simulation
+[Elevator] @60.000000000: Progress indicator
+[Elevator] @120.000000000: Progress indicator
+[Elevator] @180.000000000: Progress indicator
+[RuntimeMonitor] @217.340000000: Overweight
+[Elevator] @240.000000000: Progress indicator
+[RuntimeMonitor] @252.150000000: Overweight
+[RuntimeMonitor] @269.940000000: Overweight
+[Elevator] @300.000000000: Progress indicator
+[Elevator] @360.000000000: Progress indicator
+[RuntimeMonitor] @374.540000000: Overweight
+[RuntimeMonitor] @392.140000000: Overweight
+[RuntimeMonitor] @409.540000000: Overweight
+[Elevator] @420.000000000: Progress indicator
+[RuntimeMonitor] @432.340000000: Overweight
+[RuntimeMonitor] @450.940000000: Overweight
+[Elevator] @480.000000000: Progress indicator
+[RuntimeMonitor] @496.140000000: Overweight
+[RuntimeMonitor] @513.740000000: Overweight
+[RuntimeMonitor] @532.140000000: Overweight
+[Elevator] @540.000000000: Progress indicator
+[RuntimeMonitor] @549.540000000: Overweight
+[Elevator] @600.000000000: Progress indicator
+[Elevator] @660.000000000: Progress indicator
+[RuntimeMonitor] @662.140000000: Overweight
+[RuntimeMonitor] @684.540000000: Overweight
+[Elevator] @720.000000000: Progress indicator
+[RuntimeMonitor] @729.340000000: Overweight
+[Elevator] @780.000000000: Progress indicator
+[RuntimeMonitor] @801.140000000: Overweight
+[RuntimeMonitor] @801.400000000: R-T.8.2 Violated: The direction indicated changes
+[RuntimeMonitor] @823.740000000: Overweight
+[Elevator] @840.000000000: Progress indicator
+[RuntimeMonitor] @841.340000000: Overweight
+[RuntimeMonitor] @867.540000000: Overweight
+[RuntimeMonitor] @884.940000000: Overweight
+[Elevator] @900.000000000: Progress indicator
+[Elevator] @960.000000000: Progress indicator
+[RuntimeMonitor] @983.940000000: Overweight
+[RuntimeMonitor] @1011.140000000: Overweight
+[Elevator] @1020.000000000: Progress indicator
+[RuntimeMonitor] @1028.740000000: Overweight
+[RuntimeMonitor] @1047.740000000: Overweight
+[RuntimeMonitor] @1066.140000000: Overweight
+[Elevator] @1080.000000000: Progress indicator
+[RuntimeMonitor] @1111.340000000: Overweight
+[RuntimeMonitor] @1138.740000000: Overweight
+[Elevator] @1140.000000000: Progress indicator
+[RuntimeMonitor] @1156.140000000: Overweight
+[RuntimeMonitor] @1175.340000000: Overweight
+[Elevator] @1200.000000000: Progress indicator
+[Elevator] @1260.000000000: Progress indicator
+[RuntimeMonitor] @1274.140000000: Overweight
+[RuntimeMonitor] @1302.540000000: Overweight
+[Elevator] @1320.000000000: Progress indicator
+[RuntimeMonitor] @1331.740000000: Overweight
+[RuntimeMonitor] @1359.140000000: Overweight
+[RuntimeMonitor] @1376.740000000: Overweight
+[Elevator] @1380.000000000: Progress indicator
+[RuntimeMonitor] @1431.340000000: Overweight
+[Elevator] @1440.000000000: Progress indicator
+[RuntimeMonitor] @1448.740000000: Overweight
+[RuntimeMonitor] @1477.140000000: Overweight
+[Elevator] @1500.000000000: Progress indicator
+[RuntimeMonitor] @1504.740000000: Overweight
+[RuntimeMonitor] @1522.940000000: Overweight
+[RuntimeMonitor] @1540.340000000: Overweight
+[Elevator] @1560.000000000: Progress indicator
+[RuntimeMonitor] @1603.740000000: Overweight
+[Elevator] @1620.000000000: Progress indicator
+[RuntimeMonitor] @1621.340000000: Overweight
+[RuntimeMonitor] @1638.740000000: Overweight
+[RuntimeMonitor] @1656.140000000: Overweight
+[Elevator] @1680.000000000: Progress indicator
+[RuntimeMonitor] @1737.550000000: Overweight
+[Elevator] @1740.000000000: Progress indicator
+[RuntimeMonitor] @1755.140000000: Overweight
+[RuntimeMonitor] @1782.140000000: Overweight
+[Elevator] @1800.000000000: Progress indicator
+[RuntimeMonitor] @1808.940000000: Overweight
+[RuntimeMonitor] @1826.340000000: Overweight
+[RuntimeMonitor] @1843.740000000: Overweight
+[Elevator] @1860.000000000: Progress indicator
+[Elevator] @1920.000000000: Progress indicator
+[RuntimeMonitor] @1922.940000000: Overweight
+[RuntimeMonitor] @1949.940000000: Overweight
+[RuntimeMonitor] @1977.740000000: Overweight
+[Elevator] @1980.000000000: Progress indicator
+[RuntimeMonitor] @1995.340000000: Overweight
+[RuntimeMonitor] @2012.940000000: Overweight
+[Elevator] @2040.000000000: Progress indicator
+[RuntimeMonitor] @2058.340000000: Overweight
+[RuntimeMonitor] @2083.550000000: Overweight
+[Elevator] @2100.000000000: Progress indicator
+[RuntimeMonitor] @2101.940000000: Overweight
+[RuntimeMonitor] @2119.340000000: Overweight
+[RuntimeMonitor] @2146.740000000: Overweight
+[Elevator] @2160.000000000: Progress indicator
+[RuntimeMonitor] @2164.140000000: Overweight
+[Elevator] @2220.000000000: Progress indicator
+[RuntimeMonitor] @2227.340000000: Overweight
+[RuntimeMonitor] @2244.740000000: Overweight
+[RuntimeMonitor] @2262.340000000: Overweight
+[RuntimeMonitor] @2279.940000000: Overweight
+[Elevator] @2280.000000000: Progress indicator
+[RuntimeMonitor] @2332.140000000: Overweight
+[Elevator] @2340.000000000: Progress indicator
+[RuntimeMonitor] @2371.140000000: Overweight
+[RuntimeMonitor] @2396.140000000: Overweight
+[Elevator] @2400.000000000: Progress indicator
+[RuntimeMonitor] @2423.340000000: Overweight
+[RuntimeMonitor] @2440.740000000: Overweight
+[Elevator] @2460.000000000: Progress indicator
+[RuntimeMonitor] @2483.740000000: Overweight
+[Elevator] @2520.000000000: Progress indicator
+[RuntimeMonitor] @2553.550000000: Overweight
+[RuntimeMonitor] @2572.340000000: Overweight
+[Elevator] @2580.000000000: Progress indicator
+[RuntimeMonitor] @2589.940000000: Overweight
+[Elevator] @2640.000000000: Progress indicator
+[RuntimeMonitor] @2662.140000000: Overweight
+[RuntimeMonitor] @2679.540000000: Overweight
+[RuntimeMonitor] @2696.940000000: Overweight
+[Elevator] @2700.000000000: Progress indicator
+[RuntimeMonitor] @2714.340000000: Overweight
+[Elevator] @2760.000000000: Progress indicator
+[Elevator] @2820.000000000: Progress indicator
+[RuntimeMonitor] @2856.940000000: Overweight
+[Elevator] @2880.000000000: Progress indicator
+[RuntimeMonitor] @2902.340000000: Overweight
+[RuntimeMonitor] @2937.740000000: Overweight
+[Elevator] @2940.000000000: Progress indicator
+[RuntimeMonitor] @2955.140000000: Overweight
+[RuntimeMonitor] @2972.540000000: Overweight
+[RuntimeMonitor] @2989.940000000: Overweight
+[Elevator] @3000.000000000: Progress indicator
+[Elevator] @3060.000000000: Progress indicator
+[Elevator] @3120.000000000: Progress indicator
+[RuntimeMonitor] @3142.340000000: Overweight
+[RuntimeMonitor] @3159.740000000: Overweight
+[Elevator] @3180.000000000: Progress indicator
+[RuntimeMonitor] @3184.940000000: Overweight
+[Elevator] @3240.000000000: Progress indicator
+[RuntimeMonitor] @3293.340000000: Overweight
+[Elevator] @3300.000000000: Progress indicator
+[Elevator] @3360.000000000: Progress indicator
+[Elevator] @3420.000000000: Progress indicator
+[Elevator] @3480.000000000: Progress indicator
+[Elevator] @3491.592000000: Simulation Finished
+
+Network Utilization Summary:
+Recent: 73.33 % Max: 73.33 %  Overall:  73.33 %
+
+Monitors Warning Results: 
+RuntimeMonitor generated 0 warnings.
+
+Monitors Summmary Results: 
+Overweight Count = 88
+R-T6:Wasted Stops Count = 0
+R-T7:Wasted Openings Count = 0
+Wasted Time Dealing with Reversal = 536.14s
+Both Lanterns Lit Up Count = 0
+R-T8.1:Omitted Pending Calls Count = 0
+R-T8.2:Lantern Flicker Count = 1
+R-T8.3:Conflict Direction Count = 0
+R-T9:Inappropriate Not Fast Speed Count = 0
+R-T10:Number of times Nudged before Reversing atleast once = 0
+
+STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
+-----------------------------------------------------
+
+
+Passenger Delivery Summary
+Delivered: 392
+Stranded: 0
+Total: 392
+
+Deliver Stats (lower is better):
+Average_delivery_time: 687.708
+Maximum_delivery_time:  3156.026
+Delivery_performance_score:  5906.859
+
+Satisfaction Stats (higher is better):
+Average_satisfaction_score: 95.555
+Min_satisfaction_score:  12.500
+Satisfaction_performance_score:  394.719
+
+
+
+3491.592s simulation seconds
+ 25.008 real seconds
+ effective rate 139.62

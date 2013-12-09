@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd2a.cf -mf sd2a.mf -head header.txt
-RandomSeed = 1385066370171
+RandomSeed = 1386613880897
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,11 +13,11 @@ Message File = sd2a.mf
 Controller File = sd2a.cf
 
 Assertion Results:
-@1.0s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@79b5459e :: isLighted ?== true PASSED
-@1.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@4782b18d :: command ?== CLOSE PASSED
-@1.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@33891d5d :: getDoorCommand ?== CLOSE PASSED
-@2.3s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@77411b30 :: command ?== STOP PASSED
-@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@4e433359 :: getDoorCommand ?== STOP PASSED
+@1.0s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@17bc0ac :: isLighted ?== true PASSED
+@1.5s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@8c048e :: command ?== CLOSE PASSED
+@1.5s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@681e5a :: getDoorCommand ?== CLOSE PASSED
+@2.3s:  PASSED simulator.payloads.DoorMotorPayload$ReadableDoorMotorPayload@1719b33 :: command ?== STOP PASSED
+@2.3s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@ab8796 :: getDoorCommand ?== STOP PASSED
 
 
 ******************Summary******************

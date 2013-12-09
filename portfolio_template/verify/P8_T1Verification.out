@@ -5,7 +5,7 @@
 
 Simulator Parameters:
 Command line = -pf proj8group16acceptance1.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
-RandomSeed = 1385068509181
+RandomSeed = 1386613959761
 CanNetworkBitTime = 5000 ns
 Effective Can Bitrate = 199999.99999999997
 Run Time = null
@@ -21,23 +21,26 @@ Monitors: Proj11RuntimeMonitor
 [Elevator] @240.000000000: Progress indicator
 [Elevator] @300.000000000: Progress indicator
 [Elevator] @360.000000000: Progress indicator
-[RuntimeMonitor] @386.140000000: Overweight
+[RuntimeMonitor] @376.740000000: Overweight
+[RuntimeMonitor] @398.140000000: Overweight
 [Elevator] @420.000000000: Progress indicator
 [Elevator] @480.000000000: Progress indicator
 [Elevator] @540.000000000: Progress indicator
-[RuntimeMonitor] @552.140000000: Overweight
 [Elevator] @600.000000000: Progress indicator
+[RuntimeMonitor] @617.540000000: Overweight
+[RuntimeMonitor] @652.540000000: Overweight
 [Elevator] @660.000000000: Progress indicator
 [Elevator] @720.000000000: Progress indicator
-[RuntimeMonitor] @724.950000000: Overweight
-[RuntimeMonitor] @769.340000000: Overweight
+[RuntimeMonitor] @776.740000000: Overweight
 [Elevator] @780.000000000: Progress indicator
+[RuntimeMonitor] @794.140000000: Overweight
+[RuntimeMonitor] @830.340000000: Overweight
 [Elevator] @840.000000000: Progress indicator
 [Elevator] @900.000000000: Progress indicator
-[RuntimeMonitor] @920.140000000: Overweight
 [Elevator] @960.000000000: Progress indicator
 [Elevator] @1020.000000000: Progress indicator
-[Elevator] @1028.849000000: Simulation Finished
+[Elevator] @1080.000000000: Progress indicator
+[Elevator] @1116.670000000: Simulation Finished
 
 Network Utilization Summary:
 Recent: 73.33 % Max: 73.33 %  Overall:  73.33 %
@@ -46,10 +49,10 @@ Monitors Warning Results:
 RuntimeMonitor generated 0 warnings.
 
 Monitors Summmary Results: 
-Overweight Count = 5
+Overweight Count = 7
 R-T6:Wasted Stops Count = 0
 R-T7:Wasted Openings Count = 0
-Wasted Time Dealing with Reversal = 124.12s
+Wasted Time Dealing with Reversal = 72.48s
 Both Lanterns Lit Up Count = 0
 R-T8.1:Omitted Pending Calls Count = 0
 R-T8.2:Lantern Flicker Count = 0
@@ -67,17 +70,17 @@ Stranded: 0
 Total: 100
 
 Deliver Stats (lower is better):
-Average_delivery_time: 131.431
-Maximum_delivery_time:  382.949
-Delivery_performance_score:  908.673
+Average_delivery_time: 200.960
+Maximum_delivery_time:  673.254
+Delivery_performance_score:  1477.095
 
 Satisfaction Stats (higher is better):
-Average_satisfaction_score: 100.000
-Min_satisfaction_score:  100.000
-Satisfaction_performance_score:  500.000
+Average_satisfaction_score: 99.800
+Min_satisfaction_score:  80.000
+Satisfaction_performance_score:  479.200
 
 
 
-1028.849s simulation seconds
- 13.792 real seconds
- effective rate 74.60
+1116.67s simulation seconds
+ 8.678 real seconds
+ effective rate 128.68
