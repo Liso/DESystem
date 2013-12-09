@@ -1,3 +1,11 @@
+/* 
+ * Course and Semester : 18-649 Fall 2013
+ * Group No: 16
+ * Group Members : Jiangtian Nie(jnie) , Yue Chen(yuechen),
+ *                 Sally Stevenson(ststeven) , Sri Harsha Koppaka(skoppaka)
+ */
+
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
