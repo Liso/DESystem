@@ -15,7 +15,6 @@ Monitors: Proj11RuntimeMonitor
 
 
 [Elevator] @0.000000000: Starting Simulation
-[RuntimeMonitor] @12.400000000: R-T.8.2 Violated: The direction indicated changes
 [RuntimeMonitor] @26.140000000: Overweight
 [Elevator] @60.000000000: Progress indicator
 [Elevator] @120.000000000: Progress indicator
@@ -37,7 +36,7 @@ R-T7:Wasted Openings Count = 0
 Wasted Time Dealing with Reversal = 0.0s
 Both Lanterns Lit Up Count = 0
 R-T8.1:Omitted Pending Calls Count = 0
-R-T8.2:Lantern Flicker Count = 1
+R-T8.2:Lantern Flicker Count = 0
 R-T8.3:Conflict Direction Count = 0
 R-T9:Inappropriate Not Fast Speed Count = 0
 R-T10:Number of times Nudged before Reversing atleast once = 0
@@ -66,3 +65,4 @@ Satisfaction_performance_score:  500.000
 320.32s simulation seconds
  3.483 real seconds
  effective rate 91.97
+
