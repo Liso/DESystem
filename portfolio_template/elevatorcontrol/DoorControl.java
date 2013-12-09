@@ -390,9 +390,7 @@ public class DoorControl extends Controller {
                 // System.out.println("doorcontrol[" + hallway + "]: " + mDesiredFloor.getHallway());
                 //#transition 'T5.7'
                 if(mAtFloor.get(index1).getValue()){
-                    if (mCarWeight.getValue() >= Elevator.MaxCarCapacity) {
-                        newState = State.STATE_OPEN;
-                    }
+                 
                     if ((mDesiredFloor.getFloor() == currentFloor) &&
                             ((mDesiredFloor.getHallway() == hallway) || 
                              (mDesiredFloor.getHallway() == Hallway.BOTH)) &&
