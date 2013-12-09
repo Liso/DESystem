@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd6a.cf -mf sd6a.mf -head header.txt
-RandomSeed = 1385066390047
+RandomSeed = 1386613894732
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,12 +13,12 @@ Message File = sd6a.mf
 Controller File = sd6a.cf
 
 Assertion Results:
-@1.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@6bedc67e :: floor ?== 4 PASSED
-@1.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@5556c4a8 :: speed ?== SLOW PASSED
-@1.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@6ee6df19 :: direction ?== UP PASSED
-@4.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@5360297a :: floor ?== 5 PASSED
-@4.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@1de04033 :: speed ?== STOP PASSED
-@4.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@4d3806b6 :: direction ?== STOP PASSED
+@1.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@8c048e :: floor ?== 4 PASSED
+@1.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@681e5a :: speed ?== SLOW PASSED
+@1.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@1719b33 :: direction ?== UP PASSED
+@4.0s:  PASSED simulator.payloads.CarPositionIndicatorPayload$ReadableCarPositionIndicatorPayload@ab8796 :: floor ?== 5 PASSED
+@4.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@254ae5 :: speed ?== STOP PASSED
+@4.0s:  PASSED simulator.payloads.DrivePayload$ReadableDrivePayload@4f891e :: direction ?== STOP PASSED
 
 
 ******************Summary******************
