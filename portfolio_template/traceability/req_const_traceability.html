@@ -36,6 +36,7 @@
 
 
 
+
         Sally Stevenson (ststeven)<br>
         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -66,7 +67,7 @@
     <br>
     <hr width="100%">&nbsp;&nbsp; <br>
     <table style="width: 1535px; height: 1624px;" frame="border"
-      cellpadding="3" border="1">
+      border="1" cellpadding="3">
       <tbody>
         <tr>
           <td><u><b>Behavioral Requirements/Constraints</b></u></td>
@@ -311,7 +312,7 @@
         </tr>
         <tr>
           <td valign="top">6.7 mDoorClosed[d] true and mDesiredFloor.f
-            is greater than CurrentFloor --&gt;&nbsp; Drive slow up </td>
+            is not equal to CurrentFloor --&gt;&nbsp; Drive slow</td>
           <td align="center" valign="top">X</td>
           <td align="center" valign="top">~<br>
           </td>
@@ -323,23 +324,7 @@
           </td>
         </tr>
         <tr>
-          <td style="vertical-align: top;">6.8 mDoorClosed[d] true and
-            mDesiredFloor.f is less than CurrentFloor&nbsp; --&gt;&nbsp;
-            Drive slow down<br>
-          </td>
-          <td style="vertical-align: top;" align="center">X<br>
-          </td>
-          <td style="vertical-align: top;" align="center">~<br>
-          </td>
-          <td style="vertical-align: top;" align="center">X<br>
-          </td>
-          <td style="vertical-align: top;" align="center">~<br>
-          </td>
-          <td style="vertical-align: top;" align="center">~<br>
-          </td>
-        </tr>
-        <tr>
-          <td style="vertical-align: top;">6.9 If DriveSpeed slow and
+          <td style="vertical-align: top;">6.8 If DriveSpeed slow and
             Commit point for mDesiredFloor.f not reached --&gt; Drive
             fast<br>
           </td>
@@ -355,7 +340,7 @@
           </td>
         </tr>
         <tr>
-          <td valign="top">6.10 If DriveSpeed fast and Commit point for
+          <td valign="top">6.9 If DriveSpeed fast and Commit point for
             mDesiredFloor.f reached --&gt; Drive slow<br>
           </td>
           <td align="center" valign="top">~</td>
@@ -366,7 +351,7 @@
           <td align="center" valign="top">~</td>
         </tr>
         <tr>
-          <td valign="top">6.11 mLevel[d] true and mAtFloor[f,b] true
+          <td valign="top">6.10 mLevel[d] true and mAtFloor[f,b] true
             and f = mDesiredFloor.f --&gt; Drive stop</td>
           <td align="center" valign="top">~<br>
           </td>
@@ -380,7 +365,7 @@
           </td>
         </tr>
         <tr>
-          <td valign="top">6.12 any mLevel[d] false and mAtFloor[f, b]
+          <td valign="top">6.11 any mLevel[d] false and mAtFloor[f, b]
             true and f = mDesiredFloor.f&nbsp; --&gt;Drive (Level,d)</td>
           <td align="center" valign="top">~<br>
           </td>
@@ -394,7 +379,7 @@
           </td>
         </tr>
         <tr>
-          <td valign="top">6.13 mCarWeight&gt;= MaxCarCapacity
+          <td valign="top">6.12 mCarWeight&gt;= MaxCarCapacity
             --&gt;Drive stop<br>
           </td>
           <td align="center" valign="top">~<br>
@@ -409,7 +394,7 @@
           </td>
         </tr>
         <tr>
-          <td valign="top">6.14 mHoistwayLimit[d] true --&gt;Drive stop<br>
+          <td valign="top">6.13 mHoistwayLimit[d] true --&gt;Drive stop<br>
           </td>
           <td align="center" valign="top">~<br>
           </td>
@@ -423,7 +408,7 @@
           </td>
         </tr>
         <tr>
-          <td valign="top">6.15 mDriveSpeed always set to DriveSpeed </td>
+          <td valign="top">6.14 mDriveSpeed always set to DriveSpeed </td>
           <td align="center" valign="top">~<br>
           </td>
           <td align="center" valign="top">~<br>
@@ -562,6 +547,7 @@
           <td style="vertical-align: top;"><span style="font-weight:
               bold;">CarPositionControl</span><span style="font-weight:
               bold;"> - Completed by (<span style="font-weight: bold;">Jiangtian
+
 
 
 
