@@ -84,6 +84,10 @@
 #DEFINE CAR_CALL_[7][BACK]_CAN_ID                      0xDDCB90D
 #DEFINE CAR_LIGHT_[7][BACK]_CAN_ID                     0xF12BA0D
 #DEFINE CAR_CALL_[8][FRONT]_CAN_ID                     0xDDCB90E
+;Course and Semester : 18649 Fall 2013
+;Group 16 : Jiangtian Nie(jnie), Sally Stevenson(ststeven)
+;	    Yue Chen(yuechen), Sri Harsha Koppaka(skoppaka)
+
 #DEFINE CAR_LIGHT_[8][FRONT]_CAN_ID                    0xF12BA0E
 #DEFINE CAR_LANTERN_[UP]_CAN_ID                        0xF13BB00
 #DEFINE CAR_LANTERN_[DOWN]_CAN_ID                      0xF13BB01
