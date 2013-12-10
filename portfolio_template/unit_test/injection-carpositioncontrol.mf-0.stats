@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf carpositioncontrol.cf -mf carpositioncontrol.mf -head header.txt
-RandomSeed = 1386629550978
+RandomSeed = 1386646688864
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null

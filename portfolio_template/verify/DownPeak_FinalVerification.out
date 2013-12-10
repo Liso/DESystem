@@ -5,7 +5,7 @@
 
 Simulator Parameters:
 Command line = -pf downpeak_final.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
-RandomSeed = 1386629565277
+RandomSeed = 1386646894774
 CanNetworkBitTime = 5000 ns
 Effective Can Bitrate = 199999.99999999997
 Run Time = null
@@ -15,3 +15,273 @@ Monitors: Proj11RuntimeMonitor
 
 
 [Elevator] @0.000000000: Starting Simulation
+[Elevator] @60.000000000: Progress indicator
+[Elevator] @120.000000000: Progress indicator
+[Elevator] @180.000000000: Progress indicator
+[Elevator] @240.000000000: Progress indicator
+[RuntimeMonitor] @290.750000000: Overweight
+[Elevator] @300.000000000: Progress indicator
+[RuntimeMonitor] @308.140000000: Overweight
+[RuntimeMonitor] @325.540000000: Overweight
+[RuntimeMonitor] @342.940000000: Overweight
+[Elevator] @360.000000000: Progress indicator
+[RuntimeMonitor] @360.340000000: Overweight
+[RuntimeMonitor] @377.940000000: Overweight
+[Elevator] @420.000000000: Progress indicator
+[Elevator] @480.000000000: Progress indicator
+[RuntimeMonitor] @531.940000000: Overweight
+[Elevator] @540.000000000: Progress indicator
+[RuntimeMonitor] @549.340000000: Overweight
+[RuntimeMonitor] @566.740000000: Overweight
+[RuntimeMonitor] @589.540000000: Overweight
+[Elevator] @600.000000000: Progress indicator
+[RuntimeMonitor] @607.140000000: Overweight
+[RuntimeMonitor] @624.540000000: Overweight
+[Elevator] @660.000000000: Progress indicator
+[Elevator] @720.000000000: Progress indicator
+[Elevator] @780.000000000: Progress indicator
+[RuntimeMonitor] @797.940000000: Overweight
+[RuntimeMonitor] @815.340000000: Overweight
+[RuntimeMonitor] @832.740000000: Overweight
+[Elevator] @840.000000000: Progress indicator
+[RuntimeMonitor] @854.940000000: Overweight
+[RuntimeMonitor] @876.540000000: Overweight
+[Elevator] @900.000000000: Progress indicator
+[RuntimeMonitor] @902.740000000: Overweight
+[Elevator] @960.000000000: Progress indicator
+[RuntimeMonitor] @993.940000000: Overweight
+[Elevator] @1020.000000000: Progress indicator
+[Elevator] @1080.000000000: Progress indicator
+[RuntimeMonitor] @1095.740000000: Overweight
+[RuntimeMonitor] @1120.340000000: Overweight
+[RuntimeMonitor] @1137.750000000: Overweight
+[Elevator] @1140.000000000: Progress indicator
+[RuntimeMonitor] @1155.140000000: Overweight
+[RuntimeMonitor] @1172.540000000: Overweight
+[RuntimeMonitor] @1189.940000000: Overweight
+[Elevator] @1200.000000000: Progress indicator
+[Elevator] @1260.000000000: Progress indicator
+[Elevator] @1320.000000000: Progress indicator
+[RuntimeMonitor] @1347.740000000: Overweight
+[RuntimeMonitor] @1365.340000000: Overweight
+[Elevator] @1380.000000000: Progress indicator
+[RuntimeMonitor] @1382.740000000: Overweight
+[RuntimeMonitor] @1400.140000000: Overweight
+[RuntimeMonitor] @1417.540000000: Overweight
+[RuntimeMonitor] @1434.940000000: Overweight
+[Elevator] @1440.000000000: Progress indicator
+[Elevator] @1500.000000000: Progress indicator
+[RuntimeMonitor] @1551.340000000: Overweight
+[Elevator] @1560.000000000: Progress indicator
+[RuntimeMonitor] @1568.950000000: Overweight
+[RuntimeMonitor] @1586.340000000: Overweight
+[RuntimeMonitor] @1603.940000000: Overweight
+[Elevator] @1620.000000000: Progress indicator
+[RuntimeMonitor] @1621.340000000: Overweight
+[RuntimeMonitor] @1638.940000000: Overweight
+[Elevator] @1680.000000000: Progress indicator
+[Elevator] @1740.000000000: Progress indicator
+[RuntimeMonitor] @1757.740000000: Overweight
+[RuntimeMonitor] @1775.140000000: Overweight
+[RuntimeMonitor] @1797.340000000: Overweight
+[Elevator] @1800.000000000: Progress indicator
+[RuntimeMonitor] @1814.940000000: Overweight
+[RuntimeMonitor] @1832.340000000: Overweight
+[RuntimeMonitor] @1849.740000000: Overweight
+[Elevator] @1860.000000000: Progress indicator
+[Elevator] @1920.000000000: Progress indicator
+[RuntimeMonitor] @1948.140000000: Overweight
+[RuntimeMonitor] @1970.540000000: Overweight
+[Elevator] @1980.000000000: Progress indicator
+[RuntimeMonitor] @2005.540000000: Overweight
+[RuntimeMonitor] @2023.140000000: Overweight
+[Elevator] @2040.000000000: Progress indicator
+[RuntimeMonitor] @2040.340000000: Overweight
+[RuntimeMonitor] @2057.740000000: Overweight
+[RuntimeMonitor] @2075.340000000: Overweight
+[RuntimeMonitor] @2092.740000000: Overweight
+[Elevator] @2100.000000000: Progress indicator
+[RuntimeMonitor] @2157.740000000: Overweight
+[Elevator] @2160.000000000: Progress indicator
+[RuntimeMonitor] @2175.140000000: Overweight
+[RuntimeMonitor] @2192.540000000: Overweight
+[RuntimeMonitor] @2209.940000000: Overweight
+[Elevator] @2220.000000000: Progress indicator
+[RuntimeMonitor] @2227.540000000: Overweight
+[RuntimeMonitor] @2244.940000000: Overweight
+[RuntimeMonitor] @2266.140000000: Overweight
+[Elevator] @2280.000000000: Progress indicator
+[RuntimeMonitor] @2283.540000000: Overweight
+[RuntimeMonitor] @2300.940000000: Overweight
+[Elevator] @2340.000000000: Progress indicator
+[RuntimeMonitor] @2382.940000000: Overweight
+[Elevator] @2400.000000000: Progress indicator
+[RuntimeMonitor] @2400.340000000: Overweight
+[RuntimeMonitor] @2435.340000000: Overweight
+[RuntimeMonitor] @2452.940000000: Overweight
+[Elevator] @2460.000000000: Progress indicator
+[RuntimeMonitor] @2470.340000000: Overweight
+[RuntimeMonitor] @2487.740000000: Overweight
+[RuntimeMonitor] @2506.950000000: Overweight
+[Elevator] @2520.000000000: Progress indicator
+[RuntimeMonitor] @2524.340000000: Overweight
+[Elevator] @2580.000000000: Progress indicator
+[RuntimeMonitor] @2583.140000000: Overweight
+[RuntimeMonitor] @2600.540000000: Overweight
+[RuntimeMonitor] @2635.540000000: Overweight
+[Elevator] @2640.000000000: Progress indicator
+[RuntimeMonitor] @2653.140000000: Overweight
+[RuntimeMonitor] @2670.740000000: Overweight
+[RuntimeMonitor] @2688.140000000: Overweight
+[Elevator] @2700.000000000: Progress indicator
+[RuntimeMonitor] @2705.540000000: Overweight
+[RuntimeMonitor] @2722.940000000: Overweight
+[Elevator] @2760.000000000: Progress indicator
+[Elevator] @2820.000000000: Progress indicator
+[RuntimeMonitor] @2834.940000000: Overweight
+[RuntimeMonitor] @2852.740000000: Overweight
+[RuntimeMonitor] @2870.140000000: Overweight
+[Elevator] @2880.000000000: Progress indicator
+[RuntimeMonitor] @2887.740000000: Overweight
+[RuntimeMonitor] @2905.140000000: Overweight
+[RuntimeMonitor] @2930.740000000: Overweight
+[Elevator] @2940.000000000: Progress indicator
+[Elevator] @3000.000000000: Progress indicator
+[RuntimeMonitor] @3001.340000000: Overweight
+[RuntimeMonitor] @3021.140000000: Overweight
+[RuntimeMonitor] @3038.540000000: Overweight
+[RuntimeMonitor] @3055.940000000: Overweight
+[Elevator] @3060.000000000: Progress indicator
+[RuntimeMonitor] @3073.340000000: Overweight
+[RuntimeMonitor] @3090.740000000: Overweight
+[Elevator] @3120.000000000: Progress indicator
+[RuntimeMonitor] @3152.340000000: Overweight
+[RuntimeMonitor] @3169.940000000: Overweight
+[Elevator] @3180.000000000: Progress indicator
+[RuntimeMonitor] @3187.340000000: Overweight
+[RuntimeMonitor] @3204.740000000: Overweight
+[RuntimeMonitor] @3222.140000000: Overweight
+[RuntimeMonitor] @3239.540000000: Overweight
+[Elevator] @3240.000000000: Progress indicator
+[Elevator] @3300.000000000: Progress indicator
+[RuntimeMonitor] @3301.140000000: Overweight
+[RuntimeMonitor] @3318.740000000: Overweight
+[RuntimeMonitor] @3336.140000000: Overweight
+[RuntimeMonitor] @3353.540000000: Overweight
+[Elevator] @3360.000000000: Progress indicator
+[RuntimeMonitor] @3370.940000000: Overweight
+[RuntimeMonitor] @3388.540000000: Overweight
+[Elevator] @3420.000000000: Progress indicator
+[RuntimeMonitor] @3444.540000000: Overweight
+[RuntimeMonitor] @3461.940000000: Overweight
+[RuntimeMonitor] @3479.540000000: Overweight
+[Elevator] @3480.000000000: Progress indicator
+[RuntimeMonitor] @3496.940000000: Overweight
+[RuntimeMonitor] @3514.940000000: Overweight
+[RuntimeMonitor] @3532.340000000: Overweight
+[Elevator] @3540.000000000: Progress indicator
+[Elevator] @3600.000000000: Progress indicator
+[RuntimeMonitor] @3612.540000000: Overweight
+[RuntimeMonitor] @3629.940000000: Overweight
+[RuntimeMonitor] @3647.540000000: Overweight
+[Elevator] @3660.000000000: Progress indicator
+[RuntimeMonitor] @3664.940000000: Overweight
+[RuntimeMonitor] @3682.340000000: Overweight
+[Elevator] @3720.000000000: Progress indicator
+[RuntimeMonitor] @3750.940000000: Overweight
+[RuntimeMonitor] @3773.140000000: Overweight
+[Elevator] @3780.000000000: Progress indicator
+[RuntimeMonitor] @3790.540000000: Overweight
+[RuntimeMonitor] @3807.940000000: Overweight
+[RuntimeMonitor] @3825.340000000: Overweight
+[Elevator] @3840.000000000: Progress indicator
+[Elevator] @3900.000000000: Progress indicator
+[RuntimeMonitor] @3912.340000000: Overweight
+[RuntimeMonitor] @3929.740000000: Overweight
+[RuntimeMonitor] @3947.340000000: Overweight
+[Elevator] @3960.000000000: Progress indicator
+[RuntimeMonitor] @3964.940000000: Overweight
+[RuntimeMonitor] @4019.940000000: Overweight
+[Elevator] @4020.000000000: Progress indicator
+[RuntimeMonitor] @4037.540000000: Overweight
+[RuntimeMonitor] @4054.940000000: Overweight
+[RuntimeMonitor] @4072.540000000: Overweight
+[Elevator] @4080.000000000: Progress indicator
+[RuntimeMonitor] @4126.940000000: Overweight
+[Elevator] @4140.000000000: Progress indicator
+[RuntimeMonitor] @4144.540000000: Overweight
+[RuntimeMonitor] @4161.940000000: Overweight
+[RuntimeMonitor] @4183.740000000: Overweight
+[Elevator] @4200.000000000: Progress indicator
+[RuntimeMonitor] @4256.740000000: Overweight
+[Elevator] @4260.000000000: Progress indicator
+[RuntimeMonitor] @4279.740000000: Overweight
+[RuntimeMonitor] @4297.340000000: Overweight
+[Elevator] @4320.000000000: Progress indicator
+[RuntimeMonitor] @4358.740000000: Overweight
+[RuntimeMonitor] @4376.340000000: Overweight
+[Elevator] @4380.000000000: Progress indicator
+[RuntimeMonitor] @4393.940000000: Overweight
+[Elevator] @4440.000000000: Progress indicator
+[RuntimeMonitor] @4454.340000000: Overweight
+[RuntimeMonitor] @4471.940000000: Overweight
+[RuntimeMonitor] @4489.340000000: Overweight
+[Elevator] @4500.000000000: Progress indicator
+[Elevator] @4560.000000000: Progress indicator
+[RuntimeMonitor] @4576.740000000: Overweight
+[RuntimeMonitor] @4594.140000000: Overweight
+[Elevator] @4620.000000000: Progress indicator
+[RuntimeMonitor] @4647.740000000: Overweight
+[RuntimeMonitor] @4665.340000000: Overweight
+[Elevator] @4680.000000000: Progress indicator
+[RuntimeMonitor] @4712.340000000: Overweight
+[RuntimeMonitor] @4729.740000000: Overweight
+[Elevator] @4740.000000000: Progress indicator
+[RuntimeMonitor] @4793.540000000: Overweight
+[Elevator] @4800.000000000: Progress indicator
+[RuntimeMonitor] @4838.340000000: Overweight
+[Elevator] @4860.000000000: Progress indicator
+[Elevator] @4892.187000000: Simulation Finished
+
+Network Utilization Summary:
+Recent: 73.33 % Max: 73.33 %  Overall:  73.33 %
+
+Monitors Warning Results: 
+RuntimeMonitor generated 0 warnings.
+
+Monitors Summmary Results: 
+Overweight Count = 145
+R-T6:Wasted Stops Count = 0
+R-T7:Wasted Openings Count = 0
+Wasted Time Dealing with Reversal = 431.2s
+Both Lanterns Lit Up Count = 0
+R-T8.1:Omitted Pending Calls Count = 0
+R-T8.2:Lantern Flicker Count = 0
+R-T8.3:Conflict Direction Count = 0
+R-T9:Inappropriate Not Fast Speed Count = 0
+R-T10:Number of times Nudged before Reversing atleast once = 0
+
+STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
+-----------------------------------------------------
+
+
+Passenger Delivery Summary
+Delivered: 392
+Stranded: 0
+Total: 392
+
+Deliver Stats (lower is better):
+Average_delivery_time: 1680.581
+Maximum_delivery_time:  4626.011
+Delivery_performance_score:  11348.335
+
+Satisfaction Stats (higher is better):
+Average_satisfaction_score: 88.992
+Min_satisfaction_score:  6.250
+Satisfaction_performance_score:  362.219
+
+
+
+4892.187s simulation seconds
+ 33.280 real seconds
+ effective rate 147.00

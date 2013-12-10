@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -pf proj7acceptance3.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
-RandomSeed = 1386613951314
+RandomSeed = 1386646770176
 CanNetworkBitTime = 5000 ns
 Effective Can Bitrate = 199999.99999999997
 Run Time = null
@@ -17,108 +17,107 @@ STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
 
 
 These passengers were delivered:
-Passenger 0: INJECTED AT 60.0s and DELIVERED in 6.474s
+Passenger 0: INJECTED AT 60.0s and DELIVERED in 5.66s
   Satisfaction score: 100.0
-Passenger 1: INJECTED AT 66.3s and DELIVERED in 38.829s
+Passenger 1: INJECTED AT 66.3s and DELIVERED in 38.518s
   Satisfaction score: 100.0
-Passenger 2: INJECTED AT 85.3s and DELIVERED in 101.599s
+Passenger 4: INJECTED AT 108.2s and DELIVERED in 78.65s
   Satisfaction score: 100.0
-Passenger 4: INJECTED AT 108.2s and DELIVERED in 78.711s
+Passenger 2: INJECTED AT 85.3s and DELIVERED in 101.771s
   Satisfaction score: 100.0
-Passenger 5: INJECTED AT 128.5s and DELIVERED in 61.97s
+Passenger 7: INJECTED AT 154.7s and DELIVERED in 35.096s
   Satisfaction score: 100.0
-Passenger 7: INJECTED AT 154.7s and DELIVERED in 37.91s
+Passenger 5: INJECTED AT 128.5s and DELIVERED in 63.132s
   Satisfaction score: 100.0
-Passenger 3: INJECTED AT 91.0s and DELIVERED in 136.42s
-  Satisfaction score: 90.0
-    @151.120000000: 0.90 Repeated hall call press
-Passenger 8: INJECTED AT 174.6s and DELIVERED in 93.631s
+Passenger 3: INJECTED AT 91.0s and DELIVERED in 119.112s
   Satisfaction score: 100.0
-Passenger 12: INJECTED AT 224.6s and DELIVERED in 43.734s
+Passenger 9: INJECTED AT 182.2s and DELIVERED in 69.234s
   Satisfaction score: 100.0
-Passenger 9: INJECTED AT 182.2s and DELIVERED in 87.864s
+Passenger 8: INJECTED AT 174.6s and DELIVERED in 77.178s
   Satisfaction score: 100.0
-Passenger 6: INJECTED AT 151.4s and DELIVERED in 120.345s
+Passenger 6: INJECTED AT 151.4s and DELIVERED in 101.731s
   Satisfaction score: 100.0
-Passenger 10: INJECTED AT 194.8s and DELIVERED in 80.48s
+Passenger 10: INJECTED AT 194.8s and DELIVERED in 63.478s
   Satisfaction score: 100.0
-Passenger 11: INJECTED AT 206.5s and DELIVERED in 81.555s
+Passenger 11: INJECTED AT 206.5s and DELIVERED in 65.417s
   Satisfaction score: 100.0
-Passenger 16: INJECTED AT 303.6s and DELIVERED in 76.636s
+Passenger 18: INJECTED AT 323.7s and DELIVERED in 40.085s
   Satisfaction score: 100.0
-Passenger 14: INJECTED AT 270.6s and DELIVERED in 110.608s
+Passenger 13: INJECTED AT 254.3s and DELIVERED in 109.848s
   Satisfaction score: 100.0
-Passenger 15: INJECTED AT 293.9s and DELIVERED in 87.934s
+Passenger 14: INJECTED AT 270.6s and DELIVERED in 94.904s
   Satisfaction score: 100.0
-Passenger 18: INJECTED AT 323.7s and DELIVERED in 58.995s
+Passenger 15: INJECTED AT 293.9s and DELIVERED in 71.634s
   Satisfaction score: 100.0
-Passenger 17: INJECTED AT 318.1s and DELIVERED in 64.942s
+Passenger 12: INJECTED AT 224.6s and DELIVERED in 142.528s
   Satisfaction score: 100.0
-Passenger 13: INJECTED AT 254.3s and DELIVERED in 130.444s
+Passenger 17: INJECTED AT 318.1s and DELIVERED in 50.827s
   Satisfaction score: 100.0
-Passenger 20: INJECTED AT 365.5s and DELIVERED in 32.737s
+Passenger 19: INJECTED AT 342.4s and DELIVERED in 62.412s
   Satisfaction score: 100.0
-Passenger 23: INJECTED AT 403.2s and DELIVERED in 49.569s
+Passenger 16: INJECTED AT 303.6s and DELIVERED in 157.919s
   Satisfaction score: 100.0
-Passenger 19: INJECTED AT 342.4s and DELIVERED in 110.81s
+Passenger 24: INJECTED AT 408.4s and DELIVERED in 53.565s
   Satisfaction score: 100.0
-Passenger 24: INJECTED AT 408.4s and DELIVERED in 116.927s
+Passenger 25: INJECTED AT 415.3s and DELIVERED in 47.903s
   Satisfaction score: 100.0
-Passenger 25: INJECTED AT 415.3s and DELIVERED in 110.299s
+Passenger 21: INJECTED AT 366.0s and DELIVERED in 97.561s
   Satisfaction score: 100.0
-Passenger 27: INJECTED AT 464.0s and DELIVERED in 62.632s
+Passenger 26: INJECTED AT 436.5s and DELIVERED in 29.692s
   Satisfaction score: 100.0
-Passenger 28: INJECTED AT 492.9s and DELIVERED in 34.437s
+Passenger 22: INJECTED AT 386.3s and DELIVERED in 81.698s
   Satisfaction score: 100.0
-Passenger 21: INJECTED AT 366.0s and DELIVERED in 161.891s
+Passenger 20: INJECTED AT 365.5s and DELIVERED in 113.766s
   Satisfaction score: 100.0
-Passenger 22: INJECTED AT 386.3s and DELIVERED in 144.074s
+Passenger 27: INJECTED AT 464.0s and DELIVERED in 72.921s
   Satisfaction score: 100.0
-Passenger 26: INJECTED AT 436.5s and DELIVERED in 95.694s
+Passenger 28: INJECTED AT 492.9s and DELIVERED in 44.152s
   Satisfaction score: 100.0
-Passenger 32: INJECTED AT 541.5s and DELIVERED in 65.041s
+Passenger 23: INJECTED AT 403.2s and DELIVERED in 164.265s
   Satisfaction score: 100.0
-Passenger 30: INJECTED AT 527.9s and DELIVERED in 80.064s
+Passenger 31: INJECTED AT 538.4s and DELIVERED in 86.203s
   Satisfaction score: 100.0
-Passenger 29: INJECTED AT 499.2s and DELIVERED in 110.861s
+Passenger 29: INJECTED AT 499.2s and DELIVERED in 127.521s
   Satisfaction score: 100.0
-Passenger 31: INJECTED AT 538.4s and DELIVERED in 73.011s
+Passenger 30: INJECTED AT 527.9s and DELIVERED in 100.168s
   Satisfaction score: 100.0
-Passenger 33: INJECTED AT 560.8s and DELIVERED in 87.134s
+Passenger 32: INJECTED AT 541.5s and DELIVERED in 88.386s
   Satisfaction score: 100.0
-Passenger 36: INJECTED AT 627.2s and DELIVERED in 93.608s
+Passenger 33: INJECTED AT 560.8s and DELIVERED in 105.255s
   Satisfaction score: 100.0
-Passenger 35: INJECTED AT 613.9s and DELIVERED in 107.242s
+Passenger 41: INJECTED AT 691.0s and DELIVERED in 63.268s
   Satisfaction score: 100.0
-Passenger 34: INJECTED AT 587.6s and DELIVERED in 134.413s
+Passenger 34: INJECTED AT 587.6s and DELIVERED in 167.108s
   Satisfaction score: 100.0
-Passenger 38: INJECTED AT 645.9s and DELIVERED in 77.135s
+Passenger 37: INJECTED AT 635.0s and DELIVERED in 121.009s
   Satisfaction score: 100.0
-Passenger 37: INJECTED AT 635.0s and DELIVERED in 88.812s
+Passenger 38: INJECTED AT 645.9s and DELIVERED in 110.333s
   Satisfaction score: 100.0
-Passenger 39: INJECTED AT 663.8s and DELIVERED in 94.238s
+Passenger 36: INJECTED AT 627.2s and DELIVERED in 130.421s
   Satisfaction score: 100.0
-Passenger 49: INJECTED AT 820.8s and DELIVERED in 23.632s
+Passenger 35: INJECTED AT 613.9s and DELIVERED in 143.942s
   Satisfaction score: 100.0
-Passenger 41: INJECTED AT 691.0s and DELIVERED in 153.583s
+Passenger 40: INJECTED AT 678.5s and DELIVERED in 80.344s
   Satisfaction score: 100.0
-Passenger 40: INJECTED AT 678.5s and DELIVERED in 167.591s
+Passenger 42: INJECTED AT 709.6s and DELIVERED in 49.871s
   Satisfaction score: 100.0
-Passenger 47: INJECTED AT 784.9s and DELIVERED in 61.604s
+Passenger 44: INJECTED AT 738.5s and DELIVERED in 25.018s
   Satisfaction score: 100.0
-Passenger 45: INJECTED AT 753.0s and DELIVERED in 94.792s
+Passenger 43: INJECTED AT 724.3s and DELIVERED in 40.988s
   Satisfaction score: 100.0
-Passenger 42: INJECTED AT 709.6s and DELIVERED in 138.198s
+Passenger 39: INJECTED AT 663.8s and DELIVERED in 137.93s
   Satisfaction score: 100.0
-Passenger 48: INJECTED AT 806.0s and DELIVERED in 42.965s
+Passenger 46: INJECTED AT 759.0s and DELIVERED in 130.023s
   Satisfaction score: 100.0
-Passenger 46: INJECTED AT 759.0s and DELIVERED in 92.091s
+Passenger 49: INJECTED AT 820.8s and DELIVERED in 68.352s
   Satisfaction score: 100.0
-Passenger 44: INJECTED AT 738.5s and DELIVERED in 116.138s
+Passenger 47: INJECTED AT 784.9s and DELIVERED in 106.044s
   Satisfaction score: 100.0
-Passenger 43: INJECTED AT 724.3s and DELIVERED in 131.678s
+Passenger 50: INJECTED AT 825.5s and DELIVERED in 65.712s
   Satisfaction score: 100.0
-Passenger 50: INJECTED AT 825.5s and DELIVERED in 68.28s
+Passenger 48: INJECTED AT 806.0s and DELIVERED in 86.673s
+  Satisfaction score: 100.0
+Passenger 45: INJECTED AT 753.0s and DELIVERED in 139.964s
   Satisfaction score: 100.0
 
 Passenger Delivery Summary
@@ -127,14 +126,14 @@ Stranded: 0
 Total: 51
 
 Deliver Stats (lower is better):
-Average_delivery_time: 88.633
-Maximum_delivery_time:  167.591
-Delivery_performance_score:  522.121
+Average_delivery_time: 86.847
+Maximum_delivery_time:  167.108
+Delivery_performance_score:  514.495
 
 Satisfaction Stats (higher is better):
-Average_satisfaction_score: 99.804
-Min_satisfaction_score:  90.000
-Satisfaction_performance_score:  489.216
+Average_satisfaction_score: 100.000
+Min_satisfaction_score:  100.000
+Satisfaction_performance_score:  500.000
 
 
 

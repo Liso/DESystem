@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf sd4b.cf -mf sd4b.mf -head header.txt
-RandomSeed = 1386613890425
+RandomSeed = 1386646709878
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -20,10 +20,10 @@ Assertion Results:
 @3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1ba3f9a :: getDoorCommand ?== STOP PASSED
 @3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@47934 :: getDoorCommand ?== STOP PASSED
 @3.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@115e166 :: getValue ?== false PASSED
-@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1d6c8b9 :: getDoorCommand ?== CLOSE PASSED
-@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1aac78d :: getDoorCommand ?== CLOSE PASSED
-@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@7ca7f0 :: getDoorCommand ?== CLOSE PASSED
-@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@19c5ce6 :: getDoorCommand ?== CLOSE PASSED
+@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1419d0 :: getDoorCommand ?== CLOSE PASSED
+@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1132f26 :: getDoorCommand ?== CLOSE PASSED
+@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1f5ba55 :: getDoorCommand ?== CLOSE PASSED
+@8.0s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@971e9d :: getDoorCommand ?== CLOSE PASSED
 
 
 ******************Summary******************
