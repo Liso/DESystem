@@ -37,6 +37,7 @@
 
 
 
+
         Sally Stevenson (ststeven)<br>
         &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Sri Harsha Koppaka (skoppaka)<br>
@@ -552,6 +553,7 @@
 
 
 
+
                 Nie, jnie</span>)</span> </td>
           <td style="vertical-align: top;"><br>
           </td>
@@ -568,11 +570,12 @@
           <td style="vertical-align: top;">10.4 If at floor, display
             current floor.<br>
           </td>
-          <td style="vertical-align: top;" class="style1">~<br>
+          <td style="vertical-align: top;" class="style1">X<br>
           </td>
           <td style="vertical-align: top; text-align: center;">X<br>
           </td>
-          <td style="vertical-align: top;" class="style1" align="center">~</td>
+          <td style="vertical-align: top;" class="style1" align="center">X<br>
+          </td>
           <td style="vertical-align: top;" align="center">~ </td>
           <td style="vertical-align: top;" align="center">~ </td>
         </tr>
@@ -622,24 +625,11 @@
           </td>
         </tr>
         <tr>
-          <td style="vertical-align: top;">11.4 Set CurrenDirection to
-            mDesiredFloor.d<br>
-          </td>
-          <td style="vertical-align: top;" align="center">X<br>
-          </td>
-          <td style="vertical-align: top;" align="center">~<br>
-          </td>
-          <td style="vertical-align: top;" align="center">~<br>
-          </td>
-          <td style="vertical-align: top;" align="center">~ </td>
-          <td style="vertical-align: top;" align="center">~ </td>
-        </tr>
-        <tr>
-          <td valign="top">11.5 If Current Direction Stop &amp; any
+          <td valign="top">11.4 If Current Direction Stop &amp; any
             CarCall or HallCall above current Floor, set mDesiredFloor.d
             to UP<br>
           </td>
-          <td align="center" valign="top">~<br>
+          <td align="center" valign="top">X<br>
           </td>
           <td align="center" valign="top">~<br>
           </td>
@@ -649,7 +639,7 @@
           <td align="center" valign="top">~ </td>
         </tr>
         <tr>
-          <td valign="top">11.6 If Current Direction Stop &amp; any
+          <td valign="top">11.5 If Current Direction Stop &amp; any
             CarCall or HallCall below current Floor, set mDesiredFloor.d
             to DOWN </td>
           <td align="center" valign="top">X<br>
@@ -662,21 +652,7 @@
           <td align="center" valign="top">~</td>
         </tr>
         <tr>
-          <td valign="top">11.7 If CurrentDirection Up &amp;
-            allDoorsClosed &amp; any CarCall or HallCall above current
-            Floor, set mDesiredFloor.d to UP<br>
-          </td>
-          <td align="center" valign="top">~<br>
-          </td>
-          <td align="center" valign="top">~<br>
-          </td>
-          <td align="center" valign="top">~<br>
-          </td>
-          <td align="center" valign="top">~ </td>
-          <td align="center" valign="top">~ </td>
-        </tr>
-        <tr>
-          <td valign="top">11.8 If CurrentDirection Down &amp;
+          <td valign="top">11.6 If CurrentDirection Down &amp;
             allDoorsClosed &amp; any CarCall or HallCall below current
             Floor, set mDesiredFloor.d to DOWN </td>
           <td align="center" valign="top">X<br>
@@ -689,25 +665,12 @@
           <td align="center" valign="top">~ </td>
         </tr>
         <tr>
-          <td valign="top">11.9 If CurrentDirection Up &amp;
+          <td valign="top">11.7 If CurrentDirection Up &amp;
             allDoorsClosed &amp; all CarCall or HallCall above current
             Floor are false, set mDesiredFloor.d to STOP </td>
-          <td align="center" valign="top">~<br>
+          <td align="center" valign="top">X<br>
           </td>
-          <td align="center" valign="top">~<br>
-          </td>
-          <td align="center" valign="top">~<br>
-          </td>
-          <td align="center" valign="top">~ </td>
-          <td align="center" valign="top">~ </td>
-        </tr>
-        <tr>
-          <td valign="top">11.10 If CurrentDirection Down &amp;
-            allDoorsClosed &amp; all CarCall or HallCall below current
-            Floor are false, set mDesiredFloor.d to STOP </td>
-          <td align="center" valign="top">~<br>
-          </td>
-          <td align="center" valign="top">~<br>
+          <td align="center" valign="top">X<br>
           </td>
           <td align="center" valign="top">~<br>
           </td>
@@ -715,53 +678,56 @@
           <td align="center" valign="top">~ </td>
         </tr>
         <tr>
-          <td style="vertical-align: top;">11.11 Set mDesireFloor.f to
+          <td style="vertical-align: top;">11.8 Set mDesireFloor.f to
             Target<br>
           </td>
-          <td style="vertical-align: top;" align="center">~<br>
+          <td style="vertical-align: top;" align="center">X<br>
           </td>
           <td style="vertical-align: top;" align="center">~<br>
           </td>
-          <td style="vertical-align: top;" align="center">~<br>
+          <td style="vertical-align: top;" align="center">X<br>
           </td>
           <td style="vertical-align: top;" align="center">~ </td>
           <td style="vertical-align: top;" align="center">~ </td>
         </tr>
         <tr>
-          <td valign="top">11.12 If CurrentDirection Up &amp; Commit
+          <td valign="top">11.9 If CurrentDirection Up &amp; Commit
             point for floors(fa..fn) above current floor where any
             mCarCall or mHallCall are true has not been reached, set
             Target to Min(fa..fn)<br>
           </td>
-          <td align="center" valign="top">~ </td>
+          <td align="center" valign="top">X<br>
+          </td>
           <td align="center" valign="top">~ </td>
           <td align="center" valign="top">~</td>
           <td align="center" valign="top">~</td>
           <td align="center" valign="top">~</td>
         </tr>
         <tr>
-          <td valign="top">11.13 If CurrentDirection Down &amp; Commit
+          <td valign="top">11.10 If CurrentDirection Down &amp; Commit
             point for floors(fa..fn) below current floor where any
             mCarCall or mHallCall are true has not been reached, set
             Target to Max(fa..fn)</td>
-          <td align="center" valign="top">~ </td>
-          <td align="center" valign="top">~ </td>
-          <td align="center" valign="top">~ </td>
-          <td align="center" valign="top">~ </td>
-          <td align="center" valign="top">~ </td>
-        </tr>
-        <tr>
-          <td valign="top">11.14.1 If any DoorClose false and mAtFloor
-            false, set Target to 1.<br>
+          <td align="center" valign="top">X<br>
           </td>
           <td align="center" valign="top">~ </td>
           <td align="center" valign="top">~ </td>
           <td align="center" valign="top">~ </td>
           <td align="center" valign="top">~ </td>
+        </tr>
+        <tr>
+          <td valign="top">11.11.1 If any DoorClose false and mAtFloor
+            false, set Target to 1.<br>
+          </td>
+          <td align="center" valign="top">~ </td>
+          <td align="center" valign="top">~ </td>
+          <td align="center" valign="top">X<br>
+          </td>
+          <td align="center" valign="top">~ </td>
           <td align="center" valign="top">~ </td>
         </tr>
         <tr>
-          <td valign="top">11.14.2 If any DoorClose false and mAtFloor
+          <td valign="top">11.11.2 If any DoorClose false and mAtFloor
             false, set mDesiredFloor.b to None.<br>
           </td>
           <td align="center" valign="top">~ </td>
@@ -771,17 +737,18 @@
           <td align="center" valign="top">~ </td>
         </tr>
         <tr>
-          <td valign="top">11.15 Set mDesiredFloor.b to to b where
+          <td valign="top">11.12 Set mDesiredFloor.b to to b where
             mHallCall[f,b,d] or mCarCall[f,b] is true for f = Target.<br>
           </td>
-          <td align="center" valign="top">~ </td>
+          <td align="center" valign="top">X<br>
+          </td>
           <td align="center" valign="top">~ </td>
           <td align="center" valign="top">~ </td>
           <td align="center" valign="top">~</td>
           <td align="center" valign="top">~ </td>
         </tr>
         <tr>
-          <td valign="top">11.16 If any two mHallCall or mCarCall are
+          <td valign="top">11.13 If any two mHallCall or mCarCall are
             true for same f = Target, set mDesiredFloor.b to Both.<br>
           </td>
           <td align="center" valign="top">~ </td>
@@ -791,7 +758,7 @@
           <td align="center" valign="top">~ </td>
         </tr>
         <tr>
-          <td valign="top">11.17 Set mDesiredDwell<br>
+          <td valign="top">11.14 Set mDesiredDwell<br>
           </td>
           <td align="center" valign="top">~ </td>
           <td align="center" valign="top">~ </td>
