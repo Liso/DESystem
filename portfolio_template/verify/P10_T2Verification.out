@@ -5,7 +5,7 @@
 
 Simulator Parameters:
 Command line = -pf proj10acceptance2.pass -fs 5.0 -b 200 -monitor Proj11RuntimeMonitor -head header.txt
-RandomSeed = 1386613972122
+RandomSeed = 1386629561909
 CanNetworkBitTime = 5000 ns
 Effective Can Bitrate = 199999.99999999997
 Run Time = null
@@ -14,59 +14,3 @@ Acceptance Test File = proj10acceptance2.pass
 Monitors: Proj11RuntimeMonitor  
 
 
-[Elevator] @0.000000000: Starting Simulation
-[Elevator] @60.000000000: Progress indicator
-[Elevator] @120.000000000: Progress indicator
-[Elevator] @180.000000000: Progress indicator
-[RuntimeMonitor] @225.140000000: Overweight
-[Elevator] @240.000000000: Progress indicator
-[RuntimeMonitor] @242.540000000: Overweight
-[RuntimeMonitor] @259.940000000: Overweight
-[RuntimeMonitor] @277.540000000: Overweight
-[Elevator] @300.000000000: Progress indicator
-[Elevator] @360.000000000: Progress indicator
-[Elevator] @420.000000000: Progress indicator
-[Elevator] @452.964000000: Simulation Finished
-
-Network Utilization Summary:
-Recent: 73.33 % Max: 73.33 %  Overall:  73.33 %
-
-Monitors Warning Results: 
-RuntimeMonitor generated 0 warnings.
-
-Monitors Summmary Results: 
-Overweight Count = 4
-R-T6:Wasted Stops Count = 0
-R-T7:Wasted Openings Count = 0
-Wasted Time Dealing with Reversal = 10.44s
-Both Lanterns Lit Up Count = 0
-R-T8.1:Omitted Pending Calls Count = 0
-R-T8.2:Lantern Flicker Count = 0
-R-T8.3:Conflict Direction Count = 0
-R-T9:Inappropriate Not Fast Speed Count = 0
-R-T10:Number of times Nudged before Reversing atleast once = 0
-
-STATISTICS FOR ELEVATOR SIMULATION PASSENGER DELIVERY
------------------------------------------------------
-
-
-Passenger Delivery Summary
-Delivered: 27
-Stranded: 0
-Total: 27
-
-Deliver Stats (lower is better):
-Average_delivery_time: 204.795
-Maximum_delivery_time:  389.451
-Delivery_performance_score:  1208.633
-
-Satisfaction Stats (higher is better):
-Average_satisfaction_score: 100.000
-Min_satisfaction_score:  100.000
-Satisfaction_performance_score:  500.000
-
-
-
-452.964s simulation seconds
- 4.318 real seconds
- effective rate 104.90

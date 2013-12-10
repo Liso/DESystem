@@ -4,7 +4,7 @@
 
 Simulator Parameters:
 Command line = -cf carbuttoncontrol.cf -mf carbuttoncontrol.mf -head header.txt
-RandomSeed = 1386613869075
+RandomSeed = 1386629550685
 CanNetworkBitTime = 0 ns
 Effective Can Bitrate = Infinity
 Run Time = null
@@ -13,30 +13,30 @@ Message File = carbuttoncontrol.mf
 Controller File = carbuttoncontrol.cf
 
 Assertion Results:
-@0.25s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@143e7b7 :: getValue ?== false PASSED
-@0.25s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@68a2cc :: lighted ?== false PASSED
-@0.65s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@163f47e :: getValue ?== true PASSED
-@0.65s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@88ee :: lighted ?== true PASSED
-@1.05s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@19546ee :: getValue ?== false PASSED
-@1.05s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@18c3efb :: lighted ?== false PASSED
-@1.45s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@6ca837 :: getValue ?== true PASSED
-@1.45s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@e73750 :: lighted ?== true PASSED
-@1.85s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@13e9963 :: getValue ?== false PASSED
-@1.85s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@199ef99 :: lighted ?== false PASSED
-@2.25s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1e26d9b :: getValue ?== true PASSED
-@2.25s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@c1f7dc :: lighted ?== true PASSED
-@2.65s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@17ff24f :: getValue ?== false PASSED
-@2.65s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@d8dc2e :: lighted ?== false PASSED
-@3.05s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1cf6203 :: getValue ?== true PASSED
-@3.05s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@eac0b4 :: lighted ?== true PASSED
-@3.45s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1826b5c :: getValue ?== false PASSED
-@3.45s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@268d15 :: lighted ?== false PASSED
-@3.85s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@5b56c4 :: getValue ?== true PASSED
-@3.85s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@b07848 :: lighted ?== true PASSED
-@3.95s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1a8c22b :: getValue ?== true PASSED
-@3.95s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@1d00beb :: lighted ?== true PASSED
-@4.75s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@21ec03 :: lighted ?== false PASSED
-@4.75s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@31ac05 :: getValue ?== false PASSED
+@0.25s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@68a2cc :: getValue ?== false PASSED
+@0.25s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@163f47e :: lighted ?== false PASSED
+@0.65s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@88ee :: getValue ?== true PASSED
+@0.65s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@19546ee :: lighted ?== true PASSED
+@1.05s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@18c3efb :: getValue ?== false PASSED
+@1.05s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@6ca837 :: lighted ?== false PASSED
+@1.45s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@e73750 :: getValue ?== true PASSED
+@1.45s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@13e9963 :: lighted ?== true PASSED
+@1.85s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@199ef99 :: getValue ?== false PASSED
+@1.85s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@1e26d9b :: lighted ?== false PASSED
+@2.25s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@c1f7dc :: getValue ?== true PASSED
+@2.25s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@17ff24f :: lighted ?== true PASSED
+@2.65s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@d8dc2e :: getValue ?== false PASSED
+@2.65s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@1cf6203 :: lighted ?== false PASSED
+@3.05s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@eac0b4 :: getValue ?== true PASSED
+@3.05s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@1826b5c :: lighted ?== true PASSED
+@3.45s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@268d15 :: getValue ?== false PASSED
+@3.45s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@5b56c4 :: lighted ?== false PASSED
+@3.85s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@b07848 :: getValue ?== true PASSED
+@3.85s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@1a8c22b :: lighted ?== true PASSED
+@3.95s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1d00beb :: getValue ?== true PASSED
+@3.95s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@21ec03 :: lighted ?== true PASSED
+@4.75s:  PASSED simulator.payloads.CarLightPayload$ReadableCarLightPayload@31ac05 :: lighted ?== false PASSED
+@4.75s:  PASSED simulator.payloads.CanMailbox$ReadableCanMailbox@1ba3f9a :: getValue ?== false PASSED
 
 
 ******************Summary******************
